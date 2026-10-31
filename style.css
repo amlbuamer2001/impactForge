@@ -1,0 +1,237 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --navy: #102b46;
+  --navy-deep: #0b3454;
+  --teal: #159d9b;
+  --gold: #d39a32;
+  --text: #536984;
+  --pale-blue: #eaf4f8;
+}
+
+body {
+  margin: 0;
+  font-family: "Cairo", Tahoma, Arial, sans-serif;
+  color: var(--navy);
+  background: #fff;
+}
+
+.about-section {
+  width: min(1440px, 100%);
+  margin-inline: auto;
+  padding: 48px 30px 52px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(36px, 5vw, 88px);
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  isolation: isolate;
+}
+
+.about-section::before {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  left: 3%;
+  top: 8%;
+  background: radial-gradient(circle, rgba(204, 228, 238, .85), rgba(255,255,255,0) 68%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "consultations training"
+    "partnerships research";
+  gap: 18px;
+  align-items: stretch;
+}
+
+.service-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 2px solid rgba(16, 43, 70, .12);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, .96);
+  box-shadow: 0 14px 30px rgba(20, 54, 76, .13);
+  position: relative;
+}
+
+.service-card.training {
+  grid-area: training;
+  border: 4px solid var(--teal);
+  transform: translateY(-24px);
+}
+
+.service-card.consultations { grid-area: consultations; }
+.service-card.research { grid-area: research; }
+.service-card.partnerships {
+  grid-area: partnerships;
+  background: linear-gradient(145deg, #164969, #0a2d4c);
+  color: #fff;
+  border-color: #164969;
+  transform: translateY(8px);
+}
+
+.service-image {
+  display: block;
+  width: calc(100% - 24px);
+  height: 150px;
+  margin: 12px auto 0;
+  object-fit: cover;
+  border-radius: 19px;
+}
+
+.card-content {
+  padding: 14px 22px 24px;
+  text-align: right;
+}
+
+.number {
+  color: var(--gold);
+  font-size: 20px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.number i {
+  display: inline-block;
+  width: 36px;
+  height: 3px;
+  background: #d8b36f;
+  border-radius: 3px;
+}
+
+.service-card h3 {
+  font-size: clamp(22px, 2.1vw, 32px);
+  line-height: 1.35;
+  margin: 0 0 6px;
+  font-weight: 800;
+}
+
+.service-card p {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(15px, 1.2vw, 19px);
+  line-height: 1.85;
+  font-weight: 500;
+}
+
+.partnerships p { color: #fff; }
+.partnerships .number { color: #f1c56f; }
+.partnerships .number i { background: #f1c56f; }
+
+.about-copy {
+  text-align: right;
+  max-width: 680px;
+  justify-self: end;
+}
+
+.section-pill {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #edcf8b;
+  border-radius: 40px;
+  padding: 7px 10px 7px 22px;
+  margin: 0 0 38px auto;
+  box-shadow: 0 9px 22px rgba(23, 68, 86, .08);
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.pill-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--navy);
+  background: linear-gradient(145deg, #d8f4db, #9be4dc);
+  font-size: 20px;
+}
+
+.about-copy h1 {
+  font-size: clamp(34px, 3.3vw, 48px);
+  line-height: 1.25;
+  margin: 0 0 32px;
+  font-weight: 800;
+}
+
+.about-copy p {
+  font-size: clamp(16px, 1.28vw, 20px);
+  line-height: 2.05;
+  color: var(--text);
+  margin: 0 0 18px;
+  font-weight: 500;
+}
+
+.about-copy strong {
+  color: #0d2032;
+  font-weight: 800;
+}
+
+.highlight {
+  background: linear-gradient(transparent 38%, #f6dfad 38%);
+  border-radius: 5px;
+  padding-inline: 3px;
+}
+
+@media (max-width: 950px) {
+  .about-section {
+    grid-template-columns: 1fr;
+    padding: 34px 22px;
+    gap: 38px;
+  }
+
+  .about-copy {
+    grid-row: 1;
+    max-width: none;
+  }
+
+  .section-pill {
+    margin-bottom: 22px;
+  }
+
+  .about-copy h1 {
+    margin-bottom: 20px;
+  }
+
+  .services-grid {
+    max-width: 760px;
+    width: 100%;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .about-section { padding: 26px 14px; }
+  .services-grid { gap: 12px; }
+  .service-card { border-radius: 20px; }
+  .service-card.training { transform: translateY(-8px); }
+  .service-card.partnerships { transform: none; }
+  .service-image {
+    height: 100px;
+    width: calc(100% - 14px);
+    margin-top: 7px;
+    border-radius: 14px;
+  }
+  .card-content { padding: 9px 11px 15px; }
+  .number { font-size: 15px; gap: 6px; }
+  .number i { width: 22px; }
+  .service-card h3 { font-size: 17px; }
+  .service-card p { font-size: 12px; line-height: 1.7; }
+  .section-pill { font-size: 16px; }
+  .pill-number { width: 34px; height: 34px; }
+  .about-copy p { font-size: 15px; line-height: 1.9; }
+}
