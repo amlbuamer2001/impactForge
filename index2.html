@@ -6,6 +6,13 @@
     <meta name="description" content="إمباكتفورج القابضة: برامج تدريبية واستشارات طبية وبحث علمي لتمكين الكفاءات الصحية الوطنية وفق رؤية 2030." />
     <meta name="theme-color" content="#071a33" />
     <script>document.documentElement.classList.add("js");</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+      /* طبقة الحركة: تتفعّل بس لو GSAP اتحملت ومفيش reduced-motion (غير كده الموقع يرجع للـ CSS العادي) */
+      if (window.gsap && window.ScrollTrigger && !matchMedia("(prefers-reduced-motion: reduce)").matches)
+        document.documentElement.classList.add("gs");
+    </script>
     <title>إمباكتفورج القابضة | Impact Forge Holding</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -185,7 +192,7 @@
         color: var(--ink); background: var(--navy);
         border: 1px solid #ffffff45; border-radius: 31px;
         cursor: pointer; white-space: nowrap;
-        transition: 500ms cubic-bezier(0, 0, 0.2, 1);
+        transition: translate 500ms cubic-bezier(0, 0, 0.2, 1), box-shadow 500ms, color 500ms, letter-spacing 500ms;
         padding: 14px 22px; font-size: 0.9rem; min-height: 44px;
       }
       .chy-btn::after {
@@ -196,7 +203,7 @@
         transition: 500ms cubic-bezier(0, 0, 0.2, 1);
       }
       html[dir="rtl"] .chy-btn::after { border-radius: 0 0 0 31px; }
-      .chy-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 36px #8ff3e64d; }
+      .chy-btn:hover { translate: 0 -3px; box-shadow: 0 16px 36px #8ff3e64d; }
       .chy-btn:hover::after { width: 100%; }
       html[lang="en"] .chy-btn:hover { letter-spacing: 0.5px; }
       .chy-btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
@@ -220,8 +227,7 @@
       /* =====================================================
          4) HERO
          ===================================================== */
-      .banner-shape-area img { position: absolute; z-index: 1; width: 190px; opacity: 0.85; pointer-events: none; }
-      .banner-shape-area img.one { top: 0; left: 0; }
+      .banner-shape-area svg { position: absolute; z-index: 1; width: 190px; height: auto; opacity: 0.85; pointer-events: none; top: 0; left: 0; overflow: visible; }
 
       .hx {
         position: relative; display: flex; flex-direction: column;
@@ -249,7 +255,7 @@
       .hx-a { grid-area: a; align-self: start; display: flex; flex-direction: column; align-items: flex-start; min-width: 0; padding-top: clamp(8px, 4vh, 48px); }
       .hx-v {
         grid-area: v; align-self: end; justify-self: center; width: 100%; max-width: 880px; margin-bottom: 0;
-        z-index: 1; position: relative; display: grid; place-items: end center; isolation: isolate; --mx: 0; --my: 0;
+        z-index: 1; position: relative; display: grid; place-items: end center; isolation: isolate;
       }
       .hx-c { grid-area: c; align-self: end; display: flex; flex-direction: column; gap: 22px; padding-bottom: 48px; min-width: 0; }
 
@@ -300,8 +306,8 @@
       @media (max-width: 1200px) { .hx-c .ha { flex-wrap: wrap; } }
 
       /* Hero visual */
-      .hx-v:before {
-        content: ""; position: absolute; inset: -28% 0% 0; border-radius: 999px 999px 0 0;
+      .hx-arch {
+        position: absolute; inset: -28% 0% 0; border-radius: 999px 999px 0 0;
         background: linear-gradient(175deg, #17b3a3b5, #0a234200 70%), linear-gradient(0deg, #e0b45c1f, transparent);
         border: 1px solid #e0b45c55; border-bottom: 0; z-index: -1;
       }
@@ -311,7 +317,7 @@
       .hx-or.b { width: 104%; aspect-ratio: 1; border-style: dashed; opacity: 0.5; animation: spin 90s linear infinite reverse; }
       .hx-im {
         display: block; width: 100%; height: 410px; filter: drop-shadow(0 30px 40px #0008); transform-origin: 50% 100%;
-        transform: translate(calc(var(--mx) * -10px), calc(var(--my) * -8px)) scale(1.12); transition: transform 0.25s ease-out;
+        transform: scale(1.12);
       }
 
       /* Vision 2030 lockup */
@@ -331,6 +337,7 @@
         .hx-c .ha { flex-direction: row; flex-wrap: wrap; }
         .hx-c .chy-btn { flex: 1 1 150px; width: auto; padding: 18px; }
         .hx-v { max-width: 520px; margin-bottom: 0; }
+        .banner-shape-area svg { width: 96px; opacity: 0.55; }
       }
 
       /* =====================================================
@@ -507,9 +514,9 @@
         position: absolute; z-index: 1; display: flex; flex-direction: column;
         padding: 2.2cqw 2.2cqw 2.6cqw; background: var(--cb); border-radius: 3.6cqw;
         box-shadow: 0 12px 34px color-mix(in srgb, var(--navy) 14%, transparent);
-        transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.4s;
+        transition: translate 0.4s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.4s;
       }
-      .ab-c:hover { transform: translateY(-6px); box-shadow: 0 24px 46px color-mix(in srgb, var(--teal) 30%, transparent); }
+      .ab-c:hover { translate: 0 -6px; box-shadow: 0 24px 46px color-mix(in srgb, var(--teal) 30%, transparent); }
 
       /* المواضع مبنية على أبعاد الصورة (1024 × 1024) — نسب مئوية من جهة البداية */
       .ab-c1 { inset-inline-start: 4.9%;  top: 5.9%;  width: 43.1%; height: 45.4%; box-shadow: none; }  /* المربع العلوي */
@@ -556,8 +563,8 @@
       /* =====================================================
          7) CARDS / MESSAGE / SERVICES / GALLERY
          ===================================================== */
-      .card { background: var(--surf); border: 1px solid var(--line); border-radius: 18px; padding: 22px; transition: 0.3s; }
-      .card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px #0b244722; border-color: var(--teal); }
+      .card { position: relative; background: var(--surf); border: 1px solid var(--line); border-radius: 18px; padding: 22px; transition: translate 0.3s, box-shadow 0.3s, border-color 0.3s; }
+      .card:hover { translate: 0 -6px; box-shadow: 0 18px 40px #0b244722; border-color: var(--teal); }
       .card:hover .ic { background: linear-gradient(135deg, var(--teal), var(--navy2)); color: #fff; transform: rotate(-6deg) scale(1.08); }
       .card h3 { margin: 0 0 4px; font-size: 1.05rem; }
       .card p { margin: 0; color: var(--mut); font-size: 0.92rem; }
@@ -585,14 +592,15 @@
       .gal { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 170px; gap: 16px; }
       .gt {
         position: relative; border-radius: 22px; overflow: hidden; color: #fff; display: flex; flex-direction: column;
-        justify-content: flex-end; padding: 18px; background: linear-gradient(150deg, var(--navy), var(--navy2)); transition: 0.4s;
+        justify-content: flex-end; padding: 18px; background: linear-gradient(150deg, var(--navy), var(--navy2));
+        transition: translate 0.4s, scale 0.4s, box-shadow 0.4s;
       }
       .gt:before {
         content: ""; position: absolute; width: 180px; height: 180px; border-radius: 50%; background: var(--teal);
         opacity: 0.25; filter: blur(30px); inset-block-start: -40px; inset-inline-end: -30px;
       }
       .gt b { position: relative; z-index: 1; font-size: 1.05rem; }
-      .gt:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 20px 40px #0b244744; }
+      .gt:hover { translate: 0 -6px; scale: 1.02; box-shadow: 0 20px 40px #0b244744; }
       .gi { position: absolute; inset-block-start: 16px; inset-inline-start: 18px; font-size: 2.8rem; opacity: 0.9; color: #5eead4; }
       .g0 { grid-column: span 2; grid-row: span 2; background: linear-gradient(150deg, #0f766e, #0b2447); }
       .g0 .gi { font-size: 5rem; }
@@ -636,8 +644,8 @@
       .soon { font-size: 0.85rem; color: var(--gold-ink); font-weight: 700; }
 
       .adv { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; }
-      .ac { text-align: center; padding: 26px 16px; background: var(--surf); border: 1px dashed var(--line); border-radius: 20px; transition: 0.3s; }
-      .ac:hover { border-style: solid; border-color: var(--teal); transform: translateY(-5px); }
+      .ac { position: relative; text-align: center; padding: 26px 16px; background: var(--surf); border: 1px dashed var(--line); border-radius: 20px; transition: translate 0.3s, border-color 0.3s; }
+      .ac:hover { border-style: solid; border-color: var(--teal); translate: 0 -5px; }
       .ac b { display: block; }
       .ac small { color: var(--mut); }
       .av {
@@ -658,12 +666,14 @@
         content: ""; position: absolute; width: 200px; height: 200px; border-radius: 50%;
         border: 30px solid #ffffff0d; inset-block-end: -70px; inset-inline-end: -50px;
       }
+      .vmc h3, .vmc p { position: relative; }
       .vmc h3 { margin: 0 0 8px; color: var(--gold); font-size: 1.3rem; display: flex; align-items: center; gap: 10px; }
       .vmc p { margin: 0; color: #e1ecf8; }
       .vals { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; }
       .val .n { color: var(--gold-ink); font-weight: 800; font-size: 1.6rem; }
 
       .cta {
+        position: relative; overflow: hidden; padding-bottom: 0;
         color: #fff; text-align: center;
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cpath d='M32 25v14M25 32h14' stroke='%23fff' stroke-opacity='.07' stroke-width='2'/%3E%3C/svg%3E"), linear-gradient(120deg, #0b2447, #0f5c68);
       }
@@ -690,6 +700,105 @@
 
       footer { background: #050f20; color: #8fa5c2; text-align: center; padding: 28px 20px; font-size: 0.88rem; }
 
+      /* أعمدة الهوية (graphic.svg) فوق الفوتر */
+      .bars { display: grid; grid-template-columns: repeat(6, 1fr); align-items: end; height: clamp(54px, 10vw, 140px); margin-top: 72px; }
+      .bars i { display: block; height: 100%; background: linear-gradient(180deg, #fbeab8, #8ff3e6); transform-origin: 50% 100%; }
+      .bars i:nth-child(2), .bars i:nth-child(5) { height: 66.6%; }
+      .bars i:nth-child(3) { height: 33.4%; }
+      .bars i:nth-child(4) { height: 16.7%; }
+
+      /* مربعات الهوية (نفس شكل الهيرو) */
+      .px-deco { position: absolute; width: clamp(90px, 12vw, 160px); height: auto; top: 0; inset-inline-end: 0; opacity: 0.5; pointer-events: none; overflow: visible; }
+      html[dir="rtl"] .px-deco { transform: scaleX(-1); }
+      .cta > .wrap { position: relative; }
+
+      /* =====================================================
+         9b) STATS / SERVICES STACK / MARQUEE
+         ===================================================== */
+      .stats { display: grid; grid-template-columns: repeat(4, 1fr); margin: 26px 0 0; padding: 18px 0; border-block: 1px solid var(--line); max-width: 62ch; }
+      .stats div { display: flex; flex-direction: column; gap: 4px; padding-inline: 14px; }
+      .stats div:first-child { padding-inline-start: 0; }
+      .stats div + div { border-inline-start: 1px solid var(--line); }
+      .stats b { font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 800; line-height: 1.1; color: var(--teal-ink); font-variant-numeric: tabular-nums; }
+      .stats span { font-size: 0.85rem; color: var(--mut); line-height: 1.4; }
+      @media (max-width: 520px) {
+        .stats { grid-template-columns: 1fr 1fr; row-gap: 18px; }
+        .stats div:nth-child(3) { border: 0; padding-inline-start: 0; }
+      }
+
+      /* خدمات: كروت بتتراص فوق بعض مع السكرول */
+      .stk { display: grid; gap: 28px; }
+      .sk { position: sticky; top: calc(108px + var(--k) * 18px); }
+      .sk-in {
+        position: relative; overflow: hidden; isolation: isolate; transform-origin: 50% 0;
+        display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: clamp(18px, 4vw, 56px);
+        min-height: 300px; padding: clamp(26px, 4vw, 54px); border-radius: 32px; color: #fff;
+        background: radial-gradient(60% 90% at 90% 0%, color-mix(in srgb, var(--ac) 55%, transparent), transparent 70%), linear-gradient(140deg, #0a2342, #0b3a55);
+        border: 1px solid #ffffff14; box-shadow: 0 -10px 40px #0b24471f, 0 30px 60px -30px #0b244766;
+      }
+      .sk-n { font-size: clamp(4rem, 10vw, 8.5rem); font-weight: 800; line-height: 0.9; color: transparent; -webkit-text-stroke: 1.5px #fbeab8b0; font-variant-numeric: tabular-nums; }
+      .sk h3 { font-size: clamp(1.4rem, 3vw, 2.2rem); margin: 0 0 10px; line-height: 1.35; }
+      .sk p { margin: 0; color: #cfe0f3; font-size: 1.05rem; max-width: 52ch; }
+      .sk-ic {
+        width: clamp(84px, 11vw, 140px); aspect-ratio: 1; display: grid; place-items: center; border-radius: 30%;
+        font-size: clamp(2.4rem, 5vw, 4rem); color: var(--navy); background: linear-gradient(190deg, #fbeab8, #8ff3e6);
+        box-shadow: 0 20px 40px -10px #8ff3e655;
+      }
+      @media (max-width: 720px) {
+        .sk-in { grid-template-columns: 1fr; min-height: 0; gap: 10px; }
+        .sk-ic { position: absolute; top: 22px; inset-inline-end: 22px; width: 64px; font-size: 1.8rem; }
+        .sk-n { font-size: 4rem; }
+      }
+
+      /* شريطين متقاطعين بيتحركوا حسب سرعة السكرول */
+      .mq { position: relative; padding: 80px 0; overflow: hidden; direction: ltr; }
+      .mq-row { width: 110%; margin-left: -5%; padding: 14px 0; transform: rotate(-3deg); box-shadow: 0 20px 40px -20px #0b244766; }
+      .mq-row.r1 { position: relative; z-index: 2; background: var(--navy); }
+      .mq-row.r2 { margin-top: -60px; transform: rotate(2.5deg); background: linear-gradient(90deg, #fbeab8, #8ff3e6); }
+      .mq-t { display: flex; width: max-content; }
+      .mq-t > span { display: inline-flex; align-items: center; gap: 28px; padding-inline: 28px 0; font-size: clamp(1.3rem, 3vw, 2.3rem); font-weight: 800; white-space: nowrap; line-height: 1.6; }
+      .mq-t .tx { padding-inline-end: 0; }
+      .r1 .tx { color: transparent; background: linear-gradient(190deg, #fbeab8, #8ff3e6); -webkit-background-clip: text; background-clip: text; }
+      .r1 .i { color: #8ff3e6; }
+      .r2 .tx, .r2 .i { color: var(--navy); }
+      .mq .i { font-size: 0.8em; }
+
+      /* =====================================================
+         9c) GSAP LAYER (html.gs)
+         ===================================================== */
+      .gs .rise { animation: none; visibility: hidden; }
+      .gs .rv { transition: none; }
+      .gs .ab-cards.v .ab-c, .gs .prog, .gs .hx-or { animation: none; }
+      .gs .pside .ic { transition: none; }
+
+      /* قناع الكلمات: العربي بيتقسم كلمات مش حروف عشان الحروف تفضل متشبكة */
+      .wd { display: inline-block; overflow: hidden; vertical-align: top; padding: 0.14em 0.06em 0.22em; margin: -0.14em -0.06em -0.22em; }
+      .wi { display: inline-block; }
+
+      /* مؤشر التاب اللي بيتزحلق */
+      .tabs { position: relative; }
+      .tab-ind { position: absolute; top: 0; left: 0; z-index: 0; border-radius: 99px; background: var(--navy); pointer-events: none; }
+      .gs .tab { position: relative; z-index: 1; }
+      .gs .tab.on { background: transparent; border-color: transparent; color: #fff; }
+
+      /* إضاءة بتتبع الماوس */
+      .spot { isolation: isolate; }
+      .sp {
+        position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity 0.35s;
+        background: radial-gradient(340px circle at var(--x, 50%) var(--y, 50%), var(--spc, #8ff3e630), transparent 65%);
+      }
+      .spot:hover .sp { opacity: 1; }
+      .card .sp, .ac .sp { --spc: #17b3a324; }
+
+      /* مؤشر الماوس */
+      .cur {
+        position: fixed; top: 0; left: 0; z-index: 200; width: 34px; height: 34px; margin: -17px 0 0 -17px;
+        border-radius: 50%; border: 1.5px solid var(--teal); pointer-events: none; opacity: 0;
+        transition: width 0.3s, height 0.3s, margin 0.3s, background-color 0.3s, border-color 0.3s, opacity 0.3s;
+      }
+      .cur.on { opacity: 1; }
+      .cur.h { width: 64px; height: 64px; margin: -32px 0 0 -32px; background: #17b3a31f; border-color: var(--gold); }
+
       /* =====================================================
          10) RESPONSIVE (general)
          ===================================================== */
@@ -712,7 +821,7 @@
 
       /* Hover فقط للأجهزة اللي بتدعمه (يمنع "التصاق" الـ hover على اللمس) */
       @media (hover: none) {
-        .card:hover, .gt:hover, .ac:hover, .ab-c:hover { transform: none; }
+        .card:hover, .gt:hover, .ac:hover, .ab-c:hover { translate: none; scale: none; }
       }
 
       /* =====================================================
@@ -788,7 +897,16 @@
       <!-- ================= HERO ================= -->
       <section class="hx" id="hero">
         <div class="banner-shape-area">
-          <img src="assets/shape-left.svg" alt="" class="one" />
+          <!-- assets/shape-left.svg مضمّن عشان كل مربع يتحرك لوحده -->
+          <svg class="px" viewBox="0 0 377 324" aria-hidden="true">
+            <defs>
+              <linearGradient id="pxg" gradientUnits="userSpaceOnUse" x1="219" y1="-10" x2="158" y2="334"><stop offset="0" stop-color="#fbeab8" /><stop offset="1" stop-color="#8ff3e6" /></linearGradient>
+            </defs>
+            <rect x="0" y="215.43" width="215.43" height="107.71" fill="url(#pxg)" />
+            <rect x="161.57" y="107.72" width="107.71" height="107.71" fill="url(#pxg)" />
+            <rect x="269.29" y="215.43" width="107.71" height="107.71" fill="url(#pxg)" />
+            <rect x="269.29" y="0" width="107.71" height="107.71" fill="url(#pxg)" />
+          </svg>
         </div>
         <div class="hx-bg"></div>
         <div class="hx-o hx-o1"></div>
@@ -804,7 +922,8 @@
             </div>
           </div>
 
-          <div class="hx-v rise" style="--d: 0.2; --mx: 0.039; --my: 0.251;">
+          <div class="hx-v rise" style="--d: 0.2">
+            <div class="hx-arch"></div>
             <div class="hx-gl"></div>
             <div class="hx-or a"></div>
             <div class="hx-or b"></div>
@@ -870,6 +989,13 @@
             <p class="ar">ومن خلال <b class="hl">شراكاتنا الاستراتيجية العالمية</b> المستقبلية، نحرص أيضًا على تحويل أحدث الأبحاث الإنسانية إلى حلول عملية قابلة للتوسع، بما يعزز كفاءة الأنظمة الصحية محليًا وعالميًا.</p>
             <p class="en">Impact Forge is a Saudi-rooted catalyst for health innovation and workforce development. Aligned with <b class="hl">Saudi Vision 2030</b>, we empower the Kingdom’s healthcare sector by cultivating <b class="hl">future-ready national talent</b> across medical practice, health administration, strategic management, and healthcare finance.</p>
             <p class="en">Through <b class="hl">strategic global partnerships</b>, we also translate cutting-edge humanitarian research into practical, scalable solutions that strengthen health systems locally and globally.</p>
+
+            <div class="stats">
+              <div><b data-n="5">5</b><span><span class="ar">برامج أكاديمية</span><span class="en">Academic programs</span></span></div>
+              <div><b data-n="4">4</b><span><span class="ar">مجالات كفاءة</span><span class="en">Competency areas</span></span></div>
+              <div><b data-n="3">3</b><span><span class="ar">ركائز عمل</span><span class="en">Core pillars</span></span></div>
+              <div><b data-n="2030">2030</b><span><span class="ar">رؤية نلتزم بها</span><span class="en">Our guiding vision</span></span></div>
+            </div>
 
             <div class="ab-act">
               <a class="chy-btn" href="#programs">
@@ -950,25 +1076,46 @@
             <h2><span class="ar">مجالات عملنا</span><span class="en">What We Do</span></h2>
             <p class="lead"><span class="ar">ثلاث ركائز تجمع التعليم والاستشارة والبحث في منظومة واحدة.</span><span class="en">Three pillars uniting education, consulting and research.</span></p>
           </div>
-          <div class="svc rv">
-            <div class="card">
-              <span class="ic"><svg class="i"><use href="#steth" /></svg></span>
-              <h3><span class="ar">دورات التمريض والتطوير المهني</span><span class="en">Nursing & Professional Courses</span></h3>
-              <p><span class="ar">برامج عملية ترفع كفاءة الكوادر وتدعم سلامة المرضى.</span><span class="en">Practical programs raising competence and supporting patient safety.</span></p>
-            </div>
-            <div class="card">
-              <span class="ic"><svg class="i"><use href="#cross" /></svg></span>
-              <h3><span class="ar">الاستشارات الطبية</span><span class="en">Medical Consulting</span></h3>
-              <p><span class="ar">دعم استشاري متخصص للمنشآت والمهنيين الصحيين.</span><span class="en">Specialist advisory for facilities and healthcare professionals.</span></p>
-            </div>
-            <div class="card">
-              <span class="ic"><svg class="i"><use href="#flask" /></svg></span>
-              <h3><span class="ar">خدمات البحث العلمي</span><span class="en">Scientific Research Services</span></h3>
-              <p><span class="ar">دعم منهجي للأبحاث ونشرها وتحويلها إلى أثر عملي.</span><span class="en">Methodical support for conducting and publishing research.</span></p>
-            </div>
+          <div class="stk">
+            <article class="sk" style="--k: 0; --ac: #17b3a3">
+              <div class="sk-in">
+                <span class="sk-n">01</span>
+                <div>
+                  <h3><span class="ar">دورات التمريض والتطوير المهني</span><span class="en">Nursing & Professional Courses</span></h3>
+                  <p><span class="ar">برامج عملية ترفع كفاءة الكوادر وتدعم سلامة المرضى.</span><span class="en">Practical programs raising competence and supporting patient safety.</span></p>
+                </div>
+                <span class="sk-ic"><svg class="i"><use href="#steth" /></svg></span>
+              </div>
+            </article>
+            <article class="sk" style="--k: 1; --ac: #e0b45c">
+              <div class="sk-in">
+                <span class="sk-n">02</span>
+                <div>
+                  <h3><span class="ar">الاستشارات الطبية</span><span class="en">Medical Consulting</span></h3>
+                  <p><span class="ar">دعم استشاري متخصص للمنشآت والمهنيين الصحيين.</span><span class="en">Specialist advisory for facilities and healthcare professionals.</span></p>
+                </div>
+                <span class="sk-ic"><svg class="i"><use href="#cross" /></svg></span>
+              </div>
+            </article>
+            <article class="sk" style="--k: 2; --ac: #2f8fd8">
+              <div class="sk-in">
+                <span class="sk-n">03</span>
+                <div>
+                  <h3><span class="ar">خدمات البحث العلمي</span><span class="en">Scientific Research Services</span></h3>
+                  <p><span class="ar">دعم منهجي للأبحاث ونشرها وتحويلها إلى أثر عملي.</span><span class="en">Methodical support for conducting and publishing research.</span></p>
+                </div>
+                <span class="sk-ic"><svg class="i"><use href="#flask" /></svg></span>
+              </div>
+            </article>
           </div>
         </div>
       </section>
+
+      <!-- ============ MARQUEE ============ -->
+      <div class="mq" aria-hidden="true">
+        <div class="mq-row r1"><div class="mq-t"></div></div>
+        <div class="mq-row r2"><div class="mq-t"></div></div>
+      </div>
 
       <!-- ================= GALLERY ================= -->
       <section id="gallery">
@@ -1050,6 +1197,12 @@
 
       <!-- ================= CONTACT ================= -->
       <section id="contact" class="cta">
+        <svg class="px-deco" viewBox="0 0 377 324" aria-hidden="true">
+          <rect x="0" y="0" width="215.43" height="107.71" fill="url(#pxg)" />
+          <rect x="161.57" y="107.72" width="107.71" height="107.71" fill="url(#pxg)" />
+          <rect x="269.29" y="0" width="107.71" height="107.71" fill="url(#pxg)" />
+          <rect x="269.29" y="215.43" width="107.71" height="107.71" fill="url(#pxg)" />
+        </svg>
         <div class="wrap rv">
           <h2><span class="ar">لنصنع الأثر معًا</span><span class="en">Let’s Build Impact Together</span></h2>
           <p><span class="ar">للتسجيل في برامجنا أو طلب استشارة أو دعم بحثي، يسعدنا تواصلكم.</span><span class="en">To enrol in a program or request consulting or research support, reach out.</span></p>
@@ -1070,6 +1223,7 @@
             </form>
           </div>
         </div>
+        <div class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
       </section>
     </main>
 
@@ -1109,8 +1263,12 @@
           '</span></p><ul class="ls"><li><span class="ar">الفئة المستهدفة: تُضاف قريبًا</span><span class="en">Target audience: coming soon</span></li><li><span class="ar">الدورات: تُضاف قريبًا</span><span class="en">Courses: coming soon</span></li></ul><span class="soon"><span class="ar">● قائمة الدورات والمدد قيد الإعداد</span><span class="en">● Course list and durations in preparation</span></span></div></div>');
       });
 
+      var tabEls = tabs.getElementsByClassName("tab"),
+        curTab = 0,
+        tabFx = null; /* بتتعرّف في طبقة GSAP تحت */
+
       tabs.setAttribute("role", "tablist");
-      [].forEach.call(tabs.children, function (b, j) {
+      [].forEach.call(tabEls, function (b, j) {
         b.setAttribute("role", "tab");
         b.id = "tab" + j;
         b.setAttribute("aria-selected", j == 0);
@@ -1120,13 +1278,16 @@
       });
 
       function selectTab(k, focus) {
-        [].forEach.call(tabs.children, function (x, j) {
+        if (k == curTab && !focus) return;
+        curTab = k;
+        [].forEach.call(tabEls, function (x, j) {
           x.classList.toggle("on", j == k);
           x.setAttribute("aria-selected", j == k);
           x.tabIndex = j == k ? 0 : -1;
         });
         [].forEach.call(panels.children, function (x, j) { x.classList.toggle("on", j == k); });
-        if (focus) tabs.children[k].focus();
+        if (focus) tabEls[k].focus();
+        if (tabFx) tabFx(k);
       }
       tabs.onclick = function (e) {
         var b = e.target.closest(".tab");
@@ -1135,7 +1296,7 @@
       tabs.onkeydown = function (e) {
         var b = e.target.closest(".tab");
         if (!b) return;
-        var n = tabs.children.length, k = +b.dataset.k, rtl = document.documentElement.dir == "rtl", d = 0;
+        var n = tabEls.length, k = +b.dataset.k, rtl = document.documentElement.dir == "rtl", d = 0;
         if (e.key == "ArrowRight") d = rtl ? -1 : 1;
         if (e.key == "ArrowLeft") d = rtl ? 1 : -1;
         if (e.key == "Home") { e.preventDefault(); return selectTab(0, true); }
@@ -1153,6 +1314,24 @@
       }
 
       /* =====================================================
+         MARQUEE (كل نص مكرر مرتين عشان اللفة تبقى متصلة)
+         ===================================================== */
+      var MQ = [
+        ["الممارسة الطبية", "الإدارة الصحية", "التخطيط الاستراتيجي", "الإدارة المالية الصحية"],
+        ["Medical Practice", "Health Administration", "Strategic Planning", "Healthcare Finance"],
+        ["البحث العلمي", "الاستشارات الطبية", "التدريب العملي", "رؤية 2030"],
+        ["Scientific Research", "Medical Consulting", "Hands-on Training", "Vision 2030"],
+      ];
+      document.querySelectorAll(".mq-t").forEach(function (t, r) {
+        var set = "";
+        MQ[r * 2].forEach(function (w, j) {
+          set += '<span><b class="tx ar">' + w + '</b><b class="tx en">' + MQ[r * 2 + 1][j] + '</b><svg class="i"><use href="#cross"/></svg></span>';
+        });
+        set = set + set + set;
+        t.innerHTML = set + set;
+      });
+
+      /* =====================================================
          NAVBAR: language toggle (يتذكر الاختيار) + mobile menu
          ===================================================== */
       var root = document.documentElement,
@@ -1163,6 +1342,9 @@
         root.lang = l;
         root.dir = l == "ar" ? "rtl" : "ltr";
         try { localStorage.setItem("lang", l); } catch (e) {}
+        /* النص اتغير طوله: نعيد حساب مواضع السكرول والمؤشر */
+        if (tabFx) tabFx(curTab, true);
+        if (root.classList.contains("gs")) ScrollTrigger.refresh();
       }
       try {
         var saved = localStorage.getItem("lang");
@@ -1191,7 +1373,9 @@
           }
         });
       }, { threshold: 0.12 });
-      document.querySelectorAll(".rv").forEach(function (x) { revealObserver.observe(x); });
+      /* في وضع GSAP الظهور بيتعمل بـ ScrollTrigger تحت */
+      if (!root.classList.contains("gs"))
+        document.querySelectorAll(".rv").forEach(function (x) { revealObserver.observe(x); });
 
       /* =====================================================
          SCROLL PROGRESS + BACK TO TOP
@@ -1237,24 +1421,6 @@
       };
 
       /* =====================================================
-         HERO: mouse parallax
-         ===================================================== */
-      (function () {
-        var visual = document.querySelector(".hx-v");
-        if (!visual || !matchMedia("(hover:hover) and (pointer:fine)").matches || matchMedia("(prefers-reduced-motion:reduce)").matches) return;
-        var hero = document.getElementById("hero");
-        hero.addEventListener("mousemove", function (e) {
-          var r = hero.getBoundingClientRect();
-          visual.style.setProperty("--mx", ((e.clientX - r.left) / r.width - 0.5).toFixed(3));
-          visual.style.setProperty("--my", ((e.clientY - r.top) / r.height - 0.5).toFixed(3));
-        });
-        hero.addEventListener("mouseleave", function () {
-          visual.style.setProperty("--mx", 0);
-          visual.style.setProperty("--my", 0);
-        });
-      })();
-
-      /* =====================================================
          HANGING STRIP: a small scroll "shoves" the panel; it swings, rebounds and settles
          ===================================================== */
       (function () {
@@ -1283,6 +1449,264 @@
         }
         addEventListener("scroll", check, { passive: true });
         check();
+      })();
+
+      /* =====================================================
+         GSAP MOTION LAYER (html.gs بس)
+         ===================================================== */
+      (function () {
+        if (!root.classList.contains("gs")) return;
+        gsap.registerPlugin(ScrollTrigger);
+
+        var fine = matchMedia("(hover:hover) and (pointer:fine)").matches,
+          isRtl = function () { return root.dir == "rtl"; };
+        function $$(s, c) { return [].slice.call((c || document).querySelectorAll(s)); }
+
+        /* تقسيم لكلمات (العربي ما ينفعش يتقسم حروف). mask=true: كل كلمة جوه قناع للـ reveal */
+        function wrapNode(n, parent) {
+          var o = document.createElement("span"), i = document.createElement("span");
+          o.className = "wd"; i.className = "wi";
+          parent.insertBefore(o, n); o.appendChild(i); i.appendChild(n);
+          return i;
+        }
+        function split(el, mask) {
+          var out = [];
+          [].slice.call(el.childNodes).forEach(function (n) {
+            if (n.nodeType == 3) {
+              n.textContent.split(/(\s+)/).forEach(function (p) {
+                if (!p) return;
+                var t = document.createTextNode(p);
+                el.insertBefore(t, n);
+                if (/^\s+$/.test(p)) return;
+                if (mask) return out.push(wrapNode(t, el));
+                var s = document.createElement("span");
+                s.className = "mw"; el.insertBefore(s, t); s.appendChild(t); out.push(s);
+              });
+              el.removeChild(n);
+            } else if (n.nodeType == 1) {
+              var lang = n.classList.contains("ar") || n.classList.contains("en");
+              if (lang || !mask) out = out.concat(split(n, mask));
+              else out.push(wrapNode(n, el)); /* زي <b>: يتحرك كوحدة عشان التدرج ما يبوظش */
+            }
+          });
+          return out;
+        }
+
+        /* ---------- HERO intro ---------- */
+        var tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+        tl.set(".rise", { visibility: "inherit" })
+          .from(".nav-wrapper", { yPercent: -120, duration: 1, ease: "expo.out" }, 0)
+          .from(".px rect", { scale: 0, transformOrigin: "50% 50%", duration: 0.7, ease: "back.out(2.2)", stagger: { each: 0.09, from: "random" } }, 0.15)
+          .from(".hx-arch", { scaleY: 0, transformOrigin: "50% 100%", duration: 1.4, ease: "expo.out" }, 0.2)
+          .from(".hx-or", { scale: 0.5, autoAlpha: 0, duration: 1.6, ease: "expo.out", stagger: 0.15 }, 0.3)
+          .from(".hx-im", { yPercent: 14, autoAlpha: 0, duration: 1.4, ease: "expo.out" }, 0.45)
+          .from(".eb", { y: 20, autoAlpha: 0, duration: 0.8 }, 0.35)
+          .from(split(document.querySelector(".h1"), true), { yPercent: 120, rotate: 6, duration: 1.1, ease: "expo.out", stagger: 0.1 }, 0.45)
+          .from(split(document.querySelector(".h1-2"), true), { yPercent: 120, duration: 0.9, ease: "expo.out", stagger: 0.05 }, 0.65)
+          .from(".v30", { y: 40, rotate: -5, autoAlpha: 0, duration: 1, ease: "back.out(1.6)" }, 0.8)
+          .from(".ld", { y: 30, autoAlpha: 0, duration: 0.9 }, 0.75)
+          .from(".ha > *", { y: 30, autoAlpha: 0, duration: 0.8, stagger: 0.1 }, 0.9);
+
+        gsap.to(".hx-or.a", { rotation: 360, duration: 60, ease: "none", repeat: -1 });
+        gsap.to(".hx-or.b", { rotation: -360, duration: 90, ease: "none", repeat: -1 });
+
+        /* الهيرو بيتحرك بطبقات مع السكرول */
+        function heroST() { return { trigger: "#hero", start: "top top", end: "bottom top", scrub: true }; }
+        gsap.to(".hx-v", { yPercent: 10, ease: "none", scrollTrigger: heroST() });
+        gsap.to(".hx-a, .hx-c", { y: -70, ease: "none", scrollTrigger: heroST() });
+        gsap.to(".px", { rotate: -8, yPercent: -30, ease: "none", scrollTrigger: heroST() });
+
+        /* بارالاكس بالماوس: كل طبقة بعمق مختلف */
+        if (fine) {
+          var hero = document.getElementById("hero"),
+            layers = [[".hx-im", -14], [".hx-gl", 40], [".hx-or.a", 26], [".hx-or.b", -34], [".px", 22], [".v30", -12]].map(function (l) {
+              var el = document.querySelector(l[0]);
+              return { d: l[1], x: gsap.quickTo(el, "x", { duration: 0.8, ease: "power3" }), y: gsap.quickTo(el, "y", { duration: 0.8, ease: "power3" }) };
+            });
+          hero.addEventListener("pointermove", function (e) {
+            var r = hero.getBoundingClientRect(), px = (e.clientX - r.left) / r.width - 0.5, py = (e.clientY - r.top) / r.height - 0.5;
+            layers.forEach(function (l) { l.x(px * l.d); l.y(py * l.d * 0.7); });
+          });
+          hero.addEventListener("pointerleave", function () { layers.forEach(function (l) { l.x(0); l.y(0); }); });
+        }
+
+        /* ---------- HEADER: يختفي مع النزول ويرجع مع الطلوع ---------- */
+        var hd = document.getElementById("hd"), shown = true;
+        ScrollTrigger.create({
+          start: 0, end: "max",
+          onUpdate: function (s) {
+            var show = s.direction < 0 || s.scroll() < 200 || menu.classList.contains("o");
+            if (show == shown) return;
+            shown = show;
+            gsap.to(hd, { yPercent: show ? 0 : -140, duration: 0.5, ease: "power3.out" });
+          },
+        });
+
+        /* ---------- عناوين السكاشن: الكلمات تطلع من قناع ---------- */
+        $$("main section:not(#hero) h2").forEach(function (h) {
+          gsap.from(split(h, true), {
+            yPercent: 120, rotate: 5, duration: 1.1, ease: "expo.out", stagger: 0.07,
+            scrollTrigger: { trigger: h, start: "top 88%", once: true },
+          });
+        });
+
+        /* ---------- ظهور عام لمحتوى .rv ---------- */
+        $$(".rv").forEach(function (rv) {
+          rv.classList.add("v");
+          if (rv.matches(".ab-cards, .gal, #pg")) return;
+          var kids = [].filter.call(rv.children, function (k) { return k.tagName != "H2"; });
+          gsap.from(kids, {
+            y: 46, autoAlpha: 0, duration: 1, ease: "power3.out", stagger: 0.1,
+            scrollTrigger: { trigger: rv, start: "top 86%", once: true },
+          });
+        });
+        gsap.from("#pg", { y: 46, autoAlpha: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: "#pg", start: "top 86%", once: true } });
+
+        /* ---------- ABOUT ---------- */
+        gsap.timeline({ scrollTrigger: { trigger: ".ab-cards", start: "top 75%", once: true } })
+          .from(".ab-shape path", { scale: 0.6, rotate: -8, autoAlpha: 0, transformOrigin: "50% 50%", duration: 1.3, ease: "expo.out" })
+          .from(".ab-c", { y: 70, scale: 0.88, autoAlpha: 0, duration: 1, ease: "back.out(1.4)", stagger: 0.14 }, 0.25)
+          .from(".ab-img", { clipPath: "inset(0% 0% 100% 0%)", duration: 1.1, ease: "expo.inOut", stagger: 0.14 }, 0.3);
+
+        $$(".stats b").forEach(function (b) {
+          var n = +b.dataset.n;
+          gsap.from(b, {
+            textContent: n > 100 ? 1990 : 0, snap: { textContent: 1 }, duration: 2, ease: "power2.out",
+            scrollTrigger: { trigger: b, start: "top 92%", once: true },
+          });
+        });
+
+        /* ---------- MESSAGE: الصورة تتكشف والكلمة بتتقري مع السكرول ---------- */
+        gsap.from(".pf img", { clipPath: "inset(100% 0% 0% 0% round 24px)", duration: 1.4, ease: "expo.inOut", scrollTrigger: { trigger: ".pf", start: "top 80%", once: true } });
+        gsap.to(".pf img", { yPercent: -6, ease: "none", scrollTrigger: { trigger: ".msg", start: "top bottom", end: "bottom top", scrub: true } });
+        $$(".msg blockquote p").forEach(function (p) {
+          gsap.fromTo(split(p, false), { opacity: 0.16 }, {
+            opacity: 1, ease: "none", stagger: 0.1,
+            scrollTrigger: { trigger: p, start: "top 80%", end: "bottom 50%", scrub: true },
+          });
+        });
+
+        /* ---------- SERVICES: الكارت اللي فات بيصغر لما اللي بعده يغطيه ---------- */
+        var sks = $$(".sk");
+        sks.forEach(function (c, i) {
+          var inner = c.firstElementChild;
+          gsap.from(inner.querySelector(".sk-ic"), { scale: 0.3, rotate: -120, duration: 1.2, ease: "back.out(1.8)", scrollTrigger: { trigger: c, start: "top 85%", once: true } });
+          gsap.from(inner.querySelector(".sk-n"), { yPercent: 60, autoAlpha: 0, duration: 1, ease: "expo.out", scrollTrigger: { trigger: c, start: "top 85%", once: true } });
+          var next = sks[i + 1];
+          if (next)
+            gsap.fromTo(inner, { scale: 1, filter: "brightness(1)" }, {
+              scale: 0.9, filter: "brightness(0.55)", ease: "none",
+              scrollTrigger: { trigger: next, start: "top bottom", end: "top 25%", scrub: true },
+            });
+        });
+
+        /* ---------- MARQUEE: سرعته واتجاهه حسب السكرول ---------- */
+        var loops = $$(".mq-t").map(function (t, i) {
+          var tw = gsap.fromTo(t, { xPercent: i ? -50 : 0 }, { xPercent: i ? 0 : -50, duration: 40, ease: "none", repeat: -1 });
+          tw.totalTime(tw.duration() * 50); /* نبدأ من نص بعيد عشان الرجوع لورا يشتغل */
+          return tw;
+        });
+        var speed = { v: 1 };
+        function applySpeed() { loops.forEach(function (t) { t.timeScale(speed.v); }); }
+        ScrollTrigger.create({
+          trigger: ".mq", start: "top bottom", end: "bottom top",
+          onUpdate: function (s) {
+            var v = s.getVelocity() / 250;
+            speed.v = Math.abs(v) < 1 ? s.direction : gsap.utils.clamp(-8, 8, v);
+            applySpeed();
+            gsap.to(speed, { v: s.direction, duration: 1.2, ease: "power2.out", overwrite: true, onUpdate: applySpeed });
+          },
+        });
+        gsap.from(".mq-row", { xPercent: function (i) { return i ? 30 : -30; }, autoAlpha: 0, duration: 1.4, ease: "expo.out", stagger: 0.1, scrollTrigger: { trigger: ".mq", start: "top 85%", once: true } });
+
+        /* ---------- GALLERY ---------- */
+        gsap.from(".gt", {
+          clipPath: "inset(100% 0% 0% 0% round 22px)", duration: 1.1, ease: "expo.inOut", stagger: { each: 0.1, from: "random" }, clearProps: "clipPath",
+          scrollTrigger: { trigger: ".gal", start: "top 80%", once: true },
+        });
+        gsap.from(".gt .gi", { scale: 0, rotate: -90, duration: 1, ease: "back.out(2)", stagger: 0.08, delay: 0.5, scrollTrigger: { trigger: ".gal", start: "top 80%", once: true } });
+
+        /* ميل ثلاثي الأبعاد مع الماوس */
+        if (fine)
+          $$(".gt").forEach(function (g) {
+            gsap.set(g, { transformPerspective: 800 });
+            var rx = gsap.quickTo(g, "rotationX", { duration: 0.5, ease: "power3" }),
+              ry = gsap.quickTo(g, "rotationY", { duration: 0.5, ease: "power3" });
+            g.addEventListener("pointermove", function (e) {
+              var r = g.getBoundingClientRect();
+              ry(((e.clientX - r.left) / r.width - 0.5) * 14);
+              rx(-((e.clientY - r.top) / r.height - 0.5) * 14);
+            });
+            g.addEventListener("pointerleave", function () { rx(0); ry(0); });
+          });
+
+        /* ---------- PROGRAMS: مؤشر بيتزحلق + انتقال البانل ---------- */
+        var ind = document.createElement("span");
+        ind.className = "tab-ind";
+        tabs.appendChild(ind);
+        tabFx = function (k, instant) {
+          var t = tabEls[k];
+          gsap.to(ind, { x: t.offsetLeft, y: t.offsetTop, width: t.offsetWidth, height: t.offsetHeight, duration: instant ? 0 : 0.6, ease: "power3.inOut" });
+          if (instant) return;
+          var p = panels.children[k];
+          gsap.fromTo(p.querySelector(".pside"), { clipPath: "inset(0% 0% 100% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.9, ease: "expo.out" });
+          gsap.fromTo(p.querySelector(".pside .ic"), { scale: 0.4, rotate: -45, autoAlpha: 0 }, { scale: 1, rotate: 0, autoAlpha: 1, duration: 0.9, ease: "back.out(2)", delay: 0.1 });
+          gsap.fromTo(p.querySelector(".pbody").children, { x: isRtl() ? -24 : 24, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 0.6, ease: "power3.out", stagger: 0.08, delay: 0.15 });
+        };
+        tabFx(curTab, true);
+        addEventListener("resize", function () { tabFx(curTab, true); });
+        document.fonts && document.fonts.ready.then(function () { tabFx(curTab, true); ScrollTrigger.refresh(); });
+
+        /* ---------- CONTACT: أعمدة الهوية + المربعات ---------- */
+        gsap.from(".bars i", {
+          scaleY: 0, ease: "none", stagger: 0.12,
+          scrollTrigger: { trigger: ".bars", start: "top bottom", end: "bottom bottom", scrub: 1 },
+        });
+        gsap.from(".px-deco rect", { scale: 0, transformOrigin: "50% 50%", duration: 0.7, ease: "back.out(2.2)", stagger: { each: 0.1, from: "random" }, scrollTrigger: { trigger: ".cta", start: "top 70%", once: true } });
+
+        /* ---------- إضاءة تتبع الماوس على الكروت ---------- */
+        if (fine) {
+          $$(".gt, .vmc, .sk-in, .card, .ac").forEach(function (el) {
+            el.classList.add("spot");
+            el.insertAdjacentHTML("afterbegin", '<i class="sp" aria-hidden="true"></i>');
+          });
+          document.addEventListener("pointermove", function (e) {
+            var el = e.target.closest && e.target.closest(".spot");
+            if (!el) return;
+            var r = el.getBoundingClientRect();
+            el.style.setProperty("--x", e.clientX - r.left + "px");
+            el.style.setProperty("--y", e.clientY - r.top + "px");
+          });
+        }
+
+        /* ---------- أزرار مغناطيسية ---------- */
+        if (fine)
+          $$(".chy-btn, .lang").forEach(function (b) {
+            var mx = gsap.quickTo(b, "x", { duration: 0.6, ease: "elastic.out(1, 0.5)" }),
+              my = gsap.quickTo(b, "y", { duration: 0.6, ease: "elastic.out(1, 0.5)" });
+            b.addEventListener("pointermove", function (e) {
+              var r = b.getBoundingClientRect();
+              mx((e.clientX - r.left - r.width / 2) * 0.3);
+              my((e.clientY - r.top - r.height / 2) * 0.45);
+            });
+            b.addEventListener("pointerleave", function () { mx(0); my(0); });
+          });
+
+        /* ---------- مؤشر الماوس ---------- */
+        if (fine) {
+          var cur = document.createElement("div");
+          cur.className = "cur";
+          cur.setAttribute("aria-hidden", "true");
+          document.body.appendChild(cur);
+          var cx = gsap.quickTo(cur, "x", { duration: 0.45, ease: "power3" }),
+            cy = gsap.quickTo(cur, "y", { duration: 0.45, ease: "power3" });
+          addEventListener("pointermove", function (e) {
+            cur.classList.add("on");
+            cx(e.clientX); cy(e.clientY);
+            cur.classList.toggle("h", !!(e.target.closest && e.target.closest("a, button, .gt, input, textarea")));
+          });
+          document.documentElement.addEventListener("pointerleave", function () { cur.classList.remove("on"); });
+        }
       })();
     </script>
   </body>
