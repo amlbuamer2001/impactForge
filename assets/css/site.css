@@ -375,9 +375,13 @@ h2 {
   }
 }
 
-/* ---------- BUTTON ---------- */
+/* ---------- BUTTON ----------
+   زرار بارز 3D: جسم متدرّج + إضاءة فوق + bevel تحت + حافة سميكة (--b-edge)
+   بيطلع مع الـ hover وبيتضغط مع الضغط */
 .btn {
   --ink: var(--if-royal);
+  --b-edge: var(--if-deep); /* لون سُمك الزرار */
+  --b-depth: 4px; /* سُمك الزرار */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -390,20 +394,26 @@ h2 {
   font-weight: 700;
   text-transform: uppercase;
   color: var(--ink);
-  background: var(--navy);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--if-royal) 82%, #ffffff), var(--if-deep));
   border: 1px solid #ffffff45;
   border-radius: 31px;
   cursor: pointer;
   white-space: nowrap;
+  box-shadow:
+    inset 0 1px 0 #ffffff66,
+    inset 0 -3px 0 #0b1c4a59,
+    0 var(--b-depth) 0 var(--b-edge),
+    0 calc(var(--b-depth) + 10px) 22px -8px #050d2699;
   transition:
-    translate 500ms cubic-bezier(0, 0, 0.2, 1),
-    box-shadow 500ms,
+    translate 300ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 300ms,
     color 500ms,
     letter-spacing 500ms;
   padding: 14px 22px;
   font-size: 0.9rem;
   min-height: 44px;
 
+  /* اللوح الفاتح اللي بيتمد مع الـ hover (بإضاءة وbevel كمان) */
   &::after {
     content: "";
     position: absolute;
@@ -413,18 +423,43 @@ h2 {
     width: 77%;
     height: 100%;
     background: linear-gradient(190deg, #ffffff, #c8eaef);
+    box-shadow:
+      inset 0 1px 0 #fff,
+      inset 0 -3px 0 color-mix(in srgb, var(--if-royal) 14%, transparent);
     border-radius: 0 0 31px 0;
     transition: 500ms cubic-bezier(0, 0, 0.2, 1);
   }
   html[dir="rtl"] &::after {
     border-radius: 0 0 0 31px;
   }
+  /* لمعة بتعدّي (نفس لمعة الـ kicker) */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(100deg, transparent 35%, #ffffff8c 50%, transparent 65%);
+    background-size: 300% 100%;
+    background-position: 150% 0;
+    animation: kicker-shine 5s ease-in-out infinite;
+    pointer-events: none;
+  }
   &:hover {
+    --b-depth: 6px;
     translate: 0 -3px;
-    box-shadow: 0 16px 36px #c8eaef4d;
+  }
+  &:active {
+    --b-depth: 1px;
+    translate: 0 3px;
+    transition-duration: 80ms;
   }
   &:hover::after {
     width: 100%;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    &::before {
+      animation: none;
+    }
   }
   html[lang="en"] &:hover {
     letter-spacing: 0.5px;
@@ -458,8 +493,9 @@ h2 {
 
   /* Secondary: ghost on navy glass */
   &.btn-ghost {
+    --b-edge: #0b1c4a99;
     color: #fff;
-    background: color-mix(in srgb, var(--if-royal) 70%, transparent);
+    background: linear-gradient(180deg, color-mix(in srgb, var(--if-royal) 55%, transparent), color-mix(in srgb, var(--if-deep) 80%, transparent));
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 
@@ -473,9 +509,6 @@ h2 {
     }
     &:hover {
       color: var(--ink);
-      box-shadow:
-        inset 0 0 0 1.5px transparent,
-        0 16px 36px #c8eaef4d;
     }
     &:hover .icon {
       color: var(--ink);
@@ -490,9 +523,10 @@ h2 {
     opacity: 0.6;
     cursor: not-allowed;
   }
-  &.is-soon:hover {
+  &.is-soon:hover,
+  &.is-soon:active {
+    --b-depth: 4px;
     translate: none;
-    box-shadow: none;
   }
 }
 
@@ -2204,8 +2238,6 @@ h2 {
     .btn {
       padding: 16px 28px;
       font-size: 1rem;
-      box-shadow: 0 14px 30px -14px
-        color-mix(in srgb, var(--navy) 60%, transparent);
     }
     .btn:focus-visible {
       outline-color: var(--gold);
