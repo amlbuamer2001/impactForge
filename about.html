@@ -3,9 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>عن إمباكتفورج | الرؤية والرسالة والقيم</title>
-    <meta name="description" content="محفّز وطني للتميّز في رأس المال البشري في القطاعين الصحي والإداري." />
-    <meta name="theme-color" content="#071a33" />
+    <title ar="من نحن — إمباكتفورج القابضة" en="About Impact Forge Holding">من نحن — إمباكتفورج القابضة</title>
+    <meta name="description" content="تعرّف على رؤية إمباكتفورج ورسالتها وقيمها، وكلمة مستشارتها التنفيذية عن تمكين الكفاءات الصحية السعودية." ar-content="تعرّف على رؤية إمباكتفورج ورسالتها وقيمها، وكلمة مستشارتها التنفيذية عن تمكين الكفاءات الصحية السعودية." en-content="Our vision, mission, and values, and a message from our Executive Advisor on empowering Saudi health talent." />
+    <meta name="keywords" content="شركة تدريب صحي سعودية" ar-content="شركة تدريب صحي سعودية" en-content="Saudi healthcare training company" />
+    <meta name="theme-color" content="#2E4FA0" />
     <script>
       /* اللغة المحفوظة + علامة الـ JS قبل أول رسم (يمنع وميض اللغة) */
       (function (d) { d.classList.add("js"); try { if (localStorage.getItem("lang") == "en") { d.lang = "en"; d.dir = "ltr"; } } catch (e) {} })(document.documentElement);
@@ -13,8 +14,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script>
-      /* طبقة الحركة: تتفعّل بس لو GSAP اتحملت ومفيش reduced-motion (غير كده الموقع يرجع للـ CSS العادي) */
-      if (window.gsap && window.ScrollTrigger && !matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("gs");
+      /* طبقة الحركة: تتفعّل بس لو GSAP اتحملت ومفيش reduced-motion */
+      if (window.gsap && window.ScrollTrigger && !matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("gsap-enabled");
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -51,185 +52,109 @@
         <symbol id="arrow" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
         <symbol id="up" viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"/></symbol>
         <symbol id="send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4zM22 2 11 13"/></symbol>
-        <linearGradient id="pxg" gradientUnits="userSpaceOnUse" x1="219" y1="-10" x2="158" y2="334"><stop offset="0" stop-color="#fbeab8" /><stop offset="1" stop-color="#8ff3e6" /></linearGradient>
+        <linearGradient id="pxg" gradientUnits="userSpaceOnUse" x1="219" y1="-10" x2="158" y2="334"><stop offset="0" stop-color="#ffffff" /><stop offset="1" stop-color="#c8eaef" /></linearGradient>
       </defs>
     </svg>
 
-    <a class="skip" href="#main"><span class="ar">تخطَّ إلى المحتوى</span><span class="en">Skip to content</span></a>
-    <div id="pr"></div>
-    <header id="hd">
-      <div class="nav-wrapper">
-        <div class="scoop-left"></div>
-        <nav class="nav-top" aria-label="Main">
-          <a href="index2.html" class="logo" aria-label="Impact Forge"><i><svg class="i" aria-hidden="true"><use href="#cross" /></svg></i></a>
-          <button class="burger" id="bg" aria-label="القائمة / Menu" aria-expanded="false" aria-controls="nv">☰</button>
-          <div class="links" id="nv">
-            <a href="index2.html"><span class="ar">الرئيسية</span><span class="en">Home</span></a>
-            <a href="about.html" class="act" aria-current="page"><span class="ar">من نحن</span><span class="en">About Us</span></a>
-            <a href="programs.html"><span class="ar">البرامج</span><span class="en">Programs</span></a>
-            <a href="advisors.html"><span class="ar">المستشارون الأكاديميون</span><span class="en">Academic Advisors</span></a>
-            <a href="organizations.html"><span class="ar">حلول المؤسسات</span><span class="en">For Organizations</span></a>
-            <a href="contact.html"><span class="ar">تواصل معنا</span><span class="en">Contact Us</span></a>
-            <a class="nav-cta" href="contact.html"><span class="ar">سجّل الآن</span><span class="en">Register Now</span></a>
-             <button class="lang" id="lg"><span class="ar">EN</span><span class="en">العربية</span></button>
+    <a class="skip-link" href="#main"><span ar="تخطَّ إلى المحتوى" en="Skip to content"></span></a>
+    <div class="scroll-progress"></div>
+
+    <!-- ================= HEADER ================= -->
+    <header class="header">
+      <div class="header-wrapper">
+        <div class="header-scoop-left"></div>
+        <nav class="header-bar" aria-label="Main">
+          <a href="index2.html" class="logo" aria-label="Impact Forge"><img src="assets/images/logo.svg" ar-alt="إمباكتفورج القابضة | Impact Forge" en-alt="Impact Forge Holding" alt="Impact Forge" width="200" height="50" /></a>
+          <button class="menu-toggle" ar-aria-label="القائمة" en-aria-label="Menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+          <div class="nav-links" id="nav-links">
+            <a href="index2.html"><span ar="الرئيسية" en="Home"></span></a>
+            <a href="about.html" class="is-active" aria-current="page"><span ar="من نحن" en="About"></span></a>
+            <div class="nav-dropdown"><a href="programs.html" aria-haspopup="true"><span ar="البرامج" en="Programs"></span><i class="caret" aria-hidden="true">▾</i></a><div class="nav-dropdown-menu"><a href="program-nursing.html"><span ar="التمريض" en="Nursing"></span></a><a href="program-medical.html"><span ar="الطب" en="Medical"></span></a><a href="program-emergency.html"><span ar="طب الطوارئ" en="Emergency Medicine"></span></a><a href="program-business.html"><span ar="الإدارة والأعمال" en="Business &amp; Management"></span></a><a href="program-research.html"><span ar="البحث العلمي" en="Research"></span></a></div></div>
+            <a href="advisors.html"><span ar="المستشارون" en="Advisors"></span></a>
+            <a href="organizations.html"><span ar="للمؤسسات" en="For Organizations"></span></a>
+            <a href="contact.html"><span ar="تواصل معنا" en="Contact"></span></a>
+            <a class="nav-register" href="register.html"><span ar="سجّل الآن" en="Register"></span></a>
+            <button class="lang-toggle" type="button"><span ar="EN" en="عربي"></span></button>
           </div>
         </nav>
-        <div class="scoop-right"></div>
+        <div class="header-scoop-right"></div>
       </div>
     </header>
 
     <main id="main">
-      <section class="ph">
-        <svg class="px" viewBox="0 0 377 324" aria-hidden="true"><rect x="0" y="215.43" width="215.43" height="107.71" fill="url(#pxg)"/><rect x="161.57" y="107.72" width="107.71" height="107.71" fill="url(#pxg)"/><rect x="269.29" y="215.43" width="107.71" height="107.71" fill="url(#pxg)"/><rect x="269.29" y="0" width="107.71" height="107.71" fill="url(#pxg)"/></svg>
-        <span class="ph-ring a"></span><span class="ph-ring b"></span>
-        <div class="wrap">
-          <div class="ph-in">
-            <nav class="crumbs" aria-label="Breadcrumb"><a href="index2.html"><span class="ar">الرئيسية</span><span class="en">Home</span></a><i>/</i><span><span class="ar">من نحن</span><span class="en">About Us</span></span></nav>
-            <h1><span class="ar">عن <b>إمباكتفورج</b></span><span class="en">About <b>Impact Forge</b></span></h1>
-            <p class="ph-sub"><span class="ar">محفّز وطني للتميّز في رأس المال البشري.</span><span class="en">A national catalyst for human capital excellence.</span></p>
+      <section class="page-hero">
+        <svg class="page-hero-pixels" viewBox="0 0 377 324" aria-hidden="true"><rect x="0" y="215.43" width="215.43" height="107.71" fill="url(#pxg)"/><rect x="161.57" y="107.72" width="107.71" height="107.71" fill="url(#pxg)"/><rect x="269.29" y="215.43" width="107.71" height="107.71" fill="url(#pxg)"/><rect x="269.29" y="0" width="107.71" height="107.71" fill="url(#pxg)"/></svg>
+        <span class="page-hero-ring page-hero-ring-a"></span><span class="page-hero-ring page-hero-ring-b"></span>
+        
+        <div class="container">
+          <div class="page-hero-content">
+            <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index2.html"><span ar="الرئيسية" en="Home"></span></a><i>/</i><span ar="من نحن" en="About"></span></nav>
+            
+            <h1 ar="نصنع التغيير بالاستثمار في الإنسان" en="Forging change by investing in people"></h1>
+            
+            
           </div>
         </div>
       </section>
-      <!-- قصتنا: النص بيتقري مع السكرول -->
+
       <section id="story">
-        <div class="wrap">
-          <span class="kick rv">OUR STORY</span>
-          <h2><span class="ar">قصتنا</span><span class="en">Our Story</span></h2>
-          <div class="scrub" style="font-size: clamp(1.15rem, 2vw, 1.5rem); font-weight: 600; line-height: 1.9; max-width: 980px">
-            <p class="ar">إمباكتفورج محرّك وطني رائد يُسهم في تحفيز الابتكار الصحي وتنمية الكوادر البشرية، ننطلق من قلب المملكة العربية السعودية. واستنادًا إلى مستهدفات رؤية السعودية 2030، نعمل على تمكين قطاع الرعاية الصحية عبر إعداد كفاءات وطنية مؤهلة للمستقبل في مجالات الممارسة الطبية، والإدارة الصحية، والتخطيط الاستراتيجي، والإدارة المالية الصحية.</p>
-            <p class="ar">ومن خلال شراكاتنا الاستراتيجية العالمية، نحوّل أحدث الأبحاث إلى حلول عملية قابلة للتوسّع، تعزّز كفاءة الأنظمة الصحية محليًا وعالميًا.</p>
-            <p class="en">Impact Forge is a Saudi-rooted catalyst for health innovation and workforce development. Aligned with Saudi Vision 2030, we empower the Kingdom's healthcare sector by cultivating future-ready national talent across medical practice, health administration, strategic management and healthcare finance.</p>
-            <p class="en">Through strategic global partnerships, we translate the latest research into practical, scalable solutions that strengthen health systems locally and globally.</p>
-          </div>
+        <div class="container">
+          <div class="scrub-text reveal" style="font-size: clamp(1.15rem, 2vw, 1.5rem); font-weight: 600; line-height: 1.9; max-width: 980px"><p ar="إمباكتفورج القابضة محرّك وطني رائد يُسهم في تحفيز الابتكار الصحي وتنمية الكوادر البشرية، ننطلق من قلب المملكة العربية السعودية. واستنادًا إلى مستهدفات رؤية السعودية 2030، نعمل على تمكين قطاع الرعاية الصحية في المملكة عبر إعداد كفاءات وطنية مؤهلة للمستقبل في مجالات الممارسة الطبية، والإدارة الصحية، والتخطيط الاستراتيجي، والإدارة المالية الصحية. ومن خلال شراكات استراتيجية عالمية، نحرص على تحويل أحدث الأبحاث الإنسانية إلى حلول عملية قابلة للتوسع، تعزّز كفاءة الأنظمة الصحية محليًا وعالميًا." en="Impact Forge Holding is a Saudi-rooted catalyst for health innovation and workforce development. Aligned with Saudi Vision 2030, we empower the Kingdom’s healthcare sector by cultivating future-ready national talent across medical practice, health administration, strategic management, and healthcare finance. Through strategic global partnerships, we translate cutting-edge humanitarian research into practical, scalable solutions that strengthen health systems locally and globally."></p></div>
         </div>
       </section>
 
-      <!-- الرؤية والرسالة + القيم -->
-      <section id="vision" class="vm">
-        <div class="wrap">
-          <div class="rv">
-            <span class="kick">VISION · MISSION · VALUES</span>
-            <h2><span class="ar">الرؤية والرسالة</span><span class="en">Vision &amp; Mission</span></h2>
+      <section class="vision-mission" id="vision">
+        <div class="container">
+          <div class="reveal"><span class="kicker" ar="الرؤية والرسالة" en="Vision &amp; Mission"></span><h2 ar="الرؤية والرسالة" en="Vision &amp; Mission"></h2></div>
+          <div class="vm-grid reveal" style="margin-top: 28px">
+            <div class="vm-card"><h3 ar="الرؤية" en="Vision"></h3><p ar="أن نكون المحفّز الرائد في المملكة العربية السعودية لتحقيق التميّز في رأس المال البشري، من خلال تمكين المهنيين والمؤسسات في القطاعات الصحية والطبية والتجارية عبر برامج تطوير قدرات متخصصة تقود الابتكار وتحقق أثرًا مستدامًا." en="To be Saudi Arabia’s leading catalyst for human capital excellence — empowering health, medical, and business professionals and organizations through specialized capacity development that drives innovation and sustainable impact."></p></div>
+            <div class="vm-card"><h3 ar="الرسالة" en="Mission"></h3><p ar="نُزوّد خريجي ومؤسسات القطاعات الصحية والطبية والتجارية بالمعرفة المتخصصة والمهارات وحلول التطوير التي تبني كوادر بشرية مستعدة للمستقبل، وتُعزز الابتكار، وتُحدث أثرًا عميقًا ومستدامًا في المنظومتين الصحية والتجارية بالمملكة." en="We equip health, medical, and business graduates and organizations with specialized knowledge, skills, and development solutions that build future-ready talent, foster innovation, and create lasting impact across Saudi Arabia’s health and business ecosystems."></p></div>
           </div>
-          <div class="vmg rv" style="margin-top: 28px">
-            <div class="vmc">
-              <h3><span class="ar"><svg class="i"><use href="#target" /></svg> رؤيتنا</span><span class="en"><svg class="i"><use href="#target" /></svg> Our Vision</span></h3>
-              <p><span class="ar">أن نكون المحفّز الرائد في المملكة العربية السعودية للتميّز في رأس المال البشري، من خلال تمكين المهنيين والمؤسسات في القطاعات الصحية والطبية والتجارية عبر برامج تطوير قدرات متخصصة تقود الابتكار وتحقق أثرًا مستدامًا.</span><span class="en">To be Saudi Arabia's leading catalyst for human capital excellence — empowering health, medical and business professionals and organizations through specialized capacity development that drives innovation and sustainable impact.</span></p>
-            </div>
-            <div class="vmc">
-              <h3><span class="ar"><svg class="i"><use href="#rocket" /></svg> رسالتنا</span><span class="en"><svg class="i"><use href="#rocket" /></svg> Our Mission</span></h3>
-              <p><span class="ar">نزوّد خريجي ومؤسسات القطاعات الصحية والطبية والتجارية بالمعرفة المتخصصة والمهارات وحلول التطوير التي تبني كوادر مستعدة للمستقبل، وتعزّز الابتكار، وتُحدث أثرًا عميقًا ومستدامًا في المنظومتين الصحية والتجارية بالمملكة.</span><span class="en">We equip health, medical and business graduates and organizations with specialized knowledge, skills and development solutions that build future-ready talent, foster innovation and create lasting impact across Saudi Arabia's health and business ecosystems.</span></p>
-            </div>
-          </div>
-          <div class="rv"><h2 style="margin-top: 20px"><span class="ar">قيمنا</span><span class="en">Our Values</span></h2></div>
-          <div class="vals rv" style="margin-top: 20px">
-            <div class="card val"><div class="n">01</div><h3><span class="ar">التميّز</span><span class="en">Excellence</span></h3><p><span class="ar">نلتزم بأعلى المعايير في كل برنامج وشراكة ونتيجة، ونسعى باستمرار إلى رفع سقف ما يمكن تحقيقه في تطوير القدرات.</span><span class="en">We uphold the highest standards in every program, partnership and outcome — continuously raising the bar for what capacity development can achieve.</span></p></div>
-            <div class="card val"><div class="n">02</div><h3><span class="ar">الابتكار</span><span class="en">Innovation</span></h3><p><span class="ar">نتبنّى أساليب استباقية وحلولًا متطورة تُعِدّ المهنيين لمتطلبات المشهد الصحي والتجاري المتجددة.</span><span class="en">We embrace forward-thinking approaches and cutting-edge solutions to prepare professionals for the evolving demands of tomorrow's health and business landscapes.</span></p></div>
-            <div class="card val"><div class="n">03</div><h3><span class="ar">الأثر</span><span class="en">Impact</span></h3><p><span class="ar">نقيس نجاحنا بالفارق الملموس الذي نُحدثه في الأفراد والمؤسسات والمنظومة السعودية الأشمل.</span><span class="en">We measure our success by the tangible difference we make — in individuals, organizations and the broader Saudi ecosystem.</span></p></div>
-            <div class="card val"><div class="n">04</div><h3><span class="ar">التمكين</span><span class="en">Empowerment</span></h3><p><span class="ar">نؤمن بإطلاق الطاقات الكامنة عبر تزويد المهنيين والمؤسسات بالأدوات والثقة والقدرات اللازمة للقيادة والنمو المستدام.</span><span class="en">We unlock human potential by equipping professionals and organizations with the tools, confidence and capabilities to lead and grow sustainably.</span></p></div>
-          </div>
+          <div class="reveal"><h2 ar="القيم" en="Values"></h2></div>
+          <div class="values-grid reveal" style="margin-top: 20px"><div class="card"><span class="value-number" ar="01" en="01"></span><h3 ar="التميّز" en="Excellence"></h3><p ar="نلتزم بأعلى المعايير في كل برنامج وشراكة ونتيجة، ونسعى باستمرار إلى رفع سقف ما يمكن تحقيقه في تطوير القدرات." en="We uphold the highest standards in every program, partnership, and outcome — continuously raising the bar for what capacity development can achieve."></p></div><div class="card"><span class="value-number" ar="02" en="02"></span><h3 ar="الأثر" en="Impact"></h3><p ar="نقيس نجاحنا بالفارق الملموس الذي نُحدثه في الأفراد والمؤسسات والمنظومة السعودية الأشمل." en="We measure our success by the tangible difference we make — in individuals, organizations, and the broader Saudi ecosystem."></p></div><div class="card"><span class="value-number" ar="03" en="03"></span><h3 ar="الابتكار" en="Innovation"></h3><p ar="نتبنّى أساليب تفكير استباقية وحلولًا متطورة لإعداد المهنيين لمتطلبات المشهد الصحي والتجاري في الغد." en="We embrace forward-thinking approaches and cutting-edge solutions to prepare professionals for tomorrow’s health and business landscapes."></p></div><div class="card"><span class="value-number" ar="04" en="04"></span><h3 ar="التمكين" en="Empowerment"></h3><p ar="نؤمن بإطلاق الطاقات البشرية بتزويد المهنيين والمؤسسات بالأدوات والثقة والقدرات اللازمة للقيادة والنمو المستدام." en="We unlock human potential by equipping professionals and organizations with the tools, confidence, and capabilities to lead and grow sustainably."></p></div></div>
         </div>
       </section>
 
-      <!-- منهجيتنا -->
-      <section id="approach">
-        <div class="wrap">
-          <div class="rv">
-            <span class="kick">OUR APPROACH</span>
-            <h2><span class="ar">كيف نصنع الأثر</span><span class="en">How We Deliver Impact</span></h2>
-          </div>
-          <div class="path rv">
-            <i class="path-fill"></i>
-            <div><h3><span class="ar">التعلّم التطبيقي</span><span class="en">Practice-Based Learning</span></h3><p><span class="ar">محاكاة ودراسات حالة وسيناريوهات سريرية واقعية.</span><span class="en">Simulation, case studies and real clinical scenarios.</span></p></div>
-            <div><h3><span class="ar">إشراف الخبراء</span><span class="en">Expert-Led Delivery</span></h3><p><span class="ar">برامج تُصمَّم بإشراف نخبة من المستشارين الأكاديميين.</span><span class="en">Programs designed with distinguished academic advisors.</span></p></div>
-            <div><h3><span class="ar">مسارات متخصصة</span><span class="en">Specialized Pathways</span></h3><p><span class="ar">محتوى مصمَّم وفق الاحتياج الفعلي لكل تخصص.</span><span class="en">Content tailored to each profession's real needs.</span></p></div>
-            <div><h3><span class="ar">مخرجات قابلة للقياس</span><span class="en">Measurable Outcomes</span></h3><p><span class="ar">كفاءات واضحة ونتائج ملموسة.</span><span class="en">Clear competencies and tangible results.</span></p></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- كلمة المستشارة التنفيذية -->
-      <section id="message" class="msg">
-        <div class="wrap msgbox">
-          <div class="pf rv">
-            <!-- ضعي صورة صاحبة السمو في assets/princess.jpg -->
-            <img src="assets/princess.jpg" alt="صاحبة السمو الملكي الأميرة نجود بنت هذلول بن عبدالعزيز" />
-          </div>
-          <div>
-            <span class="kick">MESSAGE</span>
-            <h2><span class="ar">كلمة المستشارة التنفيذية</span><span class="en">A Message from Our Executive Advisor</span></h2>
-            <blockquote class="scrub ar">
-              <p>بصفتي مستشارةً تنفيذيةً لشركة إمباكتفورج القابضة، حيث نضع الإنسان في صميم اهتمامنا، ألمس عن قرب كيف تنبثق رسالتنا وقيمنا وأهدافنا مباشرةً من رؤية المملكة 2030 التي جعلت الإنسان محورها. فنحن لا نكتفي بتقديم برامج تدريبية، بل نعمل على تمكين الكفاءات السعودية لقيادة مستقبل القطاع الصحي والطبي. ولأن تعزيز سلامة المرضى والارتقاء بجودة الخدمات ركيزتان أساسيتان في الرؤية، فإننا نمدّ جسور التعاون مع المتخصصين في الرعاية الصحية على المستويين المحلي والدولي.</p>
-              <p>هدفنا واضح: سدّ الفجوة بين الإمكانات والكفاءة بمستويات عالمية. وانطلاقًا من قيم التميّز والنزاهة والأثر الإنساني، نستثمر في برامج تعليمية عملية تُعِدّ الكوادر الصحية لمواجهة التحديات السريرية الواقعية. ومن خلال بناء قيادات سعودية قادرة ومتمكّنة، إلى جانب كوادر عاملة عالية المهارة، نُسهم اليوم في بناء مجتمع أكثر صحةً للمستقبل.</p>
-            </blockquote>
-            <blockquote class="scrub en">
-              <p>As Executive Advisor to Impact Forge Holding — where people are at the very heart of everything we do — I see firsthand how our mission, values and objectives flow directly from Saudi Vision 2030, a vision centered on the human being. We go beyond offering training programs; we empower Saudi talent to lead the future of the health and medical sectors. And because enhancing patient safety and elevating service quality are fundamental pillars of Vision 2030, we build bridges of collaboration with healthcare professionals locally and internationally.</p>
-              <p>Our objective is clear: to bridge the gap between potential and world-class competence. Guided by our values of excellence, integrity and human impact, we invest in practical, hands-on programs that prepare healthcare professionals to meet real-world clinical challenges. By cultivating capable, empowered Saudi leaders alongside a highly skilled workforce, we are contributing today to a healthier society for tomorrow.</p>
-            </blockquote>
-            <div class="who">
-              <b><span class="ar">صاحبة السمو الملكي الأميرة نجود بنت هذلول بن عبدالعزيز</span><span class="en">HRH Princess Nujoud bint Hathloul bin Abdulaziz</span></b>
-              <small><span class="ar">المستشارة التنفيذية لإمباكتفورج القابضة</span><span class="en">Executive Advisor, Impact Forge Holding</span></small>
+      <section class="message section-dark" id="advisor-message">
+        <div class="container">
+          <span class="kicker reveal" ar="كلمة المستشارة التنفيذية" en="Executive Advisor Message"></span>
+          <div class="message-grid reveal" style="margin-top: 24px">
+            <div class="message-photo"><img src="assets/images/princess.jpg" alt="" onerror="this.closest('.message-photo').remove()" /></div>
+            <div>
+              <blockquote><p ar="بصفتي مستشارةً تنفيذيةً لشركة إمباكتفورج القابضة، حيث نضع الإنسان في صميم اهتمامنا، ألمس فعليًا كيف تنبثق رسالتنا وقيمنا وأهدافنا مباشرةً من «رؤية المملكة 2030» التي جعلت الإنسان محورها. فنحن لا نكتفي بتقديم برامج تدريبية فحسب، بل نعمل على تمكين الكفاءات السعودية لقيادة مستقبل القطاع الصحي والطبي." en="As Executive Advisor at Impact Forge Holding — where we place people at the very heart of our focus — I witness firsthand how our mission, values, and objectives stem directly from Saudi Vision 2030, a vision centered on the human element. We go beyond offering training programs; we empower Saudi talent to lead the future of the health and medical sectors."></p><p ar="ولأن تعزيز سلامة المرضى والارتقاء بجودة الخدمات ركيزتان أساسيتان في الرؤية، فإننا نمدّ جسور التعاون أيضًا مع المتخصصين في الرعاية الصحية على المستويين المحلي والدولي. هدفنا واضح: سدّ الفجوة بين الإمكانات والكفاءة بمستويات عالمية." en="Because enhancing patient safety and elevating service quality are fundamental pillars of Vision 2030, we also build bridges of collaboration with healthcare professionals locally and internationally. Our objective is clear: to bridge the gap between potential and world-class competence."></p><p ar="وانطلاقًا من قيم التميّز والتمكين والأثر، نستثمر في برامج تعليمية عملية تُعدّ الكوادر الصحية لمواجهة التحديات السريرية الواقعية. ومن خلال بناء قيادات سعودية متمكّنة وكوادر عاملة عالية المهارة، نسهم اليوم في بناء مجتمع أكثر صحةً للمستقبل." en="Guided by our values of excellence, empowerment, and impact, we invest in practical, hands-on educational programs that prepare healthcare professionals for real-world clinical challenges. By cultivating capable Saudi leaders alongside a highly skilled workforce, we are contributing today to a healthier community for the future."></p></blockquote>
+              <div class="message-author"><b ar="صاحبة السمو الملكي الأميرة نجود بنت هذلول بن عبدالعزيز" en="HRH Princess Nujoud bint Hathloul bin Abdulaziz"></b><small ar="المستشارة التنفيذية" en="Executive Advisor"></small></div>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="cta">
-        <svg class="px-deco" viewBox="0 0 377 324" aria-hidden="true"><rect x="0" y="0" width="215.43" height="107.71" fill="url(#pxg)" /><rect x="161.57" y="107.72" width="107.71" height="107.71" fill="url(#pxg)" /><rect x="269.29" y="0" width="107.71" height="107.71" fill="url(#pxg)" /><rect x="269.29" y="215.43" width="107.71" height="107.71" fill="url(#pxg)" /></svg>
-        <div class="wrap rv">
-          <h2><span class="ar">خطوتك المهنية القادمة تبدأ من هنا</span><span class="en">Your Next Career Milestone Starts Here</span></h2>
-          <p><span class="ar">أخبرنا بأهدافك، وسيرشدك فريقنا إلى البرنامج الأنسب لك.</span><span class="en">Tell us about your goals, and our team will guide you to the right program.</span></p>
-          <div class="ha" style="justify-content: center">
-            <a class="chy-btn" href="contact.html"><span class="text"><span class="ar">سجّل اهتمامك</span><span class="en">Register Your Interest</span></span><svg class="i ar-i"><use href="#arrow" /></svg></a>
-          </div>
-        </div>
-      </section>
     </main>
 
-    <footer id="ft" class="ft">
-      <div class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-      <div class="wrap ft-g">
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+      <div class="footer-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="container footer-grid">
         <div>
-          <a class="logo" href="index2.html"><i><svg class="i" aria-hidden="true"><use href="#cross" /></svg></i><span class="ar">إمباكتفورج القابضة</span><span class="en">Impact Forge Holding</span></a>
-          <p><span class="ar">نصنع كفاءات المستقبل للمملكة.</span><span class="en">Forging future-ready talent for Saudi Arabia.</span></p>
-          <a class="plat" data-platform><svg class="i" aria-hidden="true"><use href="#monitor" /></svg><span class="ar">منصة التعلّم</span><span class="en">Learning Platform</span><i class="soon"><span class="ar">قريبًا</span><span class="en">Soon</span></i></a>
+          <a class="logo" href="index2.html"><i class="logo-mark"><svg class="icon" aria-hidden="true"><use href="#cross"/></svg></i><span ar="إمباكتفورج القابضة" en="Impact Forge Holding"></span></a>
+          <p ar="إمباكتفورج القابضة — نُعدّ كفاءات وطنية مؤهلة للمستقبل في القطاعين الصحي والتجاري." en="Impact Forge Holding — building future-ready national talent across health and business."></p>
         </div>
         <div>
-          <h4><span class="ar">روابط سريعة</span><span class="en">Quick Links</span></h4>
-          <ul>
-            <li><a href="index2.html"><span class="ar">الرئيسية</span><span class="en">Home</span></a></li>
-            <li><a href="about.html"><span class="ar">من نحن</span><span class="en">About Us</span></a></li>
-            <li><a href="programs.html"><span class="ar">البرامج</span><span class="en">Programs</span></a></li>
-            <li><a href="advisors.html"><span class="ar">المستشارون الأكاديميون</span><span class="en">Academic Advisors</span></a></li>
-            <li><a href="organizations.html"><span class="ar">حلول المؤسسات</span><span class="en">For Organizations</span></a></li>
-            <li><a href="contact.html"><span class="ar">تواصل معنا</span><span class="en">Contact Us</span></a></li>
-          </ul>
+          <h4 ar="البرامج" en="Programs"></h4>
+          <ul><li><a href="program-nursing.html"><span ar="التمريض" en="Nursing"></span></a></li><li><a href="program-medical.html"><span ar="الطب" en="Medical"></span></a></li><li><a href="program-emergency.html"><span ar="طب الطوارئ" en="Emergency Medicine"></span></a></li><li><a href="program-business.html"><span ar="الإدارة والأعمال" en="Business &amp; Management"></span></a></li><li><a href="program-research.html"><span ar="البحث العلمي" en="Research"></span></a></li></ul>
         </div>
         <div>
-          <h4><span class="ar">البرامج</span><span class="en">Programs</span></h4>
-          <ul>
-            <li><a href="program-nursing.html"><span class="ar">التمريض</span><span class="en">Nursing</span></a></li>
-            <li><a href="program-medical.html"><span class="ar">الطب</span><span class="en">Medical</span></a></li>
-            <li><a href="program-emergency.html"><span class="ar">طب الطوارئ</span><span class="en">Emergency Medicine</span></a></li>
-            <li><a href="program-business.html"><span class="ar">الإدارة والأعمال</span><span class="en">Business & Management</span></a></li>
-            <li><a href="program-research.html"><span class="ar">البحث العلمي</span><span class="en">Research</span></a></li>
-          </ul>
+          <ul><li><a href="about.html"><span ar="من نحن" en="About"></span></a></li><li><a href="advisors.html"><span ar="المستشارون" en="Advisors"></span></a></li><li><a href="organizations.html"><span ar="للمؤسسات" en="For Organizations"></span></a></li><li><a href="faq.html"><span ar="الأسئلة الشائعة" en="FAQ"></span></a></li></ul>
         </div>
         <div>
-          <h4><span class="ar">تواصل معنا</span><span class="en">Contact</span></h4>
-          <ul>
-            <!-- [ ] بيانات التواصل الرسمية: ضيفي هنا <li> لكل وسيلة -->
-            <li><span class="ar">بيانات التواصل تُضاف قريبًا</span><span class="en">Contact details coming soon</span></li>
-            <li><a href="contact.html"><span class="ar">أرسل لنا رسالة</span><span class="en">Send us a message</span></a></li>
-          </ul>
+          <h4 ar="تواصل معنا" en="Contact"></h4>
+          <ul><li><a href="contact.html"><span ar="تواصل معنا" en="Contact"></span></a></li><li><a href="privacy.html"><span ar="الخصوصية" en="Privacy Policy"></span></a></li><li><a href="terms.html"><span ar="الشروط" en="Terms &amp; Conditions"></span></a></li><li><a href="refund.html"><span ar="الاسترداد" en="Refund &amp; Cancellation Policy"></span></a></li></ul>
         </div>
       </div>
-      <div class="wrap ft-b">
-        <span><span class="ar">© 2026 إمباكتفورج القابضة. جميع الحقوق محفوظة.</span><span class="en">© 2026 Impact Forge Holding. All rights reserved.</span></span>
-        <span><span class="ar">متوافقون مع رؤية السعودية 2030</span><span class="en">Aligned with Saudi Vision 2030</span></span>
+      <div class="container footer-bottom">
+        <span ar="© 2026 إمباكتفورج القابضة. جميع الحقوق محفوظة." en="© 2026 Impact Forge Holding. All rights reserved."></span>
       </div>
     </footer>
-    <button id="tp" aria-label="Back to top"><svg class="i"><use href="#up" /></svg></button>
+    <button class="back-to-top" ar-aria-label="العودة للأعلى" en-aria-label="Back to top"><svg class="icon" aria-hidden="true"><use href="#up"/></svg></button>
     <script src="assets/js/site.js"></script>
   </body>
 </html>

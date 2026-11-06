@@ -3,9 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>تواصل معنا | إمباكتفورج</title>
-    <meta name="description" content="لديك استفسار حول برامجنا أو الشراكات؟ فريقنا جاهز لمساعدتك." />
-    <meta name="theme-color" content="#071a33" />
+    <title ar="تواصل معنا — إمباكتفورج القابضة" en="Contact Us — Impact Forge Holding">تواصل معنا — إمباكتفورج القابضة</title>
+    <meta name="theme-color" content="#2E4FA0" />
     <script>
       /* اللغة المحفوظة + علامة الـ JS قبل أول رسم (يمنع وميض اللغة) */
       (function (d) { d.classList.add("js"); try { if (localStorage.getItem("lang") == "en") { d.lang = "en"; d.dir = "ltr"; } } catch (e) {} })(document.documentElement);
@@ -13,8 +12,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script>
-      /* طبقة الحركة: تتفعّل بس لو GSAP اتحملت ومفيش reduced-motion (غير كده الموقع يرجع للـ CSS العادي) */
-      if (window.gsap && window.ScrollTrigger && !matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("gs");
+      /* طبقة الحركة: تتفعّل بس لو GSAP اتحملت ومفيش reduced-motion */
+      if (window.gsap && window.ScrollTrigger && !matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("gsap-enabled");
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -51,128 +50,88 @@
         <symbol id="arrow" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
         <symbol id="up" viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"/></symbol>
         <symbol id="send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4zM22 2 11 13"/></symbol>
-        <linearGradient id="pxg" gradientUnits="userSpaceOnUse" x1="219" y1="-10" x2="158" y2="334"><stop offset="0" stop-color="#fbeab8" /><stop offset="1" stop-color="#8ff3e6" /></linearGradient>
+        <linearGradient id="pxg" gradientUnits="userSpaceOnUse" x1="219" y1="-10" x2="158" y2="334"><stop offset="0" stop-color="#ffffff" /><stop offset="1" stop-color="#c8eaef" /></linearGradient>
       </defs>
     </svg>
 
-    <a class="skip" href="#main"><span class="ar">تخطَّ إلى المحتوى</span><span class="en">Skip to content</span></a>
-    <div id="pr"></div>
-    <header id="hd">
-      <div class="nav-wrapper">
-        <div class="scoop-left"></div>
-        <nav class="nav-top" aria-label="Main">
-          <a href="index2.html" class="logo" aria-label="Impact Forge"><i><svg class="i" aria-hidden="true"><use href="#cross" /></svg></i></a>
-          <button class="burger" id="bg" aria-label="القائمة / Menu" aria-expanded="false" aria-controls="nv">☰</button>
-          <div class="links" id="nv">
-            <a href="index2.html"><span class="ar">الرئيسية</span><span class="en">Home</span></a>
-            <a href="about.html"><span class="ar">من نحن</span><span class="en">About Us</span></a>
-            <a href="programs.html"><span class="ar">البرامج</span><span class="en">Programs</span></a>
-            <a href="advisors.html"><span class="ar">المستشارون الأكاديميون</span><span class="en">Academic Advisors</span></a>
-            <a href="organizations.html"><span class="ar">حلول المؤسسات</span><span class="en">For Organizations</span></a>
-            <a href="contact.html" class="act" aria-current="page"><span class="ar">تواصل معنا</span><span class="en">Contact Us</span></a>
-            <a class="nav-cta" href="contact.html"><span class="ar">سجّل الآن</span><span class="en">Register Now</span></a>
-             <button class="lang" id="lg"><span class="ar">EN</span><span class="en">العربية</span></button>
+    <a class="skip-link" href="#main"><span ar="تخطَّ إلى المحتوى" en="Skip to content"></span></a>
+    <div class="scroll-progress"></div>
+
+    <!-- ================= HEADER ================= -->
+    <header class="header">
+      <div class="header-wrapper">
+        <div class="header-scoop-left"></div>
+        <nav class="header-bar" aria-label="Main">
+          <a href="index2.html" class="logo" aria-label="Impact Forge"><img src="assets/images/logo.svg" ar-alt="إمباكتفورج القابضة | Impact Forge" en-alt="Impact Forge Holding" alt="Impact Forge" width="200" height="50" /></a>
+          <button class="menu-toggle" ar-aria-label="القائمة" en-aria-label="Menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+          <div class="nav-links" id="nav-links">
+            <a href="index2.html"><span ar="الرئيسية" en="Home"></span></a>
+            <a href="about.html"><span ar="من نحن" en="About"></span></a>
+            <div class="nav-dropdown"><a href="programs.html" aria-haspopup="true"><span ar="البرامج" en="Programs"></span><i class="caret" aria-hidden="true">▾</i></a><div class="nav-dropdown-menu"><a href="program-nursing.html"><span ar="التمريض" en="Nursing"></span></a><a href="program-medical.html"><span ar="الطب" en="Medical"></span></a><a href="program-emergency.html"><span ar="طب الطوارئ" en="Emergency Medicine"></span></a><a href="program-business.html"><span ar="الإدارة والأعمال" en="Business &amp; Management"></span></a><a href="program-research.html"><span ar="البحث العلمي" en="Research"></span></a></div></div>
+            <a href="advisors.html"><span ar="المستشارون" en="Advisors"></span></a>
+            <a href="organizations.html"><span ar="للمؤسسات" en="For Organizations"></span></a>
+            <a href="contact.html" class="is-active" aria-current="page"><span ar="تواصل معنا" en="Contact"></span></a>
+            <a class="nav-register" href="register.html"><span ar="سجّل الآن" en="Register"></span></a>
+            <button class="lang-toggle" type="button"><span ar="EN" en="عربي"></span></button>
           </div>
         </nav>
-        <div class="scoop-right"></div>
+        <div class="header-scoop-right"></div>
       </div>
     </header>
 
     <main id="main">
-      <section class="ph">
-        <svg class="px" viewBox="0 0 377 324" aria-hidden="true"><rect x="0" y="215.43" width="215.43" height="107.71" fill="url(#pxg)"/><rect x="161.57" y="107.72" width="107.71" height="107.71" fill="url(#pxg)"/><rect x="269.29" y="215.43" width="107.71" height="107.71" fill="url(#pxg)"/><rect x="269.29" y="0" width="107.71" height="107.71" fill="url(#pxg)"/></svg>
-        <span class="ph-ring a"></span><span class="ph-ring b"></span>
-        <div class="wrap">
-          <div class="ph-in">
-            <nav class="crumbs" aria-label="Breadcrumb"><a href="index2.html"><span class="ar">الرئيسية</span><span class="en">Home</span></a><i>/</i><span><span class="ar">تواصل معنا</span><span class="en">Contact Us</span></span></nav>
-            <h1><span class="ar"><b>تواصل</b> معنا</span><span class="en">Get in <b>Touch</b></span></h1>
-            <p class="ph-sub"><span class="ar">لديك استفسار حول برامجنا أو الشراكات؟ فريقنا جاهز لمساعدتك.</span><span class="en">Have a question about our programs or partnerships? Our team is ready to help.</span></p>
+      <section class="page-hero">
+        <svg class="page-hero-pixels" viewBox="0 0 377 324" aria-hidden="true"><rect x="0" y="215.43" width="215.43" height="107.71" fill="url(#pxg)"/><rect x="161.57" y="107.72" width="107.71" height="107.71" fill="url(#pxg)"/><rect x="269.29" y="215.43" width="107.71" height="107.71" fill="url(#pxg)"/><rect x="269.29" y="0" width="107.71" height="107.71" fill="url(#pxg)"/></svg>
+        <span class="page-hero-ring page-hero-ring-a"></span><span class="page-hero-ring page-hero-ring-b"></span>
+        
+        <div class="container">
+          <div class="page-hero-content">
+            <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index2.html"><span ar="الرئيسية" en="Home"></span></a><i>/</i><span ar="تواصل معنا" en="Contact"></span></nav>
+            
+            <h1 ar="نسعد بتواصلك" en="We’d love to hear from you"></h1>
+            <p class="page-hero-sub" ar="للاستفسار عن البرامج أو الشراكات أو تدريب المؤسسات، تواصل معنا عبر النموذج أو واتساب." en="For questions about programs, partnerships, or corporate training, reach us through the form or WhatsApp."></p>
+            
           </div>
         </div>
       </section>
-      <section class="cta" id="form">
-        <svg class="px-deco" viewBox="0 0 377 324" aria-hidden="true"><rect x="0" y="0" width="215.43" height="107.71" fill="url(#pxg)" /><rect x="161.57" y="107.72" width="107.71" height="107.71" fill="url(#pxg)" /><rect x="269.29" y="0" width="107.71" height="107.71" fill="url(#pxg)" /><rect x="269.29" y="215.43" width="107.71" height="107.71" fill="url(#pxg)" /></svg>
-        <div class="wrap rv">
-          <h2><span class="ar">سجّل اهتمامك</span><span class="en">Register Your Interest</span></h2>
-          <div class="cg">
-            <div class="ci">
-              <div><b><svg class="i"><use href="#phone" /></svg></b><span><small style="display:block;color:#9fb2cc"><span class="ar">الهاتف</span><span class="en">Phone</span></small><span><span class="ar">يُضاف قريبًا</span><span class="en">Coming soon</span></span></span></div>
-              <div><b><svg class="i"><use href="#phone" /></svg></b><span><small style="display:block;color:#9fb2cc"><span class="ar">واتساب</span><span class="en">WhatsApp</span></small><span><span class="ar">يُضاف قريبًا</span><span class="en">Coming soon</span></span></span></div>
-              <div><b><svg class="i"><use href="#mail" /></svg></b><span><small style="display:block;color:#9fb2cc"><span class="ar">البريد الإلكتروني</span><span class="en">Email</span></small><span><span class="ar">يُضاف قريبًا</span><span class="en">Coming soon</span></span></span></div>
-              <div><b><svg class="i"><use href="#pin" /></svg></b><span><small style="display:block;color:#9fb2cc"><span class="ar">العنوان</span><span class="en">Address</span></small><span><span class="ar">يُضاف قريبًا</span><span class="en">Coming soon</span></span></span></div>
-            </div>
-            <!-- [ ] data-to: الإيميل الرسمي اللي الرسائل بتتبعت عليه -->
-          <form class="cf" data-to="" data-subject="Website inquiry">
-              <div class="cf-row">
-                <input name="name" autocomplete="name" required placeholder="الاسم الكامل / Full name" aria-label="الاسم الكامل / Full name" />
-                <input name="phone" type="tel" autocomplete="tel" required placeholder="رقم الجوال / Mobile number" aria-label="رقم الجوال / Mobile number" />
-              </div>
-              <div class="cf-row">
-                <input name="email" type="email" autocomplete="email" required placeholder="البريد الإلكتروني / Email" aria-label="البريد الإلكتروني / Email" />
-                <input name="profession" placeholder="المهنة / Profession" aria-label="المهنة / Profession" />
-              </div>
-              <select name="program" data-programs aria-label="البرنامج المطلوب / Program of interest">
-                <option value="">البرنامج المطلوب / Program of interest</option>
-                <option value="nursing">التمريض / Nursing</option>
-                <option value="medical">الطب / Medical</option>
-                <option value="emergency">طب الطوارئ / Emergency Medicine</option>
-                <option value="business">الإدارة والأعمال / Business & Management</option>
-                <option value="research">البحث العلمي / Research</option>
-                <option value="other">غير محدد / Not sure</option>
-              </select>
-              <textarea name="message" rows="4" placeholder="الرسالة / Message" aria-label="الرسالة / Message"></textarea>
-              <button class="chy-btn" type="submit"><span class="text"><span class="ar">إرسال</span><span class="en">Send Message</span></span><svg class="i"><use href="#send" /></svg></button>
-              <!-- [ ] عدد أيام الرد --><p class="cf-ok" role="status"><svg class="i"><use href="#check" /></svg><span><span class="ar">شكرًا لتواصلك، سيتواصل معك فريقنا قريبًا.</span><span class="en">Thank you. Our team will contact you soon.</span></span></p>
-            </form>
-          </div>
+
+      <section class="form-section" id="form">
+        <div class="container reveal" style="max-width: 820px">
+          <form class="contact-form" data-to="" data-subject="Website inquiry">
+            <div class="form-row"><label><span ar="الاسم *" en="Name *"></span><input name="name" type="text" required autocomplete="name" /></label><label><span ar="البريد *" en="Email *"></span><input name="email" type="email" required autocomplete="email" /></label></div><div class="form-row"><label><span ar="الجوال" en="Mobile"></span><input name="phone" type="tel" autocomplete="tel" /></label><label><span ar="الموضوع" en="Subject"></span><input name="subject" type="text" /></label></div><label><span ar="الرسالة *" en="Message *"></span><textarea name="message" rows="5" required></textarea></label>
+            <button class="btn" type="submit"><span class="btn-text" ar="إرسال" en="Send"></span><svg class="icon" aria-hidden="true"><use href="#send"/></svg></button>
+            <p class="form-success" role="status"><svg class="icon" aria-hidden="true"><use href="#check"/></svg><span ar="شكرًا لاهتمامك. سيتواصل معك فريقنا بتفاصيل المواعيد والتسجيل." en="Thank you for your interest. Our team will contact you with schedule and registration details."></span></p>
+          </form>
         </div>
       </section>
+
     </main>
 
-    <footer id="ft" class="ft">
-      <div class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-      <div class="wrap ft-g">
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+      <div class="footer-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="container footer-grid">
         <div>
-          <a class="logo" href="index2.html"><i><svg class="i" aria-hidden="true"><use href="#cross" /></svg></i><span class="ar">إمباكتفورج القابضة</span><span class="en">Impact Forge Holding</span></a>
-          <p><span class="ar">نصنع كفاءات المستقبل للمملكة.</span><span class="en">Forging future-ready talent for Saudi Arabia.</span></p>
-          <a class="plat" data-platform><svg class="i" aria-hidden="true"><use href="#monitor" /></svg><span class="ar">منصة التعلّم</span><span class="en">Learning Platform</span><i class="soon"><span class="ar">قريبًا</span><span class="en">Soon</span></i></a>
+          <a class="logo" href="index2.html"><i class="logo-mark"><svg class="icon" aria-hidden="true"><use href="#cross"/></svg></i><span ar="إمباكتفورج القابضة" en="Impact Forge Holding"></span></a>
+          <p ar="إمباكتفورج القابضة — نُعدّ كفاءات وطنية مؤهلة للمستقبل في القطاعين الصحي والتجاري." en="Impact Forge Holding — building future-ready national talent across health and business."></p>
         </div>
         <div>
-          <h4><span class="ar">روابط سريعة</span><span class="en">Quick Links</span></h4>
-          <ul>
-            <li><a href="index2.html"><span class="ar">الرئيسية</span><span class="en">Home</span></a></li>
-            <li><a href="about.html"><span class="ar">من نحن</span><span class="en">About Us</span></a></li>
-            <li><a href="programs.html"><span class="ar">البرامج</span><span class="en">Programs</span></a></li>
-            <li><a href="advisors.html"><span class="ar">المستشارون الأكاديميون</span><span class="en">Academic Advisors</span></a></li>
-            <li><a href="organizations.html"><span class="ar">حلول المؤسسات</span><span class="en">For Organizations</span></a></li>
-            <li><a href="contact.html"><span class="ar">تواصل معنا</span><span class="en">Contact Us</span></a></li>
-          </ul>
+          <h4 ar="البرامج" en="Programs"></h4>
+          <ul><li><a href="program-nursing.html"><span ar="التمريض" en="Nursing"></span></a></li><li><a href="program-medical.html"><span ar="الطب" en="Medical"></span></a></li><li><a href="program-emergency.html"><span ar="طب الطوارئ" en="Emergency Medicine"></span></a></li><li><a href="program-business.html"><span ar="الإدارة والأعمال" en="Business &amp; Management"></span></a></li><li><a href="program-research.html"><span ar="البحث العلمي" en="Research"></span></a></li></ul>
         </div>
         <div>
-          <h4><span class="ar">البرامج</span><span class="en">Programs</span></h4>
-          <ul>
-            <li><a href="program-nursing.html"><span class="ar">التمريض</span><span class="en">Nursing</span></a></li>
-            <li><a href="program-medical.html"><span class="ar">الطب</span><span class="en">Medical</span></a></li>
-            <li><a href="program-emergency.html"><span class="ar">طب الطوارئ</span><span class="en">Emergency Medicine</span></a></li>
-            <li><a href="program-business.html"><span class="ar">الإدارة والأعمال</span><span class="en">Business & Management</span></a></li>
-            <li><a href="program-research.html"><span class="ar">البحث العلمي</span><span class="en">Research</span></a></li>
-          </ul>
+          <ul><li><a href="about.html"><span ar="من نحن" en="About"></span></a></li><li><a href="advisors.html"><span ar="المستشارون" en="Advisors"></span></a></li><li><a href="organizations.html"><span ar="للمؤسسات" en="For Organizations"></span></a></li><li><a href="faq.html"><span ar="الأسئلة الشائعة" en="FAQ"></span></a></li></ul>
         </div>
         <div>
-          <h4><span class="ar">تواصل معنا</span><span class="en">Contact</span></h4>
-          <ul>
-            <!-- [ ] بيانات التواصل الرسمية: ضيفي هنا <li> لكل وسيلة -->
-            <li><span class="ar">بيانات التواصل تُضاف قريبًا</span><span class="en">Contact details coming soon</span></li>
-            <li><a href="contact.html"><span class="ar">أرسل لنا رسالة</span><span class="en">Send us a message</span></a></li>
-          </ul>
+          <h4 ar="تواصل معنا" en="Contact"></h4>
+          <ul><li><a href="contact.html"><span ar="تواصل معنا" en="Contact"></span></a></li><li><a href="privacy.html"><span ar="الخصوصية" en="Privacy Policy"></span></a></li><li><a href="terms.html"><span ar="الشروط" en="Terms &amp; Conditions"></span></a></li><li><a href="refund.html"><span ar="الاسترداد" en="Refund &amp; Cancellation Policy"></span></a></li></ul>
         </div>
       </div>
-      <div class="wrap ft-b">
-        <span><span class="ar">© 2026 إمباكتفورج القابضة. جميع الحقوق محفوظة.</span><span class="en">© 2026 Impact Forge Holding. All rights reserved.</span></span>
-        <span><span class="ar">متوافقون مع رؤية السعودية 2030</span><span class="en">Aligned with Saudi Vision 2030</span></span>
+      <div class="container footer-bottom">
+        <span ar="© 2026 إمباكتفورج القابضة. جميع الحقوق محفوظة." en="© 2026 Impact Forge Holding. All rights reserved."></span>
       </div>
     </footer>
-    <button id="tp" aria-label="Back to top"><svg class="i"><use href="#up" /></svg></button>
+    <button class="back-to-top" ar-aria-label="العودة للأعلى" en-aria-label="Back to top"><svg class="icon" aria-hidden="true"><use href="#up"/></svg></button>
     <script src="assets/js/site.js"></script>
   </body>
 </html>

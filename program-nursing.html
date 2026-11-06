@@ -3,9 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>برنامج تعزيز كفاءات التمريض | إمباكتفورج</title>
-    <meta name="description" content="تطوير تمريضي عملي في التقييم السريري وسلامة المرضى والقيادة." />
-    <meta name="theme-color" content="#071a33" />
+    <title ar="برنامج تعزيز كفاءات التمريض — إمباكتفورج" en="Nurse Enhancement Program — Impact Forge">برنامج تعزيز كفاءات التمريض — إمباكتفورج</title>
+    <meta name="description" content="برامج تمريض ترافقك من الاستعداد للتوظيف حتى التقدم المهني، بمسار تعلّم منظم ومحطات تقييم واختبار نهائي." ar-content="برامج تمريض ترافقك من الاستعداد للتوظيف حتى التقدم المهني، بمسار تعلّم منظم ومحطات تقييم واختبار نهائي." en-content="Nursing programs from job readiness to career advancement, with a structured roadmap, formative assessment, and final exam." />
+    <meta name="keywords" content="دورات تمريض" ar-content="دورات تمريض" en-content="nursing courses Saudi Arabia" />
+    <meta name="theme-color" content="#2E4FA0" />
     <script>
       /* اللغة المحفوظة + علامة الـ JS قبل أول رسم (يمنع وميض اللغة) */
       (function (d) { d.classList.add("js"); try { if (localStorage.getItem("lang") == "en") { d.lang = "en"; d.dir = "ltr"; } } catch (e) {} })(document.documentElement);
@@ -13,8 +14,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script>
-      /* طبقة الحركة: تتفعّل بس لو GSAP اتحملت ومفيش reduced-motion (غير كده الموقع يرجع للـ CSS العادي) */
-      if (window.gsap && window.ScrollTrigger && !matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("gs");
+      /* طبقة الحركة: تتفعّل بس لو GSAP اتحملت ومفيش reduced-motion */
+      if (window.gsap && window.ScrollTrigger && !matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("gsap-enabled");
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -22,7 +23,7 @@
     <link rel="stylesheet" href="assets/css/site.css" />
   </head>
 
-  <body data-page="programs">
+  <body data-page="program-nursing">
     <!-- ============ SVG SPRITE ============ -->
     <svg width="0" height="0" style="position: absolute" aria-hidden="true">
       <defs>
@@ -51,164 +52,93 @@
         <symbol id="arrow" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
         <symbol id="up" viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"/></symbol>
         <symbol id="send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4zM22 2 11 13"/></symbol>
-        <linearGradient id="pxg" gradientUnits="userSpaceOnUse" x1="219" y1="-10" x2="158" y2="334"><stop offset="0" stop-color="#fbeab8" /><stop offset="1" stop-color="#8ff3e6" /></linearGradient>
+        <linearGradient id="pxg" gradientUnits="userSpaceOnUse" x1="219" y1="-10" x2="158" y2="334"><stop offset="0" stop-color="#ffffff" /><stop offset="1" stop-color="#c8eaef" /></linearGradient>
       </defs>
     </svg>
 
-    <a class="skip" href="#main"><span class="ar">تخطَّ إلى المحتوى</span><span class="en">Skip to content</span></a>
-    <div id="pr"></div>
-    <header id="hd">
-      <div class="nav-wrapper">
-        <div class="scoop-left"></div>
-        <nav class="nav-top" aria-label="Main">
-          <a href="index2.html" class="logo" aria-label="Impact Forge"><i><svg class="i" aria-hidden="true"><use href="#cross" /></svg></i></a>
-          <button class="burger" id="bg" aria-label="القائمة / Menu" aria-expanded="false" aria-controls="nv">☰</button>
-          <div class="links" id="nv">
-            <a href="index2.html"><span class="ar">الرئيسية</span><span class="en">Home</span></a>
-            <a href="about.html"><span class="ar">من نحن</span><span class="en">About Us</span></a>
-            <a href="programs.html" class="act" aria-current="page"><span class="ar">البرامج</span><span class="en">Programs</span></a>
-            <a href="advisors.html"><span class="ar">المستشارون الأكاديميون</span><span class="en">Academic Advisors</span></a>
-            <a href="organizations.html"><span class="ar">حلول المؤسسات</span><span class="en">For Organizations</span></a>
-            <a href="contact.html"><span class="ar">تواصل معنا</span><span class="en">Contact Us</span></a>
-            <a class="nav-cta" href="contact.html"><span class="ar">سجّل الآن</span><span class="en">Register Now</span></a>
-             <button class="lang" id="lg"><span class="ar">EN</span><span class="en">العربية</span></button>
+    <a class="skip-link" href="#main"><span ar="تخطَّ إلى المحتوى" en="Skip to content"></span></a>
+    <div class="scroll-progress"></div>
+
+    <!-- ================= HEADER ================= -->
+    <header class="header">
+      <div class="header-wrapper">
+        <div class="header-scoop-left"></div>
+        <nav class="header-bar" aria-label="Main">
+          <a href="index2.html" class="logo" aria-label="Impact Forge"><img src="assets/images/logo.svg" ar-alt="إمباكتفورج القابضة | Impact Forge" en-alt="Impact Forge Holding" alt="Impact Forge" width="200" height="50" /></a>
+          <button class="menu-toggle" ar-aria-label="القائمة" en-aria-label="Menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+          <div class="nav-links" id="nav-links">
+            <a href="index2.html"><span ar="الرئيسية" en="Home"></span></a>
+            <a href="about.html"><span ar="من نحن" en="About"></span></a>
+            <div class="nav-dropdown"><a href="programs.html" class="is-active" aria-current="page" aria-haspopup="true"><span ar="البرامج" en="Programs"></span><i class="caret" aria-hidden="true">▾</i></a><div class="nav-dropdown-menu"><a href="program-nursing.html"><span ar="التمريض" en="Nursing"></span></a><a href="program-medical.html"><span ar="الطب" en="Medical"></span></a><a href="program-emergency.html"><span ar="طب الطوارئ" en="Emergency Medicine"></span></a><a href="program-business.html"><span ar="الإدارة والأعمال" en="Business &amp; Management"></span></a><a href="program-research.html"><span ar="البحث العلمي" en="Research"></span></a></div></div>
+            <a href="advisors.html"><span ar="المستشارون" en="Advisors"></span></a>
+            <a href="organizations.html"><span ar="للمؤسسات" en="For Organizations"></span></a>
+            <a href="contact.html"><span ar="تواصل معنا" en="Contact"></span></a>
+            <a class="nav-register" href="register.html"><span ar="سجّل الآن" en="Register"></span></a>
+            <button class="lang-toggle" type="button"><span ar="EN" en="عربي"></span></button>
           </div>
         </nav>
-        <div class="scoop-right"></div>
+        <div class="header-scoop-right"></div>
       </div>
     </header>
 
     <main id="main">
-      <section class="ph" style="--ac: #0f9d8e">
-        <svg class="px" viewBox="0 0 377 324" aria-hidden="true"><rect x="0" y="215.43" width="215.43" height="107.71" fill="url(#pxg)"/><rect x="161.57" y="107.72" width="107.71" height="107.71" fill="url(#pxg)"/><rect x="269.29" y="215.43" width="107.71" height="107.71" fill="url(#pxg)"/><rect x="269.29" y="0" width="107.71" height="107.71" fill="url(#pxg)"/></svg>
-        <span class="ph-ring a"></span><span class="ph-ring b"></span>
-        <span class="ph-num" aria-hidden="true">01</span>
-        <div class="wrap">
-          <div class="ph-in">
-            <nav class="crumbs" aria-label="Breadcrumb"><a href="index2.html"><span class="ar">الرئيسية</span><span class="en">Home</span></a><i>/</i><a href="programs.html"><span class="ar">البرامج</span><span class="en">Programs</span></a><i>/</i><span><span class="ar">التمريض</span><span class="en">Nursing</span></span></nav>
-            <span class="en-name ar">Impact Nurse Enhancement Program</span>
-            <h1><span class="ar">برنامج إمباكت لتعزيز كفاءات التمريض</span><span class="en">Impact Nurse Enhancement Program</span></h1>
-            <p class="ph-sub"><b class="grad"><span class="ar">من المعرفة إلى الثقة السريرية</span><span class="en">From Knowledge to Clinical Confidence</span></b></p>
-            <p class="ph-sub" style="margin-top: 14px"><span class="ar">برنامج تطبيقي يرتقي بالأداء التمريضي إلى المعايير الدولية، ويعزّز التفكير السريري وسلامة المرضى والرعاية المتمحورة حول المريض، ليُعِدّ الممرّض لتقديم رعاية واثقة في مختلف بيئات العمل.</span><span class="en">A practice-driven program that elevates nursing performance to international standards. It strengthens clinical reasoning, patient safety and patient-centered care, preparing nurses to deliver with confidence in every setting.</span></p>
-            <div class="ha">
-              <a class="chy-btn" href="contact.html?program=nursing"><span class="text"><span class="ar">سجّل الآن</span><span class="en">Enroll Now</span></span><svg class="i ar-i" aria-hidden="true"><use href="#arrow" /></svg></a>
-              <!-- [ ] رابط الكتيّب: حطيه في data-soon -->
-              <a class="chy-btn alt" data-soon=""><span class="text"><span class="ar">حمّل الكتيّب</span><span class="en">Download Brochure</span></span><svg class="i" aria-hidden="true"><use href="#download" /></svg></a>
-            </div>
+      <section class="page-hero" style="--ac: var(--p1)">
+        <svg class="page-hero-pixels" viewBox="0 0 377 324" aria-hidden="true"><rect x="0" y="215.43" width="215.43" height="107.71" fill="url(#pxg)"/><rect x="161.57" y="107.72" width="107.71" height="107.71" fill="url(#pxg)"/><rect x="269.29" y="215.43" width="107.71" height="107.71" fill="url(#pxg)"/><rect x="269.29" y="0" width="107.71" height="107.71" fill="url(#pxg)"/></svg>
+        <span class="page-hero-ring page-hero-ring-a"></span><span class="page-hero-ring page-hero-ring-b"></span>
+        <span class="page-hero-number" aria-hidden="true">01</span>
+        <div class="container">
+          <div class="page-hero-content">
+            <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index2.html"><span ar="الرئيسية" en="Home"></span></a><i>/</i><a href="programs.html"><span ar="البرامج" en="Programs"></span></a><i>/</i><span ar="التمريض" en="Nursing"></span></nav>
+            <span class="english-name" ar="Impact Nurse Enhancement Program" en=""></span>
+            <h1 ar="برنامج إمباكت لتعزيز كفاءات التمريض" en="Impact Nurse Enhancement Program"></h1>
+            <p class="page-hero-sub" ar="من الجاهزية للتوظيف إلى التقدم المهني — برامج ترافق الممرض في كل مرحلة." en="From job readiness to career advancement — programs that support nurses at every stage."></p>
+            <div class="actions"><a class="btn" href="register.html?program=nursing" ><span class="btn-text" ar="سجّل في برنامج التمريض" en="Register for the Nursing Program"></span><svg class="icon btn-arrow" aria-hidden="true"><use href="#arrow"/></svg></a></div>
           </div>
         </div>
       </section>
 
       <section>
-        <div class="wrap pd" style="--ac: #0f9d8e">
-          <div class="pd-main">
-            <section class="rv">
-              <span class="kick">WHO SHOULD ATTEND</span>
-              <h2><span class="ar">الفئة المستهدفة</span><span class="en">Who Should Attend</span></h2>
-              <ul class="chips">
-                <li><svg class="i" aria-hidden="true"><use href="#user" /></svg><span class="ar">خريجو التمريض الجدد</span><span class="en">Newly graduated nurses</span></li>
-                <li><svg class="i" aria-hidden="true"><use href="#user" /></svg><span class="ar">الممرضون الممارسون الساعون إلى التطوّر</span><span class="en">Practicing nurses seeking advancement</span></li>
-                <li><svg class="i" aria-hidden="true"><use href="#user" /></svg><span class="ar">مشرفو التمريض ورؤساء الفرق</span><span class="en">Nurse supervisors and charge nurses</span></li>
-              </ul>
-            </section>
-            <section>
-              <span class="kick">CORE MODULES</span>
-              <h2><span class="ar">المحاور الرئيسية</span><span class="en">Core Modules</span></h2>
-              <div class="tl">
-                <i class="tl-fill"></i>
-                <ol>
-                  <li><span><span class="ar">التقييم السريري والتفكير النقدي</span><span class="en">Clinical Assessment & Critical Thinking</span></span></li>
-                  <li><span><span class="ar">سلامة المرضى ومكافحة العدوى</span><span class="en">Patient Safety & Infection Prevention</span></span></li>
-                  <li><span><span class="ar">أساسيات الرعاية الحادة والحرجة</span><span class="en">Acute & Critical Care Essentials</span></span></li>
-                  <li><span><span class="ar">التوثيق والتواصل مع الفريق الصحي</span><span class="en">Documentation & Interprofessional Communication</span></span></li>
-                  <li><span><span class="ar">القيادة التمريضية</span><span class="en">Nursing Leadership</span></span></li>
-                </ol>
-              </div>
-            </section>
-            <section class="rv">
-              <span class="kick">LEARNING OUTCOMES</span>
-              <h2><span class="ar">مخرجات التعلّم</span><span class="en">Learning Outcomes</span></h2>
-              <div class="outs">
-                <div class="card"><span class="ic"><svg class="i" aria-hidden="true"><use href="#check" /></svg></span><p><span class="ar">تقديم رعاية تمريضية أكثر أمانًا ومبنية على البراهين</span><span class="en">Deliver safer, evidence-based nursing care</span></p></div>
-                <div class="card"><span class="ic"><svg class="i" aria-hidden="true"><use href="#check" /></svg></span><p><span class="ar">التعامل بثقة مع تدهور حالة المريض</span><span class="en">Respond confidently to deteriorating patients</span></p></div>
-                <div class="card"><span class="ic"><svg class="i" aria-hidden="true"><use href="#check" /></svg></span><p><span class="ar">التواصل الفعّال ضمن الفرق متعددة التخصصات</span><span class="en">Communicate effectively within multidisciplinary teams</span></p></div>
-              </div>
-            </section>
+        <div class="container program-detail no-aside" style="--ac: var(--p1)">
+          <div class="program-detail-main">
+          <section class="reveal"><h2 ar="نظرة عامة" en="Overview"></h2><p ar="تدعم برامج إمباكت لتعزيز كفاءات التمريض الممرضين والممرضات في مختلف مراحل مسيرتهم المهنية: الاستعداد للتوظيف، والجاهزية لأدوار جديدة، والحفاظ على مستوى الأداء، وبناء القدرات اللازمة للتقدم المهني. صُممت البرامج استجابةً لاحتياجات تعليمية محددة ومتطلبات التقييم في بيئة العمل، لتمنح المشاركين معارف ومهارات عملية وثقة يوظفونها في الممارسة السريرية الواقعية." en="The Impact Nurse Enhancement Programs support nurses at every stage of their careers: preparing for employment, getting ready for new roles, sustaining performance, and building the capabilities needed for advancement. Developed in response to identified learning needs and workplace evaluation requirements, they build knowledge, practical skills, and confidence that nurses apply in real clinical settings."></p></section>
+          <section class="reveal"><h2 ar="لمن البرنامج" en="Who it’s for"></h2><div class="services-grid"><div class="card"><h3 ar="قبل التوظيف" en="Before employment"></h3><p ar="خريجو التمريض المستعدون للتوظيف وتقييمات القبول" en="Graduates preparing for employment and hiring assessments"></p></div><div class="card"><h3 ar="دور جديد" en="New role"></h3><p ar="ممرضون ينتقلون إلى قسم أو تخصص أو دور جديد" en="Nurses moving into a new unit, specialty, or role"></p></div><div class="card"><h3 ar="أثناء العمل" en="On the job"></h3><p ar="ممرضون ممارسون يستعدون لتقييمات الأداء والكفاءة" en="Practicing nurses preparing for performance and competency evaluations"></p></div><div class="card"><h3 ar="التقدم المهني" en="Career advancement"></h3><p ar="ممرضون يبنون مهارات الترقي والمسؤوليات الأعلى" en="Nurses building capabilities for promotion and wider responsibility"></p></div></div></section>
+          <section class="reveal"><h2 ar="رحلة التعلّم" en="Learning Roadmap"></h2><div class="timeline"><i class="timeline-fill"></i><ol><li><span><b ar="جلسة تعريفية" en="Induction session"></b></span></li><li><span><b ar="محطات تقييم تكويني" en="Formative assessment stations"></b></span></li><li><span><b ar="اختبار نهائي" en="Final examination"></b></span></li></ol></div><p ar="تُكيَّف الأنشطة والتقييم حسب أهداف كل برنامج." en="Activities and assessments are tailored to each program’s objectives."></p></section>
+          <section class="reveal"><h2 ar="الأثر" en="Why It Matters"></h2><div class="outcomes"><div class="card"><span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#check"/></svg></span><p ar="ممارسة تمريضية أكثر أمانًا" en="Safer nursing practice"></p></div><div class="card"><span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#check"/></svg></span><p ar="رعاية أكثر اتساقًا" en="More consistent care"></p></div><div class="card"><span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#check"/></svg></span><p ar="تجربة أفضل للمريض" en="A better patient experience"></p></div></div></section>
+          <section class="reveal"><h2 ar="أسئلة شائعة" en="FAQ"></h2><details class="faq-item"><summary ar="هل يناسبني البرنامج وأنا حديث التخرج؟" en="Is it suitable for new graduates?"></summary><p ar="نعم، توجد برامج مخصصة لمرحلة الاستعداد للتوظيف." en="Yes, some programs target employment readiness."></p></details><details class="faq-item"><summary ar="كيف يُقيَّم تقدمي؟" en="How is progress assessed?"></summary><p ar="عبر محطات تقييم تكويني ثم اختبار نهائي." en="Through formative stations and a final exam."></p></details></section>
           </div>
-          <aside class="pd-aside">
-            <div class="pd-card">
-              <h3><span class="ar">الشكل والمدة</span><span class="en">Format &amp; Duration</span></h3>
-              <!-- [ ] طريقة التقديم والمدة وساعات CME: بدّلي "يُعلن قريبًا" بالقيمة -->
-              <dl>
-                <div><dt><span class="ar">طريقة التقديم</span><span class="en">Delivery mode</span></dt><dd><span class="tba"><span class="ar">يُعلن قريبًا</span><span class="en">To be announced</span></span></dd></div>
-                <div><dt><span class="ar">المدة</span><span class="en">Duration</span></dt><dd><span class="tba"><span class="ar">يُعلن قريبًا</span><span class="en">To be announced</span></span></dd></div>
-                <div><dt><span class="ar">ساعات التعليم الطبي المستمر</span><span class="en">CME hours</span></dt><dd><span class="tba"><span class="ar">يُعلن قريبًا</span><span class="en">To be announced</span></span></dd></div>
-              </dl>
-              <div class="ha">
-                <a class="chy-btn" href="contact.html?program=nursing"><span class="text"><span class="ar">سجّل الآن</span><span class="en">Enroll Now</span></span><svg class="i ar-i" aria-hidden="true"><use href="#arrow" /></svg></a>
-                <!-- [ ] رابط الكتيّب: حطيه في data-soon -->
-                <a class="chy-btn alt" data-soon=""><span class="text"><span class="ar">حمّل الكتيّب</span><span class="en">Download Brochure</span></span><svg class="i" aria-hidden="true"><use href="#download" /></svg></a>
-              </div>
-            </div>
-          </aside>
         </div>
       </section>
+      <section style="padding-top: 0"><div class="container">
+        <a class="next-program" href="program-medical.html" style="--ac: var(--p2)"><small ar="البرنامج التالي" en="Next program"></small><b ar="برنامج إمباكت للتعزيز الطبي" en="Impact Medical Enhancement Program"></b><span class="arrow-circle"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a>
+      </div></section>
 
-      <section style="padding-top: 0">
-        <div class="wrap">
-          <a class="nxt" href="program-medical.html" style="--ac: #2563a8">
-            <small><span class="ar">البرنامج التالي</span><span class="en">Next program</span></small>
-            <b><span class="ar">برنامج إمباكت لتعزيز الكفاءات الطبية</span><span class="en">Impact Medical Enhancement Program</span></b>
-            <span class="pix-go"><svg class="i" aria-hidden="true"><use href="#arrow" /></svg></span>
-          </a>
-        </div>
-      </section>
     </main>
 
-    <footer id="ft" class="ft">
-      <div class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-      <div class="wrap ft-g">
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+      <div class="footer-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="container footer-grid">
         <div>
-          <a class="logo" href="index2.html"><i><svg class="i" aria-hidden="true"><use href="#cross" /></svg></i><span class="ar">إمباكتفورج القابضة</span><span class="en">Impact Forge Holding</span></a>
-          <p><span class="ar">نصنع كفاءات المستقبل للمملكة.</span><span class="en">Forging future-ready talent for Saudi Arabia.</span></p>
-          <a class="plat" data-platform><svg class="i" aria-hidden="true"><use href="#monitor" /></svg><span class="ar">منصة التعلّم</span><span class="en">Learning Platform</span><i class="soon"><span class="ar">قريبًا</span><span class="en">Soon</span></i></a>
+          <a class="logo" href="index2.html"><i class="logo-mark"><svg class="icon" aria-hidden="true"><use href="#cross"/></svg></i><span ar="إمباكتفورج القابضة" en="Impact Forge Holding"></span></a>
+          <p ar="إمباكتفورج القابضة — نُعدّ كفاءات وطنية مؤهلة للمستقبل في القطاعين الصحي والتجاري." en="Impact Forge Holding — building future-ready national talent across health and business."></p>
         </div>
         <div>
-          <h4><span class="ar">روابط سريعة</span><span class="en">Quick Links</span></h4>
-          <ul>
-            <li><a href="index2.html"><span class="ar">الرئيسية</span><span class="en">Home</span></a></li>
-            <li><a href="about.html"><span class="ar">من نحن</span><span class="en">About Us</span></a></li>
-            <li><a href="programs.html"><span class="ar">البرامج</span><span class="en">Programs</span></a></li>
-            <li><a href="advisors.html"><span class="ar">المستشارون الأكاديميون</span><span class="en">Academic Advisors</span></a></li>
-            <li><a href="organizations.html"><span class="ar">حلول المؤسسات</span><span class="en">For Organizations</span></a></li>
-            <li><a href="contact.html"><span class="ar">تواصل معنا</span><span class="en">Contact Us</span></a></li>
-          </ul>
+          <h4 ar="البرامج" en="Programs"></h4>
+          <ul><li><a href="program-nursing.html"><span ar="التمريض" en="Nursing"></span></a></li><li><a href="program-medical.html"><span ar="الطب" en="Medical"></span></a></li><li><a href="program-emergency.html"><span ar="طب الطوارئ" en="Emergency Medicine"></span></a></li><li><a href="program-business.html"><span ar="الإدارة والأعمال" en="Business &amp; Management"></span></a></li><li><a href="program-research.html"><span ar="البحث العلمي" en="Research"></span></a></li></ul>
         </div>
         <div>
-          <h4><span class="ar">البرامج</span><span class="en">Programs</span></h4>
-          <ul>
-            <li><a href="program-nursing.html"><span class="ar">التمريض</span><span class="en">Nursing</span></a></li>
-            <li><a href="program-medical.html"><span class="ar">الطب</span><span class="en">Medical</span></a></li>
-            <li><a href="program-emergency.html"><span class="ar">طب الطوارئ</span><span class="en">Emergency Medicine</span></a></li>
-            <li><a href="program-business.html"><span class="ar">الإدارة والأعمال</span><span class="en">Business & Management</span></a></li>
-            <li><a href="program-research.html"><span class="ar">البحث العلمي</span><span class="en">Research</span></a></li>
-          </ul>
+          <ul><li><a href="about.html"><span ar="من نحن" en="About"></span></a></li><li><a href="advisors.html"><span ar="المستشارون" en="Advisors"></span></a></li><li><a href="organizations.html"><span ar="للمؤسسات" en="For Organizations"></span></a></li><li><a href="faq.html"><span ar="الأسئلة الشائعة" en="FAQ"></span></a></li></ul>
         </div>
         <div>
-          <h4><span class="ar">تواصل معنا</span><span class="en">Contact</span></h4>
-          <ul>
-            <!-- [ ] بيانات التواصل الرسمية: ضيفي هنا <li> لكل وسيلة -->
-            <li><span class="ar">بيانات التواصل تُضاف قريبًا</span><span class="en">Contact details coming soon</span></li>
-            <li><a href="contact.html"><span class="ar">أرسل لنا رسالة</span><span class="en">Send us a message</span></a></li>
-          </ul>
+          <h4 ar="تواصل معنا" en="Contact"></h4>
+          <ul><li><a href="contact.html"><span ar="تواصل معنا" en="Contact"></span></a></li><li><a href="privacy.html"><span ar="الخصوصية" en="Privacy Policy"></span></a></li><li><a href="terms.html"><span ar="الشروط" en="Terms &amp; Conditions"></span></a></li><li><a href="refund.html"><span ar="الاسترداد" en="Refund &amp; Cancellation Policy"></span></a></li></ul>
         </div>
       </div>
-      <div class="wrap ft-b">
-        <span><span class="ar">© 2026 إمباكتفورج القابضة. جميع الحقوق محفوظة.</span><span class="en">© 2026 Impact Forge Holding. All rights reserved.</span></span>
-        <span><span class="ar">متوافقون مع رؤية السعودية 2030</span><span class="en">Aligned with Saudi Vision 2030</span></span>
+      <div class="container footer-bottom">
+        <span ar="© 2026 إمباكتفورج القابضة. جميع الحقوق محفوظة." en="© 2026 Impact Forge Holding. All rights reserved."></span>
       </div>
     </footer>
-    <button id="tp" aria-label="Back to top"><svg class="i"><use href="#up" /></svg></button>
+    <button class="back-to-top" ar-aria-label="العودة للأعلى" en-aria-label="Back to top"><svg class="icon" aria-hidden="true"><use href="#up"/></svg></button>
     <script src="assets/js/site.js"></script>
   </body>
 </html>

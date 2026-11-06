@@ -3,9 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>برنامج الإدارة الصحية والقيادة | إمباكتفورج</title>
-    <meta name="description" content="التخطيط الاستراتيجي والإدارة المالية الصحية والقيادة للمؤسسات الصحية." />
-    <meta name="theme-color" content="#071a33" />
+    <title ar="دورات وشهادات مصغّرة في الإدارة الصحية والمالية" en="Healthcare &amp; Business Management Microcredentials">دورات وشهادات مصغّرة في الإدارة الصحية والمالية</title>
+    <meta name="description" content="دورات قصيرة تطبيقية في الإدارة الصحية والمالية والموارد البشرية والإدارة الأكاديمية، تنتهي بمخرج جاهز للعمل." ar-content="دورات قصيرة تطبيقية في الإدارة الصحية والمالية والموارد البشرية والإدارة الأكاديمية، تنتهي بمخرج جاهز للعمل." en-content="Applied short courses in healthcare, finance, HR, and academic administration that end with a workplace-ready output." />
+    <meta name="keywords" content="دورات الإدارة الصحية" ar-content="دورات الإدارة الصحية" en-content="healthcare management courses" />
+    <meta name="theme-color" content="#2E4FA0" />
     <script>
       /* اللغة المحفوظة + علامة الـ JS قبل أول رسم (يمنع وميض اللغة) */
       (function (d) { d.classList.add("js"); try { if (localStorage.getItem("lang") == "en") { d.lang = "en"; d.dir = "ltr"; } } catch (e) {} })(document.documentElement);
@@ -13,8 +14,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script>
-      /* طبقة الحركة: تتفعّل بس لو GSAP اتحملت ومفيش reduced-motion (غير كده الموقع يرجع للـ CSS العادي) */
-      if (window.gsap && window.ScrollTrigger && !matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("gs");
+      /* طبقة الحركة: تتفعّل بس لو GSAP اتحملت ومفيش reduced-motion */
+      if (window.gsap && window.ScrollTrigger && !matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("gsap-enabled");
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -22,7 +23,7 @@
     <link rel="stylesheet" href="assets/css/site.css" />
   </head>
 
-  <body data-page="programs">
+  <body data-page="program-business">
     <!-- ============ SVG SPRITE ============ -->
     <svg width="0" height="0" style="position: absolute" aria-hidden="true">
       <defs>
@@ -51,164 +52,91 @@
         <symbol id="arrow" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
         <symbol id="up" viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"/></symbol>
         <symbol id="send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4zM22 2 11 13"/></symbol>
-        <linearGradient id="pxg" gradientUnits="userSpaceOnUse" x1="219" y1="-10" x2="158" y2="334"><stop offset="0" stop-color="#fbeab8" /><stop offset="1" stop-color="#8ff3e6" /></linearGradient>
+        <linearGradient id="pxg" gradientUnits="userSpaceOnUse" x1="219" y1="-10" x2="158" y2="334"><stop offset="0" stop-color="#ffffff" /><stop offset="1" stop-color="#c8eaef" /></linearGradient>
       </defs>
     </svg>
 
-    <a class="skip" href="#main"><span class="ar">تخطَّ إلى المحتوى</span><span class="en">Skip to content</span></a>
-    <div id="pr"></div>
-    <header id="hd">
-      <div class="nav-wrapper">
-        <div class="scoop-left"></div>
-        <nav class="nav-top" aria-label="Main">
-          <a href="index2.html" class="logo" aria-label="Impact Forge"><i><svg class="i" aria-hidden="true"><use href="#cross" /></svg></i></a>
-          <button class="burger" id="bg" aria-label="القائمة / Menu" aria-expanded="false" aria-controls="nv">☰</button>
-          <div class="links" id="nv">
-            <a href="index2.html"><span class="ar">الرئيسية</span><span class="en">Home</span></a>
-            <a href="about.html"><span class="ar">من نحن</span><span class="en">About Us</span></a>
-            <a href="programs.html" class="act" aria-current="page"><span class="ar">البرامج</span><span class="en">Programs</span></a>
-            <a href="advisors.html"><span class="ar">المستشارون الأكاديميون</span><span class="en">Academic Advisors</span></a>
-            <a href="organizations.html"><span class="ar">حلول المؤسسات</span><span class="en">For Organizations</span></a>
-            <a href="contact.html"><span class="ar">تواصل معنا</span><span class="en">Contact Us</span></a>
-            <a class="nav-cta" href="contact.html"><span class="ar">سجّل الآن</span><span class="en">Register Now</span></a>
-             <button class="lang" id="lg"><span class="ar">EN</span><span class="en">العربية</span></button>
+    <a class="skip-link" href="#main"><span ar="تخطَّ إلى المحتوى" en="Skip to content"></span></a>
+    <div class="scroll-progress"></div>
+
+    <!-- ================= HEADER ================= -->
+    <header class="header">
+      <div class="header-wrapper">
+        <div class="header-scoop-left"></div>
+        <nav class="header-bar" aria-label="Main">
+          <a href="index2.html" class="logo" aria-label="Impact Forge"><img src="assets/images/logo.svg" ar-alt="إمباكتفورج القابضة | Impact Forge" en-alt="Impact Forge Holding" alt="Impact Forge" width="200" height="50" /></a>
+          <button class="menu-toggle" ar-aria-label="القائمة" en-aria-label="Menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+          <div class="nav-links" id="nav-links">
+            <a href="index2.html"><span ar="الرئيسية" en="Home"></span></a>
+            <a href="about.html"><span ar="من نحن" en="About"></span></a>
+            <div class="nav-dropdown"><a href="programs.html" class="is-active" aria-current="page" aria-haspopup="true"><span ar="البرامج" en="Programs"></span><i class="caret" aria-hidden="true">▾</i></a><div class="nav-dropdown-menu"><a href="program-nursing.html"><span ar="التمريض" en="Nursing"></span></a><a href="program-medical.html"><span ar="الطب" en="Medical"></span></a><a href="program-emergency.html"><span ar="طب الطوارئ" en="Emergency Medicine"></span></a><a href="program-business.html"><span ar="الإدارة والأعمال" en="Business &amp; Management"></span></a><a href="program-research.html"><span ar="البحث العلمي" en="Research"></span></a></div></div>
+            <a href="advisors.html"><span ar="المستشارون" en="Advisors"></span></a>
+            <a href="organizations.html"><span ar="للمؤسسات" en="For Organizations"></span></a>
+            <a href="contact.html"><span ar="تواصل معنا" en="Contact"></span></a>
+            <a class="nav-register" href="register.html"><span ar="سجّل الآن" en="Register"></span></a>
+            <button class="lang-toggle" type="button"><span ar="EN" en="عربي"></span></button>
           </div>
         </nav>
-        <div class="scoop-right"></div>
+        <div class="header-scoop-right"></div>
       </div>
     </header>
 
     <main id="main">
-      <section class="ph" style="--ac: #a16207">
-        <svg class="px" viewBox="0 0 377 324" aria-hidden="true"><rect x="0" y="215.43" width="215.43" height="107.71" fill="url(#pxg)"/><rect x="161.57" y="107.72" width="107.71" height="107.71" fill="url(#pxg)"/><rect x="269.29" y="215.43" width="107.71" height="107.71" fill="url(#pxg)"/><rect x="269.29" y="0" width="107.71" height="107.71" fill="url(#pxg)"/></svg>
-        <span class="ph-ring a"></span><span class="ph-ring b"></span>
-        <span class="ph-num" aria-hidden="true">04</span>
-        <div class="wrap">
-          <div class="ph-in">
-            <nav class="crumbs" aria-label="Breadcrumb"><a href="index2.html"><span class="ar">الرئيسية</span><span class="en">Home</span></a><i>/</i><a href="programs.html"><span class="ar">البرامج</span><span class="en">Programs</span></a><i>/</i><span><span class="ar">الإدارة والأعمال</span><span class="en">Business & Management</span></span></nav>
-            <span class="en-name ar">Business & Management Enhancement Program</span>
-            <h1><span class="ar">برنامج تعزيز كفاءات الإدارة والأعمال</span><span class="en">Business & Management Enhancement Program</span></h1>
-            <p class="ph-sub"><b class="grad"><span class="ar">قيادة صحية بعقلية الأعمال</span><span class="en">Healthcare Leadership with a Business Mindset</span></b></p>
-            <p class="ph-sub" style="margin-top: 14px"><span class="ar">يزوّد هذا البرنامج المهنيين بما يلزم لقيادة المؤسسات الصحية والتجارية بكفاءة، من خلال الجمع بين التخطيط الاستراتيجي والإدارة المالية والتميّز التشغيلي، لتحويل الرؤية إلى نتائج قابلة للقياس.</span><span class="en">This program equips professionals to lead health and business organizations effectively — combining strategic planning, financial management and operational excellence to turn vision into measurable results.</span></p>
-            <div class="ha">
-              <a class="chy-btn" href="contact.html?program=business"><span class="text"><span class="ar">سجّل الآن</span><span class="en">Enroll Now</span></span><svg class="i ar-i" aria-hidden="true"><use href="#arrow" /></svg></a>
-              <!-- [ ] رابط الكتيّب: حطيه في data-soon -->
-              <a class="chy-btn alt" data-soon=""><span class="text"><span class="ar">حمّل الكتيّب</span><span class="en">Download Brochure</span></span><svg class="i" aria-hidden="true"><use href="#download" /></svg></a>
-            </div>
+      <section class="page-hero" style="--ac: var(--p4)">
+        <svg class="page-hero-pixels" viewBox="0 0 377 324" aria-hidden="true"><rect x="0" y="215.43" width="215.43" height="107.71" fill="url(#pxg)"/><rect x="161.57" y="107.72" width="107.71" height="107.71" fill="url(#pxg)"/><rect x="269.29" y="215.43" width="107.71" height="107.71" fill="url(#pxg)"/><rect x="269.29" y="0" width="107.71" height="107.71" fill="url(#pxg)"/></svg>
+        <span class="page-hero-ring page-hero-ring-a"></span><span class="page-hero-ring page-hero-ring-b"></span>
+        <span class="page-hero-number" aria-hidden="true">04</span>
+        <div class="container">
+          <div class="page-hero-content">
+            <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index2.html"><span ar="الرئيسية" en="Home"></span></a><i>/</i><a href="programs.html"><span ar="البرامج" en="Programs"></span></a><i>/</i><span ar="الإدارة والأعمال" en="Business &amp; Management"></span></nav>
+            <span class="english-name" ar="Impact Business &amp; Management Enhancement Program" en=""></span>
+            <h1 ar="برنامج إمباكت لتعزيز المهارات الإدارية" en="Impact Business &amp; Management Enhancement Program"></h1>
+            <p class="page-hero-sub" ar="مهارات تطبّقها في العمل من اليوم التالي — دورات قصيرة وشهادات مصغّرة مصمّمة لاحتياجك." en="Skills you use at work the next day — short courses and microcredentials built around your needs."></p>
+            <div class="actions"><a class="btn" href="register.html?program=management" ><span class="btn-text" ar="سجّل في دورة" en="Enroll in a Course"></span><svg class="icon btn-arrow" aria-hidden="true"><use href="#arrow"/></svg></a><a class="btn btn-ghost" href="organizations.html?area=management" ><span class="btn-text" ar="اطلب برنامجًا لمؤسستك" en="Request a Program for Your Organization"></span><svg class="icon btn-arrow" aria-hidden="true"><use href="#arrow"/></svg></a></div>
           </div>
         </div>
       </section>
 
       <section>
-        <div class="wrap pd" style="--ac: #a16207">
-          <div class="pd-main">
-            <section class="rv">
-              <span class="kick">WHO SHOULD ATTEND</span>
-              <h2><span class="ar">الفئة المستهدفة</span><span class="en">Who Should Attend</span></h2>
-              <ul class="chips">
-                <li><svg class="i" aria-hidden="true"><use href="#user" /></svg><span class="ar">خريجو الإدارة والأعمال</span><span class="en">Business and management graduates</span></li>
-                <li><svg class="i" aria-hidden="true"><use href="#user" /></svg><span class="ar">القيادات الصحية الناشئة</span><span class="en">Emerging healthcare leaders</span></li>
-                <li><svg class="i" aria-hidden="true"><use href="#user" /></svg><span class="ar">رؤساء الأقسام والإداريون</span><span class="en">Department heads and administrators</span></li>
-              </ul>
-            </section>
-            <section>
-              <span class="kick">CORE MODULES</span>
-              <h2><span class="ar">المحاور الرئيسية</span><span class="en">Core Modules</span></h2>
-              <div class="tl">
-                <i class="tl-fill"></i>
-                <ol>
-                  <li><span><span class="ar">القيادة وإدارة الفرق</span><span class="en">Leadership & Team Management</span></span></li>
-                  <li><span><span class="ar">التخطيط الاستراتيجي وإدارة التغيير</span><span class="en">Strategic Planning & Change Management</span></span></li>
-                  <li><span><span class="ar">الإدارة المالية الصحية</span><span class="en">Healthcare Finance</span></span></li>
-                  <li><span><span class="ar">إدارة الجودة والأداء</span><span class="en">Quality & Performance Management</span></span></li>
-                  <li><span><span class="ar">التحوّل الرقمي وريادة الأعمال</span><span class="en">Digital Transformation & Entrepreneurship</span></span></li>
-                </ol>
-              </div>
-            </section>
-            <section class="rv">
-              <span class="kick">LEARNING OUTCOMES</span>
-              <h2><span class="ar">مخرجات التعلّم</span><span class="en">Learning Outcomes</span></h2>
-              <div class="outs">
-                <div class="card"><span class="ic"><svg class="i" aria-hidden="true"><use href="#check" /></svg></span><p><span class="ar">قيادة الفرق والمبادرات بثقة</span><span class="en">Lead teams and initiatives with confidence</span></p></div>
-                <div class="card"><span class="ic"><svg class="i" aria-hidden="true"><use href="#check" /></svg></span><p><span class="ar">بناء استراتيجيات مبنية على البيانات وتنفيذها</span><span class="en">Build and execute data-driven strategies</span></p></div>
-                <div class="card"><span class="ic"><svg class="i" aria-hidden="true"><use href="#check" /></svg></span><p><span class="ar">إدارة الموازنات والأداء بفاعلية</span><span class="en">Manage budgets and performance effectively</span></p></div>
-              </div>
-            </section>
+        <div class="container program-detail no-aside" style="--ac: var(--p4)">
+          <div class="program-detail-main">
+          <section class="reveal"><h2 ar="نظرة عامة" en="Overview"></h2><p ar="تقدّم برامج إمباكت لتعزيز المهارات الإدارية دورات قصيرة وشهادات مصغّرة (Microcredentials) مصمّمة وفق الاحتياجات التشغيلية الفعلية في الرعاية الصحية والمالية والموارد البشرية والإدارة الأكاديمية. تركّز على المهارات التطبيقية بدلًا من النظريات العامة، وتساعد المهنيين والمؤسسات على بناء قدرات جاهزة للعمل بسرعة." en="Impact Business &amp; Management Enhancement Programs deliver short courses and microcredentials built around the real operational needs of healthcare, finance, human resources, and academic administration. They focus on applied skills rather than broad theory, helping professionals and institutions quickly build job-ready capability."></p></section>
+          <section class="reveal"><h2 ar="ما يميّزه" en="What sets it apart"></h2><div class="services-grid"><div class="card"><h3 ar="بناء حسب الحاجة" en="Tailored design"></h3><p ar="نحلّل الأدوار وسير العمل والمتطلبات التنظيمية وفجوات الأداء، ثم نصوغ المحتوى والمدة وأسلوب التقديم لكل سياق." en="We analyze roles, workflows, regulatory requirements, and performance gaps, then shape content, duration, and delivery for each context."></p></div><div class="card"><h3 ar="تعلّم بالتطبيق" en="Hands-on learning"></h3><p ar="دراسات حالة ومحاكاة ونماذج وأدوات، وينتهي كل برنامج بمخرج تطبيقي: خطة أو إجراء أو تقرير أو مسودة سياسة." en="Case studies, simulations, templates, and tools; every course ends with an applied output: a plan, process, report, or policy draft."></p></div><div class="card"><h3 ar="شهادات قابلة للتراكم" en="Stackable credentials"></h3><p ar="دورات مركّزة وشهادات مصغّرة تؤخذ منفردة أو ضمن مسار مهني أوسع، دون الانقطاع طويلًا عن العمل." en="Focused courses and microcredentials taken one at a time or combined into wider pathways, without long breaks from work."></p></div></div></section>
+          <section class="reveal"><h2 ar="القطاعات" en="Sectors"></h2><div class="services-grid"><div class="card"><h3 ar="الرعاية الصحية" en="Healthcare"></h3><p ar="إدارة المنشآت بكفاءة، الجودة والامتثال، الإجراءات الإدارية للمرضى، إدارة الموارد." en="Running facilities efficiently, quality and compliance, patient-facing administration, resource management."></p></div><div class="card"><h3 ar="المالية" en="Finance"></h3><p ar="العمليات المالية، التقارير، الضوابط، الميزانيات، القرار المبني على المخاطر." en="Financial processes, reporting, controls, budgeting, risk-informed decisions."></p></div><div class="card"><h3 ar="الموارد البشرية" en="Human Resources"></h3><p ar="إدارة المواهب، سياسات القوى العاملة، علاقات الموظفين، أنظمة الأداء." en="Talent management, workforce policies, employee relations, performance systems."></p></div><div class="card"><h3 ar="الإدارة الأكاديمية" en="Academic Administration"></h3><p ar="إدارة المؤسسات، دعم الطلبة، الحوكمة الأكاديمية، ضمان الجودة." en="Institutional operations, student support, academic governance, quality assurance."></p></div></div></section>
           </div>
-          <aside class="pd-aside">
-            <div class="pd-card">
-              <h3><span class="ar">الشكل والمدة</span><span class="en">Format &amp; Duration</span></h3>
-              <!-- [ ] طريقة التقديم والمدة وساعات CME: بدّلي "يُعلن قريبًا" بالقيمة -->
-              <dl>
-                <div><dt><span class="ar">طريقة التقديم</span><span class="en">Delivery mode</span></dt><dd><span class="tba"><span class="ar">يُعلن قريبًا</span><span class="en">To be announced</span></span></dd></div>
-                <div><dt><span class="ar">المدة</span><span class="en">Duration</span></dt><dd><span class="tba"><span class="ar">يُعلن قريبًا</span><span class="en">To be announced</span></span></dd></div>
-                <div><dt><span class="ar">ساعات التعليم الطبي المستمر</span><span class="en">CME hours</span></dt><dd><span class="tba"><span class="ar">يُعلن قريبًا</span><span class="en">To be announced</span></span></dd></div>
-              </dl>
-              <div class="ha">
-                <a class="chy-btn" href="contact.html?program=business"><span class="text"><span class="ar">سجّل الآن</span><span class="en">Enroll Now</span></span><svg class="i ar-i" aria-hidden="true"><use href="#arrow" /></svg></a>
-                <!-- [ ] رابط الكتيّب: حطيه في data-soon -->
-                <a class="chy-btn alt" data-soon=""><span class="text"><span class="ar">حمّل الكتيّب</span><span class="en">Download Brochure</span></span><svg class="i" aria-hidden="true"><use href="#download" /></svg></a>
-              </div>
-            </div>
-          </aside>
         </div>
       </section>
+      <section style="padding-top: 0"><div class="container">
+        <a class="next-program" href="program-research.html" style="--ac: var(--p5)"><small ar="البرنامج التالي" en="Next program"></small><b ar="برنامج إمباكت لتعزيز البحث العلمي" en="Impact Research Enhancement Program"></b><span class="arrow-circle"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a>
+      </div></section>
 
-      <section style="padding-top: 0">
-        <div class="wrap">
-          <a class="nxt" href="program-research.html" style="--ac: #6d28d9">
-            <small><span class="ar">البرنامج التالي</span><span class="en">Next program</span></small>
-            <b><span class="ar">برنامج إمباكت لتعزيز البحث العلمي</span><span class="en">Impact Research Enhancement Program</span></b>
-            <span class="pix-go"><svg class="i" aria-hidden="true"><use href="#arrow" /></svg></span>
-          </a>
-        </div>
-      </section>
     </main>
 
-    <footer id="ft" class="ft">
-      <div class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-      <div class="wrap ft-g">
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+      <div class="footer-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="container footer-grid">
         <div>
-          <a class="logo" href="index2.html"><i><svg class="i" aria-hidden="true"><use href="#cross" /></svg></i><span class="ar">إمباكتفورج القابضة</span><span class="en">Impact Forge Holding</span></a>
-          <p><span class="ar">نصنع كفاءات المستقبل للمملكة.</span><span class="en">Forging future-ready talent for Saudi Arabia.</span></p>
-          <a class="plat" data-platform><svg class="i" aria-hidden="true"><use href="#monitor" /></svg><span class="ar">منصة التعلّم</span><span class="en">Learning Platform</span><i class="soon"><span class="ar">قريبًا</span><span class="en">Soon</span></i></a>
+          <a class="logo" href="index2.html"><i class="logo-mark"><svg class="icon" aria-hidden="true"><use href="#cross"/></svg></i><span ar="إمباكتفورج القابضة" en="Impact Forge Holding"></span></a>
+          <p ar="إمباكتفورج القابضة — نُعدّ كفاءات وطنية مؤهلة للمستقبل في القطاعين الصحي والتجاري." en="Impact Forge Holding — building future-ready national talent across health and business."></p>
         </div>
         <div>
-          <h4><span class="ar">روابط سريعة</span><span class="en">Quick Links</span></h4>
-          <ul>
-            <li><a href="index2.html"><span class="ar">الرئيسية</span><span class="en">Home</span></a></li>
-            <li><a href="about.html"><span class="ar">من نحن</span><span class="en">About Us</span></a></li>
-            <li><a href="programs.html"><span class="ar">البرامج</span><span class="en">Programs</span></a></li>
-            <li><a href="advisors.html"><span class="ar">المستشارون الأكاديميون</span><span class="en">Academic Advisors</span></a></li>
-            <li><a href="organizations.html"><span class="ar">حلول المؤسسات</span><span class="en">For Organizations</span></a></li>
-            <li><a href="contact.html"><span class="ar">تواصل معنا</span><span class="en">Contact Us</span></a></li>
-          </ul>
+          <h4 ar="البرامج" en="Programs"></h4>
+          <ul><li><a href="program-nursing.html"><span ar="التمريض" en="Nursing"></span></a></li><li><a href="program-medical.html"><span ar="الطب" en="Medical"></span></a></li><li><a href="program-emergency.html"><span ar="طب الطوارئ" en="Emergency Medicine"></span></a></li><li><a href="program-business.html"><span ar="الإدارة والأعمال" en="Business &amp; Management"></span></a></li><li><a href="program-research.html"><span ar="البحث العلمي" en="Research"></span></a></li></ul>
         </div>
         <div>
-          <h4><span class="ar">البرامج</span><span class="en">Programs</span></h4>
-          <ul>
-            <li><a href="program-nursing.html"><span class="ar">التمريض</span><span class="en">Nursing</span></a></li>
-            <li><a href="program-medical.html"><span class="ar">الطب</span><span class="en">Medical</span></a></li>
-            <li><a href="program-emergency.html"><span class="ar">طب الطوارئ</span><span class="en">Emergency Medicine</span></a></li>
-            <li><a href="program-business.html"><span class="ar">الإدارة والأعمال</span><span class="en">Business & Management</span></a></li>
-            <li><a href="program-research.html"><span class="ar">البحث العلمي</span><span class="en">Research</span></a></li>
-          </ul>
+          <ul><li><a href="about.html"><span ar="من نحن" en="About"></span></a></li><li><a href="advisors.html"><span ar="المستشارون" en="Advisors"></span></a></li><li><a href="organizations.html"><span ar="للمؤسسات" en="For Organizations"></span></a></li><li><a href="faq.html"><span ar="الأسئلة الشائعة" en="FAQ"></span></a></li></ul>
         </div>
         <div>
-          <h4><span class="ar">تواصل معنا</span><span class="en">Contact</span></h4>
-          <ul>
-            <!-- [ ] بيانات التواصل الرسمية: ضيفي هنا <li> لكل وسيلة -->
-            <li><span class="ar">بيانات التواصل تُضاف قريبًا</span><span class="en">Contact details coming soon</span></li>
-            <li><a href="contact.html"><span class="ar">أرسل لنا رسالة</span><span class="en">Send us a message</span></a></li>
-          </ul>
+          <h4 ar="تواصل معنا" en="Contact"></h4>
+          <ul><li><a href="contact.html"><span ar="تواصل معنا" en="Contact"></span></a></li><li><a href="privacy.html"><span ar="الخصوصية" en="Privacy Policy"></span></a></li><li><a href="terms.html"><span ar="الشروط" en="Terms &amp; Conditions"></span></a></li><li><a href="refund.html"><span ar="الاسترداد" en="Refund &amp; Cancellation Policy"></span></a></li></ul>
         </div>
       </div>
-      <div class="wrap ft-b">
-        <span><span class="ar">© 2026 إمباكتفورج القابضة. جميع الحقوق محفوظة.</span><span class="en">© 2026 Impact Forge Holding. All rights reserved.</span></span>
-        <span><span class="ar">متوافقون مع رؤية السعودية 2030</span><span class="en">Aligned with Saudi Vision 2030</span></span>
+      <div class="container footer-bottom">
+        <span ar="© 2026 إمباكتفورج القابضة. جميع الحقوق محفوظة." en="© 2026 Impact Forge Holding. All rights reserved."></span>
       </div>
     </footer>
-    <button id="tp" aria-label="Back to top"><svg class="i"><use href="#up" /></svg></button>
+    <button class="back-to-top" ar-aria-label="العودة للأعلى" en-aria-label="Back to top"><svg class="icon" aria-hidden="true"><use href="#up"/></svg></button>
     <script src="assets/js/site.js"></script>
   </body>
 </html>
