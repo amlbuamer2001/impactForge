@@ -113,6 +113,28 @@
             <span class="kicker" ar="الرؤية والرسالة" en="Vision &amp; Mission"></span>
             <h2 ar="الرؤية والرسالة" en="Vision &amp; Mission"></h2>
             <p ar="محفّز وطني للتميّز في رأس المال البشري." en="A national catalyst for human capital excellence."></p>
+            <!-- ناف "لزجة": الأزرار متوصلة بجسور منحنية مرسومة SVG (بتتحسب في site.js) + توهّج بيتبع الماوس -->
+            <div class="cube-nav-wrap">
+              <div class="goo">
+                <svg aria-hidden="true" focusable="false">
+                  <defs>
+                    <radialGradient id="cube-nav-glow" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="50">
+                      <stop offset="0" stop-color="#229aab" stop-opacity="1" />
+                      <stop offset=".45" stop-color="#229aab" stop-opacity=".55" />
+                      <stop offset="1" stop-color="#229aab" stop-opacity="0" />
+                    </radialGradient>
+                  </defs>
+                  <path class="goo-base" />
+                  <path class="goo-shine" fill="url(#cube-nav-glow)" />
+                </svg>
+                <nav class="cube-nav" ar-aria-label="الرؤية والرسالة والقيم" en-aria-label="Vision, mission, and values" aria-label="الرؤية والرسالة والقيم">
+                  <button type="button" ar="الرؤية" en="Vision"></button>
+                  <button type="button" ar="الرسالة" en="Mission"></button>
+                  <button type="button" ar="القيم" en="Values"></button>
+                  <button type="button" ar="الهدف" en="Objective"></button>
+                </nav>
+              </div>
+            </div>
           </div>
 
           <!-- مكعبين 3D: وجوه النص (يمين) ووجوه الصور (شمال) بيلفّوا عكس بعض مع السكرول -->
@@ -141,28 +163,6 @@
                 <div class="cube-face" style="--f: 1"><img src="assets/images/02_medical_consultations.jpg" alt="" loading="lazy" /><i class="cube-dim"></i></div>
                 <div class="cube-face" style="--f: 2"><img src="assets/images/03_scientific_research.jpg" alt="" loading="lazy" /><i class="cube-dim"></i></div>
                 <div class="cube-face" style="--f: 3"><img src="assets/images/04_global_partnerships.jpg" alt="" loading="lazy" /><i class="cube-dim"></i></div>
-              </div>
-            </div>
-            <!-- ناف "لزجة": الأزرار متوصلة بجسور منحنية مرسومة SVG (بتتحسب في site.js) + توهّج بيتبع الماوس -->
-            <div class="cube-nav-wrap">
-              <div class="goo">
-                <svg aria-hidden="true" focusable="false">
-                  <defs>
-                    <radialGradient id="cube-nav-glow" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="50">
-                      <stop offset="0" stop-color="#229aab" stop-opacity="1" />
-                      <stop offset=".45" stop-color="#229aab" stop-opacity=".55" />
-                      <stop offset="1" stop-color="#229aab" stop-opacity="0" />
-                    </radialGradient>
-                  </defs>
-                  <path class="goo-base" />
-                  <path class="goo-shine" fill="url(#cube-nav-glow)" />
-                </svg>
-                <nav class="cube-nav" ar-aria-label="الرؤية والرسالة والقيم" en-aria-label="Vision, mission, and values" aria-label="الرؤية والرسالة والقيم">
-                  <button type="button" ar="الرؤية" en="Vision"></button>
-                  <button type="button" ar="الرسالة" en="Mission"></button>
-                  <button type="button" ar="القيم" en="Values"></button>
-                  <button type="button" ar="الهدف" en="Objective"></button>
-                </nav>
               </div>
             </div>
           </div>

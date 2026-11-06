@@ -192,12 +192,28 @@
             <span class="kicker" ar="لمحة عن الشركة" en="About Snapshot"></span>
             <h2 ar="إمباكتفورج القابضة" en="Impact Forge Holding"></h2>
             <p ar="إمباكتفورج القابضة محرّك وطني لتحفيز الابتكار الصحي وتنمية الكوادر البشرية، ننطلق من قلب المملكة. نُعدّ كفاءات وطنية مؤهلة للمستقبل في الممارسة الطبية والإدارة الصحية والتخطيط الاستراتيجي والإدارة المالية الصحية." en="Impact Forge Holding is a Saudi-rooted catalyst for health innovation and workforce development. We cultivate future-ready national talent across medical practice, health administration, strategic management, and healthcare finance."></p>
-            <ul class="about-areas" ar-aria-label="مجالات إعداد الكفاءات" en-aria-label="Competency areas" aria-label="مجالات إعداد الكفاءات">
-              <li ar="الممارسة الطبية" en="Medical Practice"></li>
-              <li ar="الإدارة الصحية" en="Health Administration"></li>
-              <li ar="التخطيط الاستراتيجي" en="Strategic Planning"></li>
-              <li ar="الإدارة المالية الصحية" en="Healthcare Finance"></li>
-            </ul>
+            <!-- ناف "لزجة": الأزرار متوصلة بجسور منحنية مرسومة SVG (بتتحسب في site.js) + توهّج بيتبع الماوس -->
+            <div class="cube-nav-wrap">
+              <div class="goo">
+                <svg aria-hidden="true" focusable="false">
+                  <defs>
+                    <radialGradient id="cube-nav-glow" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="50">
+                      <stop offset="0" stop-color="#229aab" stop-opacity="1" />
+                      <stop offset=".45" stop-color="#229aab" stop-opacity=".55" />
+                      <stop offset="1" stop-color="#229aab" stop-opacity="0" />
+                    </radialGradient>
+                  </defs>
+                  <path class="goo-base" />
+                  <path class="goo-shine" fill="url(#cube-nav-glow)" />
+                </svg>
+                <nav class="cube-nav" ar-aria-label="الرؤية والرسالة والقيم" en-aria-label="Vision, mission, and values" aria-label="الرؤية والرسالة والقيم">
+                  <button type="button" ar="الرؤية" en="Vision"></button>
+                  <button type="button" ar="الرسالة" en="Mission"></button>
+                  <button type="button" ar="القيم" en="Values"></button>
+                  <button type="button" ar="الهدف" en="Objective"></button>
+                </nav>
+              </div>
+            </div>
             <div class="about-action"><a class="btn" href="about.html" ><span class="btn-text" ar="تعرّف علينا" en="About Us"></span><svg class="icon btn-arrow" aria-hidden="true"><use href="#arrow"/></svg></a></div>
           </div>
           <!-- <div class="about-cards reveal">
@@ -246,28 +262,6 @@
                 <div class="cube-face" style="--f: 1"><img src="assets/images/02_medical_consultations.jpg" alt="" loading="lazy" /><i class="cube-dim"></i></div>
                 <div class="cube-face" style="--f: 2"><img src="assets/images/03_scientific_research.jpg" alt="" loading="lazy" /><i class="cube-dim"></i></div>
                 <div class="cube-face" style="--f: 3"><img src="assets/images/04_global_partnerships.jpg" alt="" loading="lazy" /><i class="cube-dim"></i></div>
-              </div>
-            </div>
-            <!-- ناف "لزجة": الأزرار متوصلة بجسور منحنية مرسومة SVG (بتتحسب في site.js) + توهّج بيتبع الماوس -->
-            <div class="cube-nav-wrap">
-              <div class="goo">
-                <svg aria-hidden="true" focusable="false">
-                  <defs>
-                    <radialGradient id="cube-nav-glow" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="50">
-                      <stop offset="0" stop-color="#229aab" stop-opacity="1" />
-                      <stop offset=".45" stop-color="#229aab" stop-opacity=".55" />
-                      <stop offset="1" stop-color="#229aab" stop-opacity="0" />
-                    </radialGradient>
-                  </defs>
-                  <path class="goo-base" />
-                  <path class="goo-shine" fill="url(#cube-nav-glow)" />
-                </svg>
-                <nav class="cube-nav" ar-aria-label="الرؤية والرسالة والقيم" en-aria-label="Vision, mission, and values" aria-label="الرؤية والرسالة والقيم">
-                  <button type="button" ar="الرؤية" en="Vision"></button>
-                  <button type="button" ar="الرسالة" en="Mission"></button>
-                  <button type="button" ar="القيم" en="Values"></button>
-                  <button type="button" ar="الهدف" en="Objective"></button>
-                </nav>
               </div>
             </div>
           </div>

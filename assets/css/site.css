@@ -2099,19 +2099,16 @@ h2 {
     line-height: 0.8;
     letter-spacing: -0.02em;
     color: transparent;
-    -webkit-text-stroke: 1.5px color-mix(in srgb, var(--if-royal) 14%, transparent);
+    -webkit-text-stroke: 1.5px color-mix(in srgb, var(--if-royal) 9%, transparent); /* هادية: خلفية مش عنصر */
     translate: calc(var(--about-p, 0) * -10%) 0;
     pointer-events: none;
-  }
- 
-  html[dir="rtl"] &::after {
-    transform: scaleX(-1);
   }
 }
 
 /* عمود النص: كارت زجاجي بارز */
 .about-track .about-text {
   position: relative;
+  min-width: 0; /* الناف جواه بتتصغّر بـ scale؛ ده بيمنع عرضها الأصلي يوسّع الكارت */
   padding: clamp(24px, 3vw, 40px);
   border-radius: 28px;
   background: linear-gradient(180deg, #ffffffe6, #ffffffb3);
@@ -2127,44 +2124,23 @@ h2 {
     position: relative;
     color: var(--if-deep);
   }
-}
-/* المجالات الأربعة كوسوم بارزة */
-.about-areas {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 18px 0 0;
-  padding: 0;
 
-  li {
-    padding: 7px 14px;
-    border-radius: 99px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--if-royal);
-    background: linear-gradient(180deg, #ffffff, #eef3fb);
-    border: 1px solid color-mix(in srgb, var(--if-royal) 18%, transparent);
-    box-shadow:
-      inset 0 1px 0 #fff,
-      0 2px 0 color-mix(in srgb, var(--if-royal) 16%, transparent);
-    transition: translate 0.3s, box-shadow 0.3s;
+  /* ناف المكعبات جوه الكارت: الكارت هو اللي بيتحكم في المكعبات */
+  .cube-nav-wrap {
+    justify-content: flex-start;
+    margin-top: 24px;
   }
-  li:hover {
-    translate: 0 -2px;
-    box-shadow:
-      inset 0 1px 0 #fff,
-      0 4px 0 color-mix(in srgb, var(--if-royal) 18%, transparent),
-      0 10px 16px -10px color-mix(in srgb, var(--if-deep) 50%, transparent);
+  .goo {
+    transform-origin: top right;
+
+    html[dir="ltr"] & {
+      transform-origin: top left;
+    }
   }
 }
 @media (max-width: 860px) {
-  /* موبايل: المساحة أضيق، فالوسوم بتستخبى والكارت أخف */
   .about-track .about-text {
     padding: 20px;
-  }
-  .about-areas {
-    display: none;
   }
 }
 .about-cubes {
@@ -4407,25 +4383,84 @@ html[dir="rtl"] .hero .hero-bg {
   margin-inline-start: 6px;
   font-size: 0.75em;
 }
+/* قائمة البرامج: طيّ 3D زي "الماكيسو" — كل برنامج بيتفرد من اللي فوقه ورا بعض،
+   وكل شريط بلون البرنامج بتاعه (--p1..--p5 نفس ألوان كروت البرامج) */
 .header .nav-links .nav-dropdown-menu {
   position: absolute;
   inset-block-start: 100%;
   inset-inline-start: 0;
-  min-width: 230px;
-  display: none;
-  flex-direction: column;
-  gap: 6px;
-  padding: 10px;
-  border-radius: 16px;
-  background: #fff;
-  box-shadow: 0 18px 40px color-mix(in srgb, var(--if-text) 25%, transparent);
   z-index: 5;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px; /* جسر للماوس بين الزرار والقائمة */
+  perspective: 900px;
+  visibility: hidden;
+  pointer-events: none;
+  transition: visibility 0s 0.6s; /* تفضل ظاهرة لحد ما تتطوي */
+  filter: drop-shadow(0 18px 24px color-mix(in srgb, var(--if-deep) 35%, transparent));
+}
+.header .nav-links .nav-dropdown-menu a {
+  --c: var(--p1);
+  display: block;
+  margin: 0;
+  padding: 11px 18px;
+  border-radius: 0;
+  border-top: 1px dashed #ffffff4d;
+  background: var(--c);
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 700;
+  /* مطوية لفوق حوالين الحافة اللي فوق */
+  transform-origin: 50% 0;
+  transform: rotateX(-90deg);
+  filter: brightness(0.6);
+  /* الطيّ بالعكس: آخر واحدة بتتطوي الأول */
+  transition:
+    transform 0.35s cubic-bezier(0.23, 1, 0.32, 1) calc((4 - var(--i, 0)) * 60ms),
+    filter 0.35s calc((4 - var(--i, 0)) * 60ms),
+    padding 0.25s cubic-bezier(0.23, 1, 0.32, 1),
+    background-color 0.25s;
+
+  &:nth-child(1) { --i: 0; --c: var(--p1); border-top: 0; border-radius: 14px 14px 0 0; }
+  &:nth-child(2) { --i: 1; --c: var(--p2); }
+  &:nth-child(3) { --i: 2; --c: var(--p3); }
+  &:nth-child(4) { --i: 3; --c: var(--p4); }
+  &:nth-child(5) { --i: 4; --c: var(--p5); border-radius: 0 0 14px 14px; }
+
+  /* الـ hover: النص بيزق لجوه والشريط بيغمق (زي الماكيسو) */
+  &:hover,
+  &:focus-visible {
+    padding-inline-start: 30px;
+    background: color-mix(in srgb, var(--c) 82%, #000);
+    color: #fff;
+    transform: none;
+  }
 }
 .header .nav-links .nav-dropdown:hover .nav-dropdown-menu,
 .header .nav-links .nav-dropdown:focus-within .nav-dropdown-menu {
-  display: flex;
+  visibility: visible;
+  pointer-events: auto;
+  transition: visibility 0s;
+
+  a {
+    transform: rotateX(0);
+    filter: brightness(1);
+    /* الفرد: الأولى الأول وبعدها اللي تحتها */
+    transition:
+      transform 0.45s cubic-bezier(0.23, 1, 0.32, 1) calc(var(--i) * 70ms),
+      filter 0.45s calc(var(--i) * 70ms),
+      padding 0.25s cubic-bezier(0.23, 1, 0.32, 1),
+      background-color 0.25s;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .header .nav-links .nav-dropdown-menu a {
+    transition: none !important;
+  }
 }
 @media (max-width: 1240px) {
+  /* موبايل: القائمة مفرودة جوه المنيو من غير طيّ */
   .header .nav-links .nav-dropdown {
     display: flex;
     flex-direction: column;
@@ -4433,10 +4468,14 @@ html[dir="rtl"] .hero .hero-bg {
   }
   .header .nav-links .nav-dropdown-menu {
     position: static;
-    display: flex;
-    box-shadow: none;
+    visibility: visible;
+    pointer-events: auto;
     padding: 6px 0 0;
-    background: transparent;
+    filter: none;
+  }
+  .header .nav-links .nav-dropdown-menu a {
+    transform: none;
+    filter: none;
   }
 }
 
