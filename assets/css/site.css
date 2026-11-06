@@ -351,7 +351,6 @@ h2 {
 .section-dark {
   color: #fff;
   background-image:
-    var(--plus-pattern),
     linear-gradient(160deg, var(--if-royal), var(--if-steel));
 
   /* نسخة زجاجية للأقسام الداكنة */
@@ -3103,7 +3102,6 @@ h2 {
   color: #fff;
   text-align: center;
   background-image:
-    var(--plus-pattern),
     linear-gradient(120deg, var(--if-royal), var(--if-steel));
 
   > .container {
@@ -4359,10 +4357,6 @@ h2 {
 html[dir="rtl"] .hero .hero-bg {
   --hero-dir: 225deg;
 }
-/* الباترن القطري أخف عشان الخلفية ما تبقاش زحمة */
-.hero .hero-bg::after {
-  opacity: 0.22;
-}
 .page-hero {
   background: linear-gradient(135deg, var(--if-royal), var(--if-steel));
 }
@@ -4381,7 +4375,7 @@ html[dir="rtl"] .hero .hero-bg {
 .header .nav-links .nav-dropdown .caret {
   font-style: normal;
   margin-inline-start: 6px;
-  font-size: 0.75em;
+  font-size: 1.3em;
 }
 /* قائمة البرامج: طيّ 3D زي "الماكيسو" — كل برنامج بيتفرد من اللي فوقه ورا بعض،
    وكل شريط بلون البرنامج بتاعه (--p1..--p5 نفس ألوان كروت البرامج) */
