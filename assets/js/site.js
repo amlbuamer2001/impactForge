@@ -149,6 +149,8 @@
     var max = document.documentElement.scrollHeight - innerHeight;
     if (progress) progress.style.transform = "scaleX(" + (max > 0 ? scrollY / max : 0) + ")";
     if (toTop) toTop.classList.toggle("is-visible", scrollY > 600);
+    /* الهيدر بيلزق في أعلى الشاشة (inset 0) أول ما السكرول يبدأ */
+    if (header) header.classList.toggle("is-scrolled", scrollY > 0);
   }
   onScrollProgress();
   addEventListener("scroll", onScrollProgress, { passive: true });
@@ -171,6 +173,122 @@
       f.classList.add("is-sent");
     };
   });
+
+  /* =====================================================
+     ABOUT CUBES (الرئيسية): المكعبين بيلفّوا وجه مع كل خطوة سكرول
+     كل خطوة فيها "وقفة" قصيرة عشان الوجه يتقري قبل ما يلف
+     ===================================================== */
+  (function () {
+    var track = $(".about-track");
+    if (!track) return;
+    var textCube = $(".cube-text", track),
+      imageCube = $(".cube-image", track),
+      steps = $$(".cube-face", textCube).length,
+      buttons = $$(".cube-nav button", track),
+      dims = [$$(".cube-dim", textCube), $$(".cube-dim", imageCube)],
+      current = -1,
+      queued = false;
+    var smooth = function (x) { return x * x * (3 - 2 * x); };
+
+    function render() {
+      queued = false;
+      var total = Math.max(1, track.offsetHeight - innerHeight),
+        progress = Math.min(1, Math.max(0, -track.getBoundingClientRect().top / total)),
+        t = progress * (steps - 1),
+        k = Math.min(steps - 2, Math.floor(t)),
+        f = Math.min(1, Math.max(0, (t - k - 0.2) / 0.6)), /* 20% وقفة في أول وآخر كل خطوة */
+        angle = (k + smooth(f)) * 90;
+      textCube.style.transform = "translateZ(calc(var(--s) / -2)) rotateX(" + angle + "deg)";
+      imageCube.style.transform = "translateZ(calc(var(--s) / -2)) rotateX(" + -angle + "deg)";
+      dims.forEach(function (list) {
+        list.forEach(function (d, i) { d.style.opacity = Math.min(0.6, (Math.abs(angle - i * 90) / 90) * 0.6); });
+      });
+      var step = Math.round(angle / 90);
+      if (step != current) {
+        current = step;
+        buttons.forEach(function (b, i) { if (i == step) b.setAttribute("aria-current", "step"); else b.removeAttribute("aria-current"); });
+        if (!hovering) focusButton(buttons[step], false); /* التوهّج بيمشي مع الوجه الحالي */
+      }
+    }
+
+    /* ---------- الناف اللزجة: شكل واحد للأزرار + جسور منحنية بينهم ---------- */
+    var goo = $(".goo", track),
+      gooWrap = $(".cube-nav-wrap", track),
+      gooPaths = goo ? $$("path", goo) : [],
+      glow = $("#cube-nav-glow"),
+      R = 12, BRIDGE = 21.3, OVERLAP = 1.91,
+      glowNow = { x: 0, y: 0 }, glowTo = { x: 0, y: 0 }, glowRaf = null, hovering = false;
+    function roundRect(x, y, w, h, r) {
+      return "M" + x + " " + (y + r) + " A" + r + " " + r + " 0 0 1 " + (x + r) + " " + y +
+        " L" + (x + w - r) + " " + y + " A" + r + " " + r + " 0 0 1 " + (x + w) + " " + (y + r) +
+        " L" + (x + w) + " " + (y + h - r) + " A" + r + " " + r + " 0 0 1 " + (x + w - r) + " " + (y + h) +
+        " L" + (x + r) + " " + (y + h) + " A" + r + " " + r + " 0 0 1 " + x + " " + (y + h - r) + " Z ";
+    }
+    function buildGoo() {
+      if (!goo) return;
+      /* ترتيب الأزرار على الشاشة (في RTL الأول على اليمين) عشان الجسور توصل الجيران */
+      var bs = buttons.slice().sort(function (a, b) { return a.offsetLeft - b.offsetLeft; }),
+        H = bs[0].offsetHeight, dx = R - OVERLAP, inset = R - Math.sqrt(R * R - dx * dx), d = "";
+      bs.forEach(function (b) { d += roundRect(b.offsetLeft, 0, b.offsetWidth, H, R); });
+      for (var i = 0; i < bs.length - 1; i++) {
+        var x1 = bs[i].offsetLeft + bs[i].offsetWidth - OVERLAP, x2 = bs[i + 1].offsetLeft + OVERLAP;
+        d += "M" + x1 + " " + inset + " A" + BRIDGE + " " + BRIDGE + " 0 0 0 " + x2 + " " + inset +
+          " L" + x2 + " " + (H - inset) + " A" + BRIDGE + " " + BRIDGE + " 0 0 0 " + x1 + " " + (H - inset) + " Z ";
+      }
+      gooPaths.forEach(function (p) { p.setAttribute("d", d); });
+      fitGoo();
+      focusButton(buttons[Math.max(0, current)], true);
+    }
+    function fitGoo() {
+      goo.style.transform = "";
+      var s = Math.min(1, gooWrap.clientWidth / goo.offsetWidth);
+      goo.style.transform = s < 1 ? "scale(" + s + ")" : "";
+    }
+    function setGlow(x, y) { glow.setAttribute("cx", x); glow.setAttribute("cy", y); }
+    function glowTick() {
+      glowNow.x += (glowTo.x - glowNow.x) * 0.18;
+      glowNow.y += (glowTo.y - glowNow.y) * 0.18;
+      setGlow(glowNow.x, glowNow.y);
+      glowRaf = Math.abs(glowTo.x - glowNow.x) > 0.1 || Math.abs(glowTo.y - glowNow.y) > 0.1 ? requestAnimationFrame(glowTick) : null;
+    }
+    function moveGlow(x, y, snap) {
+      glowTo.x = x; glowTo.y = y;
+      if (snap) { glowNow.x = x; glowNow.y = y; setGlow(x, y); return; }
+      if (!glowRaf) glowRaf = requestAnimationFrame(glowTick);
+    }
+    function focusButton(b, snap) {
+      if (!goo || !b) return;
+      buttons.forEach(function (x) { x.classList.toggle("is-hot", x === b); });
+      moveGlow(b.offsetLeft + b.offsetWidth / 2, b.offsetHeight / 2, snap);
+    }
+    if (goo) {
+      goo.addEventListener("pointermove", function (e) {
+        hovering = true;
+        var r = goo.getBoundingClientRect(), s = r.width / goo.offsetWidth;
+        moveGlow((e.clientX - r.left) / s, (e.clientY - r.top) / s, false);
+      });
+      goo.addEventListener("pointerleave", function () { hovering = false; focusButton(buttons[current], false); });
+      buttons.forEach(function (b) {
+        b.addEventListener("pointerenter", function () { buttons.forEach(function (x) { x.classList.toggle("is-hot", x === b); }); });
+        b.addEventListener("focus", function () { focusButton(b, false); });
+      });
+      langHooks.push(buildGoo); /* عرض الأزرار بيتغير مع اللغة */
+      addEventListener("resize", buildGoo);
+      if (document.fonts) document.fonts.ready.then(buildGoo);
+    }
+    function queue() { if (!queued) { queued = true; requestAnimationFrame(render); } }
+
+    buttons.forEach(function (b, i) {
+      b.addEventListener("click", function () {
+        var total = track.offsetHeight - innerHeight;
+        scrollTo({ top: track.getBoundingClientRect().top + scrollY + (total * i) / (steps - 1), behavior: "smooth" });
+      });
+    });
+    addEventListener("scroll", queue, { passive: true });
+    addEventListener("resize", queue);
+    render();
+    buildGoo();
+  })();
 
   /* =====================================================
      HIGHLIGHTS STRIP (الرئيسية): سكرول بسيط "بيزق" اللوحة فتتمرجح وتستقر
@@ -317,6 +435,24 @@
       scrollTrigger: { trigger: item, start: "top 86%", once: true },
     });
   });
+
+  /* ---------- القيم: كارت مطوي (زي الأكورديون) بيتفرد مع السكرول — ديسكتوب بس ---------- */
+  if ($(".fold-card"))
+    gsap.matchMedia().add("(min-width: 721px)", function () {
+      var folds = $$(".fold-card .fold"), skew = 15;
+      gsap.set(".fold-card", { scaleX: 0.6 });
+      gsap.set(folds, {
+        skewY: function (i) { return i % 2 ? -skew : skew; },
+        filter: function (i) { return i % 2 ? "brightness(0.75)" : "brightness(1.25)"; },
+      });
+      gsap.timeline({
+        defaults: { ease: "none" },
+        scrollTrigger: { trigger: ".values-stage", start: "top top", end: "+=150%", pin: true, scrub: 1 },
+      })
+        .to(".fold-card", { scaleX: 1 }, 0)
+        .to(folds, { skewY: 0, filter: "brightness(1)" }, 0)
+        .to(".fold-hint", { autoAlpha: 0 }, 0);
+    });
 
   /* ---------- الشكل المترابط (About) ---------- */
   if ($(".about-cards"))
