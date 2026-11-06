@@ -364,7 +364,7 @@
       .from(".hero .hero-pixels rect", { scale: 0, transformOrigin: "50% 50%", duration: 0.7, ease: "back.out(2.2)", stagger: { each: 0.09, from: "random" } }, 0.15)
       .from(".hero-arch", { scaleY: 0, transformOrigin: "50% 100%", duration: 1.4, ease: "expo.out" }, 0.2)
       .from(".hero-image", { yPercent: 14, autoAlpha: 0, duration: 1.4, ease: "expo.out" }, 0.45)
-      .from(".hero .eyebrow", { y: 20, autoAlpha: 0, duration: 0.8 }, 0.35)
+      .from(".hero .eyebrow", { rotationX: -95, scale: 0.7, autoAlpha: 0, transformPerspective: 600, transformOrigin: "50% 100%", duration: 1.1, ease: "back.out(1.8)", clearProps: "transform" }, 0.35)
       .from(split($(".hero-title"), true), { yPercent: 120, rotate: 6, duration: 1.1, ease: "expo.out", stagger: 0.1 }, 0.45)
       .from($(".hero-subtitle") ? split($(".hero-subtitle"), true) : [], { yPercent: 120, duration: 0.9, ease: "expo.out", stagger: 0.05 }, 0.65)
       .from(".vision-badge", { y: 40, rotate: -5, autoAlpha: 0, duration: 1, ease: "back.out(1.6)" }, 0.8)
