@@ -73,7 +73,8 @@
             <a href="about.html"><span ar="من نحن" en="About"></span></a>
             <div class="nav-dropdown"><a href="programs.html" class="is-active" aria-current="page" aria-haspopup="true"><span ar="البرامج" en="Programs"></span><i class="caret" aria-hidden="true">▾</i></a><div class="nav-dropdown-menu"><a href="program-nursing.html"><span ar="التمريض" en="Nursing"></span></a><a href="program-medical.html"><span ar="الطب" en="Medical"></span></a><a href="program-emergency.html"><span ar="طب الطوارئ" en="Emergency Medicine"></span></a><a href="program-business.html"><span ar="الإدارة والأعمال" en="Business &amp; Management"></span></a><a href="program-research.html"><span ar="البحث العلمي" en="Research"></span></a></div></div>
             <a href="advisors.html"><span ar="المستشارون" en="Advisors"></span></a>
-            <a href="organizations.html"><span ar="للمؤسسات" en="For Organizations"></span></a>
+            <!-- <a href="organizations.html"><span ar="للمؤسسات" en="For Organizations"></span></a> -->
+
             <a href="contact.html"><span ar="تواصل معنا" en="Contact"></span></a>
             <a class="nav-register" href="register.html"><span ar="سجّل الآن" en="Register"></span></a>
             <button class="lang-toggle" type="button"><span ar="EN" en="عربي"></span></button>
@@ -90,7 +91,7 @@
         <span class="page-hero-number" aria-hidden="true">03</span>
         <div class="container">
           <div class="page-hero-content">
-            <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index2.html"><span ar="الرئيسية" en="Home"></span></a><i>/</i><a href="programs.html"><span ar="البرامج" en="Programs"></span></a><i>/</i><span ar="طب الطوارئ" en="Emergency Medicine"></span></nav>
+            <nav class="breadcrumbs" ar-aria-label="مسار التنقل" en-aria-label="Breadcrumb" aria-label="مسار التنقل"><ol><li><a class="bc-home" href="index2.html"><svg class="bc-home-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9v11h13V9"/><path d="M10 20v-6h4v6"/></svg><span ar="الرئيسية" en="Home"></span></a></li><li><a href="programs.html"><span ar="البرامج" en="Programs"></span></a></li><li><span class="bc-current" aria-current="page" ar="طب الطوارئ" en="Emergency Medicine"></span></li></ol></nav>
             <span class="english-name" ar="Impact Emergency Medicine Enhancement Program" en=""></span>
             <h1 ar="برنامج إمباكت لتعزيز كفاءات طب الطوارئ" en="Impact Emergency Medicine Enhancement Program"></h1>
             <p class="page-hero-sub" ar="حين تُحسب الثواني — تدريب عملي لاتخاذ القرار الصحيح تحت الضغط." en="When every second counts — hands-on training for the right decision under pressure."></p>
@@ -100,13 +101,25 @@
       </section>
 
       <section>
-        <div class="container program-detail no-aside" style="--ac: var(--p3)">
+        <div class="container program-detail" style="--ac: var(--p3)">
           <div class="program-detail-main">
-          <section class="reveal"><h2 ar="نظرة عامة" en="Overview"></h2><p ar="يُعدّ برنامج إمباكت لتعزيز كفاءات طب الطوارئ الأطباء والكوادر الصحية للتعامل مع الحالات الحرجة بثبات ومنهجية. يعتمد على المحاكاة والسيناريوهات الواقعية والتدريب الجماعي، ليتدرب المشارك على التقييم السريع والتدخل والتواصل ضمن الفريق في بيئة آمنة قبل مواجهتها في الواقع." en="The Impact Emergency Medicine Enhancement Program prepares physicians and healthcare teams to manage critical cases with confidence and structure. Through simulation, realistic scenarios, and team-based training, participants practice rapid assessment, intervention, and team communication in a safe environment before facing them in practice."></p></section>
-          <section class="reveal"><h2 ar="لمن البرنامج" en="Who it’s for"></h2><p ar="أطباء الطوارئ والأطباء المقيمون، أطباء الامتياز والأطباء العامون، وممرضو الطوارئ." en="Emergency physicians and residents, interns and general practitioners, and emergency nurses."></p></section>
-          <section class="reveal"><h2 ar="المحاور" en="Focus Areas"></h2><div class="timeline"><i class="timeline-fill"></i><ol><li><span><b ar="التقييم الأولي المنهجي للمريض الحرج (ABCDE)" en="Structured primary assessment of the critically ill patient (ABCDE)"></b></span></li><li><span><b ar="الإنعاش وإدارة مجرى الهواء" en="Resuscitation and airway management"></b></span></li><li><span><b ar="الفرز وإدارة تدفق المرضى" en="Triage and patient flow"></b></span></li><li><span><b ar="الإصابات والحوادث متعددة الإصابات" en="Trauma and mass-casualty incidents"></b></span></li><li><span><b ar="المهارات الإجرائية والموجات فوق الصوتية عند السرير" en="Procedural skills and point-of-care ultrasound"></b></span></li><li><span><b ar="العمل الجماعي والتواصل في الأزمات" en="Teamwork and crisis communication"></b></span></li></ol></div></section>
-          <section class="reveal"><h2 ar="المخرجات" en="Outcomes"></h2><div class="outcomes"><div class="card"><span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#check"/></svg></span><p ar="استجابة أكثر تنظيمًا وأمانًا، وفرق طوارئ أكثر تناغمًا." en="A more structured, safer response and better-coordinated emergency teams."></p></div></div></section>
+          <section class="reveal pd-sec" id="pd-1"><h2 ar="نظرة عامة" en="Overview"></h2><p ar="يُعدّ برنامج إمباكت لتعزيز كفاءات طب الطوارئ الأطباء والكوادر الصحية للتعامل مع الحالات الحرجة بثبات ومنهجية. يعتمد على المحاكاة والسيناريوهات الواقعية والتدريب الجماعي، ليتدرب المشارك على التقييم السريع والتدخل والتواصل ضمن الفريق في بيئة آمنة قبل مواجهتها في الواقع." en="The Impact Emergency Medicine Enhancement Program prepares physicians and healthcare teams to manage critical cases with confidence and structure. Through simulation, realistic scenarios, and team-based training, participants practice rapid assessment, intervention, and team communication in a safe environment before facing them in practice."></p></section>
+          <section class="reveal pd-sec" id="pd-2"><h2 ar="لمن البرنامج" en="Who it’s for"></h2><p ar="أطباء الطوارئ والأطباء المقيمون، أطباء الامتياز والأطباء العامون، وممرضو الطوارئ." en="Emergency physicians and residents, interns and general practitioners, and emergency nurses."></p></section>
+          <section class="reveal pd-sec" id="pd-3"><h2 ar="المحاور" en="Focus Areas"></h2><div class="timeline"><i class="timeline-fill"></i><ol><li><span><b ar="التقييم الأولي المنهجي للمريض الحرج (ABCDE)" en="Structured primary assessment of the critically ill patient (ABCDE)"></b></span></li><li><span><b ar="الإنعاش وإدارة مجرى الهواء" en="Resuscitation and airway management"></b></span></li><li><span><b ar="الفرز وإدارة تدفق المرضى" en="Triage and patient flow"></b></span></li><li><span><b ar="الإصابات والحوادث متعددة الإصابات" en="Trauma and mass-casualty incidents"></b></span></li><li><span><b ar="المهارات الإجرائية والموجات فوق الصوتية عند السرير" en="Procedural skills and point-of-care ultrasound"></b></span></li><li><span><b ar="العمل الجماعي والتواصل في الأزمات" en="Teamwork and crisis communication"></b></span></li></ol></div></section>
+          <section class="reveal pd-sec" id="pd-4"><h2 ar="المخرجات" en="Outcomes"></h2><div class="outcomes"><div class="card"><span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#check"/></svg></span><p ar="استجابة أكثر تنظيمًا وأمانًا، وفرق طوارئ أكثر تناغمًا." en="A more structured, safer response and better-coordinated emergency teams."></p></div></div></section>
           </div>
+          <aside class="program-detail-aside">
+            <nav class="pd-toc" ar-aria-label="في هذه الصفحة" en-aria-label="On this page" aria-label="في هذه الصفحة">
+              <span class="pd-toc-label" ar="في هذه الصفحة" en="On this page"></span>
+              <ol><li><a href="#pd-1"><i>01</i><span ar="نظرة عامة" en="Overview"></span></a></li><li><a href="#pd-2"><i>02</i><span ar="لمن البرنامج" en="Who it’s for"></span></a></li><li><a href="#pd-3"><i>03</i><span ar="المحاور" en="Focus Areas"></span></a></li><li><a href="#pd-4"><i>04</i><span ar="المخرجات" en="Outcomes"></span></a></li></ol>
+            </nav>
+            <div class="program-summary pd-cta">
+              <h3 ar="جاهز تبدأ؟" en="Ready to start?"></h3>
+              <p ar="سجّل اهتمامك وسيتواصل معك فريقنا بالمواعيد وتفاصيل التسجيل." en="Register your interest and our team will contact you with schedules and details."></p>
+              <a class="btn" href="register.html?program=emergency-medicine"><span class="btn-text" ar="سجّل اهتمامك ببرنامج الطوارئ" en="Register Your Interest"></span><svg class="icon btn-arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
+              <a class="pd-cta-link" href="contact.html"><span ar="عندك سؤال؟ تواصل معنا" en="Have a question? Contact us"></span></a>
+            </div>
+          </aside>
         </div>
       </section>
       <section style="padding-top: 0"><div class="container">

@@ -71,7 +71,8 @@
             <a href="about.html"><span ar="من نحن" en="About"></span></a>
             <div class="nav-dropdown"><a href="programs.html" class="is-active" aria-current="page" aria-haspopup="true"><span ar="البرامج" en="Programs"></span><i class="caret" aria-hidden="true">▾</i></a><div class="nav-dropdown-menu"><a href="program-nursing.html"><span ar="التمريض" en="Nursing"></span></a><a href="program-medical.html"><span ar="الطب" en="Medical"></span></a><a href="program-emergency.html"><span ar="طب الطوارئ" en="Emergency Medicine"></span></a><a href="program-business.html"><span ar="الإدارة والأعمال" en="Business &amp; Management"></span></a><a href="program-research.html"><span ar="البحث العلمي" en="Research"></span></a></div></div>
             <a href="advisors.html"><span ar="المستشارون" en="Advisors"></span></a>
-            <a href="organizations.html"><span ar="للمؤسسات" en="For Organizations"></span></a>
+            <!-- <a href="organizations.html"><span ar="للمؤسسات" en="For Organizations"></span></a> -->
+
             <a href="contact.html"><span ar="تواصل معنا" en="Contact"></span></a>
             <a class="nav-register" href="register.html"><span ar="سجّل الآن" en="Register"></span></a>
             <button class="lang-toggle" type="button"><span ar="EN" en="عربي"></span></button>
@@ -88,7 +89,7 @@
         
         <div class="container">
           <div class="page-hero-content">
-            <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index2.html"><span ar="الرئيسية" en="Home"></span></a><i>/</i><span ar="البرامج" en="Programs"></span></nav>
+            <nav class="breadcrumbs" ar-aria-label="مسار التنقل" en-aria-label="Breadcrumb" aria-label="مسار التنقل"><ol><li><a class="bc-home" href="index2.html"><svg class="bc-home-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9v11h13V9"/><path d="M10 20v-6h4v6"/></svg><span ar="الرئيسية" en="Home"></span></a></li><li><span class="bc-current" aria-current="page" ar="البرامج" en="Programs"></span></li></ol></nav>
             
             <h1 ar="البرامج" en="Programs"></h1>
             <p class="page-hero-sub" ar="اختر مسارك المهني" en="Choose Your Path"></p>
@@ -97,19 +98,110 @@
         </div>
       </section>
 
-      <section><div class="container"><ul class="program-index">
-            <li><a href="program-nursing.html" style="--ac: var(--p1)"><span class="program-index-number">01</span><div><span class="english-name" ar="Impact Nurse Enhancement Program" en=""></span><h3 ar="برنامج إمباكت لتعزيز كفاءات التمريض" en="Impact Nurse Enhancement Program"></h3></div><p ar="برامج ترافق الممرضين والممرضات من الاستعداد للتوظيف حتى التقدم المهني." en="Programs that support nurses from job readiness to career advancement."></p><span class="arrow-circle"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
-            <li><a href="program-medical.html" style="--ac: var(--p2)"><span class="program-index-number">02</span><div><span class="english-name" ar="Impact Medical Enhancement Program" en=""></span><h3 ar="برنامج إمباكت للتعزيز الطبي" en="Impact Medical Enhancement Program"></h3></div><p ar="ثلاثة مسارات لطلاب الطب وخريجيه: الاختبارات، الأساسيات، المهارات المتخصصة." en="Three tracks for medical students and graduates: exams, core education, specialized skills."></p><span class="arrow-circle"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
-            <li><a href="program-emergency.html" style="--ac: var(--p3)"><span class="program-index-number">03</span><div><span class="english-name" ar="Impact Emergency Medicine Enhancement Program" en=""></span><h3 ar="برنامج إمباكت لتعزيز كفاءات طب الطوارئ" en="Impact Emergency Medicine Enhancement Program"></h3></div><p ar="تدريب قائم على المحاكاة لاتخاذ القرار في الحالات الحرجة." en="Simulation-based training for decisions in critical cases."></p><span class="arrow-circle"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
-            <li><a href="program-business.html" style="--ac: var(--p4)"><span class="program-index-number">04</span><div><span class="english-name" ar="Impact Business &amp; Management Enhancement Program" en=""></span><h3 ar="برنامج إمباكت لتعزيز المهارات الإدارية" en="Impact Business &amp; Management Enhancement Program"></h3></div><p ar="دورات قصيرة وشهادات مصغّرة للإدارة الصحية والمالية والموارد البشرية والأكاديمية." en="Short courses and microcredentials in healthcare, finance, HR, and academic administration."></p><span class="arrow-circle"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
-            <li><a href="program-research.html" style="--ac: var(--p5)"><span class="program-index-number">05</span><div><span class="english-name" ar="Impact Research Enhancement Program" en=""></span><h3 ar="برنامج إمباكت لتعزيز البحث العلمي" en="Impact Research Enhancement Program"></h3></div><p ar="من الفكرة الأولى حتى نشر المقال العلمي." en="From first idea to published article."></p><span class="arrow-circle"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
-          </ul></div></section>
+      <section class="programs-acc">
+        <div class="container">
+          <!-- البرامج: أكورديون بيتفتح (اضغط على البرنامج يتفرد ويظهر تفاصيله) — الحركة في site.js -->
+          <div class="pacc-head">
+            <span class="kicker" ar="البرامج الخمسة" en="Five Programs"></span>
+            <p class="pacc-hint" ar="اضغط على أي برنامج لعرض تفاصيله" en="Tap any program to see its details"></p>
+          </div>
+          <div class="pacc">
+            <section class="pa is-open" style="--ac: var(--p1)">
+              <span class="pa-plus" aria-hidden="true"><i></i><i></i></span>
+              <img class="pa-thumb" src="assets/images/01_training.jpg" alt="" loading="lazy" />
+              <span class="pa-num" aria-hidden="true">01</span>
+              <h2 class="pa-title"><button type="button" aria-expanded="true" aria-controls="pa-01" ar="التمريض" en="Nursing"></button></h2>
+              <div class="pa-media" id="pa-01">
+                <img class="pa-img" src="assets/images/01_training.jpg" alt="" loading="lazy" />
+                <div class="pa-card">
+                  <div class="pa-meta"><span class="pa-icon"><svg class="icon" aria-hidden="true"><use href="#steth"/></svg></span><span class="pa-cnum">01 / 05</span></div>
+                  <span class="english-name" ar="Impact Nurse Enhancement Program" en=""></span>
+                  <h3 ar="برنامج إمباكت لتعزيز كفاءات التمريض" en="Impact Nurse Enhancement Program"></h3>
+                  <p ar="برامج ترافق الممرضين والممرضات من الاستعداد للتوظيف حتى التقدم المهني." en="Programs that support nurses from job readiness to career advancement."></p>
+                  <a class="btn" href="program-nursing.html"><span class="btn-text" ar="تفاصيل البرنامج" en="View Program"></span><svg class="icon btn-arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
+                </div>
+              </div>
+            </section>
+            <section class="pa" style="--ac: var(--p2)">
+              <span class="pa-plus" aria-hidden="true"><i></i><i></i></span>
+              <img class="pa-thumb" src="assets/images/02_medical_consultations.jpg" alt="" loading="lazy" />
+              <span class="pa-num" aria-hidden="true">02</span>
+              <h2 class="pa-title"><button type="button" aria-expanded="false" aria-controls="pa-02" ar="الطب" en="Medical"></button></h2>
+              <div class="pa-media" id="pa-02">
+                <img class="pa-img" src="assets/images/02_medical_consultations.jpg" alt="" loading="lazy" />
+                <div class="pa-card">
+                  <div class="pa-meta"><span class="pa-icon"><svg class="icon" aria-hidden="true"><use href="#cross"/></svg></span><span class="pa-cnum">02 / 05</span></div>
+                  <span class="english-name" ar="Impact Medical Enhancement Program" en=""></span>
+                  <h3 ar="برنامج إمباكت للتعزيز الطبي" en="Impact Medical Enhancement Program"></h3>
+                  <p ar="ثلاثة مسارات لطلاب الطب وخريجيه: الاختبارات، الأساسيات، المهارات المتخصصة." en="Three tracks for medical students and graduates: exams, core education, specialized skills."></p>
+                  <a class="btn" href="program-medical.html"><span class="btn-text" ar="تفاصيل البرنامج" en="View Program"></span><svg class="icon btn-arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
+                </div>
+              </div>
+            </section>
+            <section class="pa" style="--ac: var(--p3)">
+              <span class="pa-plus" aria-hidden="true"><i></i><i></i></span>
+              <img class="pa-thumb" src="assets/images/medical-team-heroo.png" alt="" loading="lazy" />
+              <span class="pa-num" aria-hidden="true">03</span>
+              <h2 class="pa-title"><button type="button" aria-expanded="false" aria-controls="pa-03" ar="طب الطوارئ" en="Emergency Medicine"></button></h2>
+              <div class="pa-media" id="pa-03">
+                <img class="pa-img" src="assets/images/medical-team-heroo.png" alt="" loading="lazy" />
+                <div class="pa-card">
+                  <div class="pa-meta"><span class="pa-icon"><svg class="icon" aria-hidden="true"><use href="#amb"/></svg></span><span class="pa-cnum">03 / 05</span></div>
+                  <span class="english-name" ar="Impact Emergency Medicine Enhancement Program" en=""></span>
+                  <h3 ar="برنامج إمباكت لتعزيز كفاءات طب الطوارئ" en="Impact Emergency Medicine Enhancement Program"></h3>
+                  <p ar="تدريب قائم على المحاكاة لاتخاذ القرار في الحالات الحرجة." en="Simulation-based training for decisions in critical cases."></p>
+                  <a class="btn" href="program-emergency.html"><span class="btn-text" ar="تفاصيل البرنامج" en="View Program"></span><svg class="icon btn-arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
+                </div>
+              </div>
+            </section>
+            <section class="pa" style="--ac: var(--p4)">
+              <span class="pa-plus" aria-hidden="true"><i></i><i></i></span>
+              <img class="pa-thumb" src="assets/images/04_global_partnerships.jpg" alt="" loading="lazy" />
+              <span class="pa-num" aria-hidden="true">04</span>
+              <h2 class="pa-title"><button type="button" aria-expanded="false" aria-controls="pa-04" ar="الإدارة والأعمال" en="Business &amp; Management"></button></h2>
+              <div class="pa-media" id="pa-04">
+                <img class="pa-img" src="assets/images/04_global_partnerships.jpg" alt="" loading="lazy" />
+                <div class="pa-card">
+                  <div class="pa-meta"><span class="pa-icon"><svg class="icon" aria-hidden="true"><use href="#chart"/></svg></span><span class="pa-cnum">04 / 05</span></div>
+                  <span class="english-name" ar="Impact Business &amp; Management Enhancement Program" en=""></span>
+                  <h3 ar="برنامج إمباكت لتعزيز المهارات الإدارية" en="Impact Business &amp; Management Enhancement Program"></h3>
+                  <p ar="دورات قصيرة وشهادات مصغّرة للإدارة الصحية والمالية والموارد البشرية والأكاديمية." en="Short courses and microcredentials in healthcare, finance, HR, and academic administration."></p>
+                  <a class="btn" href="program-business.html"><span class="btn-text" ar="تفاصيل البرنامج" en="View Program"></span><svg class="icon btn-arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
+                </div>
+              </div>
+            </section>
+            <section class="pa" style="--ac: var(--p5)">
+              <span class="pa-plus" aria-hidden="true"><i></i><i></i></span>
+              <img class="pa-thumb" src="assets/images/03_scientific_research.jpg" alt="" loading="lazy" />
+              <span class="pa-num" aria-hidden="true">05</span>
+              <h2 class="pa-title"><button type="button" aria-expanded="false" aria-controls="pa-05" ar="البحث العلمي" en="Research"></button></h2>
+              <div class="pa-media" id="pa-05">
+                <img class="pa-img" src="assets/images/03_scientific_research.jpg" alt="" loading="lazy" />
+                <div class="pa-card">
+                  <div class="pa-meta"><span class="pa-icon"><svg class="icon" aria-hidden="true"><use href="#flask"/></svg></span><span class="pa-cnum">05 / 05</span></div>
+                  <span class="english-name" ar="Impact Research Enhancement Program" en=""></span>
+                  <h3 ar="برنامج إمباكت لتعزيز البحث العلمي" en="Impact Research Enhancement Program"></h3>
+                  <p ar="من الفكرة الأولى حتى نشر المقال العلمي." en="From first idea to published article."></p>
+                  <a class="btn" href="program-research.html"><span class="btn-text" ar="تفاصيل البرنامج" en="View Program"></span><svg class="icon btn-arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
       <section class="cta" id="cta">
-        <svg class="cta-pixels" viewBox="0 0 377 324" aria-hidden="true"><rect x="0" y="0" width="215.43" height="107.71" fill="url(#pxg)" /><rect x="161.57" y="107.72" width="107.71" height="107.71" fill="url(#pxg)" /><rect x="269.29" y="0" width="107.71" height="107.71" fill="url(#pxg)" /><rect x="269.29" y="215.43" width="107.71" height="107.71" fill="url(#pxg)" /></svg>
-        <div class="container reveal">
-          <h2 ar="ابدأ الخطوة التالية في مسيرتك المهنية" en="Take the next step in your career"></h2>
-          
-          <div class="actions" style="justify-content: center"><a class="btn" href="register.html" ><span class="btn-text" ar="سجّل اهتمامك" en="Register Your Interest"></span><svg class="icon btn-arrow" aria-hidden="true"><use href="#arrow"/></svg></a><a class="btn btn-ghost" href="organizations.html" ><span class="btn-text" ar="حلول للمؤسسات" en="Solutions for Organizations"></span><svg class="icon" aria-hidden="true"><use href="#send"/></svg></a></div>
+        <div class="container">
+          <!-- CTA: لوحة 3D عائمة بهوية الموقع -->
+          <div class="cta-panel cta-panel--solo">
+            <svg class="cta-pixels" viewBox="0 0 377 324" aria-hidden="true"><rect x="0" y="0" width="215.43" height="107.71" fill="url(#pxg)" /><rect x="161.57" y="107.72" width="107.71" height="107.71" fill="url(#pxg)" /><rect x="269.29" y="0" width="107.71" height="107.71" fill="url(#pxg)" /><rect x="269.29" y="215.43" width="107.71" height="107.71" fill="url(#pxg)" /></svg>
+            <span class="cta-mark" aria-hidden="true">IF</span>
+            <div class="cta-copy">
+              <span class="kicker" ar="خطوتك التالية" en="Your next step"></span>
+              <h2 ar="ابدأ الخطوة التالية في مسيرتك المهنية" en="Take the next step in your career"></h2>
+              <p ar="اختر البرنامج المناسب لتخصصك، وسيتواصل معك فريقنا بتفاصيل المواعيد والتسجيل." en="Choose the program that fits your specialty, and our team will contact you with schedules and registration details."></p>
+              <div class="actions"><a class="btn" href="register.html" ><span class="btn-text" ar="سجّل اهتمامك" en="Register Your Interest"></span><svg class="icon btn-arrow" aria-hidden="true"><use href="#arrow"/></svg></a><a class="btn btn-ghost" href="organizations.html" ><span class="btn-text" ar="حلول للمؤسسات" en="Solutions for Organizations"></span><svg class="icon" aria-hidden="true"><use href="#send"/></svg></a></div>
+            </div>
+          </div>
         </div>
       </section>
     </main>

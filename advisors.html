@@ -73,7 +73,8 @@
             <a href="about.html"><span ar="من نحن" en="About"></span></a>
             <div class="nav-dropdown"><a href="programs.html" aria-haspopup="true"><span ar="البرامج" en="Programs"></span><i class="caret" aria-hidden="true">▾</i></a><div class="nav-dropdown-menu"><a href="program-nursing.html"><span ar="التمريض" en="Nursing"></span></a><a href="program-medical.html"><span ar="الطب" en="Medical"></span></a><a href="program-emergency.html"><span ar="طب الطوارئ" en="Emergency Medicine"></span></a><a href="program-business.html"><span ar="الإدارة والأعمال" en="Business &amp; Management"></span></a><a href="program-research.html"><span ar="البحث العلمي" en="Research"></span></a></div></div>
             <a href="advisors.html" class="is-active" aria-current="page"><span ar="المستشارون" en="Advisors"></span></a>
-            <a href="organizations.html"><span ar="للمؤسسات" en="For Organizations"></span></a>
+            <!-- <a href="organizations.html"><span ar="للمؤسسات" en="For Organizations"></span></a> -->
+
             <a href="contact.html"><span ar="تواصل معنا" en="Contact"></span></a>
             <a class="nav-register" href="register.html"><span ar="سجّل الآن" en="Register"></span></a>
             <button class="lang-toggle" type="button"><span ar="EN" en="عربي"></span></button>
@@ -90,7 +91,7 @@
         
         <div class="container">
           <div class="page-hero-content">
-            <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index2.html"><span ar="الرئيسية" en="Home"></span></a><i>/</i><span ar="المستشارون" en="Advisors"></span></nav>
+            <nav class="breadcrumbs" ar-aria-label="مسار التنقل" en-aria-label="Breadcrumb" aria-label="مسار التنقل"><ol><li><a class="bc-home" href="index2.html"><svg class="bc-home-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9v11h13V9"/><path d="M10 20v-6h4v6"/></svg><span ar="الرئيسية" en="Home"></span></a></li><li><span class="bc-current" aria-current="page" ar="المستشارون" en="Advisors"></span></li></ol></nav>
             
             <h1 ar="المستشارون الأكاديميون" en="Academic Advisors"></h1>
             
@@ -113,11 +114,28 @@
         </div>
       </section>
       <section class="cta" id="cta">
-        <svg class="cta-pixels" viewBox="0 0 377 324" aria-hidden="true"><rect x="0" y="0" width="215.43" height="107.71" fill="url(#pxg)" /><rect x="161.57" y="107.72" width="107.71" height="107.71" fill="url(#pxg)" /><rect x="269.29" y="0" width="107.71" height="107.71" fill="url(#pxg)" /><rect x="269.29" y="215.43" width="107.71" height="107.71" fill="url(#pxg)" /></svg>
-        <div class="container reveal">
-          <h2 ar="ابدأ الخطوة التالية في مسيرتك المهنية" en="Take the next step in your career"></h2>
-          
-          <div class="actions" style="justify-content: center"><a class="btn" href="programs.html" ><span class="btn-text" ar="استكشف البرامج" en="Explore Programs"></span><svg class="icon btn-arrow" aria-hidden="true"><use href="#arrow"/></svg></a></div>
+        <div class="container">
+          <!-- CTA: لوحة 3D عائمة بهوية الموقع + اختصار مباشر لكل برنامج -->
+          <div class="cta-panel">
+            <svg class="cta-pixels" viewBox="0 0 377 324" aria-hidden="true"><rect x="0" y="0" width="215.43" height="107.71" fill="url(#pxg)" /><rect x="161.57" y="107.72" width="107.71" height="107.71" fill="url(#pxg)" /><rect x="269.29" y="0" width="107.71" height="107.71" fill="url(#pxg)" /><rect x="269.29" y="215.43" width="107.71" height="107.71" fill="url(#pxg)" /></svg>
+            <span class="cta-mark" aria-hidden="true">IF</span>
+            <div class="cta-copy">
+              <span class="kicker" ar="خطوتك التالية" en="Your next step"></span>
+              <h2 ar="ابدأ الخطوة التالية في مسيرتك المهنية" en="Take the next step in your career"></h2>
+              <p ar="اختر البرنامج المناسب لتخصصك، وسيتواصل معك فريقنا بتفاصيل المواعيد والتسجيل." en="Choose the program that fits your specialty, and our team will contact you with schedules and registration details."></p>
+              <div class="actions"><a class="btn" href="programs.html" ><span class="btn-text" ar="استكشف البرامج" en="Explore Programs"></span><svg class="icon btn-arrow" aria-hidden="true"><use href="#arrow"/></svg></a></div>
+            </div>
+            <nav class="cta-progs" ar-aria-label="ابدأ من برنامجك" en-aria-label="Start from your program" aria-label="ابدأ من برنامجك">
+              <span class="cta-progs-label" ar="أو ابدأ مباشرة من برنامجك" en="Or start right from your program"></span>
+              <ul>
+                <li><a class="cta-prog" href="program-nursing.html" style="--ac: var(--p1)"><span class="cta-prog-icon"><svg class="icon" aria-hidden="true"><use href="#steth"/></svg></span><span class="cta-prog-name" ar="التمريض" en="Nursing"></span><span class="cta-prog-num">01</span><span class="cta-prog-go"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
+                <li><a class="cta-prog" href="program-medical.html" style="--ac: var(--p2)"><span class="cta-prog-icon"><svg class="icon" aria-hidden="true"><use href="#cross"/></svg></span><span class="cta-prog-name" ar="الطب" en="Medical"></span><span class="cta-prog-num">02</span><span class="cta-prog-go"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
+                <li><a class="cta-prog" href="program-emergency.html" style="--ac: var(--p3)"><span class="cta-prog-icon"><svg class="icon" aria-hidden="true"><use href="#amb"/></svg></span><span class="cta-prog-name" ar="طب الطوارئ" en="Emergency Medicine"></span><span class="cta-prog-num">03</span><span class="cta-prog-go"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
+                <li><a class="cta-prog" href="program-business.html" style="--ac: var(--p4)"><span class="cta-prog-icon"><svg class="icon" aria-hidden="true"><use href="#chart"/></svg></span><span class="cta-prog-name" ar="الإدارة والأعمال" en="Business &amp; Management"></span><span class="cta-prog-num">04</span><span class="cta-prog-go"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
+                <li><a class="cta-prog" href="program-research.html" style="--ac: var(--p5)"><span class="cta-prog-icon"><svg class="icon" aria-hidden="true"><use href="#flask"/></svg></span><span class="cta-prog-name" ar="البحث العلمي" en="Research"></span><span class="cta-prog-num">05</span><span class="cta-prog-go"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
+              </ul>
+            </nav>
+          </div>
         </div>
       </section>
     </main>

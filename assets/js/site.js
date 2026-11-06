@@ -162,10 +162,17 @@
   $$("form.contact-form").forEach(function (f) {
     f.onsubmit = function (e) {
       e.preventDefault();
-      var lines = $$("input, select, textarea", f).map(function (el) {
+      var lines = $$("input, select, textarea", f).filter(function (el) {
+        return el.type != "radio" || el.checked; /* الشرايح (radio): المختار بس */
+      }).map(function (el) {
         var v = el.tagName == "SELECT" && el.selectedIndex > 0 ? el.options[el.selectedIndex].text : el.value;
         var lb = el.closest("label"), name = el.getAttribute("aria-label") || (lb && lb.firstElementChild && lb.firstElementChild.textContent) || el.name;
         if (el.type == "checkbox") v = el.checked ? "✓" : "✗";
+        if (el.type == "radio") {
+          var fs = el.closest("fieldset"), lg = fs && fs.querySelector("legend");
+          name = lg ? lg.textContent : el.name;
+          v = el.nextElementSibling ? el.nextElementSibling.textContent : el.value;
+        }
         return name + ": " + v;
       });
       /* المستلم ونص رسالة التأكيد مكتوبين في الـ HTML: data-to على الفورم و .form-success */
@@ -729,8 +736,17 @@
     scaleY: 0, ease: "none", stagger: 0.12,
     scrollTrigger: { trigger: ".footer", start: "top bottom", end: "top 55%", scrub: 1 },
   });
-  if ($(".cta-pixels"))
-    gsap.from(".cta-pixels rect", { scale: 0, transformOrigin: "50% 50%", duration: 0.7, ease: "back.out(2.2)", stagger: { each: 0.1, from: "random" }, scrollTrigger: { trigger: ".cta-pixels", start: "top 80%", once: true } });
+  /* CTA: اللوحة بتقوم من ميل 3D مع السكرول، وبعدين المحتوى وقائمة البرامج بيدخلوا بالتتابع */
+  if ($(".cta-panel")) {
+    gsap.fromTo(".cta-panel", { rotateX: 12, y: 50, scale: 0.95 }, {
+      rotateX: 0, y: 0, scale: 1, ease: "none",
+      scrollTrigger: { trigger: ".cta", start: "top 95%", end: "top 35%", scrub: true },
+    });
+    gsap.timeline({ scrollTrigger: { trigger: ".cta-panel", start: "top 75%", once: true } })
+      .from(".cta-pixels rect", { scale: 0, transformOrigin: "50% 50%", duration: 0.7, ease: "back.out(2.2)", stagger: { each: 0.1, from: "random" } }, 0)
+      .from(".cta-copy > *", { y: 34, autoAlpha: 0, duration: 0.9, ease: "power3.out", stagger: 0.1 }, 0.1)
+      .from(".cta-progs-label, .cta-prog", { x: root.dir == "rtl" ? -40 : 40, autoAlpha: 0, duration: 0.8, ease: "power3.out", stagger: 0.07 }, 0.35);
+  }
 
   /* ---------- إضاءة تتبع الماوس على الكروت ---------- */
   if (fine) {
@@ -775,4 +791,272 @@
     });
     root.addEventListener("pointerleave", function () { cursor.classList.remove("is-active"); });
   }
+})();
+/* =========================================================
+   رحلة المتدرب: مسار متعرّج بين الأرقام، بيترسم مع السكرول
+   - المسار بيتحسب من أماكن الأرقام الفعلية (بيتعاد مع تغيير المقاس/اللغة)
+   - الخط الملوّن بيتملى، ونقطة مضيئة على راسه، وكل محطة بتنوّر لما الخط يوصلها
+   ========================================================= */
+(function () {
+  var jr = document.querySelector(".jr");
+  if (!jr) return;
+  var root = document.documentElement,
+    svg = jr.querySelector(".jr-svg"),
+    track = jr.querySelector(".jr-track"),
+    line = jr.querySelector(".jr-line"),
+    dot = jr.querySelector(".jr-dot"),
+    grad = svg.querySelector("#jrGrad"),
+    steps = [].slice.call(jr.querySelectorAll(".jr-step")),
+    badges = steps.map(function (s) { return s.querySelector(".jr-badge"); }),
+    animated = root.classList.contains("gsap-enabled") && window.ScrollTrigger,
+    len = 0, stops = [], progress = animated ? 0 : 1;
+
+  /* قطعة بين نقطتين: أفقي → رأسي في النص → أفقي، بزوايا مدوّرة */
+  function seg(a, b) {
+    var dx = b.x - a.x, dy = b.y - a.y;
+    if (Math.abs(dy) < 1 || Math.abs(dx) < 1) return " L" + b.x + " " + b.y;
+    var mx = (a.x + b.x) / 2, sx = dx > 0 ? 1 : -1, sy = dy > 0 ? 1 : -1,
+      r = Math.min(18, Math.abs(dx) / 2, Math.abs(dy) / 2);
+    return " L" + (mx - sx * r) + " " + a.y +
+      " Q" + mx + " " + a.y + " " + mx + " " + (a.y + sy * r) +
+      " L" + mx + " " + (b.y - sy * r) +
+      " Q" + mx + " " + b.y + " " + (mx + sx * r) + " " + b.y +
+      " L" + b.x + " " + b.y;
+  }
+
+  function build() {
+    var box = jr.getBoundingClientRect();
+    var pts = badges.map(function (b) {
+      var r = b.getBoundingClientRect();
+      return { x: Math.round(r.left + r.width / 2 - box.left), y: Math.round(r.top + r.height / 2 - box.top) };
+    });
+    svg.setAttribute("viewBox", "0 0 " + box.width + " " + box.height);
+    grad.setAttribute("x1", pts[0].x); grad.setAttribute("y1", pts[0].y);
+    grad.setAttribute("x2", pts[pts.length - 1].x); grad.setAttribute("y2", pts[pts.length - 1].y);
+    var d = "M" + pts[0].x + " " + pts[0].y, probe = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    stops = [0];
+    for (var i = 1; i < pts.length; i++) {
+      d += seg(pts[i - 1], pts[i]);
+      probe.setAttribute("d", d);
+      stops.push(probe.getTotalLength());
+    }
+    track.setAttribute("d", d);
+    line.setAttribute("d", d);
+    len = line.getTotalLength();
+    line.style.strokeDasharray = len + " " + len;
+    render();
+  }
+
+  function render() {
+    var at = len * progress;
+    line.style.strokeDashoffset = len - at;
+    if (len) {
+      var p = line.getPointAtLength(Math.max(0.01, at));
+      dot.setAttribute("cx", p.x); dot.setAttribute("cy", p.y);
+    }
+    jr.classList.toggle("is-drawing", progress > 0.001 && progress < 0.999);
+    var last = -1;
+    steps.forEach(function (s, i) {
+      var on = at >= stops[i] - 4;
+      s.classList.toggle("is-on", on);
+      if (on) last = i;
+    });
+    steps.forEach(function (s, i) { s.classList.toggle("is-current", i == last && progress < 0.999); });
+  }
+
+  build();
+  window.addEventListener("load", build);
+  /* تغيير اللغة بيقلب الاتجاه → الأرقام بتتبدّل أماكنها */
+  new MutationObserver(function () { requestAnimationFrame(build); }).observe(root, { attributes: true, attributeFilter: ["dir", "lang"] });
+
+  if (!animated) { window.addEventListener("resize", build); return; }
+
+  ScrollTrigger.addEventListener("refreshInit", build);
+  ScrollTrigger.create({
+    trigger: jr, start: "top 72%", end: "bottom 62%", scrub: 0.6,
+    onUpdate: function (self) { progress = self.progress; render(); },
+  });
+  /* دخول الكروت: بتتقلب من تحت بمنظور */
+  gsap.from(jr.querySelectorAll(".jr-fig"), {
+    y: 70, rotateX: -24, transformPerspective: 900, transformOrigin: "50% 100%", autoAlpha: 0,
+    duration: 1.1, ease: "expo.out", stagger: 0.12,
+    scrollTrigger: { trigger: jr, start: "top 82%", once: true },
+  });
+  gsap.from(jr.querySelectorAll(".jr-badge"), {
+    scale: 0, duration: 0.8, ease: "back.out(2)", stagger: 0.12, delay: 0.3, clearProps: "transform",
+    scrollTrigger: { trigger: jr, start: "top 82%", once: true },
+  });
+})();
+
+/* =========================================================
+   لماذا إمباكتفورج: كروت متعلّقة بتتمرجح (زنبرك بسيط)
+   - الماوس: اسحب الكارت يمين/شمال وسيبه يتمرجح
+   - اللمس: الضغطة بتدّي الكارت زقّة خفيفة (والسكرول شغال عادي)
+   - الكشّاف بيلف ناحية الكارت اللي عليه الماوس
+   - الكروت بتنزل من فوق وتتمرجح لما السكشن يظهر
+   ========================================================= */
+(function () {
+  var box = document.querySelector(".whyx");
+  if (!box) return;
+  var root = document.documentElement,
+    reduce = matchMedia("(prefers-reduced-motion: reduce)").matches,
+    narrow = matchMedia("(max-width: 1080px)"),
+    beam = box.querySelector(".whyx-beam"),
+    pool = box.querySelector(".whyx-pool"),
+    L = { a: 0, ta: 0, x: 0, tx: 0, y: 0, ty: 0 },
+    t = 0, running = false;
+
+  var S = [].slice.call(box.querySelectorAll(".whyx-card")).map(function (el) {
+    var base = parseFloat(getComputedStyle(el).getPropertyValue("--a")) || 0;
+    var s = { el: el, base: base, a: base * (narrow.matches ? 0.45 : 1), v: 0, drag: false, x0: 0, a0: 0, ph: Math.random() * 6 };
+
+    el.addEventListener("pointerdown", function (e) {
+      if (e.pointerType != "mouse") { s.v += (Math.random() > 0.5 ? 1 : -1) * 2.4; return; }
+      s.drag = true; s.x0 = e.clientX; s.a0 = s.a;
+      el.classList.add("is-drag"); el.setPointerCapture(e.pointerId);
+    });
+    el.addEventListener("pointermove", function (e) {
+      if (!s.drag) return;
+      s.a = Math.max(-40, Math.min(40, s.a0 + (e.clientX - s.x0) * 0.25)); s.v = 0;
+    });
+    function up() { s.drag = false; el.classList.remove("is-drag"); }
+    el.addEventListener("pointerup", up);
+    el.addEventListener("pointercancel", up);
+
+    /* الكشّاف يتبع الكارت (ماوس بس، وفي التصميم الكبير) */
+    el.addEventListener("pointerenter", function (e) {
+      if (e.pointerType != "mouse") return;
+      var b = box.getBoundingClientRect(), r = el.getBoundingClientRect();
+      var cx = r.left + r.width / 2 - b.left - b.width / 2, cy = r.top + r.height / 2 - b.top + 90;
+      L.ta = -Math.atan2(cx, cy) * 180 / Math.PI;
+      L.tx = cx; L.ty = r.top - b.top - 120;
+      el.classList.add("is-lit");
+    });
+    el.addEventListener("pointerleave", function () {
+      L.ta = 0; L.tx = 0; L.ty = 0;
+      el.classList.remove("is-lit");
+    });
+    return s;
+  });
+
+  function frame() {
+    if (!running) return;
+    t += 0.016;
+    L.a += (L.ta - L.a) * 0.07; L.x += (L.tx - L.x) * 0.07; L.y += (L.ty - L.y) * 0.07;
+    beam.style.rotate = L.a + "deg";
+    pool.style.translate = L.x + "px " + L.y + "px";
+    /* في الشاشات الصغيرة الكروت أعرض، فالميل بيبقى أهدى */
+    var f = narrow.matches ? 0.45 : 1;
+    S.forEach(function (s) {
+      if (!s.drag) {
+        var sway = Math.sin(t * 1.1 + s.ph) * 0.5;
+        s.v += (s.base * f + sway - s.a) * 0.06; s.v *= 0.93; s.a += s.v;
+      }
+      s.el.style.rotate = s.a.toFixed(3) + "deg";
+    });
+    requestAnimationFrame(frame);
+  }
+  if (reduce) return;
+
+  /* اللوب شغال بس والسكشن ظاهر */
+  new IntersectionObserver(function (en) {
+    var vis = en[0].isIntersecting;
+    if (vis && !running) { running = true; requestAnimationFrame(frame); }
+    else if (!vis) running = false;
+  }).observe(box);
+
+  /* دخول: الكروت بتنزل من فوق، ولما توصل تاخد زقّة فتتمرجح */
+  if (root.classList.contains("gsap-enabled") && window.gsap) {
+    S.forEach(function (s, i) {
+      gsap.from(s.el, {
+        y: -360, autoAlpha: 0, duration: 1.1, ease: "power3.in", delay: i * 0.12,
+        scrollTrigger: { trigger: box, start: "top 70%", once: true },
+        onComplete: function () { s.v += (i % 2 ? 1 : -1) * (narrow.matches ? 1.2 : 2.4); },
+      });
+    });
+    gsap.from(".whyx-beam, .whyx-lamp", { autoAlpha: 0, duration: 1.4, ease: "power2.out", scrollTrigger: { trigger: box, start: "top 75%", once: true } });
+  }
+})();
+
+/* =========================================================
+   صفحة البرامج: أكورديون بيتفتح
+   - الضغط على أي برنامج (أو زرار اسمه) يفرده ويقفل الباقي
+   - الأسهم بتتنقل بين البرامج (حسب اتجاه الصفحة)، و Home/End لأول/آخر واحد
+   ========================================================= */
+(function () {
+  var acc = document.querySelector(".pacc");
+  if (!acc) return;
+  var root = document.documentElement,
+    panels = [].slice.call(acc.querySelectorAll(".pa")),
+    buttons = panels.map(function (p) { return p.querySelector(".pa-title button"); });
+
+  function open(i, focus) {
+    panels.forEach(function (p, j) {
+      var on = j == i;
+      p.classList.toggle("is-open", on);
+      buttons[j].setAttribute("aria-expanded", on);
+    });
+    if (focus) buttons[i].focus();
+  }
+
+  panels.forEach(function (p, i) {
+    p.addEventListener("click", function (e) {
+      if (e.target.closest("a")) return; /* زرار "تفاصيل البرنامج" يشتغل عادي */
+      if (!p.classList.contains("is-open")) open(i);
+    });
+  });
+
+  acc.addEventListener("keydown", function (e) {
+    var i = buttons.indexOf(document.activeElement);
+    if (i < 0) return;
+    var rtl = root.dir == "rtl", vertical = matchMedia("(max-width: 860px)").matches, n = null;
+    if (e.key == "Home") n = 0;
+    else if (e.key == "End") n = panels.length - 1;
+    else if (vertical ? e.key == "ArrowDown" : e.key == (rtl ? "ArrowLeft" : "ArrowRight")) n = Math.min(panels.length - 1, i + 1);
+    else if (vertical ? e.key == "ArrowUp" : e.key == (rtl ? "ArrowRight" : "ArrowLeft")) n = Math.max(0, i - 1);
+    if (n === null) return;
+    e.preventDefault();
+    open(n, true);
+  });
+
+  /* دخول: الأعمدة بتطلع من تحت بالتتابع */
+  if (root.classList.contains("gsap-enabled") && window.gsap) {
+    gsap.from(panels, {
+      y: 70, autoAlpha: 0, duration: 1, ease: "expo.out", stagger: 0.08, clearProps: "transform,opacity,visibility",
+      scrollTrigger: { trigger: acc, start: "top 85%", once: true },
+    });
+  }
+})();
+
+/* =========================================================
+   تفاصيل البرنامج: فهرس "في هذه الصفحة" بيعلّم القسم اللي بتقراه
+   ========================================================= */
+(function () {
+  var links = [].slice.call(document.querySelectorAll(".pd-toc a"));
+  if (!links.length || !("IntersectionObserver" in window)) return;
+  var map = {};
+  links.forEach(function (a) { map[a.getAttribute("href").slice(1)] = a; });
+  var visible = {};
+  function update() {
+    /* أول قسم ظاهر من فوق هو الحالي */
+    var current = null;
+    links.forEach(function (a) {
+      var id = a.getAttribute("href").slice(1);
+      if (!current && visible[id]) current = id;
+    });
+    if (!current) return;
+    links.forEach(function (a) {
+      var on = a.getAttribute("href") == "#" + current;
+      a.classList.toggle("is-current", on);
+      if (on) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current");
+    });
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { visible[e.target.id] = e.isIntersecting; });
+    update();
+  }, { rootMargin: "-120px 0px -55% 0px" });
+  Object.keys(map).forEach(function (id) {
+    var sec = document.getElementById(id);
+    if (sec) io.observe(sec);
+  });
 })();
