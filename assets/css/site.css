@@ -4405,14 +4405,17 @@ html[dir="rtl"] .hero .hero-bg {
   color: #fff;
   font-size: 0.88rem;
   font-weight: 700;
-  /* مطوية لفوق حوالين الحافة اللي فوق */
+  /* مطوية لفوق ومتجمّعة عند الزرار (translateY بيرفع كل شريط مكان اللي فوقه)،
+     وشفافة عشان ما يفضلش خط رفيع وهي واقفة على حرفها */
   transform-origin: 50% 0;
-  transform: rotateX(-90deg);
+  transform: translateY(calc(var(--i, 0) * -100%)) rotateX(-90deg);
+  opacity: 0;
   filter: brightness(0.6);
-  /* الطيّ بالعكس: آخر واحدة بتتطوي الأول */
+  /* القفل: بالعكس (آخر واحدة الأول) وأسرع ومن غير ارتداد */
   transition:
-    transform 0.35s cubic-bezier(0.23, 1, 0.32, 1) calc((4 - var(--i, 0)) * 60ms),
-    filter 0.35s calc((4 - var(--i, 0)) * 60ms),
+    transform 0.4s cubic-bezier(0.55, 0, 0.45, 1) calc((4 - var(--i, 0)) * 40ms),
+    opacity 0.28s ease-in calc((4 - var(--i, 0)) * 40ms + 0.08s),
+    filter 0.4s calc((4 - var(--i, 0)) * 40ms),
     padding 0.25s cubic-bezier(0.23, 1, 0.32, 1),
     background-color 0.25s;
 
@@ -4428,7 +4431,7 @@ html[dir="rtl"] .hero .hero-bg {
     padding-inline-start: 30px;
     background: color-mix(in srgb, var(--c) 82%, #000);
     color: #fff;
-    transform: none;
+    transform: translateY(0) rotateX(0);
   }
 }
 .header .nav-links .nav-dropdown:hover .nav-dropdown-menu,
@@ -4438,11 +4441,14 @@ html[dir="rtl"] .hero .hero-bg {
   transition: visibility 0s;
 
   a {
-    transform: rotateX(0);
+    /* نفس قائمة الدوال (translateY + rotateX) عشان الانتقال يبقى ناعم في الاتجاهين */
+    transform: translateY(0) rotateX(0);
+    opacity: 1;
     filter: brightness(1);
     /* الفرد: الأولى الأول وبعدها اللي تحتها */
     transition:
       transform 0.45s cubic-bezier(0.23, 1, 0.32, 1) calc(var(--i) * 70ms),
+      opacity 0.2s calc(var(--i) * 70ms),
       filter 0.45s calc(var(--i) * 70ms),
       padding 0.25s cubic-bezier(0.23, 1, 0.32, 1),
       background-color 0.25s;
@@ -4470,6 +4476,7 @@ html[dir="rtl"] .hero .hero-bg {
   .header .nav-links .nav-dropdown-menu a {
     transform: none;
     filter: none;
+    opacity: 1;
   }
 }
 
