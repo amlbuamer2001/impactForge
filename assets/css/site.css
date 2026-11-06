@@ -1154,9 +1154,40 @@ h2 {
         color: var(--if-text);
         transform: translateY(-2px);
       }
+      /* الصفحة الحالية: مش زرار (عشان ما تتلخبطش مع "سجّل الآن")
+         نص ملكي + مكعب الهوية بيلف + خط متدرّج بلمعة تحت الكلمة */
       &.is-active {
-        background: var(--gold);
-        color: #ffffff;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: color-mix(in srgb, var(--if-teal) 8%, #fff);
+        color: var(--if-royal);
+
+        &::before {
+          content: "";
+          flex: none;
+          width: 9px;
+          height: 9px;
+          border-radius: 2.5px;
+          background: linear-gradient(135deg, var(--if-mint), var(--if-teal) 45%, var(--if-royal));
+          box-shadow:
+            inset 1px 1px 0 #ffffffb3,
+            inset -1px -1px 0 #0b1c4a40,
+            0 2px 4px -1px color-mix(in srgb, var(--if-royal) 55%, transparent);
+          animation: kicker-cube 5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+        }
+    
+        &:hover {
+          background: color-mix(in srgb, var(--if-teal) 14%, #fff);
+          color: var(--if-royal);
+        }
+        @media (prefers-reduced-motion: reduce) {
+          &::before,
+          &::after {
+            animation: none;
+          }
+        }
       }
       /* زر سجّل الآن */
       &.nav-register {
