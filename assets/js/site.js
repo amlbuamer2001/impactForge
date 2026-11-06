@@ -292,6 +292,129 @@
   })();
 
   /* =====================================================
+     PROGRAMS 3D (الرئيسية): كروت متراصة بمنظور
+     التقليب: سحب بالماوس (رأسي أو أفقي) · عجلة الماوس · سحب أفقي باللمس · الأسهم · القائمة · النقط
+     الموضع "pos" رقم عشري، فالكروت بتمشي مع إيد المستخدم وهو بيسحب وبعدين بتستقر على أقرب كارت
+     ===================================================== */
+  (function () {
+    var box = $(".pgx");
+    if (!box) return;
+    var stage = $(".pgx-stage", box),
+      anchors = $$(".pgx-anchor", box),
+      cards = $$(".pgx-card", box),
+      rows = $$(".pgx-row", box),
+      details = $$(".pgx-detail", box),
+      dots = $$(".pgx-dot", box),
+      prev = $(".pgx-prev", box),
+      next = $(".pgx-next", box),
+      count = $(".pgx-count", box),
+      N = cards.length,
+      active = 0;
+    function pad(n) { return (n < 10 ? "0" : "") + n; }
+    function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+    /* يرسم الكروت حوالين موضع عشري (نفس معادلات التصميم الأصلي، بس متصلة عشان السحب) */
+    function layout(pos) {
+      anchors.forEach(function (an, i) {
+        var o = i - pos, n = Math.abs(o), s = o < 0 ? -1 : 1, k = Math.min(n, 1), card = cards[i];
+        an.style.zIndex = String(20 - Math.round(n * 2));
+        card.style.opacity = n > 2.5 ? 0 : n > 2 ? (2.5 - n) * 2 * 0.88 : 1 - 0.12 * k;
+        card.style.pointerEvents = n > 2 ? "none" : "auto";
+        card.style.transform = n < 0.001 ? "none"
+          : "translateY(" + s * 83 * n + "%) translateZ(" + -260 * n + "px) scale(" + (1 - 0.055 * n) + ") rotateX(" + -s * k * (56 + 4 * n) + "deg)";
+        card.lastElementChild.style.opacity = Math.min(n * 0.125, 0.3);
+      });
+    }
+    function select(i) {
+      active = clamp(Math.round(i), 0, N - 1);
+      layout(active);
+      /* زرار الكارت النشط بس هو اللي يتوصله بالـ Tab */
+      cards.forEach(function (c, j) {
+        var cta = $(".pgx-cta", c);
+        if (cta) cta.tabIndex = j == active ? 0 : -1;
+        c.parentNode.setAttribute("aria-hidden", j == active ? "false" : "true");
+      });
+      rows.forEach(function (r, j) { r.setAttribute("aria-pressed", j == active); });
+      dots.forEach(function (d, j) { d.setAttribute("aria-current", j == active); });
+      details.forEach(function (d, j) { d.hidden = j != active; });
+      if (count) count.textContent = pad(active + 1) + " / " + pad(N);
+      if (prev) prev.disabled = active == 0;
+      if (next) next.disabled = active == N - 1;
+    }
+
+    rows.forEach(function (r, i) { r.addEventListener("click", function () { select(i); }); });
+    dots.forEach(function (d, i) { d.addEventListener("click", function () { select(i); }); });
+    if (prev) prev.addEventListener("click", function () { select(active - 1); });
+    if (next) next.addEventListener("click", function () { select(active + 1); });
+
+    /* الكيبورد: فوق/تحت، ويمين/شمال حسب اتجاه اللغة */
+    stage.addEventListener("keydown", function (e) {
+      var rtl = root.dir == "rtl", d = 0;
+      if (e.key == "ArrowUp") d = -1;
+      if (e.key == "ArrowDown") d = 1;
+      if (e.key == "ArrowLeft") d = rtl ? 1 : -1;
+      if (e.key == "ArrowRight") d = rtl ? -1 : 1;
+      if (d) { e.preventDefault(); select(active + d); }
+    });
+
+    /* عجلة الماوس فوق الكروت: كارت لكل حركة. في الأول/الآخر بتسيب الصفحة تسكرول عادي */
+    var wheelSum = 0, wheelAt = 0;
+    stage.addEventListener("wheel", function (e) {
+      var dir = e.deltaY > 0 ? 1 : -1, target = active + dir;
+      if (Math.abs(e.deltaY) < 1 || target < 0 || target > N - 1) { wheelSum = 0; return; }
+      e.preventDefault();
+      if (Date.now() - wheelAt < 450) return;
+      wheelSum += e.deltaY;
+      if (Math.abs(wheelSum) >= 40) { wheelSum = 0; wheelAt = Date.now(); select(target); }
+    }, { passive: false });
+
+    /* السحب: الماوس رأسي أو أفقي، واللمس أفقي بس (الرأسي يسكرول الصفحة) */
+    var drag = null, suppressClick = false, STEP = 120;
+    stage.addEventListener("pointerdown", function (e) {
+      if (e.button !== 0) return;
+      drag = { id: e.pointerId, x: e.clientX, y: e.clientY, start: active, t: Date.now(), d: 0, moved: false, mouse: e.pointerType == "mouse" };
+    });
+    stage.addEventListener("pointermove", function (e) {
+      if (!drag || e.pointerId !== drag.id) return;
+      var dx = e.clientX - drag.x, dy = e.clientY - drag.y,
+        horiz = Math.abs(dx) > Math.abs(dy),
+        /* سالب = التالي: السحب لفوق، أو ناحية اتجاه القراءة */
+        d = drag.mouse && !horiz ? dy : (root.dir == "rtl" ? -dx : dx);
+      if (!drag.moved) {
+        if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+        if (!drag.mouse && !horiz) { drag = null; return; } /* لمس رأسي = سكرول الصفحة */
+        drag.moved = true;
+        box.classList.add("is-dragging");
+        try { stage.setPointerCapture(drag.id); } catch (err) {}
+      }
+      drag.d = d;
+      layout(clamp(drag.start - d / STEP, -0.35, N - 1 + 0.35));
+    });
+    function endDrag() {
+      if (!drag) return;
+      var d = drag, quick = Date.now() - d.t < 280;
+      drag = null;
+      if (!d.moved) return;
+      box.classList.remove("is-dragging");
+      suppressClick = true;
+      /* سحبة سريعة قصيرة = كارت واحد؛ غير كده أقرب كارت للموضع */
+      var target = quick && Math.abs(d.d) > 25 ? d.start + (d.d < 0 ? 1 : -1) : d.start - d.d / STEP;
+      select(target);
+    }
+    stage.addEventListener("pointerup", endDrag);
+    stage.addEventListener("pointercancel", endDrag);
+
+    /* الضغط: بعد سحبة ما يفتحش اللينك؛ وعلى كارت مش نشط يجيبه لقدّام بدل ما يفتحه */
+    stage.addEventListener("click", function (e) {
+      if (suppressClick) { suppressClick = false; e.preventDefault(); e.stopPropagation(); return; }
+      var card = e.target.closest(".pgx-card"), i = cards.indexOf(card);
+      if (card && i != active) { e.preventDefault(); select(i); }
+    }, true);
+
+    select(0);
+  })();
+
+  /* =====================================================
      HIGHLIGHTS STRIP (الرئيسية): سكرول بسيط "بيزق" اللوحة فتتمرجح وتستقر
      ===================================================== */
   (function () {

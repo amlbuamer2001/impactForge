@@ -112,73 +112,99 @@
 
       <!-- ================= 2) البرامج الخمسة ================= -->
       <section class="programs" id="programs">
-        <div class="container">
+        <!-- البرامج: كروت 3D متراصة بمنظور (سحب بالماوس / سكرول بالعجلة / سحب باللمس / الأسهم) — الحركة في site.js -->
+        <div class="container pgx">
+          <div class="pgx-info">
           <div class="reveal">
             <span class="kicker" ar="البرامج الخمسة" en="Our Programs"></span>
             <h2 ar="اختر مسارك المهني" en="Choose Your Path"></h2>
             <p class="lead" ar="اختر البرنامج المصمَّم لمهنتك؛ فكل برنامج أُعدّ بإشراف نخبة من المستشارين الأكاديميين، ويركّز على الأداء في بيئة العمل الحقيقية." en="Choose the program built for your profession. Each is designed with distinguished academic advisors and focused on real-world performance."></p>
           </div>
-          <div class="program-stack">
-            <article class="program-slide" style="--k: 0; --ac: var(--p1)">
-              <a class="program-card" href="program-nursing.html">
-                <span class="program-number">01</span>
-                <div>
-                  <span class="english-name" ar="Impact Nurse Enhancement Program" en=""></span>
-                  <h3 ar="برنامج إمباكت لتعزيز كفاءات التمريض" en="Impact Nurse Enhancement Program"></h3>
-                  <p ar="برامج ترافق الممرضين والممرضات من الاستعداد للتوظيف حتى التقدم المهني." en="Programs that support nurses from job readiness to career advancement."></p>
-                  <span class="program-more"><span ar="تفاصيل البرنامج" en="View Program"></span> <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span>
+            <nav class="pgx-list" ar-aria-label="اختر برنامجًا" en-aria-label="Choose a program" aria-label="اختر برنامجًا">
+              <button class="pgx-row" type="button" aria-pressed="true"><span class="pgx-n">01</span><span class="pgx-t" ar="التمريض" en="Nursing"></span><span class="pgx-ic"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></button>
+              <button class="pgx-row" type="button" aria-pressed="false"><span class="pgx-n">02</span><span class="pgx-t" ar="الطب" en="Medical"></span><span class="pgx-ic"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></button>
+              <button class="pgx-row" type="button" aria-pressed="false"><span class="pgx-n">03</span><span class="pgx-t" ar="طب الطوارئ" en="Emergency Medicine"></span><span class="pgx-ic"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></button>
+              <button class="pgx-row" type="button" aria-pressed="false"><span class="pgx-n">04</span><span class="pgx-t" ar="الإدارة والأعمال" en="Business &amp; Management"></span><span class="pgx-ic"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></button>
+              <button class="pgx-row" type="button" aria-pressed="false"><span class="pgx-n">05</span><span class="pgx-t" ar="البحث العلمي" en="Research"></span><span class="pgx-ic"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></button>
+            </nav>
+            <div class="pgx-actions">
+              <a class="btn" href="programs.html"><span class="btn-text" ar="عرض جميع البرامج" en="View All Programs"></span><svg class="icon btn-arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
+            </div>
+          </div>
+          <div class="pgx-visual">
+            <div class="pgx-stage" tabindex="0" role="region" aria-roledescription="carousel" ar-aria-label="البرامج: اسحب أو استخدم الأسهم للتقليب" en-aria-label="Programs: drag or use arrow keys to browse" aria-label="البرامج: اسحب أو استخدم الأسهم للتقليب">
+              <div class="pgx-clip"><div class="pgx-scene">
+                <div class="pgx-anchor">
+                  <article class="pgx-card" style="--ac: var(--p1)">
+                    <img class="pgx-img" src="assets/images/01_training.jpg" alt="" loading="lazy" draggable="false" />
+                    <span class="pgx-card-top"><span class="pgx-num">01</span><span class="pgx-icon"><svg class="icon" aria-hidden="true"><use href="#steth"/></svg></span></span>
+                    <div class="pgx-card-body"><span class="english-name" ar="Impact Nurse Enhancement Program" en=""></span><h3 ar="برنامج إمباكت لتعزيز كفاءات التمريض" en="Impact Nurse Enhancement Program"></h3>
+                      <p ar="برامج ترافق الممرضين والممرضات من الاستعداد للتوظيف حتى التقدم المهني." en="Programs that support nurses from job readiness to career advancement."></p>
+                      <a class="pgx-cta" href="program-nursing.html"><span ar="تفاصيل البرنامج" en="View Program"></span><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+                    </div>
+                    <i class="pgx-shade" aria-hidden="true"></i>
+                  </article>
                 </div>
-                <span class="program-icon"><svg class="icon" aria-hidden="true"><use href="#steth"/></svg></span>
-              </a>
-            </article>
-            <article class="program-slide" style="--k: 1; --ac: var(--p2)">
-              <a class="program-card" href="program-medical.html">
-                <span class="program-number">02</span>
-                <div>
-                  <span class="english-name" ar="Impact Medical Enhancement Program" en=""></span>
-                  <h3 ar="برنامج إمباكت للتعزيز الطبي" en="Impact Medical Enhancement Program"></h3>
-                  <p ar="ثلاثة مسارات لطلاب الطب وخريجيه: الاختبارات، الأساسيات، المهارات المتخصصة." en="Three tracks for medical students and graduates: exams, core education, specialized skills."></p>
-                  <span class="program-more"><span ar="تفاصيل البرنامج" en="View Program"></span> <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span>
+                <div class="pgx-anchor">
+                  <article class="pgx-card" style="--ac: var(--p2)">
+                    <img class="pgx-img" src="assets/images/02_medical_consultations.jpg" alt="" loading="lazy" draggable="false" />
+                    <span class="pgx-card-top"><span class="pgx-num">02</span><span class="pgx-icon"><svg class="icon" aria-hidden="true"><use href="#cross"/></svg></span></span>
+                    <div class="pgx-card-body"><span class="english-name" ar="Impact Medical Enhancement Program" en=""></span><h3 ar="برنامج إمباكت للتعزيز الطبي" en="Impact Medical Enhancement Program"></h3>
+                      <p ar="ثلاثة مسارات لطلاب الطب وخريجيه: الاختبارات، الأساسيات، المهارات المتخصصة." en="Three tracks for medical students and graduates: exams, core education, specialized skills."></p>
+                      <a class="pgx-cta" href="program-medical.html"><span ar="تفاصيل البرنامج" en="View Program"></span><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+                    </div>
+                    <i class="pgx-shade" aria-hidden="true"></i>
+                  </article>
                 </div>
-                <span class="program-icon"><svg class="icon" aria-hidden="true"><use href="#cross"/></svg></span>
-              </a>
-            </article>
-            <article class="program-slide" style="--k: 2; --ac: var(--p3)">
-              <a class="program-card" href="program-emergency.html">
-                <span class="program-number">03</span>
-                <div>
-                  <span class="english-name" ar="Impact Emergency Medicine Enhancement Program" en=""></span>
-                  <h3 ar="برنامج إمباكت لتعزيز كفاءات طب الطوارئ" en="Impact Emergency Medicine Enhancement Program"></h3>
-                  <p ar="تدريب قائم على المحاكاة لاتخاذ القرار في الحالات الحرجة." en="Simulation-based training for decisions in critical cases."></p>
-                  <span class="program-more"><span ar="تفاصيل البرنامج" en="View Program"></span> <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span>
+                <div class="pgx-anchor">
+                  <article class="pgx-card" style="--ac: var(--p3)">
+                    <img class="pgx-img" src="assets/images/medical-team-heroo.png" alt="" loading="lazy" draggable="false" />
+                    <span class="pgx-card-top"><span class="pgx-num">03</span><span class="pgx-icon"><svg class="icon" aria-hidden="true"><use href="#amb"/></svg></span></span>
+                    <div class="pgx-card-body"><span class="english-name" ar="Impact Emergency Medicine Enhancement Program" en=""></span><h3 ar="برنامج إمباكت لتعزيز كفاءات طب الطوارئ" en="Impact Emergency Medicine Enhancement Program"></h3>
+                      <p ar="تدريب قائم على المحاكاة لاتخاذ القرار في الحالات الحرجة." en="Simulation-based training for decisions in critical cases."></p>
+                      <a class="pgx-cta" href="program-emergency.html"><span ar="تفاصيل البرنامج" en="View Program"></span><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+                    </div>
+                    <i class="pgx-shade" aria-hidden="true"></i>
+                  </article>
                 </div>
-                <span class="program-icon"><svg class="icon" aria-hidden="true"><use href="#amb"/></svg></span>
-              </a>
-            </article>
-            <article class="program-slide" style="--k: 3; --ac: var(--p4)">
-              <a class="program-card" href="program-business.html">
-                <span class="program-number">04</span>
-                <div>
-                  <span class="english-name" ar="Impact Business &amp; Management Enhancement Program" en=""></span>
-                  <h3 ar="برنامج إمباكت لتعزيز المهارات الإدارية" en="Impact Business &amp; Management Enhancement Program"></h3>
-                  <p ar="دورات قصيرة وشهادات مصغّرة للإدارة الصحية والمالية والموارد البشرية والأكاديمية." en="Short courses and microcredentials in healthcare, finance, HR, and academic administration."></p>
-                  <span class="program-more"><span ar="تفاصيل البرنامج" en="View Program"></span> <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span>
+                <div class="pgx-anchor">
+                  <article class="pgx-card" style="--ac: var(--p4)">
+                    <img class="pgx-img" src="assets/images/04_global_partnerships.jpg" alt="" loading="lazy" draggable="false" />
+                    <span class="pgx-card-top"><span class="pgx-num">04</span><span class="pgx-icon"><svg class="icon" aria-hidden="true"><use href="#chart"/></svg></span></span>
+                    <div class="pgx-card-body"><span class="english-name" ar="Impact Business &amp; Management Enhancement Program" en=""></span><h3 ar="برنامج إمباكت لتعزيز المهارات الإدارية" en="Impact Business &amp; Management Enhancement Program"></h3>
+                      <p ar="دورات قصيرة وشهادات مصغّرة للإدارة الصحية والمالية والموارد البشرية والأكاديمية." en="Short courses and microcredentials in healthcare, finance, HR, and academic administration."></p>
+                      <a class="pgx-cta" href="program-business.html"><span ar="تفاصيل البرنامج" en="View Program"></span><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+                    </div>
+                    <i class="pgx-shade" aria-hidden="true"></i>
+                  </article>
                 </div>
-                <span class="program-icon"><svg class="icon" aria-hidden="true"><use href="#chart"/></svg></span>
-              </a>
-            </article>
-            <article class="program-slide" style="--k: 4; --ac: var(--p5)">
-              <a class="program-card" href="program-research.html">
-                <span class="program-number">05</span>
-                <div>
-                  <span class="english-name" ar="Impact Research Enhancement Program" en=""></span>
-                  <h3 ar="برنامج إمباكت لتعزيز البحث العلمي" en="Impact Research Enhancement Program"></h3>
-                  <p ar="من الفكرة الأولى حتى نشر المقال العلمي." en="From first idea to published article."></p>
-                  <span class="program-more"><span ar="تفاصيل البرنامج" en="View Program"></span> <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span>
+                <div class="pgx-anchor">
+                  <article class="pgx-card" style="--ac: var(--p5)">
+                    <img class="pgx-img" src="assets/images/03_scientific_research.jpg" alt="" loading="lazy" draggable="false" />
+                    <span class="pgx-card-top"><span class="pgx-num">05</span><span class="pgx-icon"><svg class="icon" aria-hidden="true"><use href="#flask"/></svg></span></span>
+                    <div class="pgx-card-body"><span class="english-name" ar="Impact Research Enhancement Program" en=""></span><h3 ar="برنامج إمباكت لتعزيز البحث العلمي" en="Impact Research Enhancement Program"></h3>
+                      <p ar="من الفكرة الأولى حتى نشر المقال العلمي." en="From first idea to published article."></p>
+                      <a class="pgx-cta" href="program-research.html"><span ar="تفاصيل البرنامج" en="View Program"></span><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+                    </div>
+                    <i class="pgx-shade" aria-hidden="true"></i>
+                  </article>
                 </div>
-                <span class="program-icon"><svg class="icon" aria-hidden="true"><use href="#flask"/></svg></span>
-              </a>
-            </article>
+              </div></div>
+            </div>
+            <div class="pgx-foot">
+              <div class="pgx-cap"><b class="pgx-count">01 / 05</b><span ar="اسحب أو مرّر للتقليب" en="Drag or scroll to browse"></span></div>
+              <div class="pgx-ctl">
+                <button class="pgx-arrow pgx-prev" type="button" ar-aria-label="البرنامج السابق" en-aria-label="Previous program" aria-label="البرنامج السابق"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></button>
+                <button class="pgx-arrow pgx-next" type="button" ar-aria-label="البرنامج التالي" en-aria-label="Next program" aria-label="البرنامج التالي"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></button>
+              </div>
+            </div>
+            <div class="pgx-pag"><div>
+                <button class="pgx-dot" type="button" ar-aria-label="التمريض" en-aria-label="Nursing" aria-label="التمريض" aria-current="true"><i></i></button>
+                <button class="pgx-dot" type="button" ar-aria-label="الطب" en-aria-label="Medical" aria-label="الطب" aria-current="false"><i></i></button>
+                <button class="pgx-dot" type="button" ar-aria-label="طب الطوارئ" en-aria-label="Emergency Medicine" aria-label="طب الطوارئ" aria-current="false"><i></i></button>
+                <button class="pgx-dot" type="button" ar-aria-label="الإدارة والأعمال" en-aria-label="Business and Management" aria-label="الإدارة والأعمال" aria-current="false"><i></i></button>
+                <button class="pgx-dot" type="button" ar-aria-label="البحث العلمي" en-aria-label="Research" aria-label="البحث العلمي" aria-current="false"><i></i></button>
+            </div></div>
           </div>
         </div>
       </section>

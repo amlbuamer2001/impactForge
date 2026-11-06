@@ -484,6 +484,27 @@ h2 {
     transition: translate 0.25s;
     color: #fff;
   }
+
+  /* السهم في خانة ثابتة آخر الزرار، على الجزء الغامق دايمًا:
+     اللوح الفاتح = العرض كله ناقص الخانة دي (بدل 77% اللي كانت بتختلف مع عرض الزرار) */
+  --arrow-slot: 52px;
+  &:has(.btn-arrow) {
+    /* !important عشان مقاسات الـ padding الخاصة ببعض الأزرار ما تاكلش مكان السهم */
+    padding-inline-end: calc(var(--arrow-slot) + 6px) !important;
+  }
+  &:has(.btn-arrow)::after {
+    width: calc(100% - var(--arrow-slot));
+  }
+  /* لازم يجي بعد اللي فوقه: نفس الـ specificity، فالأخير هو اللي بيكسب */
+  &:has(.btn-arrow):hover::after {
+    width: 100%;
+  }
+  .btn-arrow {
+    position: absolute;
+    inset-block: 0;
+    margin-block: auto;
+    inset-inline-end: calc((var(--arrow-slot) - 1.2rem) / 2);
+  }
   &:hover .btn-arrow {
     translate: -5px 0;
     color: var(--ink);
@@ -2801,6 +2822,453 @@ h2 {
     .program-number {
       font-size: 4rem;
     }
+  }
+}
+
+/* =====================================================
+   9b) PROGRAMS — كاروسيل 3D بمنظور (الرئيسية)
+   كروت متراصة فوق وتحت الكارت النشط؛ التقليب بالسحب/العجلة/اللمس/الأسهم (site.js)
+   ===================================================== */
+.pgx {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: center;
+}
+.pgx-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* قائمة البرامج */
+.pgx-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 6px 0 22px;
+}
+.pgx-row {
+  all: unset;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 30px 1fr 30px;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 14px;
+  border-radius: 16px;
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--mut);
+  transition: background-color 0.25s, color 0.25s, box-shadow 0.25s;
+
+  &:hover,
+  &[aria-pressed="true"] {
+    background: #fff;
+    color: var(--if-deep);
+    box-shadow:
+      inset 0 1px 0 #fff,
+      0 2px 0 color-mix(in srgb, var(--if-royal) 12%, transparent),
+      0 14px 26px -18px color-mix(in srgb, var(--if-deep) 60%, transparent);
+  }
+  &:focus-visible {
+    outline: 3px solid var(--if-royal);
+    outline-offset: 2px;
+  }
+}
+.pgx-n {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--if-teal);
+  font-variant-numeric: tabular-nums;
+}
+.pgx-ic {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 0.95rem;
+  color: #fff;
+  background: linear-gradient(135deg, var(--if-royal), var(--if-teal));
+  opacity: 0;
+  scale: 0.8;
+  transition: opacity 0.25s, scale 0.25s;
+
+  .pgx-row[aria-pressed="true"] & {
+    opacity: 1;
+    scale: 1;
+  }
+  html[dir="ltr"] & .icon {
+    transform: rotate(180deg);
+  }
+}
+
+/* زرار "عرض جميع البرامج" تحت القائمة (المحتوى الخاص بكل برنامج على الكارت نفسه) */
+.pgx-actions {
+  margin-top: 6px;
+}
+
+/* المسرح */
+.pgx-visual {
+  min-width: 0;
+}
+.pgx-stage {
+  position: relative;
+  height: 520px;
+  touch-action: pan-y pinch-zoom; /* السحب الرأسي باللمس يسكرول الصفحة؛ الأفقي يقلّب */
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  outline: none;
+
+  .pgx.is-dragging & {
+    cursor: grabbing;
+  }
+  &:focus-visible {
+    outline: 3px solid var(--if-royal);
+    outline-offset: 6px;
+    border-radius: 24px;
+  }
+}
+.pgx-clip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent);
+}
+.pgx-scene {
+  position: absolute;
+  inset: 0;
+  perspective: 1200px;
+}
+.pgx-anchor {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 86%;
+  aspect-ratio: 1.4; /* أطول شوية عشان الوصف والزرار على الكارت */
+  max-height: 66%;
+  translate: -50% -50%;
+  perspective: 1200px;
+  pointer-events: none;
+}
+/* الكارت: صورة البرنامج خلفية + طبقة بألوان الهوية + محتوى البرنامج والزرار فوقها
+   (التدرّج تحت = احتياطي لو الصورة ما اتحمّلتش) */
+.pgx-card {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  padding: clamp(20px, 3vw, 32px);
+  border-radius: 24px;
+  overflow: hidden;
+  color: #fff;
+  text-decoration: none;
+  pointer-events: auto;
+  backface-visibility: hidden;
+  -webkit-user-drag: none;
+  background:
+    radial-gradient(70% 110% at 92% 0%, color-mix(in srgb, var(--ac) 80%, transparent), transparent 70%),
+    radial-gradient(50% 70% at 8% 100%, color-mix(in srgb, var(--ac) 35%, transparent), transparent 70%),
+    linear-gradient(140deg, var(--if-royal), var(--if-deep));
+  border: 1px solid #ffffff1f;
+  box-shadow:
+    inset 0 1px 0 #ffffff40,
+    inset 0 -3px 0 #0b1c4a4d,
+    0 30px 50px -28px #050d2699;
+  transition:
+    transform 0.7s cubic-bezier(0.22, 0.8, 0.2, 1),
+    opacity 0.7s;
+
+  .pgx.is-dragging & {
+    transition: none;
+  }
+  &:focus-visible {
+    outline: 3px solid var(--if-mint);
+    outline-offset: -6px;
+  }
+  /* طبقة الهوية فوق الصورة: غامقة تحت عشان النص يتقري، شفافة فوق عشان الصورة تبان */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(70% 90% at 92% 0%, color-mix(in srgb, var(--ac) 55%, transparent), transparent 70%),
+      linear-gradient(to top, color-mix(in srgb, var(--if-deep) 96%, transparent) 0%, color-mix(in srgb, var(--if-deep) 80%, transparent) 38%, color-mix(in srgb, var(--if-royal) 25%, transparent) 75%, transparent 100%);
+  }
+  h3 {
+    margin: 4px 0 0;
+    font-size: clamp(1.05rem, 1.8vw, 1.4rem);
+    line-height: 1.4;
+    text-shadow: 0 2px 10px #0b1c4a80;
+  }
+  .english-name {
+    color: var(--if-mint);
+  }
+  p {
+    margin: 8px 0 14px;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: #e1ecf8;
+    max-width: 48ch;
+    /* سطرين بالكتير عشان الكارت ما يتزحمش */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    /* موبايل: الكارت أصغر، فالعنوان والزرار بس */
+    @media (max-width: 860px) {
+      display: none;
+    }
+  }
+  @media (max-width: 860px) {
+    .pgx-cta {
+      margin-top: 10px;
+    }
+  }
+}
+.pgx-img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+.pgx-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+/* زرار "تفاصيل البرنامج" على الكارت: كبسولة فاتحة بارزة */
+.pgx-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 18px;
+  border-radius: 99px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--if-royal);
+  text-decoration: none;
+  background: linear-gradient(180deg, #ffffff, #e6f0fa);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 3px 0 color-mix(in srgb, var(--ac) 55%, #0b1c4a),
+    0 12px 20px -12px #050d26b3;
+  transition: gap 0.3s, translate 0.3s;
+
+  &:hover {
+    gap: 16px;
+    translate: 0 -2px;
+  }
+  &:focus-visible {
+    outline: 3px solid var(--if-mint);
+    outline-offset: 3px;
+  }
+  html[dir="ltr"] & .icon {
+    transform: rotate(180deg);
+  }
+}
+.pgx-num {
+  font-size: clamp(3rem, 6vw, 4.6rem);
+  font-weight: 800;
+  line-height: 0.9;
+  color: transparent;
+  -webkit-text-stroke: 1.5px color-mix(in srgb, var(--if-mint) 75%, transparent);
+  font-variant-numeric: tabular-nums;
+}
+.pgx-icon {
+  width: clamp(56px, 6vw, 76px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 30%;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: color-mix(in srgb, var(--ac) 70%, var(--if-deep));
+  background: linear-gradient(190deg, #ffffff, #d7eef2);
+  box-shadow:
+    inset 0 2px 0 #fff,
+    inset 0 -3px 0 color-mix(in srgb, var(--ac) 22%, transparent),
+    0 5px 0 color-mix(in srgb, var(--ac) 55%, #0b1c4a),
+    0 16px 24px -12px #050d26a6;
+}
+/* تغميق الكروت البعيدة (بيتحسب في site.js) */
+.pgx-shade {
+  position: absolute;
+  inset: 0;
+  background: var(--if-deep);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.7s;
+
+  .pgx.is-dragging & {
+    transition: none;
+  }
+}
+
+/* تحت المسرح: العداد + الأسهم + النقط */
+.pgx-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 0 7%;
+  margin-top: 6px;
+}
+.pgx-cap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  b {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--if-royal);
+    font-variant-numeric: tabular-nums;
+    /* "01 / 05" لازم تتقري من الشمال لليمين حتى في العربي */
+    direction: ltr;
+    unicode-bidi: isolate;
+    align-self: flex-start;
+  }
+  span {
+    font-size: 0.8rem;
+    color: var(--mut);
+  }
+}
+.pgx-ctl {
+  display: flex;
+  gap: 10px;
+}
+.pgx-arrow {
+  all: unset;
+  box-sizing: border-box;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-size: 1.15rem;
+  color: var(--if-royal);
+  background: linear-gradient(180deg, #ffffff, #eef3fb);
+  border: 1px solid color-mix(in srgb, var(--if-royal) 18%, transparent);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 3px 0 color-mix(in srgb, var(--if-royal) 18%, transparent),
+    0 10px 18px -12px var(--if-deep);
+  transition: background-color 0.25s, color 0.25s, translate 0.25s, opacity 0.25s;
+
+  &:hover:not(:disabled) {
+    background: var(--if-royal);
+    color: #fff;
+    translate: 0 -2px;
+  }
+  &:focus-visible {
+    outline: 3px solid var(--if-royal);
+    outline-offset: 3px;
+  }
+  &:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+  /* السهم الأصلي بيشاور يمين/شمال؛ هنا لفوق (السابق) ولتحت (التالي) */
+  &.pgx-prev .icon {
+    rotate: 90deg;
+  }
+  &.pgx-next .icon {
+    rotate: -90deg;
+  }
+}
+.pgx-pag {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+
+  > div {
+    display: flex;
+    padding: 4px;
+    border-radius: 24px;
+    background: color-mix(in srgb, var(--if-royal) 7%, #fff);
+  }
+}
+.pgx-dot {
+  all: unset;
+  width: 28px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+
+  i {
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 99px;
+    background: var(--if-royal);
+    opacity: 0.3;
+    transition: width 0.3s, opacity 0.3s;
+  }
+  &[aria-current="true"] i {
+    width: 22px;
+    opacity: 1;
+    background: linear-gradient(90deg, var(--if-royal), var(--if-teal));
+  }
+  &:focus-visible {
+    outline: 2px solid var(--if-royal);
+    border-radius: 8px;
+  }
+}
+
+@media (max-width: 860px) {
+  /* موبايل: العنوان ← الكروت ← القائمة ← التفاصيل */
+  .pgx {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .pgx-info {
+    display: contents;
+  }
+  .pgx-visual {
+    order: 1;
+  }
+  .pgx-list {
+    order: 2;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .pgx-row {
+    grid-template-columns: 24px 1fr;
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+  .pgx-ic {
+    display: none;
+  }
+  .pgx-details {
+    order: 3;
+  }
+  .pgx-stage {
+    height: 380px;
+  }
+  .pgx-anchor {
+    width: 92%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pgx-card,
+  .pgx-shade {
+    transition: none;
   }
 }
 
