@@ -296,17 +296,60 @@
       </section>
 
       <!-- ================= 4) اقتباس المستشارة التنفيذية ================= -->
-      <section class="quote section-dark" id="quote">
+      <section class="advisor-poster" id="quote">
         <div class="container">
-          <span class="kicker reveal" ar="اقتباس المستشارة التنفيذية" en="Executive Advisor Quote"></span>
-          <blockquote class="quote-text scrub-text" ar="هدفنا واضح: سدّ الفجوة بين الإمكانات والكفاءة بمستويات عالمية." en="Our objective is clear: to bridge the gap between potential and world-class competence."></blockquote>
-          <div class="reveal">
-            <div class="quote-author">
-              <img src="assets/images/princess.jpg" alt="" onerror="this.remove()" />
-              <div><b ar="صاحبة السمو الملكي الأميرة نجود بنت هذلول بن عبدالعزيز" en="HRH Princess Nujoud bint Hathloul bin Abdulaziz"></b><small ar="المستشارة التنفيذية" en="Executive Advisor"></small></div>
+          <!-- كلمة المستشارة: تصميم بوستر (صورة بإطار قوسي + ختم دوّار + الاقتباس) -->
+          <article class="poster">
+            <span class="poster-watermark" aria-hidden="true">IMPACT</span>
+
+            <header class="poster-top">
+              <span class="poster-brand"><img src="assets/images/logo-white.png" alt="" width="150" height="24" loading="lazy" /></span>
+              <span class="poster-label" ar="كلمة المستشارة التنفيذية" en="Executive Advisor’s Word"></span>
+              <span class="poster-issue">2030</span>
+            </header>
+
+            <div class="poster-grid">
+              <figure class="poster-photo">
+                <span class="poster-arch-line" aria-hidden="true"></span>
+                <span class="poster-arch">
+                  <img src="assets/images/princess.jpg" ar-alt="صاحبة السمو الملكي الأميرة نجود بنت هذلول بن عبدالعزيز" en-alt="HRH Princess Nujoud bint Hathloul bin Abdulaziz" alt="صاحبة السمو الملكي الأميرة نجود بنت هذلول بن عبدالعزيز" loading="lazy" />
+                </span>
+                <!-- الختم = اختصار لقراءة الكلمة كاملة (الزرار تحت هو المسار الأساسي للكيبورد وقارئ الشاشة) -->
+                <a class="poster-stamp-link" href="about.html#advisor-message" tabindex="-1" aria-hidden="true" ar-title="اقرأ الكلمة كاملة" en-title="Read the full message" title="اقرأ الكلمة كاملة">
+                <svg class="poster-stamp" viewBox="0 0 200 200" aria-hidden="true">
+                  <defs><path id="stampPath" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0" /></defs>
+                  <circle cx="100" cy="100" r="96" />
+                  <text><textPath href="#stampPath" textLength="462" lengthAdjust="spacing">IMPACT FORGE • EXECUTIVE ADVISOR • VISION 2030 •</textPath></text>
+                </svg>
+                <span class="poster-stamp-core" aria-hidden="true"><svg class="icon"><use href="#arrow"/></svg></span>
+                </a>
+                <figcaption class="poster-tag" ar="المستشارة التنفيذية" en="Executive Advisor"></figcaption>
+              </figure>
+
+              <div class="poster-copy">
+                <span class="poster-mark" aria-hidden="true">”</span>
+                <blockquote class="poster-quote scrub-text" ar="هدفنا واضح: سدّ الفجوة بين الإمكانات <b>والكفاءة بمستويات عالمية.</b>" en="Our objective is clear: to bridge the gap between potential and <b>world-class competence.</b>"></blockquote>
+                <p class="poster-excerpt reveal" ar="لا نكتفي بتقديم برامج تدريبية فحسب، بل نعمل على تمكين الكفاءات السعودية لقيادة مستقبل القطاع الصحي والطبي، انطلاقًا من «رؤية المملكة 2030» التي جعلت الإنسان محورها." en="We go beyond offering training programs; we empower Saudi talent to lead the future of the health and medical sectors — guided by Saudi Vision 2030, a vision centered on people."></p>
+                <div class="poster-sign reveal">
+                  <span class="poster-sign-line" aria-hidden="true"></span>
+                  <div>
+                    <b ar="صاحبة السمو الملكي الأميرة نجود بنت هذلول بن عبدالعزيز" en="HRH Princess Nujoud bint Hathloul bin Abdulaziz"></b>
+                    <small ar="المستشارة التنفيذية — إمباكتفورج القابضة" en="Executive Advisor — Impact Forge Holding"></small>
+                  </div>
+                </div>
+                <div class="poster-actions reveal">
+                  <a class="btn" href="about.html#advisor-message"><span class="btn-text" ar="اقرأ الكلمة كاملة" en="Read the Full Message"></span><svg class="icon btn-arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
+                </div>
+              </div>
             </div>
-            <div><a class="link-more" href="about.html#advisor-message"><span ar="اقرأ الكلمة كاملة" en="Read the Full Message"></span> <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a></div>
-          </div>
+
+            <footer class="poster-foot">
+              <span ar="التميّز" en="Excellence"></span><i aria-hidden="true"></i>
+              <span ar="التمكين" en="Empowerment"></span><i aria-hidden="true"></i>
+              <span ar="الأثر" en="Impact"></span>
+              <span class="poster-foot-end" ar="رؤية المملكة 2030" en="Saudi Vision 2030"></span>
+            </footer>
+          </article>
         </div>
       </section>
 
@@ -362,7 +405,7 @@
 
       <div class="container footer-grid">
         <div>
-          <a class="logo" href="index2.html"><img class="logo-img" src="assets/images/logo-white.png" ar-alt="إمباكتفورج القابضة" en-alt="Impact Forge Holding" alt="إمباكتفورج القابضة" width="230" height="37" loading="lazy" /></a>
+          <a class="logo" href="index2.html"><img class="logo-img" src="assets/images/logo-header.png" ar-alt="إمباكتفورج القابضة" en-alt="Impact Forge Holding" alt="إمباكتفورج القابضة" width="230" height="37" loading="lazy" /></a>
           <p ar="إمباكتفورج القابضة — نُعدّ كفاءات وطنية مؤهلة للمستقبل في القطاعين الصحي والتجاري." en="Impact Forge Holding — building future-ready national talent across health and business."></p>
         </div>
         <div>

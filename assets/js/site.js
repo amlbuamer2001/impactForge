@@ -612,6 +612,21 @@
   }
   initScrub();
   langHooks.push(initScrub);
+  /* بوستر كلمة المستشارة: البوستر بيقوم من ميل 3D، والصورة بتنكشف جوه القوس */
+  if ($(".poster")) {
+    gsap.fromTo(".poster", { rotateX: 14, y: 60, scale: 0.94 }, {
+      rotateX: 0, y: 0, scale: 1, ease: "none",
+      scrollTrigger: { trigger: ".advisor-poster", start: "top 95%", end: "top 25%", scrub: true },
+    });
+    gsap.timeline({ scrollTrigger: { trigger: ".poster-grid", start: "top 75%", once: true } })
+      .fromTo(".poster-arch", { clipPath: "inset(100% 0% 0% 0% round 999px 999px 28px 28px)" }, { clipPath: "inset(0% 0% 0% 0% round 999px 999px 28px 28px)", duration: 1.4, ease: "expo.inOut" })
+      .from(".poster-arch-line", { autoAlpha: 0, x: 18, y: 18, duration: 1, ease: "expo.out" }, 0.6)
+      .from(".poster-stamp, .poster-stamp-core", { scale: 0, duration: 1, ease: "back.out(1.7)" }, 0.9)
+      .from(".poster-tag", { autoAlpha: 0, y: 20, duration: 0.8, ease: "expo.out" }, 1)
+      .from(".poster-mark", { autoAlpha: 0, yPercent: 40, duration: 1, ease: "expo.out" }, 0.3);
+    gsap.to(".poster-arch img", { yPercent: -8, ease: "none", scrollTrigger: { trigger: ".poster", start: "top bottom", end: "bottom top", scrub: true } });
+    gsap.to(".poster-watermark", { xPercent: -12, ease: "none", scrollTrigger: { trigger: ".poster", start: "top bottom", end: "bottom top", scrub: true } });
+  }
   if ($(".message-photo img")) {
     gsap.from(".message-photo img", { clipPath: "inset(100% 0% 0% 0% round 24px)", duration: 1.4, ease: "expo.inOut", scrollTrigger: { trigger: ".message-photo", start: "top 80%", once: true } });
     gsap.to(".message-photo img", { yPercent: -6, ease: "none", scrollTrigger: { trigger: ".message-photo", start: "top bottom", end: "bottom top", scrub: true } });
