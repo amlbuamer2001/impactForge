@@ -245,7 +245,6 @@
       .set(".fade-up", { visibility: "inherit" })
       .from(".hero .hero-pixels rect", { scale: 0, transformOrigin: "50% 50%", duration: 0.7, ease: "back.out(2.2)", stagger: { each: 0.09, from: "random" } }, 0.15)
       .from(".hero-arch", { scaleY: 0, transformOrigin: "50% 100%", duration: 1.4, ease: "expo.out" }, 0.2)
-      .from(".hero-ring", { scale: 0.5, autoAlpha: 0, duration: 1.6, ease: "expo.out", stagger: 0.15 }, 0.3)
       .from(".hero-image", { yPercent: 14, autoAlpha: 0, duration: 1.4, ease: "expo.out" }, 0.45)
       .from(".hero .eyebrow", { y: 20, autoAlpha: 0, duration: 0.8 }, 0.35)
       .from(split($(".hero-title"), true), { yPercent: 120, rotate: 6, duration: 1.1, ease: "expo.out", stagger: 0.1 }, 0.45)
@@ -254,9 +253,6 @@
       .from(".hero-lead", { y: 30, autoAlpha: 0, duration: 0.9 }, 0.75)
       .from(".hero .actions > *", { y: 30, autoAlpha: 0, duration: 0.8, stagger: 0.1 }, 0.9);
 
-    gsap.to(".hero-ring-a", { rotation: 360, duration: 60, ease: "none", repeat: -1 });
-    gsap.to(".hero-ring-b", { rotation: -360, duration: 90, ease: "none", repeat: -1 });
-
     var heroTrigger = function () { return { trigger: ".hero", start: "top top", end: "bottom top", scrub: true }; };
     gsap.to(".hero-visual", { yPercent: 10, ease: "none", scrollTrigger: heroTrigger() });
     gsap.to(".hero-intro, .hero-content", { y: -70, ease: "none", scrollTrigger: heroTrigger() });
@@ -264,7 +260,7 @@
 
     if (fine) {
       var hero = $(".hero"),
-        layers = [[".hero-image", -14], [".hero-glow", 40], [".hero-ring-a", 26], [".hero-ring-b", -34], [".hero .hero-pixels", 22], [".vision-badge", -12]].map(function (l) {
+        layers = [[".hero-image", -14], [".hero-glow", 40],[".hero .hero-pixels", 22], [".vision-badge", -12]].map(function (l) {
           var el = $(l[0]);
           return { d: l[1], x: gsap.quickTo(el, "x", { duration: 0.8, ease: "power3" }), y: gsap.quickTo(el, "y", { duration: 0.8, ease: "power3" }) };
         });

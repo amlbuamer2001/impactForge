@@ -1083,6 +1083,11 @@ h2 {
   background: var(--if-royal);
   margin: 6px 4px;
   border-radius: 20px;
+  /* حافة فاتحة من جوه + ظل بره عشان الهيرو يبان كبلوك بارز عن الصفحة */
+  box-shadow:
+    inset 0 1px 0 #ffffff33,
+    inset 0 0 0 1px #ffffff14,
+    0 30px 70px -30px #0b1c4ab3;
 
   > .container {
     width: 100%;
@@ -1106,22 +1111,47 @@ h2 {
     inset: 0;
     border-radius: 20px;
     background:
+      /* سبوت لايت ورا المجسّم في النص */
+      radial-gradient(
+        38% 55% at 50% 62%,
+        color-mix(in srgb, var(--if-teal) 55%, transparent),
+        transparent 70%
+      ),
       radial-gradient(
         55% 55% at 82% 30%,
         color-mix(in srgb, var(--if-teal) 27%, transparent),
         transparent 70%
       ),
+      /* تغميق الأطراف (vignette) عشان النص والمجسّم يبرزوا */
       radial-gradient(
-        40% 40% at 8% 92%,
-        color-mix(in srgb, var(--if-royal) 17%, transparent),
-        transparent 70%
+        120% 90% at 50% 45%,
+        transparent 45%,
+        #0b1c4a99 100%
       ),
       linear-gradient(
         135deg,
-        var(--if-royal) 0%,
-        var(--if-royal) 55%,
+        color-mix(in srgb, var(--if-royal) 80%, #0b1c4a) 0%,
+        var(--if-royal) 50%,
         var(--if-steel) 100%
       );
+
+    /* أرضية شبكية بمنظور تحت المجسّم */
+    &::before {
+      content: "";
+      position: absolute;
+      inset: auto -10% 0;
+      height: 48%;
+      background-image:
+        linear-gradient(#ffffff1f 1px, transparent 1px),
+        linear-gradient(90deg, #ffffff1f 1px, transparent 1px);
+      background-size: 64px 64px;
+      background-position: center bottom;
+      transform: perspective(520px) rotateX(62deg);
+      transform-origin: 50% 100%;
+      -webkit-mask: linear-gradient(transparent, #000 70%);
+      mask: linear-gradient(transparent, #000 70%);
+      pointer-events: none;
+    }
 
     &::after {
       content: "";
@@ -1250,24 +1280,70 @@ h2 {
     place-items: end center;
     isolation: isolate;
   }
+  /* القوس: مجسّم بإضاءة من فوق + تظليل جانبي (كأنه أسطوانة) + لوح خلفي بيدّيه سُمك */
   .hero-arch {
     position: absolute;
     inset: -28% 0% 0;
     border-radius: 999px 999px 0 0;
     background:
+      /* لمعة الإضاءة من فوق */
+      radial-gradient(70% 45% at 50% 0%, #ffffff47, transparent 70%),
+      /* تظليل الجوانب */
+      linear-gradient(90deg, #0b1c4a66, transparent 22%, transparent 78%, #0b1c4a66),
+      /* جسم القوس */
       linear-gradient(
-        175deg,
-        color-mix(in srgb, var(--if-teal) 71%, transparent),
-        color-mix(in srgb, var(--if-royal) 0%, transparent) 70%
-      ),
-      linear-gradient(
-        0deg,
-        color-mix(in srgb, var(--if-royal) 12%, transparent),
-        transparent
+        180deg,
+        color-mix(in srgb, var(--if-teal) 88%, #ffffff) 0%,
+        var(--if-teal) 30%,
+        color-mix(in srgb, var(--if-steel) 70%, var(--if-royal)) 70%,
+        color-mix(in srgb, var(--if-royal) 80%, #0b1c4a) 100%
       );
-    border: 1px solid color-mix(in srgb, var(--if-royal) 33%, transparent);
-    border-bottom: 0;
+    box-shadow:
+      inset 0 2px 0 #ffffffa6,
+      inset 0 30px 60px #ffffff1f,
+      inset 0 -80px 90px #0b1c4a73,
+      0 40px 90px -30px #071233cc;
     z-index: -1;
+
+    /* حافة مضيئة على القوس من فوق */
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 2px;
+      background: linear-gradient(180deg, #e9fffb 0%, #8ff3e6aa 25%, transparent 60%);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+      pointer-events: none;
+    }
+  }
+  /* لوح خلفي ورا القوس مزاح لتحت وللجنب = سُمك المجسّم
+     (على .hero-visual مش جوه القوس، عشان يترسم وراه مش فوقه) */
+  .hero-visual::before {
+    content: "";
+    position: absolute;
+    inset: calc(-28% - 14px) -14px 0;
+    border-radius: 999px 999px 0 0;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--if-royal) 70%, #0b1c4a), #071233);
+    transform: translate(18px, 10px);
+    box-shadow: 0 30px 60px -20px #050d26b3;
+    z-index: -3;
+  }
+  /* ظل/توهّج الأرضية تحت المجسّم */
+  .hero-visual::after {
+    content: "";
+    position: absolute;
+    bottom: -40px;
+    left: 4%;
+    right: 4%;
+    height: 110px;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, #8ff3e680, color-mix(in srgb, var(--if-teal) 35%, transparent) 55%, transparent);
+    filter: blur(8px);
+    z-index: -3;
+    pointer-events: none;
   }
   .hero-glow {
     position: absolute;
@@ -1279,31 +1355,14 @@ h2 {
     filter: blur(80px);
     z-index: -2;
   }
-  .hero-ring {
-    position: absolute;
-    border: 1px solid color-mix(in srgb, var(--if-royal) 25%, transparent);
-    border-radius: 50%;
-    z-index: -1;
-  }
-  .hero-ring-a {
-    width: 86%;
-    aspect-ratio: 1;
-    animation: spin 60s linear infinite;
-  }
-  .hero-ring-b {
-    width: 104%;
-    aspect-ratio: 1;
-    border-style: dashed;
-    opacity: 0.5;
-    animation: spin 90s linear infinite reverse;
-  }
   .hero-image {
     display: block;
     width: 100%;
     height: 410px;
     object-fit: contain;
     object-position: 50% 100%;
-    filter: drop-shadow(0 30px 40px #0008);
+    /* ظل للعمق + هالة فاتحة حوالين الأشخاص تفصلهم عن القوس */
+    filter: drop-shadow(0 30px 40px #0009) drop-shadow(0 0 28px #8ff3e640);
     transform-origin: 50% 100%;
     transform: scale(1.12);
 
@@ -1369,9 +1428,6 @@ h2 {
       visibility: hidden;
     }
   }
-  .gsap-enabled & .hero-ring {
-    animation: none;
-  }
 
   @media (max-width: 980px) {
     min-height: 0;
@@ -1408,7 +1464,6 @@ h2 {
     }
   }
   @media (prefers-reduced-motion: reduce) {
-    .hero-ring,
     .eyebrow-dot,
     .hero-orb {
       animation: none !important;
