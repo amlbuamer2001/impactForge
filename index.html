@@ -1,140 +1,539 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="إمباكت فورج — محرك وطني رائد لتحفيز الابتكار الصحي وتنمية الكوادر البشرية وتمكين مستقبل الرعاية الصحية." />
-  <title>ImpactForge | نصنع الأثر ونمكّن المستقبل الصحي</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
-  <!-- ملف الهيرو: لازم ييجي بعد styles.css -->
-  <link rel="stylesheet" href="hero-folder.css" />
-</head>
-<body>
-  <!-- SVG fallback للـ clip-path (التاب ناحية اليمين عشان RTL) -->
-  <svg width="0" height="0" style="position:absolute;" aria-hidden="true">
-    <defs>
-      <clipPath id="folder-shape" clipPathUnits="objectBoundingBox">
-        <path transform="translate(1,0) scale(-1,1)" d="M0.422 0.021C0.414 0.008 0.397 0 0.379 0H0.048C0.022 0 0 0.017 0 0.037V0.122V0.964C0 0.984 0.022 1 0.048 1H0.952C0.978 1 1 0.984 1 0.964V0.141C1 0.121 0.978 0.105 0.952 0.105H0.506C0.488 0.105 0.471 0.097 0.463 0.084L0.422 0.021Z" />
-      </clipPath>
-    </defs>
-  </svg>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title ar="إمباكتفورج القابضة — تطوير الكفاءات الصحية في السعودية" en="Impact Forge Holding — Healthcare Talent Development in Saudi Arabia">إمباكتفورج القابضة — تطوير الكفاءات الصحية في السعودية</title>
+    <meta name="description" content="برامج تطوير متخصصة في التمريض والطب وطب الطوارئ والإدارة والبحث العلمي، تُعدّ الكفاءات الوطنية للممارسة الواقعية انسجامًا مع رؤية 2030." ar-content="برامج تطوير متخصصة في التمريض والطب وطب الطوارئ والإدارة والبحث العلمي، تُعدّ الكفاءات الوطنية للممارسة الواقعية انسجامًا مع رؤية 2030." en-content="Specialized programs in nursing, medicine, emergency medicine, management, and research that prepare Saudi talent for real-world practice." />
+    <meta name="keywords" content="تطوير الكوادر الصحية" ar-content="تطوير الكوادر الصحية" en-content="healthcare training Saudi Arabia" />
+    <meta name="theme-color" content="#2E4FA0" />
+    <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+    <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png" />
+    <script>
+      /* اللغة المحفوظة + علامة الـ JS قبل أول رسم (يمنع وميض اللغة) */
+      (function (d) { d.classList.add("js"); try { if (localStorage.getItem("lang") == "en") { d.lang = "en"; d.dir = "ltr"; } } catch (e) {} })(document.documentElement);
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+      /* طبقة الحركة: تتفعّل بس لو GSAP اتحملت ومفيش reduced-motion */
+      if (window.gsap && window.ScrollTrigger && !matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("gsap-enabled");
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/site.css" />
+  </head>
 
-  <div class="site-shell">
-    <header class="header container">
-      <a class="brand" href="#home" aria-label="ImpactForge الرئيسية">
-        <span class="brand-mark" aria-hidden="true">✚</span>
-        <span class="brand-name">ImpactForge</span>
-      </a>
+  <body data-page="index2">
+    <!-- ============ SVG SPRITE ============ -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <symbol id="steth" viewBox="0 0 24 24"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6 6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3M8 15v1a6 6 0 0 0 12 0v-4"/><circle cx="20" cy="10" r="2"/></symbol>
+        <symbol id="cross" viewBox="0 0 24 24"><path d="M10 2h4a1 1 0 0 1 1 1v6h6a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-6v6a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h6V3a1 1 0 0 1 1-1z"/></symbol>
+        <symbol id="flask" viewBox="0 0 24 24"><path d="M10 2v7.5L4.5 19a2 2 0 0 0 1.7 3h11.6a2 2 0 0 0 1.7-3L14 9.5V2M8.5 2h7M7 16h10"/></symbol>
+        <symbol id="cap" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5zM6 12v5c3 3 9 3 12 0v-5"/></symbol>
+        <symbol id="globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20"/></symbol>
+        <symbol id="amb" viewBox="0 0 24 24"><path d="M10 10H6M8 8v4M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2M15 18H9M19 18h2a1 1 0 0 0 1-1v-3.7a1 1 0 0 0-.2-.6l-3.5-4.4A1 1 0 0 0 17.5 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol>
+        <symbol id="chart" viewBox="0 0 24 24"><path d="M3 3v18h18M8 17v-5M13 17V8M18 17v-9"/></symbol>
+        <symbol id="target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+        <symbol id="rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.3-2 5-2 5s3.7-.5 5-2c.7-.8.7-2.1-.1-2.9a2.2 2.2 0 0 0-2.9-.1zM12 15l-3-3a22 22 0 0 1 2-4A13 13 0 0 1 22 2c0 2.7-.8 7.5-6 11a22 22 0 0 1-4 2zM9 12H4s.6-3 2-4c1.6-1.1 5 0 5 0M12 15v5s3-.6 4-2c1.1-1.6 0-5 0-5"/></symbol>
+        <symbol id="phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></symbol>
+        <symbol id="mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+        <symbol id="pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+        <symbol id="user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+        <symbol id="users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0M16 4a4 4 0 0 1 0 8M22 21a7 7 0 0 0-4-6.3"/></symbol>
+        <symbol id="layers" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol>
+        <symbol id="check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+        <symbol id="info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+        <symbol id="monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></symbol>
+        <symbol id="download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
+        <symbol id="building" viewBox="0 0 24 24"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 7h1M14 7h1M9 11h1M14 11h1M9 15h1M14 15h1"/></symbol>
+        <symbol id="search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
+        <symbol id="handshake" viewBox="0 0 24 24"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.9-3.9a3 3 0 0 0-4.2 0l-.9.9a1 1 0 1 1-3-3l2.8-2.8a5 5 0 0 1 6 .8L21 9"/><path d="M3 9l3.5-3.5 4 1M3 9l6 6"/></symbol>
+        <symbol id="arrow" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
+        <symbol id="up" viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"/></symbol>
+        <symbol id="send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4zM22 2 11 13"/></symbol>
+        <linearGradient id="pxg" gradientUnits="userSpaceOnUse" x1="219" y1="-10" x2="158" y2="334"><stop offset="0" stop-color="#ffffff" /><stop offset="1" stop-color="#c8eaef" /></linearGradient>
+      </defs>
+    </svg>
 
-      <button class="menu-toggle" aria-label="فتح القائمة" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+    <a class="skip-link" href="#main"><span ar="تخطَّ إلى المحتوى" en="Skip to content"></span></a>
+    <div class="scroll-progress"></div>
 
-      <nav class="nav" aria-label="القائمة الرئيسية">
-        <a class="active" href="#about">من نحن</a>
-        <a href="#message">كلمة المستشارة</a>
-        <a href="#programs">البرامج</a>
-        <a href="#consultants">المستشارون</a>
-        <a href="#vision">الرؤية والرسالة</a>
-        <a href="#contact">تواصل معنا</a>
-      </nav>
-      <a class="language" href="#" aria-label="English">EN</a>
+    <!-- ================= HEADER ================= -->
+    <header class="header">
+      <div class="header-wrapper">
+        <div class="header-scoop-left"></div>
+        <nav class="header-bar" aria-label="Main">
+          <a href="index2.html" class="logo" aria-label="Impact Forge"><img src="assets/images/logo-header.png" ar-alt="إمباكتفورج القابضة | Impact Forge" en-alt="Impact Forge Holding" alt="Impact Forge" width="210" height="33" /></a>
+          <button class="menu-toggle" ar-aria-label="القائمة" en-aria-label="Menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+          <div class="nav-links" id="nav-links">
+            <a href="index2.html" class="is-active" aria-current="page"><span ar="الرئيسية" en="Home"></span></a>
+            <a href="about.html"><span ar="من نحن" en="About"></span></a>
+            <div class="nav-dropdown"><a href="programs.html" aria-haspopup="true"><span ar="البرامج" en="Programs"></span><i class="caret" aria-hidden="true">▾</i></a><div class="nav-dropdown-menu"><a href="program-nursing.html"><span ar="التمريض" en="Nursing"></span></a><a href="program-medical.html"><span ar="الطب" en="Medical"></span></a><a href="program-emergency.html"><span ar="طب الطوارئ" en="Emergency Medicine"></span></a><a href="program-business.html"><span ar="الإدارة والأعمال" en="Business &amp; Management"></span></a><a href="program-research.html"><span ar="البحث العلمي" en="Research"></span></a></div></div>
+            <a href="advisors.html"><span ar="المستشارون" en="Advisors"></span></a>
+            <!-- <a href="organizations.html"><span ar="للمؤسسات" en="For Organizations"></span></a> -->
+
+            <a href="contact.html"><span ar="تواصل معنا" en="Contact"></span></a>
+            <a class="nav-register" href="register.html"><span ar="سجّل الآن" en="Register"></span></a>
+            <button class="lang-toggle" type="button"><span ar="EN" en="عربي"></span></button>
+          </div>
+        </nav>
+        <div class="header-scoop-right"></div>
+      </div>
     </header>
 
-    <main id="home">
-      <div class="hero-shell container">
-        <section class="hero hero-folder" id="about">
+    <main id="main">
+      <!-- ================= 1) HERO ================= -->
+      <section class="hero" id="hero">
+        <svg class="hero-pixels" viewBox="0 0 377 324" aria-hidden="true"><rect x="0" y="215.43" width="215.43" height="107.71" fill="url(#pxg)"/><rect x="161.57" y="107.72" width="107.71" height="107.71" fill="url(#pxg)"/><rect x="269.29" y="215.43" width="107.71" height="107.71" fill="url(#pxg)"/><rect x="269.29" y="0" width="107.71" height="107.71" fill="url(#pxg)"/></svg>
+        <div class="hero-bg"></div>
+        <div class="hero-orb hero-orb-1"></div>
+        <div class="hero-orb hero-orb-2"></div>
+        <div class="container hero-grid">
+          <div class="hero-intro">
+            <span class="eyebrow fade-up" style="--d: 0.05"><i class="eyebrow-dot"></i><span class="eyebrow-text" ar="اصنع التغيير… واترك أثرًا في المستقبل" en="Forge the change… impact the future"></span></span>
+            <h1 class="hero-title fade-up" style="--d: 0.15" ar="نُعدّ الكفاءات <b>الصحية السعودية</b> للممارسة الواقعية" en="Preparing <b>Saudi health talent</b> for real-world practice"></h1>
+            <div class="vision-badge fade-up" style="--d: 0.3"><img src="assets/images/vision.png" ar-alt="رؤية السعودية 2030" en-alt="Saudi Vision 2030" alt="Saudi Vision 2030" width="420" height="282" /></div>
+          </div>
+          <div class="hero-visual fade-up" style="--d: 0.2">
+            <div class="hero-arch"></div><div class="hero-glow"></div>
+            <img class="hero-image" src="assets/images/hero (2).png" width="960" height="691" fetchpriority="high" ar-alt="متدربون سعوديون في بيئة تدريب عملي" en-alt="Saudi trainees in hands-on practice" alt="" />
+          </div>
+          <div class="hero-content">
+            <p class="hero-lead fade-up" style="--d: 0.3" ar="برامج تطوير متخصصة في التمريض والطب وطب الطوارئ والإدارة والبحث العلمي، تربط المعرفة بالتطبيق وتُعدّ الخريجين والممارسين لمتطلبات بيئة العمل، انسجامًا مع مستهدفات رؤية السعودية 2030." en="Specialized development programs in nursing, medicine, emergency medicine, management, and research — linking knowledge to application and preparing graduates and practitioners for workplace demands, in line with Saudi Vision 2030."></p>
+            <div class="actions fade-up" style="--d: 0.5">
+              <a class="btn" href="programs.html" ><span class="btn-text" ar="استكشف البرامج" en="Explore Programs"></span><svg class="icon btn-arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
+              <a class="btn btn-ghost" href="register.html" ><span class="btn-text" ar="سجّل اهتمامك" en="Register Your Interest"></span><svg class="icon" aria-hidden="true"><use href="#send"/></svg></a>
+            </div>
+          </div>
+        </div>
+      </section>
 
-          <!-- المحتوى (يمين) -->
-          <div class="hf-content">
-            <div class="hf-meta">
-              <span class="hf-eyebrow"><span class="hf-dot" aria-hidden="true"></span> نُمكّن مستقبل الرعاية الصحية</span>
-              <span class="hf-badge"><strong>2030</strong> متوافقون مع رؤية السعودية</span>
+      <!-- ================= 2) البرامج الخمسة ================= -->
+      <section class="programs" id="programs">
+        <!-- البرامج: كروت 3D متراصة بمنظور (سحب بالماوس / سكرول بالعجلة / سحب باللمس / الأسهم) — الحركة في site.js -->
+        <div class="container pgx">
+          <div class="pgx-info">
+          <div class="reveal">
+            <span class="kicker" ar="البرامج الخمسة" en="Our Programs"></span>
+            <h2 ar="اختر مسارك المهني" en="Choose Your Path"></h2>
+            <p class="lead" ar="اختر البرنامج المصمَّم لمهنتك؛ فكل برنامج أُعدّ بإشراف نخبة من المستشارين الأكاديميين، ويركّز على الأداء في بيئة العمل الحقيقية." en="Choose the program built for your profession. Each is designed with distinguished academic advisors and focused on real-world performance."></p>
+          </div>
+            <nav class="pgx-list" ar-aria-label="اختر برنامجًا" en-aria-label="Choose a program" aria-label="اختر برنامجًا">
+              <button class="pgx-row" type="button" style="--ac: var(--p1)" aria-pressed="true"><span class="pgx-n">01</span><span class="pgx-t" ar="التمريض" en="Nursing"></span><span class="pgx-ic"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></button>
+              <button class="pgx-row" type="button" style="--ac: var(--p2)" aria-pressed="false"><span class="pgx-n">02</span><span class="pgx-t" ar="الطب" en="Medical"></span><span class="pgx-ic"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></button>
+              <button class="pgx-row" type="button" style="--ac: var(--p3)" aria-pressed="false"><span class="pgx-n">03</span><span class="pgx-t" ar="طب الطوارئ" en="Emergency Medicine"></span><span class="pgx-ic"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></button>
+              <button class="pgx-row" type="button" style="--ac: var(--p4)" aria-pressed="false"><span class="pgx-n">04</span><span class="pgx-t" ar="الإدارة والأعمال" en="Business &amp; Management"></span><span class="pgx-ic"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></button>
+              <button class="pgx-row" type="button" style="--ac: var(--p5)" aria-pressed="false"><span class="pgx-n">05</span><span class="pgx-t" ar="البحث العلمي" en="Research"></span><span class="pgx-ic"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></button>
+            </nav>
+            <div class="pgx-actions">
+              <a class="btn" href="programs.html"><span class="btn-text" ar="عرض جميع البرامج" en="View All Programs"></span><svg class="icon btn-arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
             </div>
-            <h1>نصنع <span class="gradient-word">الأثر</span><br>ونمكّن كفاءات<br>المستقبل الصحي</h1>
-            <p class="lead">
-              إمباكت فورج محرك وطني رائد يُسهم في تحفيز الابتكار الصحي وتنمية الكوادر البشرية، وننطلق من قلب المملكة العربية السعودية.
-            </p>
-            <p class="description">
-              نحوّل أحدث الأبحاث الإنسانية إلى حلول عملية قابلة للتوسع، تعزز كفاءة الأنظمة الصحية محليًا وعالميًا.
-            </p>
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="#programs">اكتشف المزيد <span aria-hidden="true">←</span></a>
-              <a class="btn btn-outline" href="#contact">تواصل معنا</a>
+          </div>
+          <div class="pgx-visual">
+            <div class="pgx-stage" tabindex="0" role="region" aria-roledescription="carousel" ar-aria-label="البرامج: اسحب أو استخدم الأسهم للتقليب" en-aria-label="Programs: drag or use arrow keys to browse" aria-label="البرامج: اسحب أو استخدم الأسهم للتقليب">
+              <div class="pgx-clip"><div class="pgx-scene">
+                <div class="pgx-anchor">
+                  <article class="pgx-card" style="--ac: var(--p1)">
+                    <img class="pgx-img" src="assets/images/01_training.jpg" alt="" loading="lazy" draggable="false" />
+                    <span class="pgx-card-top"><span class="pgx-num">01</span><span class="pgx-icon"><svg class="icon" aria-hidden="true"><use href="#steth"/></svg></span></span>
+                    <div class="pgx-card-body"><span class="english-name" ar="Impact Nurse Enhancement Program" en=""></span><h3 ar="برنامج إمباكت لتعزيز كفاءات التمريض" en="Impact Nurse Enhancement Program"></h3>
+                      <p ar="برامج ترافق الممرضين والممرضات من الاستعداد للتوظيف حتى التقدم المهني." en="Programs that support nurses from job readiness to career advancement."></p>
+                      <a class="pgx-cta" href="program-nursing.html"><span ar="تفاصيل البرنامج" en="View Program"></span><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+                    </div>
+                    <i class="pgx-shade" aria-hidden="true"></i>
+                  </article>
+                </div>
+                <div class="pgx-anchor">
+                  <article class="pgx-card" style="--ac: var(--p2)">
+                    <img class="pgx-img" src="assets/images/02_medical_consultations.jpg" alt="" loading="lazy" draggable="false" />
+                    <span class="pgx-card-top"><span class="pgx-num">02</span><span class="pgx-icon"><svg class="icon" aria-hidden="true"><use href="#cross"/></svg></span></span>
+                    <div class="pgx-card-body"><span class="english-name" ar="Impact Medical Enhancement Program" en=""></span><h3 ar="برنامج إمباكت للتعزيز الطبي" en="Impact Medical Enhancement Program"></h3>
+                      <p ar="ثلاثة مسارات لطلاب الطب وخريجيه: الاختبارات، الأساسيات، المهارات المتخصصة." en="Three tracks for medical students and graduates: exams, core education, specialized skills."></p>
+                      <a class="pgx-cta" href="program-medical.html"><span ar="تفاصيل البرنامج" en="View Program"></span><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+                    </div>
+                    <i class="pgx-shade" aria-hidden="true"></i>
+                  </article>
+                </div>
+                <div class="pgx-anchor">
+                  <article class="pgx-card" style="--ac: var(--p3)">
+                    <img class="pgx-img" src="assets/images/medical-team-heroo.png" alt="" loading="lazy" draggable="false" />
+                    <span class="pgx-card-top"><span class="pgx-num">03</span><span class="pgx-icon"><svg class="icon" aria-hidden="true"><use href="#amb"/></svg></span></span>
+                    <div class="pgx-card-body"><span class="english-name" ar="Impact Emergency Medicine Enhancement Program" en=""></span><h3 ar="برنامج إمباكت لتعزيز كفاءات طب الطوارئ" en="Impact Emergency Medicine Enhancement Program"></h3>
+                      <p ar="تدريب قائم على المحاكاة لاتخاذ القرار في الحالات الحرجة." en="Simulation-based training for decisions in critical cases."></p>
+                      <a class="pgx-cta" href="program-emergency.html"><span ar="تفاصيل البرنامج" en="View Program"></span><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+                    </div>
+                    <i class="pgx-shade" aria-hidden="true"></i>
+                  </article>
+                </div>
+                <div class="pgx-anchor">
+                  <article class="pgx-card" style="--ac: var(--p4)">
+                    <img class="pgx-img" src="assets/images/04_global_partnerships.jpg" alt="" loading="lazy" draggable="false" />
+                    <span class="pgx-card-top"><span class="pgx-num">04</span><span class="pgx-icon"><svg class="icon" aria-hidden="true"><use href="#chart"/></svg></span></span>
+                    <div class="pgx-card-body"><span class="english-name" ar="Impact Business &amp; Management Enhancement Program" en=""></span><h3 ar="برنامج إمباكت لتعزيز المهارات الإدارية" en="Impact Business &amp; Management Enhancement Program"></h3>
+                      <p ar="دورات قصيرة وشهادات مصغّرة للإدارة الصحية والمالية والموارد البشرية والأكاديمية." en="Short courses and microcredentials in healthcare, finance, HR, and academic administration."></p>
+                      <a class="pgx-cta" href="program-business.html"><span ar="تفاصيل البرنامج" en="View Program"></span><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+                    </div>
+                    <i class="pgx-shade" aria-hidden="true"></i>
+                  </article>
+                </div>
+                <div class="pgx-anchor">
+                  <article class="pgx-card" style="--ac: var(--p5)">
+                    <img class="pgx-img" src="assets/images/03_scientific_research.jpg" alt="" loading="lazy" draggable="false" />
+                    <span class="pgx-card-top"><span class="pgx-num">05</span><span class="pgx-icon"><svg class="icon" aria-hidden="true"><use href="#flask"/></svg></span></span>
+                    <div class="pgx-card-body"><span class="english-name" ar="Impact Research Enhancement Program" en=""></span><h3 ar="برنامج إمباكت لتعزيز البحث العلمي" en="Impact Research Enhancement Program"></h3>
+                      <p ar="من الفكرة الأولى حتى نشر المقال العلمي." en="From first idea to published article."></p>
+                      <a class="pgx-cta" href="program-research.html"><span ar="تفاصيل البرنامج" en="View Program"></span><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+                    </div>
+                    <i class="pgx-shade" aria-hidden="true"></i>
+                  </article>
+                </div>
+              </div></div>
             </div>
-            <div class="hf-focus">
-              <p class="hf-focus-title">نُعدّ كفاءات وطنية مؤهلة للمستقبل في:</p>
+            <div class="pgx-foot">
+              <div class="pgx-cap"><b class="pgx-count">01 / 05</b><span ar="اسحب أو مرّر للتقليب" en="Drag or scroll to browse"></span></div>
+              <div class="pgx-ctl">
+                <button class="pgx-arrow pgx-prev" type="button" ar-aria-label="البرنامج السابق" en-aria-label="Previous program" aria-label="البرنامج السابق"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></button>
+                <button class="pgx-arrow pgx-next" type="button" ar-aria-label="البرنامج التالي" en-aria-label="Next program" aria-label="البرنامج التالي"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></button>
+              </div>
+            </div>
+            <div class="pgx-pag"><div>
+                <button class="pgx-dot" type="button" ar-aria-label="التمريض" en-aria-label="Nursing" aria-label="التمريض" aria-current="true"><i></i></button>
+                <button class="pgx-dot" type="button" ar-aria-label="الطب" en-aria-label="Medical" aria-label="الطب" aria-current="false"><i></i></button>
+                <button class="pgx-dot" type="button" ar-aria-label="طب الطوارئ" en-aria-label="Emergency Medicine" aria-label="طب الطوارئ" aria-current="false"><i></i></button>
+                <button class="pgx-dot" type="button" ar-aria-label="الإدارة والأعمال" en-aria-label="Business and Management" aria-label="الإدارة والأعمال" aria-current="false"><i></i></button>
+                <button class="pgx-dot" type="button" ar-aria-label="البحث العلمي" en-aria-label="Research" aria-label="البحث العلمي" aria-current="false"><i></i></button>
+            </div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 3) لمحة عن الشركة ================= -->
+      <!-- السكشن طويل (--steps × ارتفاع الشاشة) والمحتوى sticky جواه؛ المكعبين بيلفّوا وجه مع كل خطوة سكرول -->
+      <section class="about about-track" id="about" style="--steps: 4">
+        <div class="about-stick" data-watermark="IMPACT FORGE">
+        <div class="container about-grid">
+          <div class="about-text reveal">
+            <span class="kicker" ar="لمحة عن الشركة" en="About Snapshot"></span>
+            <h2 ar="إمباكتفورج القابضة" en="Impact Forge Holding"></h2>
+            <p ar="إمباكتفورج القابضة محرّك وطني لتحفيز الابتكار الصحي وتنمية الكوادر البشرية، ننطلق من قلب المملكة. نُعدّ كفاءات وطنية مؤهلة للمستقبل في الممارسة الطبية والإدارة الصحية والتخطيط الاستراتيجي والإدارة المالية الصحية." en="Impact Forge Holding is a Saudi-rooted catalyst for health innovation and workforce development. We cultivate future-ready national talent across medical practice, health administration, strategic management, and healthcare finance."></p>
+            <!-- ناف "لزجة": الأزرار متوصلة بجسور منحنية مرسومة SVG (بتتحسب في site.js) + توهّج بيتبع الماوس -->
+            <div class="cube-nav-wrap">
+              <div class="goo">
+                <svg aria-hidden="true" focusable="false">
+                  <defs>
+                    <radialGradient id="cube-nav-glow" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="50">
+                      <stop offset="0" stop-color="#229aab" stop-opacity="1" />
+                      <stop offset=".45" stop-color="#229aab" stop-opacity=".55" />
+                      <stop offset="1" stop-color="#229aab" stop-opacity="0" />
+                    </radialGradient>
+                  </defs>
+                  <path class="goo-base" />
+                  <path class="goo-shine" fill="url(#cube-nav-glow)" />
+                </svg>
+                <nav class="cube-nav" ar-aria-label="الرؤية والرسالة والقيم" en-aria-label="Vision, mission, and values" aria-label="الرؤية والرسالة والقيم">
+                  <button type="button" ar="الرؤية" en="Vision"></button>
+                  <button type="button" ar="الرسالة" en="Mission"></button>
+                  <button type="button" ar="القيم" en="Values"></button>
+                  <button type="button" ar="الهدف" en="Objective"></button>
+                </nav>
+              </div>
+            </div>
+            <div class="about-action"><a class="btn" href="about.html" ><span class="btn-text" ar="تعرّف علينا" en="About Us"></span><svg class="icon btn-arrow" aria-hidden="true"><use href="#arrow"/></svg></a></div>
+          </div>
+          <!-- <div class="about-cards reveal">
+            <svg class="about-shape" viewBox="0 0 1024 1024" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="abg" gradientUnits="userSpaceOnUse" x1="60" y1="960" x2="980" y2="60"><stop offset="0" stop-color="#229AAB" /><stop offset="1" stop-color="#2E4FA0" /></linearGradient></defs><path fill="url(#abg)" d="M569 56H937A45 45 0 0 1 982 101V495A45 45 0 0 1 937 540H569A45 45 0 0 0 524 585V930A45 45 0 0 1 479 975H85A45 45 0 0 1 40 930V530A45 45 0 0 1 85 485H479A45 45 0 0 0 524 440V101A45 45 0 0 1 569 56Z" /></svg>
+            <article class="about-card about-card-1" style="--i: 0">
+              <div class="about-card-image"><img src="assets/images/01_training.jpg" alt="" loading="lazy" /><span class="about-card-number">01</span></div>
+              <h3 ar="الممارسة الطبية" en="Medical Practice"></h3>
+            </article>
+            <article class="about-card about-card-2" style="--i: 1">
+              <div class="about-card-image"><img src="assets/images/02_medical_consultations.jpg" alt="" loading="lazy" /><span class="about-card-number">02</span></div>
+              <h3 ar="الإدارة الصحية" en="Health Administration"></h3>
+            </article>
+            <article class="about-card about-card-3" style="--i: 2">
+              <div class="about-card-image"><img src="assets/images/03_scientific_research.jpg" alt="" loading="lazy" /><span class="about-card-number">03</span></div>
+              <h3 ar="التخطيط الاستراتيجي" en="Strategic Planning"></h3>
+            </article>
+            <article class="about-card about-card-4" style="--i: 3">
+              <div class="about-card-image"><img src="assets/images/04_global_partnerships.jpg" alt="" loading="lazy" /><span class="about-card-number">04</span></div>
+              <h3 ar="الإدارة المالية الصحية" en="Healthcare Finance"></h3>
+            </article>
+          </div> -->
+
+          <!-- مكعبين 3D: وجوه النص (يمين) ووجوه الصور (شمال) بيلفّوا عكس بعض مع السكرول -->
+          <div class="about-cubes">
+            <div class="cube-stage" role="group" aria-roledescription="carousel" ar-aria-label="الرؤية والرسالة" en-aria-label="Vision &amp; Mission" aria-label="الرؤية والرسالة">
+              <div class="cube cube-text">
+                <div class="cube-face" style="--f: 0">
+                  <div class="cube-copy"><img class="cube-mark" src="assets/images/icon.svg" alt="" /><span class="cube-num">01</span><h3 ar="الرؤية" en="Vision"></h3><p ar="أن نكون المحفّز الرائد في المملكة العربية السعودية لتحقيق التميّز في رأس المال البشري، من خلال تمكين المهنيين والمؤسسات في القطاعات الصحية والطبية والتجارية عبر برامج تطوير قدرات متخصصة تقود الابتكار وتحقق أثرًا مستدامًا." en="To be Saudi Arabia’s leading catalyst for human capital excellence — empowering health, medical, and business professionals and organizations through specialized capacity development that drives innovation and sustainable impact."></p></div>
+                  <i class="cube-dim"></i>
+                </div>
+                <div class="cube-face" style="--f: 1">
+                  <div class="cube-copy"><img class="cube-mark" src="assets/images/icon.svg" alt="" /><span class="cube-num">02</span><h3 ar="الرسالة" en="Mission"></h3><p ar="نُزوّد خريجي ومؤسسات القطاعات الصحية والطبية والتجارية بالمعرفة المتخصصة والمهارات وحلول التطوير التي تبني كوادر بشرية مستعدة للمستقبل، وتُعزز الابتكار، وتُحدث أثرًا عميقًا ومستدامًا في المنظومتين الصحية والتجارية بالمملكة." en="We equip health, medical, and business graduates and organizations with specialized knowledge, skills, and development solutions that build future-ready talent, foster innovation, and create lasting impact across Saudi Arabia’s health and business ecosystems."></p></div>
+                  <i class="cube-dim"></i>
+                </div>
+                <div class="cube-face" style="--f: 2">
+                  <div class="cube-copy"><img class="cube-mark" src="assets/images/icon.svg" alt="" /><span class="cube-num">03</span><h3 ar="القيم" en="Values"></h3><p class="cube-values" ar="<span>التميّز</span><span>الأثر</span><span>الابتكار</span><span>التمكين</span>" en="<span>Excellence</span><span>Impact</span><span>Innovation</span><span>Empowerment</span>"></p></div>
+                  <i class="cube-dim"></i>
+                </div>
+                <div class="cube-face" style="--f: 3">
+                  <div class="cube-copy"><img class="cube-mark" src="assets/images/icon.svg" alt="" /><span class="cube-num">04</span><h3 ar="الهدف" en="Our Objective"></h3><p ar="سدّ الفجوة بين الإمكانات والكفاءة بمستويات عالمية." en="To bridge the gap between potential and world-class competence."></p></div>
+                  <i class="cube-dim"></i>
+                </div>
+              </div>
+              <div class="cube cube-image" aria-hidden="true">
+                <div class="cube-face" style="--f: 0"><img src="assets/images/01_training.jpg" alt="" loading="lazy" /><i class="cube-dim"></i></div>
+                <div class="cube-face" style="--f: 1"><img src="assets/images/02_medical_consultations.jpg" alt="" loading="lazy" /><i class="cube-dim"></i></div>
+                <div class="cube-face" style="--f: 2"><img src="assets/images/03_scientific_research.jpg" alt="" loading="lazy" /><i class="cube-dim"></i></div>
+                <div class="cube-face" style="--f: 3"><img src="assets/images/04_global_partnerships.jpg" alt="" loading="lazy" /><i class="cube-dim"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </section>
+
+      <!-- ================= 4) اقتباس المستشارة التنفيذية ================= -->
+      <section class="advisor-poster" id="quote">
+        <div class="container">
+          <!-- كلمة المستشارة: تصميم بوستر (صورة بإطار قوسي + ختم دوّار + الاقتباس) -->
+          <article class="poster">
+            <span class="poster-watermark" aria-hidden="true">IMPACT</span>
+
+            <header class="poster-top">
+              <span class="poster-brand"><img src="assets/images/logo-white.png" alt="" width="150" height="24" loading="lazy" /></span>
+              <span class="poster-label" ar="كلمة المستشارة التنفيذية" en="Executive Advisor’s Word"></span>
+              <span class="poster-issue">2030</span>
+            </header>
+
+            <div class="poster-grid">
+              <figure class="poster-photo">
+                <span class="poster-arch-line" aria-hidden="true"></span>
+                <span class="poster-arch">
+                  <img src="assets/images/princess.jpg" ar-alt="صاحبة السمو الملكي الأميرة نجود بنت هذلول بن عبدالعزيز" en-alt="HRH Princess Nujoud bint Hathloul bin Abdulaziz" alt="صاحبة السمو الملكي الأميرة نجود بنت هذلول بن عبدالعزيز" loading="lazy" />
+                </span>
+                <!-- الختم = اختصار لقراءة الكلمة كاملة (الزرار تحت هو المسار الأساسي للكيبورد وقارئ الشاشة) -->
+                <a class="poster-stamp-link" href="about.html#advisor-message" tabindex="-1" aria-hidden="true" ar-title="اقرأ الكلمة كاملة" en-title="Read the full message" title="اقرأ الكلمة كاملة">
+                <svg class="poster-stamp" viewBox="0 0 200 200" aria-hidden="true">
+                  <defs><path id="stampPath" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0" /></defs>
+                  <circle cx="100" cy="100" r="96" />
+                  <text><textPath href="#stampPath" textLength="462" lengthAdjust="spacing">IMPACT FORGE • EXECUTIVE ADVISOR • VISION 2030 •</textPath></text>
+                </svg>
+                <span class="poster-stamp-core" aria-hidden="true"><svg class="icon"><use href="#arrow"/></svg></span>
+                </a>
+                <figcaption class="poster-tag" ar="المستشارة التنفيذية" en="Executive Advisor"></figcaption>
+              </figure>
+
+              <div class="poster-copy">
+                <span class="poster-mark" aria-hidden="true">”</span>
+                <blockquote class="poster-quote scrub-text" ar="هدفنا واضح: سدّ الفجوة بين الإمكانات <b>والكفاءة بمستويات عالمية.</b>" en="Our objective is clear: to bridge the gap between potential and <b>world-class competence.</b>"></blockquote>
+                <p class="poster-excerpt reveal" ar="لا نكتفي بتقديم برامج تدريبية فحسب، بل نعمل على تمكين الكفاءات السعودية لقيادة مستقبل القطاع الصحي والطبي، انطلاقًا من «رؤية المملكة 2030» التي جعلت الإنسان محورها." en="We go beyond offering training programs; we empower Saudi talent to lead the future of the health and medical sectors — guided by Saudi Vision 2030, a vision centered on people."></p>
+                <div class="poster-sign reveal">
+                  <span class="poster-sign-line" aria-hidden="true"></span>
+                  <div>
+                    <b ar="صاحبة السمو الملكي الأميرة نجود بنت هذلول بن عبدالعزيز" en="HRH Princess Nujoud bint Hathloul bin Abdulaziz"></b>
+                    <small ar="المستشارة التنفيذية — إمباكتفورج القابضة" en="Executive Advisor — Impact Forge Holding"></small>
+                  </div>
+                </div>
+                <div class="poster-actions reveal">
+                  <a class="btn" href="about.html#advisor-message"><span class="btn-text" ar="اقرأ الكلمة كاملة" en="Read the Full Message"></span><svg class="icon btn-arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
+                </div>
+              </div>
+            </div>
+
+            <footer class="poster-foot">
+              <span ar="التميّز" en="Excellence"></span><i aria-hidden="true"></i>
+              <span ar="التمكين" en="Empowerment"></span><i aria-hidden="true"></i>
+              <span ar="الأثر" en="Impact"></span>
+              <span class="poster-foot-end" ar="رؤية المملكة 2030" en="Saudi Vision 2030"></span>
+            </footer>
+          </article>
+        </div>
+      </section>
+
+      <!-- ================= 5) لماذا إمباكتفورج؟ ================= -->
+      <section class="why" id="why">
+        <!-- لماذا إمباكتفورج: كروت متعلّقة بدبابيس تحت كشّاف — بتتمرجح، تتسحب بالماوس، والضوء بيتبع الكارت (site.js) -->
+        <div class="container">
+          <div class="whyx-head reveal">
+            <span class="kicker" ar="لماذا إمباكتفورج؟" en="Why Impact Forge?"></span>
+            <h2 ar="خمسة أسباب تجعلنا شريكك في التطوير" en="Five reasons to grow with us"></h2>
+            <p class="lead" ar="نجمع بين المعرفة العلمية وواقع الممارسة لنقدّم برامج تطبيقية تُعدّ الكفاءات الصحية للعمل الحقيقي." en="We combine scientific knowledge with real practice to deliver applied programs that prepare health talent for real work."></p>
+          </div>
+          <div class="whyx">
+            <div class="whyx-light" aria-hidden="true"><i class="whyx-beam"></i><i class="whyx-lamp"></i><i class="whyx-pool"></i></div>
+            <ol class="whyx-cards">
+              <li class="whyx-card" style="--i: 0; --y: 24px; --px: 62%; --a: -6deg; --ac: var(--p1)">
+                <span class="whyx-shadow" aria-hidden="true"></span>
+                <div class="whyx-face">
+                  <span class="whyx-icon"><svg class="icon" aria-hidden="true"><use href="#steth"/></svg></span>
+                  <p ar="دراسات حالة ومحاكاة وجولات سريرية تحاكي بيئة العمل الفعلية." en="Case studies, simulation, and clinical rounds that mirror real work."></p>
+                  <div class="whyx-row"><span class="whyx-num">01</span><h3 ar="تعلّم تطبيقي" en="Applied learning"></h3></div>
+                </div>
+                <svg class="whyx-pin" viewBox="0 0 40 46" aria-hidden="true"><defs><radialGradient id="whyPin0" cx="34%" cy="28%" r="72%"><stop offset="0" stop-color="#fff" stop-opacity=".95" /><stop offset=".34" stop-color="#a6e3ea" /><stop offset=".7" stop-color="#229aab" /><stop offset="1" stop-color="#1f3a7a" /></radialGradient></defs><ellipse cx="21" cy="40" rx="12" ry="4" fill="#0b1c4a" opacity=".35" /><path d="M20 26L21.6 41" stroke="#1f3a7a" stroke-width="2.4" stroke-linecap="round" /><circle cx="19" cy="18" r="13" fill="url(#whyPin0)" /><ellipse cx="14.5" cy="12.5" rx="4.6" ry="3.2" fill="#fff" opacity=".75" /><circle cx="19" cy="18" r="13" fill="none" stroke="#0b1c4a" stroke-opacity=".25" /></svg>
+              </li>
+              <li class="whyx-card" style="--i: 1; --y: 92px; --px: 44%; --a: 4deg; --ac: var(--p2)">
+                <span class="whyx-shadow" aria-hidden="true"></span>
+                <div class="whyx-face">
+                  <span class="whyx-icon"><svg class="icon" aria-hidden="true"><use href="#layers"/></svg></span>
+                  <p ar="خمسة برامج تراعي احتياج كل فئة مهنية ومرحلتها." en="Five programs built for each profession and career stage."></p>
+                  <div class="whyx-row"><span class="whyx-num">02</span><h3 ar="مسارات حسب التخصص" en="Specialty pathways"></h3></div>
+                </div>
+                <svg class="whyx-pin" viewBox="0 0 40 46" aria-hidden="true"><defs><radialGradient id="whyPin1" cx="34%" cy="28%" r="72%"><stop offset="0" stop-color="#fff" stop-opacity=".95" /><stop offset=".34" stop-color="#a6e3ea" /><stop offset=".7" stop-color="#229aab" /><stop offset="1" stop-color="#1f3a7a" /></radialGradient></defs><ellipse cx="21" cy="40" rx="12" ry="4" fill="#0b1c4a" opacity=".35" /><path d="M20 26L21.6 41" stroke="#1f3a7a" stroke-width="2.4" stroke-linecap="round" /><circle cx="19" cy="18" r="13" fill="url(#whyPin1)" /><ellipse cx="14.5" cy="12.5" rx="4.6" ry="3.2" fill="#fff" opacity=".75" /><circle cx="19" cy="18" r="13" fill="none" stroke="#0b1c4a" stroke-opacity=".25" /></svg>
+              </li>
+              <li class="whyx-card" style="--i: 2; --y: 124px; --px: 52%; --a: -3deg; --ac: var(--p3)">
+                <span class="whyx-shadow" aria-hidden="true"></span>
+                <div class="whyx-face">
+                  <span class="whyx-icon"><svg class="icon" aria-hidden="true"><use href="#search"/></svg></span>
+                  <p ar="نبدأ بتحليل فجوات الأداء قبل بناء أي برنامج." en="We analyze performance gaps before building any program."></p>
+                  <div class="whyx-row"><span class="whyx-num">03</span><h3 ar="تصميم حسب الاحتياج" en="Needs-based design"></h3></div>
+                </div>
+                <svg class="whyx-pin" viewBox="0 0 40 46" aria-hidden="true"><defs><radialGradient id="whyPin2" cx="34%" cy="28%" r="72%"><stop offset="0" stop-color="#fff" stop-opacity=".95" /><stop offset=".34" stop-color="#a6e3ea" /><stop offset=".7" stop-color="#229aab" /><stop offset="1" stop-color="#1f3a7a" /></radialGradient></defs><ellipse cx="21" cy="40" rx="12" ry="4" fill="#0b1c4a" opacity=".35" /><path d="M20 26L21.6 41" stroke="#1f3a7a" stroke-width="2.4" stroke-linecap="round" /><circle cx="19" cy="18" r="13" fill="url(#whyPin2)" /><ellipse cx="14.5" cy="12.5" rx="4.6" ry="3.2" fill="#fff" opacity=".75" /><circle cx="19" cy="18" r="13" fill="none" stroke="#0b1c4a" stroke-opacity=".25" /></svg>
+              </li>
+              <li class="whyx-card" style="--i: 3; --y: 92px; --px: 38%; --a: 3deg; --ac: var(--p4)">
+                <span class="whyx-shadow" aria-hidden="true"></span>
+                <div class="whyx-face">
+                  <span class="whyx-icon"><svg class="icon" aria-hidden="true"><use href="#users"/></svg></span>
+                  <p ar="أكاديميون وممارسون يجمعون المعرفة العلمية بواقع الممارسة." en="Academics and practitioners who combine science with practice."></p>
+                  <div class="whyx-row"><span class="whyx-num">04</span><h3 ar="نخبة من المستشارين" en="Expert advisors"></h3></div>
+                </div>
+                <svg class="whyx-pin" viewBox="0 0 40 46" aria-hidden="true"><defs><radialGradient id="whyPin3" cx="34%" cy="28%" r="72%"><stop offset="0" stop-color="#fff" stop-opacity=".95" /><stop offset=".34" stop-color="#a6e3ea" /><stop offset=".7" stop-color="#229aab" /><stop offset="1" stop-color="#1f3a7a" /></radialGradient></defs><ellipse cx="21" cy="40" rx="12" ry="4" fill="#0b1c4a" opacity=".35" /><path d="M20 26L21.6 41" stroke="#1f3a7a" stroke-width="2.4" stroke-linecap="round" /><circle cx="19" cy="18" r="13" fill="url(#whyPin3)" /><ellipse cx="14.5" cy="12.5" rx="4.6" ry="3.2" fill="#fff" opacity=".75" /><circle cx="19" cy="18" r="13" fill="none" stroke="#0b1c4a" stroke-opacity=".25" /></svg>
+              </li>
+              <li class="whyx-card" style="--i: 4; --y: 24px; --px: 70%; --a: -4deg; --ac: var(--p5)">
+                <span class="whyx-shadow" aria-hidden="true"></span>
+                <div class="whyx-face">
+                  <span class="whyx-icon"><svg class="icon" aria-hidden="true"><use href="#target"/></svg></span>
+                  <p ar="برامج تخدم تمكين الكفاءات الوطنية وسلامة المرضى وجودة الخدمات." en="Programs that serve national talent, patient safety, and service quality."></p>
+                  <div class="whyx-row"><span class="whyx-num">05</span><h3 ar="متوافقة مع رؤية 2030" en="Vision 2030 aligned"></h3></div>
+                </div>
+                <svg class="whyx-pin" viewBox="0 0 40 46" aria-hidden="true"><defs><radialGradient id="whyPin4" cx="34%" cy="28%" r="72%"><stop offset="0" stop-color="#fff" stop-opacity=".95" /><stop offset=".34" stop-color="#a6e3ea" /><stop offset=".7" stop-color="#229aab" /><stop offset="1" stop-color="#1f3a7a" /></radialGradient></defs><ellipse cx="21" cy="40" rx="12" ry="4" fill="#0b1c4a" opacity=".35" /><path d="M20 26L21.6 41" stroke="#1f3a7a" stroke-width="2.4" stroke-linecap="round" /><circle cx="19" cy="18" r="13" fill="url(#whyPin4)" /><ellipse cx="14.5" cy="12.5" rx="4.6" ry="3.2" fill="#fff" opacity=".75" /><circle cx="19" cy="18" r="13" fill="none" stroke="#0b1c4a" stroke-opacity=".25" /></svg>
+              </li>
+            </ol>
+          </div>
+          <div class="whyx-foot reveal">
+            <p ar="كل ميزة مصمَّمة لتحقق <b>أثرًا ملموسًا</b> في الأداء وسلامة المرضى وجودة الخدمات." en="Every feature is designed for <b>measurable impact</b> on performance, patient safety, and service quality."></p>
+            <a class="btn" href="programs.html"><span class="btn-text" ar="استكشف البرامج" en="Explore the Programs"></span><svg class="icon btn-arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 6) رحلة المتدرب ================= -->
+      <section class="journey" id="journey">
+        <div class="container">
+          <div class="journey-head reveal">
+            <span class="kicker" ar="رحلة المتدرب" en="Learning Journey"></span>
+            <h2 ar="من الاختيار إلى الشهادة" en="From choosing to certified"></h2>
+            <p class="lead" ar="خمس محطات واضحة ترافقك فيها خطوة بخطوة، من اختيار البرنامج حتى استيفاء متطلبات الشهادة." en="Five clear stages, with you every step of the way — from choosing a program to completing your certificate."></p>
+          </div>
+          <!-- المسار المتقطّع بيترسم بالـ JS بين الأرقام، والخط الملوّن بيتملى مع السكرول -->
+          <div class="jr">
+            <svg class="jr-svg" aria-hidden="true">
+              <defs><linearGradient id="jrGrad" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#2e4fa0" /><stop offset=".55" stop-color="#2787a9" /><stop offset="1" stop-color="#229aab" /></linearGradient></defs>
+              <path class="jr-track" />
+              <path class="jr-line" />
+              <circle class="jr-dot" r="7" />
+            </svg>
+            <ol class="jr-steps">
+            <li class="jr-step" style="--ac: var(--p1)">
+              <figure class="jr-fig"><img src="assets/images/04_global_partnerships.jpg" alt="" loading="lazy" /></figure>
+              <span class="jr-badge" aria-hidden="true">01</span>
+              <div class="jr-text"><h3 ar="اختر برنامجك" en="Choose your program"></h3><p ar="تصفّح البرامج الخمسة واختر المسار الأنسب لتخصصك وطموحك المهني." en="Browse the five programs and pick the track that fits your specialty and goals."></p></div>
+            </li>
+            <li class="jr-step" style="--ac: var(--p2)">
+              <figure class="jr-fig"><img src="assets/images/02_medical_consultations.jpg" alt="" loading="lazy" /></figure>
+              <span class="jr-badge" aria-hidden="true">02</span>
+              <div class="jr-text"><h3 ar="سجّل اهتمامك وتواصل معك فريقنا" en="Register and hear from our team"></h3><p ar="سجّل بياناتك في دقائق، وسيتواصل معك فريقنا بالمواعيد وتفاصيل التسجيل." en="Sign up in minutes and our team will reach out with schedules and details."></p></div>
+            </li>
+            <li class="jr-step" style="--ac: var(--p3)">
+              <figure class="jr-fig"><img src="assets/images/01_training.jpg" alt="" loading="lazy" /></figure>
+              <span class="jr-badge" aria-hidden="true">03</span>
+              <div class="jr-text"><h3 ar="تدرّب بالتطبيق مع مستشارين متخصصين" en="Train hands-on with expert advisors"></h3><p ar="تدريب عملي في بيئة تحاكي الواقع، بإشراف مستشارين أكاديميين وممارسين." en="Practical training in realistic settings, guided by academic and practicing advisors."></p></div>
+            </li>
+            <li class="jr-step" style="--ac: var(--p4)">
+              <figure class="jr-fig"><img src="assets/images/03_scientific_research.jpg" alt="" loading="lazy" /></figure>
+              <span class="jr-badge" aria-hidden="true">04</span>
+              <div class="jr-text"><h3 ar="تقييم يقيس تقدمك" en="Assessment that measures progress"></h3><p ar="تقييمات دورية واضحة تقيس مهاراتك وتوضّح لك ما تحتاج تطويره." en="Clear, regular assessments that measure your skills and show what to improve."></p></div>
+            </li>
+            <li class="jr-step" style="--ac: var(--p5)">
+              <figure class="jr-fig"><img src="assets/images/medical-team-heroo.png" alt="" loading="lazy" /></figure>
+              <span class="jr-badge" aria-hidden="true">05</span>
+              <div class="jr-text"><h3 ar="استوفِ متطلبات الشهادة" en="Complete certificate requirements"></h3><p ar="أكمل المتطلبات واحصل على شهادتك، جاهزًا للممارسة الواقعية بثقة." en="Complete the requirements and earn your certificate, ready for real practice."></p></div>
+            </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 7) المستشارون (يُخفى حتى يُنشر أول مستشار) ================= -->
+      <section class="advisors-teaser" id="advisors" hidden>
+        <div class="container advisors-teaser-grid">
+          <div class="advisors-teaser-text reveal">
+            <span class="kicker" ar="المستشارون" en="Advisors"></span>
+            <h2 ar="المستشارون" en="Advisors"></h2>
+            <p ar="خلف كل برنامج مستشارون أكاديميون وممارسون يجمعون بين عمق المعرفة العلمية وواقع الممارسة اليومية. يشاركون في تصميم المحتوى وتقديمه وإرشاد المتدربين، ليبقى التعلّم مرتبطًا بما يحدث فعلًا في المستشفى والمختبر وبيئة العمل." en="Behind every program are academic advisors and practitioners who combine scientific depth with daily practice. They help design and deliver content and mentor trainees, so learning stays tied to what actually happens in the hospital, the lab, and the workplace."></p>
+            <a class="link-more" href="advisors.html"><span ar="تعرّف على المستشارين" en="Meet Our Advisors"></span> <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+          </div>
+          <div class="orbit"><div class="orbit-ring">
+<a class="orbit-item" href="program-nursing.html" ar-title="التمريض" en-title="Nursing" style="--c: var(--p1); --cx: 0.000; --cy: -1.000"><svg class="icon" aria-hidden="true"><use href="#steth"/></svg></a><a class="orbit-item" href="program-medical.html" ar-title="الطب" en-title="Medical" style="--c: var(--p2); --cx: 0.951; --cy: -0.309"><svg class="icon" aria-hidden="true"><use href="#cross"/></svg></a><a class="orbit-item" href="program-emergency.html" ar-title="طب الطوارئ" en-title="Emergency Medicine" style="--c: var(--p3); --cx: 0.588; --cy: 0.809"><svg class="icon" aria-hidden="true"><use href="#amb"/></svg></a><a class="orbit-item" href="program-business.html" ar-title="الإدارة والأعمال" en-title="Business &amp; Management" style="--c: var(--p4); --cx: -0.588; --cy: 0.809"><svg class="icon" aria-hidden="true"><use href="#chart"/></svg></a><a class="orbit-item" href="program-research.html" ar-title="البحث العلمي" en-title="Research" style="--c: var(--p5); --cx: -0.951; --cy: -0.309"><svg class="icon" aria-hidden="true"><use href="#flask"/></svg></a>
+          </div><span class="orbit-center"><svg class="icon" aria-hidden="true"><use href="#cap"/></svg></span></div>
+        </div>
+      </section>
+
+      <section class="cta" id="cta">
+        <div class="container">
+          <!-- CTA: لوحة 3D عائمة بهوية الموقع + اختصار مباشر لكل برنامج -->
+          <div class="cta-panel">
+            <svg class="cta-pixels" viewBox="0 0 377 324" aria-hidden="true"><rect x="0" y="0" width="215.43" height="107.71" fill="url(#pxg)" /><rect x="161.57" y="107.72" width="107.71" height="107.71" fill="url(#pxg)" /><rect x="269.29" y="0" width="107.71" height="107.71" fill="url(#pxg)" /><rect x="269.29" y="215.43" width="107.71" height="107.71" fill="url(#pxg)" /></svg>
+            <span class="cta-mark" aria-hidden="true">IF</span>
+            <div class="cta-copy">
+              <span class="kicker" ar="خطوتك التالية" en="Your next step"></span>
+              <h2 ar="ابدأ الخطوة التالية في مسيرتك المهنية" en="Take the next step in your career"></h2>
+              <p ar="اختر البرنامج المناسب لتخصصك، وسيتواصل معك فريقنا بتفاصيل المواعيد والتسجيل." en="Choose the program that fits your specialty, and our team will contact you with schedules and registration details."></p>
+              <div class="actions"><a class="btn" href="programs.html" ><span class="btn-text" ar="استكشف البرامج" en="Explore Programs"></span><svg class="icon btn-arrow" aria-hidden="true"><use href="#arrow"/></svg></a><a class="btn btn-ghost" href="organizations.html" ><span class="btn-text" ar="حلول للمؤسسات" en="Solutions for Organizations"></span><svg class="icon" aria-hidden="true"><use href="#send"/></svg></a></div>
+            </div>
+            <nav class="cta-progs" ar-aria-label="ابدأ من برنامجك" en-aria-label="Start from your program" aria-label="ابدأ من برنامجك">
+              <span class="cta-progs-label" ar="أو ابدأ مباشرة من برنامجك" en="Or start right from your program"></span>
               <ul>
-                <li>الممارسة الطبية</li>
-                <li>الإدارة الصحية</li>
-                <li>التخطيط الاستراتيجي</li>
-                <li>الإدارة المالية الصحية</li>
+                <li><a class="cta-prog" href="program-nursing.html" style="--ac: var(--p1)"><span class="cta-prog-icon"><svg class="icon" aria-hidden="true"><use href="#steth"/></svg></span><span class="cta-prog-name" ar="التمريض" en="Nursing"></span><span class="cta-prog-num">01</span><span class="cta-prog-go"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
+                <li><a class="cta-prog" href="program-medical.html" style="--ac: var(--p2)"><span class="cta-prog-icon"><svg class="icon" aria-hidden="true"><use href="#cross"/></svg></span><span class="cta-prog-name" ar="الطب" en="Medical"></span><span class="cta-prog-num">02</span><span class="cta-prog-go"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
+                <li><a class="cta-prog" href="program-emergency.html" style="--ac: var(--p3)"><span class="cta-prog-icon"><svg class="icon" aria-hidden="true"><use href="#amb"/></svg></span><span class="cta-prog-name" ar="طب الطوارئ" en="Emergency Medicine"></span><span class="cta-prog-num">03</span><span class="cta-prog-go"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
+                <li><a class="cta-prog" href="program-business.html" style="--ac: var(--p4)"><span class="cta-prog-icon"><svg class="icon" aria-hidden="true"><use href="#chart"/></svg></span><span class="cta-prog-name" ar="الإدارة والأعمال" en="Business &amp; Management"></span><span class="cta-prog-num">04</span><span class="cta-prog-go"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
+                <li><a class="cta-prog" href="program-research.html" style="--ac: var(--p5)"><span class="cta-prog-icon"><svg class="icon" aria-hidden="true"><use href="#flask"/></svg></span><span class="cta-prog-name" ar="البحث العلمي" en="Research"></span><span class="cta-prog-num">05</span><span class="cta-prog-go"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
               </ul>
-            </div>
+            </nav>
           </div>
-
-          <!-- الصورة + العناصر العايمة (شمال) -->
-          <div class="hf-visual">
-            <img class="hf-image" src="assets/medical-team-hero.png" alt="فريق طبي يعمل على تطوير مستقبل الرعاية الصحية في المملكة" />
-
-            <div class="hf-float hf-float-1"><span class="mini-icon" aria-hidden="true">✧</span><span>الابتكار الصحي</span></div>
-            <div class="hf-float hf-float-2"><span class="mini-icon" aria-hidden="true">♧</span><span>تنمية الكوادر البشرية</span></div>
-            <div class="hf-float hf-float-3"><span class="mini-icon" aria-hidden="true">↗</span><span>شراكات استراتيجية</span></div>
-
-            <div class="hf-caption"><span class="caption-line" aria-hidden="true"></span><span>نحو منظومة صحية أكثر ابتكارًا واستدامة</span></div>
-          </div>
-
-        </section>
-      </div>
-
-      <section class="impact-strip container" id="vision" aria-label="مجالات الأثر">
-        <article class="impact-item"><span class="impact-icon">♡</span><div><strong>ابتكار صحي مستدام</strong><small>حلول تصنع فرقًا</small></div></article>
-        <article class="impact-item"><span class="impact-icon">♧</span><div><strong>كفاءات وطنية</strong><small>نُعدّ قادة المستقبل</small></div></article>
-        <article class="impact-item"><span class="impact-icon">◇</span><div><strong>شراكات عالمية</strong><small>خبرات تتجاوز الحدود</small></div></article>
-        <article class="impact-item"><span class="impact-icon">✧</span><div><strong>أثر مستدام</strong><small>متوافق مع رؤية 2030</small></div></article>
+        </div>
       </section>
     </main>
 
-    <footer class="footer container" id="contact">
-      <span>ImpactForge</span>
-      <span>نصنع الأثر ونمكّن المستقبل الصحي</span>
-      <a href="mailto:info@impactforge.sa">تواصل معنا ↗</a>
-    </footer>
-  </div>
-  <script>
-    const toggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('.nav');
-    toggle.addEventListener('click', () => {
-      const isOpen = nav.classList.toggle('is-open');
-      toggle.setAttribute('aria-expanded', String(isOpen));
-    });
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
 
-    /* شكل الفولدر بمقاسات ثابتة (الزوايا والتاب مايتمطّوش مع عرض الشاشة) */
-    const hero = document.querySelector('.hero-folder');
-    function drawFolder() {
-      const W = hero.offsetWidth, H = hero.offsetHeight;
-      const th = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--tab-h')) || 88;
-      const r = Math.min(40, W / 10);
-      const c = Math.min(70, W * 0.06);
-      const tw = W > 900 ? W * 0.47 : Math.min(W - 2 * r - 2 * c, Math.max(W * 0.62, 240));
-      const xb = W - tw, xa = xb - 2 * c;
-      hero.style.setProperty('--tab-w', tw + 'px');
-      const d = [
-        `M ${r} ${th}`, `H ${xa}`,
-        `C ${xa + c * 1.1} ${th} ${xb - c * 1.1} 0 ${xb} 0`,
-        `H ${W - r}`, `A ${r} ${r} 0 0 1 ${W} ${r}`,
-        `V ${H - r}`, `A ${r} ${r} 0 0 1 ${W - r} ${H}`,
-        `H ${r}`, `A ${r} ${r} 0 0 1 0 ${H - r}`,
-        `V ${th + r}`, `A ${r} ${r} 0 0 1 ${r} ${th}`, 'Z'
-      ].join(' ');
-      hero.style.clipPath = `path('${d}')`;
-      hero.parentElement.style.setProperty('--r', r + 'px');
-    }
-    drawFolder();
-    new ResizeObserver(drawFolder).observe(hero);
-  </script>
-</body>
+      <div class="container footer-grid">
+        <div>
+          <a class="logo" href="index2.html"><img class="logo-img" src="assets/images/logo-header.png" ar-alt="إمباكتفورج القابضة" en-alt="Impact Forge Holding" alt="إمباكتفورج القابضة" width="230" height="37" loading="lazy" /></a>
+          <p ar="إمباكتفورج القابضة — نُعدّ كفاءات وطنية مؤهلة للمستقبل في القطاعين الصحي والتجاري." en="Impact Forge Holding — building future-ready national talent across health and business."></p>
+        </div>
+        <div>
+          <h4 ar="البرامج" en="Programs"></h4>
+          <ul><li><a href="program-nursing.html"><span ar="التمريض" en="Nursing"></span></a></li><li><a href="program-medical.html"><span ar="الطب" en="Medical"></span></a></li><li><a href="program-emergency.html"><span ar="طب الطوارئ" en="Emergency Medicine"></span></a></li><li><a href="program-business.html"><span ar="الإدارة والأعمال" en="Business &amp; Management"></span></a></li><li><a href="program-research.html"><span ar="البحث العلمي" en="Research"></span></a></li></ul>
+        </div>
+        <div>
+          <ul><li><a href="about.html"><span ar="من نحن" en="About"></span></a></li><li><a href="advisors.html"><span ar="المستشارون" en="Advisors"></span></a></li><li><a href="organizations.html"><span ar="للمؤسسات" en="For Organizations"></span></a></li><li><a href="faq.html"><span ar="الأسئلة الشائعة" en="FAQ"></span></a></li></ul>
+        </div>
+        <div>
+          <h4 ar="تواصل معنا" en="Contact"></h4>
+          <ul><li><a href="contact.html"><span ar="تواصل معنا" en="Contact"></span></a></li><li><a href="privacy.html"><span ar="الخصوصية" en="Privacy Policy"></span></a></li><li><a href="terms.html"><span ar="الشروط" en="Terms &amp; Conditions"></span></a></li><li><a href="refund.html"><span ar="الاسترداد" en="Refund &amp; Cancellation Policy"></span></a></li></ul>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span ar="© 2026 إمباكتفورج القابضة. جميع الحقوق محفوظة." en="© 2026 Impact Forge Holding. All rights reserved."></span>
+      </div>
+    </footer>
+    <button class="back-to-top" ar-aria-label="العودة للأعلى" en-aria-label="Back to top"><svg class="icon" aria-hidden="true"><use href="#up"/></svg></button>
+    <script src="assets/js/site.js"></script>
+  </body>
 </html>
