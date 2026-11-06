@@ -186,16 +186,64 @@
         </div>
       </section>
 
-      <section class="message section-dark" id="advisor-message">
+      <section class="advisor-poster advisor-poster--full" id="advisor-message">
         <div class="container">
-          <span class="kicker reveal" ar="كلمة المستشارة التنفيذية" en="Executive Advisor Message"></span>
-          <div class="message-grid reveal" style="margin-top: 24px">
-            <div class="message-photo"><img src="assets/images/princess.jpg" alt="" onerror="this.closest('.message-photo').remove()" /></div>
-            <div>
-              <blockquote><p ar="بصفتي مستشارةً تنفيذيةً لشركة إمباكتفورج القابضة، حيث نضع الإنسان في صميم اهتمامنا، ألمس فعليًا كيف تنبثق رسالتنا وقيمنا وأهدافنا مباشرةً من «رؤية المملكة 2030» التي جعلت الإنسان محورها. فنحن لا نكتفي بتقديم برامج تدريبية فحسب، بل نعمل على تمكين الكفاءات السعودية لقيادة مستقبل القطاع الصحي والطبي." en="As Executive Advisor at Impact Forge Holding — where we place people at the very heart of our focus — I witness firsthand how our mission, values, and objectives stem directly from Saudi Vision 2030, a vision centered on the human element. We go beyond offering training programs; we empower Saudi talent to lead the future of the health and medical sectors."></p><p ar="ولأن تعزيز سلامة المرضى والارتقاء بجودة الخدمات ركيزتان أساسيتان في الرؤية، فإننا نمدّ جسور التعاون أيضًا مع المتخصصين في الرعاية الصحية على المستويين المحلي والدولي. هدفنا واضح: سدّ الفجوة بين الإمكانات والكفاءة بمستويات عالمية." en="Because enhancing patient safety and elevating service quality are fundamental pillars of Vision 2030, we also build bridges of collaboration with healthcare professionals locally and internationally. Our objective is clear: to bridge the gap between potential and world-class competence."></p><p ar="وانطلاقًا من قيم التميّز والتمكين والأثر، نستثمر في برامج تعليمية عملية تُعدّ الكوادر الصحية لمواجهة التحديات السريرية الواقعية. ومن خلال بناء قيادات سعودية متمكّنة وكوادر عاملة عالية المهارة، نسهم اليوم في بناء مجتمع أكثر صحةً للمستقبل." en="Guided by our values of excellence, empowerment, and impact, we invest in practical, hands-on educational programs that prepare healthcare professionals for real-world clinical challenges. By cultivating capable Saudi leaders alongside a highly skilled workforce, we are contributing today to a healthier community for the future."></p></blockquote>
-              <div class="message-author"><b ar="صاحبة السمو الملكي الأميرة نجود بنت هذلول بن عبدالعزيز" en="HRH Princess Nujoud bint Hathloul bin Abdulaziz"></b><small ar="المستشارة التنفيذية" en="Executive Advisor"></small></div>
+          <!-- كلمة المستشارة كاملة: نفس تصميم البوستر في الرئيسية، والصورة بتثبت جنب النص وهو بيتقري -->
+          <article class="poster">
+            <span class="poster-watermark" aria-hidden="true">IMPACT</span>
+
+            <header class="poster-top">
+              <span class="poster-brand"><img src="assets/images/logo-white.png" alt="" width="150" height="24" loading="lazy" /></span>
+              <span class="poster-label" ar="كلمة المستشارة التنفيذية" en="Executive Advisor’s Word"></span>
+              <span class="poster-issue">2030</span>
+            </header>
+
+            <div class="poster-grid">
+              <figure class="poster-photo">
+                <span class="poster-arch-line" aria-hidden="true"></span>
+                <span class="poster-arch">
+                  <img src="assets/images/princess.jpg" ar-alt="صاحبة السمو الملكي الأميرة نجود بنت هذلول بن عبدالعزيز" en-alt="HRH Princess Nujoud bint Hathloul bin Abdulaziz" alt="صاحبة السمو الملكي الأميرة نجود بنت هذلول بن عبدالعزيز" loading="lazy" />
+                </span>
+                <!-- الختم = اختصار للخطوة الجاية (البرامج)؛ الزرار تحت هو المسار الأساسي للكيبورد وقارئ الشاشة -->
+                <a class="poster-stamp-link" href="programs.html" tabindex="-1" aria-hidden="true" ar-title="استكشف البرامج" en-title="Explore the programs" title="استكشف البرامج">
+                <svg class="poster-stamp" viewBox="0 0 200 200" aria-hidden="true">
+                  <defs><path id="stampPath" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0" /></defs>
+                  <circle cx="100" cy="100" r="96" />
+                  <text><textPath href="#stampPath" textLength="462" lengthAdjust="spacing">IMPACT FORGE • EXECUTIVE ADVISOR • VISION 2030 •</textPath></text>
+                </svg>
+                <span class="poster-stamp-core" aria-hidden="true"><svg class="icon"><use href="#arrow"/></svg></span>
+                </a>
+                <figcaption class="poster-tag" ar="المستشارة التنفيذية" en="Executive Advisor"></figcaption>
+              </figure>
+
+              <div class="poster-copy">
+                <span class="poster-mark" aria-hidden="true">”</span>
+                <h2 class="poster-quote scrub-text" ar="هدفنا واضح: سدّ الفجوة بين الإمكانات <b>والكفاءة بمستويات عالمية.</b>" en="Our objective is clear: to bridge the gap between potential and <b>world-class competence.</b>"></h2>
+                <div class="poster-body reveal">
+                  <p class="poster-lead" ar="بصفتي مستشارةً تنفيذيةً لشركة إمباكتفورج القابضة، حيث نضع الإنسان في صميم اهتمامنا، ألمس فعليًا كيف تنبثق رسالتنا وقيمنا وأهدافنا مباشرةً من «رؤية المملكة 2030» التي جعلت الإنسان محورها. فنحن لا نكتفي بتقديم برامج تدريبية فحسب، بل نعمل على تمكين الكفاءات السعودية لقيادة مستقبل القطاع الصحي والطبي." en="As Executive Advisor at Impact Forge Holding — where we place people at the very heart of our focus — I witness firsthand how our mission, values, and objectives stem directly from Saudi Vision 2030, a vision centered on the human element. We go beyond offering training programs; we empower Saudi talent to lead the future of the health and medical sectors."></p>
+                  <p ar="ولأن تعزيز سلامة المرضى والارتقاء بجودة الخدمات ركيزتان أساسيتان في الرؤية، فإننا نمدّ جسور التعاون أيضًا مع المتخصصين في الرعاية الصحية على المستويين المحلي والدولي. هدفنا واضح: سدّ الفجوة بين الإمكانات والكفاءة بمستويات عالمية." en="Because enhancing patient safety and elevating service quality are fundamental pillars of Vision 2030, we also build bridges of collaboration with healthcare professionals locally and internationally. Our objective is clear: to bridge the gap between potential and world-class competence."></p>
+                  <p ar="وانطلاقًا من قيم التميّز والتمكين والأثر، نستثمر في برامج تعليمية عملية تُعدّ الكوادر الصحية لمواجهة التحديات السريرية الواقعية. ومن خلال بناء قيادات سعودية متمكّنة وكوادر عاملة عالية المهارة، نسهم اليوم في بناء مجتمع أكثر صحةً للمستقبل." en="Guided by our values of excellence, empowerment, and impact, we invest in practical, hands-on educational programs that prepare healthcare professionals for real-world clinical challenges. By cultivating capable Saudi leaders alongside a highly skilled workforce, we are contributing today to a healthier community for the future."></p>
+                </div>
+                <div class="poster-sign reveal">
+                  <span class="poster-sign-line" aria-hidden="true"></span>
+                  <div>
+                    <b ar="صاحبة السمو الملكي الأميرة نجود بنت هذلول بن عبدالعزيز" en="HRH Princess Nujoud bint Hathloul bin Abdulaziz"></b>
+                    <small ar="المستشارة التنفيذية — إمباكتفورج القابضة" en="Executive Advisor — Impact Forge Holding"></small>
+                  </div>
+                </div>
+                <div class="poster-actions reveal">
+                  <a class="btn" href="programs.html"><span class="btn-text" ar="استكشف البرامج" en="Explore the Programs"></span><svg class="icon btn-arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
+                </div>
+              </div>
             </div>
-          </div>
+
+            <footer class="poster-foot">
+              <span ar="التميّز" en="Excellence"></span><i aria-hidden="true"></i>
+              <span ar="التمكين" en="Empowerment"></span><i aria-hidden="true"></i>
+              <span ar="الأثر" en="Impact"></span>
+              <span class="poster-foot-end" ar="رؤية المملكة 2030" en="Saudi Vision 2030"></span>
+            </footer>
+          </article>
         </div>
       </section>
 

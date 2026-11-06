@@ -2330,6 +2330,56 @@ h2 {
   margin-top: 30px;
 }
 
+/* نسخة "الكلمة كاملة" (صفحة من نحن): نص طويل، فالصورة بتثبت جنبه وهو بيتقري */
+.advisor-poster--full {
+  .poster-grid {
+    align-items: start;
+  }
+  .poster-photo {
+    position: sticky;
+    top: 120px;
+  }
+  .poster-quote {
+    font-size: clamp(1.5rem, 2.8vw, 2.3rem);
+  }
+}
+.poster-body {
+  margin-top: 26px;
+  padding-top: 24px;
+  border-top: 1px solid #ffffff1f;
+  max-width: 62ch;
+
+  p {
+    margin: 0 0 1.1em;
+    font-size: 1.04rem;
+    line-height: 2;
+    color: #c9d8ee;
+    text-wrap: pretty;
+  }
+  p:last-child {
+    margin-bottom: 0;
+  }
+  /* أول فقرة أوضح شوية؛ الحرف الأول البارز للإنجليزي بس (في العربي بيفصل الحرف عن الكلمة) */
+  .poster-lead {
+    font-size: 1.12rem;
+    color: #e6eefa;
+  }
+  html[dir="ltr"] & .poster-lead::first-letter {
+    float: inline-start;
+    margin-inline-end: 10px;
+    font-size: 3.3em;
+    font-weight: 800;
+    line-height: 0.95;
+    color: var(--if-mint);
+  }
+}
+@media (max-width: 860px) {
+  .advisor-poster--full .poster-photo {
+    position: relative;
+    top: auto;
+  }
+}
+
 /* الشريط السفلي */
 .poster-foot {
   display: flex;
