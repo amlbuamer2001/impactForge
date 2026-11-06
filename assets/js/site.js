@@ -436,6 +436,15 @@
     });
   });
 
+  /* ---------- الـ kicker: الشارة بتتقلب لفوق من تحت (3D) وهي داخلة ---------- */
+  $$(".kicker").forEach(function (k) {
+    gsap.from(k, {
+      rotationX: -95, scale: 0.7, transformPerspective: 600, transformOrigin: "50% 100%",
+      duration: 1.1, ease: "back.out(1.8)", clearProps: "transform",
+      scrollTrigger: { trigger: k, start: "top 90%", once: true },
+    });
+  });
+
   /* ---------- القيم: كارت مطوي (زي الأكورديون) بيتفرد مع السكرول — ديسكتوب بس ---------- */
   if ($(".fold-card"))
     gsap.matchMedia().add("(min-width: 721px)", function () {
