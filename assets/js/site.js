@@ -198,6 +198,7 @@
         k = Math.min(steps - 2, Math.floor(t)),
         f = Math.min(1, Math.max(0, (t - k - 0.2) / 0.6)), /* 20% وقفة في أول وآخر كل خطوة */
         angle = (k + smooth(f)) * 90;
+      track.style.setProperty("--about-p", progress.toFixed(3)); /* الكلمة الكبيرة في الخلفية بتزحف معاه */
       textCube.style.transform = "translateZ(calc(var(--s) / -2)) rotateX(" + angle + "deg)";
       imageCube.style.transform = "translateZ(calc(var(--s) / -2)) rotateX(" + -angle + "deg)";
       dims.forEach(function (list) {
