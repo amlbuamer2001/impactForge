@@ -286,6 +286,11 @@ h2 {
   50%, 70% { transform: perspective(40px) rotateX(180deg) rotateY(180deg); }
   100% { transform: perspective(40px) rotateX(360deg) rotateY(360deg); }
 }
+@keyframes badge-float {
+  50% {
+    translate: 0 -4px;
+  }
+}
 @keyframes kicker-shine {
   0%, 55% { background-position: 150% 0; }
   100% { background-position: -50% 0; }
@@ -1376,19 +1381,24 @@ h2 {
     font-weight: 800;
     line-height: 1.35;
     text-wrap: balance;
+    color: #fff;
+    text-shadow: 0 2px 14px #0b1c4a59; /* فصل ناعم عن الخلفية */
 
     html[lang="en"] & {
       line-height: 1.12;
       letter-spacing: -0.02em;
     }
+    /* الكلمات المميزة: أبيض لمنت صافي.
+       الظل بـ drop-shadow مش text-shadow (الـ text-shadow بيبان من تحت النص الشفاف ويطفّي اللون) */
     b {
       position: relative;
       display: inline-block;
       color: transparent;
-      background: linear-gradient(190deg, #ffffff, #c8eaef);
+      background: linear-gradient(180deg, #ffffff 30%, var(--if-mint));
       -webkit-background-clip: text;
       background-clip: text;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      text-shadow: none;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)); /* نفس قيم الـ text-shadow الأصلي */
     }
   }
   .hero-subtitle {
@@ -1403,26 +1413,79 @@ h2 {
     }
   }
 
-  /* شعار رؤية 2030 */
+  /* شعار رؤية 2030: بلاطة بارزة 3D
+     (الطفو والميلان بخاصيتي translate/rotate عشان ما يتعارضوش مع transform بتاع GSAP) */
+  .hero-intro {
+    perspective: 900px;
+  }
   .vision-badge {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     display: flex;
     align-items: center;
     gap: 16px;
-    margin-top: 10px;
-    background: linear-gradient(
-      253deg,
-      color-mix(in srgb, var(--if-teal) 45%, transparent),
-      #ffffff0f 45%,
-      color-mix(in srgb, var(--if-royal) 35%, transparent)
-    );
-    padding: 20px;
-    border-radius: 20px;
+    margin-top: 14px;
+    /* علامة ثقة مش عنصر بطل: الحجم الأصلي، والهدوء جاي من الوش الزجاجي والبروز الخفيف */
+    padding: 20px 22px;
+    border: 1px solid transparent;
+    border-radius: 22px;
+    /* وش زجاجي شبه شفاف بيذوب في الهيرو + حدود رفيعة هادية */
+    background:
+      linear-gradient(160deg, #ffffff1f, #ffffff08) padding-box,
+      linear-gradient(140deg, #ffffff40, #ffffff0d 50%, #ffffff26) border-box;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    /* بروز خفيف: لمعة فوق + سُمك 2px + ظل ناعم قريب */
+    box-shadow:
+      inset 0 1px 0 #ffffff33,
+      0 2px 0 #0b1c4a4d,
+      0 10px 22px -14px #050d2699;
+    animation: badge-float 6s ease-in-out infinite;
+    transition: rotate 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+
+    /* لمعان زجاجي على النص اللي فوق */
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 52% 0;
+      z-index: 0;
+      border-radius: inherit;
+      background: linear-gradient(180deg, #ffffff2e, transparent);
+      pointer-events: none;
+    }
+    /* لمعة بتعدّي (نفس لمعة الـ kicker) */
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: linear-gradient(100deg, transparent 35%, #ffffff2e 50%, transparent 65%);
+      background-size: 300% 100%;
+      background-position: 150% 0;
+      animation: kicker-shine 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+    /* ميلان 3D مع الماوس */
+    &:hover {
+      rotate: -1 1 0 6deg;
+    }
 
     img {
+      position: relative;
+      z-index: 1;
       display: block;
       width: clamp(92px, 9vw, 128px);
       height: auto;
-      filter: drop-shadow(0 6px 14px #0006);
+      /* الشعار نفسه بارز: حافة + ظل */
+      filter: drop-shadow(0 4px 10px #0b1c4a66);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+      &::after {
+        animation: none;
+      }
     }
   }
 
@@ -1546,9 +1609,9 @@ h2 {
     margin: 0;
     padding: 26px 26px 22px;
     border: 0;
-    color: #dbe8f3;
-    font-size: 1.1rem;
-    line-height: 1.5;
+    color: #e8f0fa; /* أوضح على الخلفية الأغمق */
+    font-size: 1.08rem;
+    line-height: 1.8;
     text-wrap: pretty;
 
     &::after {
@@ -1596,14 +1659,39 @@ h2 {
       width: 96px;
       opacity: 0.55;
     }
+    /* موبايل: عمود واحد بترتيب القراءة:
+       الشارة ← العنوان ← الوصف والأزرار ← شعار الرؤية ← الصورة
+       (hero-intro بـ display: contents عشان عناصره تترتب مع الباقي بـ order) */
     .hero-grid {
-      grid-template-columns: 1fr;
-      grid-template-areas: "intro" "content" "visual";
+      display: flex;
+      flex-direction: column;
       gap: 22px;
       padding-block: 8px 0;
     }
     .hero-intro {
-      padding-top: 0;
+      display: contents;
+    }
+    .eyebrow {
+      order: 1;
+      align-self: flex-start;
+      margin-bottom: 0;
+    }
+    .hero-title,
+    .hero-subtitle {
+      order: 2;
+      margin: 0;
+    }
+    .hero-content {
+      order: 3;
+    }
+    .vision-badge {
+      order: 4;
+      align-self: flex-start;
+      margin-top: 0;
+    }
+    .hero-visual {
+      order: 5;
+      align-self: center;
     }
     .hero-content {
       padding-bottom: 0;
@@ -4147,11 +4235,21 @@ h2 {
 .vision-mission {
   background: var(--if-surface);
 }
+/* خلفية الهيرو: أهدى وأعمق (كحلي ← ملكي ← فولاذي) بدل التيل الصارخ،
+   مع إضاءة تيل ناعمة ورا الصورة وتغميق خفيف للأطراف = تباين مريح للنص الأبيض */
 .hero .hero-bg {
-  background: var(--if-gradient);
+  --hero-dir: 135deg;
+  background:
+    radial-gradient(38% 55% at 50% 62%, color-mix(in srgb, var(--if-teal) 38%, transparent), transparent 70%),
+    radial-gradient(120% 90% at 50% 45%, transparent 50%, #0b1c4a73 100%),
+    linear-gradient(var(--hero-dir), var(--if-deep) 0%, var(--if-royal) 55%, var(--if-steel) 100%);
 }
 html[dir="rtl"] .hero .hero-bg {
-  background: linear-gradient(225deg, var(--if-royal), var(--if-teal));
+  --hero-dir: 225deg;
+}
+/* الباترن القطري أخف عشان الخلفية ما تبقاش زحمة */
+.hero .hero-bg::after {
+  opacity: 0.22;
 }
 .page-hero {
   background: linear-gradient(135deg, var(--if-royal), var(--if-steel));
