@@ -2126,21 +2126,6 @@ h2 {
   h2 {
     position: relative;
     color: var(--if-deep);
-    padding-bottom: 14px;
-    margin-bottom: 16px;
-
-    /* خط متدرّج تحت العنوان */
-    &::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      inset-inline-start: 0;
-      width: 64px;
-      height: 4px;
-      border-radius: 4px;
-      background: linear-gradient(90deg, var(--if-royal), var(--if-teal));
-      box-shadow: 0 2px 6px color-mix(in srgb, var(--if-teal) 40%, transparent);
-    }
   }
 }
 /* المجالات الأربعة كوسوم بارزة */
@@ -2671,6 +2656,7 @@ h2 {
     top: calc(108px + var(--k) * 18px);
   }
 
+  /* كارت البرنامج: بلاطة 3D بلون مميز لكل برنامج (--ac) */
   .program-card {
     position: relative;
     overflow: hidden;
@@ -2681,38 +2667,68 @@ h2 {
     grid-template-columns: auto 1fr auto;
     align-items: center;
     gap: clamp(18px, 4vw, 56px);
-    min-height: 300px;
-    padding: clamp(26px, 4vw, 54px);
+    min-height: 270px;
+    padding: clamp(26px, 4vw, 52px);
     border-radius: 32px;
     color: #fff;
+    /* لون البرنامج أوضح: توهّج كبير في الركن + لمسة تحت */
     background:
-      radial-gradient(
-        60% 90% at 90% 0%,
-        color-mix(in srgb, var(--ac) 55%, transparent),
-        transparent 70%
-      ),
-      linear-gradient(140deg, var(--if-royal), var(--if-steel));
-    border: 1px solid #ffffff14;
+      radial-gradient(70% 110% at 92% 0%, color-mix(in srgb, var(--ac) 80%, transparent), transparent 70%),
+      radial-gradient(50% 70% at 8% 100%, color-mix(in srgb, var(--ac) 35%, transparent), transparent 70%),
+      linear-gradient(140deg, var(--if-royal), var(--if-deep));
+    border: 1px solid #ffffff1f;
+    /* إضاءة فوق + bevel تحت + سُمك + ظل */
     box-shadow:
-      0 -10px 40px color-mix(in srgb, var(--if-royal) 12%, transparent),
-      0 30px 60px -30px color-mix(in srgb, var(--if-royal) 40%, transparent);
+      inset 0 1px 0 #ffffff40,
+      inset 0 -3px 0 #0b1c4a4d,
+      0 4px 0 var(--if-deep),
+      0 34px 60px -30px color-mix(in srgb, var(--if-deep) 70%, transparent);
+    transition: translate 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+
+    /* شريط بلون البرنامج على جنب الكارت */
+    &::before {
+      content: "";
+      position: absolute;
+      inset-block: 22%;
+      inset-inline-start: 0;
+      width: 5px;
+      border-start-end-radius: 6px;
+      border-end-end-radius: 6px;
+      background: linear-gradient(180deg, var(--if-mint), color-mix(in srgb, var(--ac) 70%, #fff));
+      box-shadow: 0 0 16px color-mix(in srgb, var(--ac) 80%, transparent);
+    }
+    html[dir="rtl"] &::before {
+      border-radius: 6px 0 0 6px;
+    }
 
     h3 {
-      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      font-size: clamp(1.4rem, 3vw, 2.1rem);
       margin: 0 0 10px;
       line-height: 1.35;
     }
     p {
       margin: 0;
-      color: #cfe0f3;
+      color: #e1ecf8;
       font-size: 1.05rem;
+      line-height: 1.75;
       max-width: 52ch;
     }
     .english-name {
       margin-bottom: 4px;
+      color: var(--if-mint);
+    }
+    &:hover {
+      translate: 0 -4px;
+    }
+    &:hover .program-icon {
+      rotate: -6deg;
+      scale: 1.04;
     }
     &:hover .program-more {
       gap: 16px;
+      color: var(--if-royal);
+      background: linear-gradient(180deg, #ffffff, #e6f0fa);
+      border-color: #fff;
     }
   }
   .program-number {
@@ -2720,28 +2736,43 @@ h2 {
     font-weight: 800;
     line-height: 0.9;
     color: transparent;
-    -webkit-text-stroke: 1.5px #ffffffb0;
+    -webkit-text-stroke: 1.5px color-mix(in srgb, var(--if-mint) 75%, transparent);
     font-variant-numeric: tabular-nums;
+    filter: drop-shadow(0 4px 10px #0b1c4a59);
   }
+  /* أيقونة البرنامج: بلاطة 3D، والأيقونة بلون البرنامج */
   .program-icon {
-    width: clamp(84px, 11vw, 140px);
+    width: clamp(84px, 11vw, 136px);
     aspect-ratio: 1;
     display: grid;
     place-items: center;
     border-radius: 30%;
-    font-size: clamp(2.4rem, 5vw, 4rem);
-    color: var(--navy);
-    background: linear-gradient(190deg, #ffffff, #c8eaef);
-    box-shadow: 0 20px 40px -10px #c8eaef55;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    color: color-mix(in srgb, var(--ac) 70%, var(--if-deep));
+    background: linear-gradient(190deg, #ffffff, #d7eef2);
+    box-shadow:
+      inset 0 2px 0 #fff,
+      inset 0 -4px 0 color-mix(in srgb, var(--ac) 22%, transparent),
+      0 6px 0 color-mix(in srgb, var(--ac) 55%, #0b1c4a),
+      0 22px 34px -14px #050d26a6;
+    transition: rotate 0.5s cubic-bezier(0.2, 0.7, 0.2, 1), scale 0.5s;
   }
+  /* "تفاصيل البرنامج": زرار كبسولة زجاجي واضح بيتحوّل أبيض مع الـ hover */
   .program-more {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    margin-top: 16px;
+    margin-top: 20px;
+    padding: 9px 18px;
+    border-radius: 99px;
+    border: 1px solid #ffffff40;
+    background: #ffffff1a;
+    box-shadow:
+      inset 0 1px 0 #ffffff40,
+      0 2px 0 #0b1c4a59;
     font-weight: 700;
-    color: #c8eaef;
-    transition: gap 0.3s;
+    color: #fff;
+    transition: gap 0.3s, color 0.3s, background 0.3s, border-color 0.3s;
 
     html[dir="ltr"] & .icon {
       transform: rotate(180deg);
