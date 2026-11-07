@@ -10412,18 +10412,6 @@ html.no-preload .preloader {
     --edge: var(--if-teal);
   }
 }
-.preloader::before {
-  /* شبكة خفيفة فوق الخلفية */
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background:
-    linear-gradient(#ffffff08 1px, transparent 1px) 0 0 / 48px 48px,
-    linear-gradient(90deg, #ffffff08 1px, transparent 1px) 0 0 / 48px 48px;
-  mask-image: radial-gradient(60% 60% at 50% 50%, #000, transparent 80%);
-  transition: opacity 0.4s;
-}
 .pl-center {
   position: relative;
   z-index: 2;
