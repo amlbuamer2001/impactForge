@@ -1230,3 +1230,60 @@
     else done(false);
   });
 })();
+
+/* =========================================================
+   خدماتنا الاستشارية: الكروت بتبدأ متراصة ومايلة في النص، وبتتفرد لأماكنها مع السكرول
+   + كلمة "خدماتنا" بتتحرك ورا + شريط تقدّم
+   السهم في كل كارت بيودي للنموذج ونوع الجهة متحدد
+   ========================================================= */
+(function () {
+  var track = document.querySelector(".svc-track");
+  if (!track) return;
+  var root = document.documentElement,
+    grid = track.querySelector(".svc-grid"),
+    slots = [].slice.call(grid.children),
+    big = track.querySelector(".svc-big"),
+    prog = track.querySelector(".svc-bar b"),
+    still = matchMedia("(max-width: 1000px), (prefers-reduced-motion: reduce)"),
+    ROT = [-9.4, 0.6, -0.6, 9.4], TY = [0, -6, -12, -18],
+    queued = false;
+  var ease = function (t) { return 1 - Math.pow(1 - t, 3); };
+
+  function update() {
+    queued = false;
+    if (still.matches) {
+      slots.forEach(function (s) { s.style.transform = ""; s.style.zIndex = ""; });
+      return;
+    }
+    var r = track.getBoundingClientRect(), total = track.offsetHeight - innerHeight,
+      p = Math.min(1, Math.max(0, -r.top / total)),
+      k = 1 - ease(Math.min(1, p / 0.7)), /* 1 = متراصين، 0 = في أماكنهم */
+      gc = grid.clientWidth / 2,
+      rtl = root.dir == "rtl";
+    slots.forEach(function (s, i) {
+      s.style.zIndex = k > 0.02 ? slots.length - i : "";
+      if (k <= 0.001) { s.style.transform = ""; return; }
+      var dx = (gc - (s.offsetLeft + s.offsetWidth / 2)) * k,
+        rot = (rtl ? -ROT[i] : ROT[i]) * k;
+      s.style.transform = "translate(" + dx.toFixed(1) + "px," + (TY[i] * k).toFixed(1) + "px) scale(" + (1 - 0.16 * k).toFixed(3) + ") rotate(" + rot.toFixed(2) + "deg)";
+    });
+    if (big) {
+      big.style.opacity = (0.9 * Math.min(1, p * 1.4)).toFixed(2);
+      big.style.transform = "translateX(" + ((rtl ? -1 : 1) * (18 - p * 30)).toFixed(1) + "%)";
+    }
+    if (prog) prog.style.transform = "scaleX(" + p.toFixed(3) + ")";
+  }
+  function queue() { if (!queued) { queued = true; requestAnimationFrame(update); } }
+  addEventListener("scroll", queue, { passive: true });
+  addEventListener("resize", queue);
+  if (still.addEventListener) still.addEventListener("change", queue);
+  update();
+
+  /* السهم: يحدد نوع الجهة في النموذج قبل ما ينزل له */
+  [].forEach.call(track.querySelectorAll(".svc-arrow[data-org-type]"), function (a) {
+    a.addEventListener("click", function () {
+      var r = document.querySelector('input[name="org_type"][value="' + a.dataset.orgType + '"]');
+      if (r) r.checked = true;
+    });
+  });
+})();

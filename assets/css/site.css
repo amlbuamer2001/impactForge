@@ -9673,3 +9673,272 @@ html[dir="rtl"] .contact-page .contact-form .cf-input input[dir="ltr"] {
 .org-area-chips .cf-chip span span {
   all: unset;
 }
+
+/* =====================================================
+   خدماتنا الاستشارية: كروت "من نخدم" بتتفرد مع السكرول (القسم بيثبت)
+   ===================================================== */
+.svc-track {
+  position: relative;
+  height: 240vh; /* طول السكرول اللي الحركة بتحصل فيه */
+  padding: 0;
+}
+.svc-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+/* كلمة ضخمة مفرّغة بتتحرك ورا الكروت */
+.svc-big {
+  position: absolute;
+  inset-inline-start: 0;
+  top: 52%;
+  white-space: nowrap;
+  font-size: clamp(7rem, 22vw, 20rem);
+  font-weight: 800;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px color-mix(in srgb, var(--if-royal) 16%, transparent);
+  translate: 0 -50%;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+}
+.svc-wrap {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 3.5vw, 40px);
+  width: 100%;
+
+  .org-head {
+    margin-bottom: 0;
+  }
+}
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+.svc-slot {
+  position: relative;
+  border-radius: 26px;
+  will-change: transform;
+  box-shadow: 0 18px 30px -24px color-mix(in srgb, var(--if-deep) 60%, transparent);
+}
+.svc-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  height: clamp(320px, 46vh, 440px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 22px 22px 18px;
+  border-radius: 26px;
+  color: #fff;
+  background: color-mix(in srgb, var(--ac) 40%, var(--if-deep));
+  box-shadow:
+    inset 0 1px 0 #ffffff33,
+    0 5px 0 color-mix(in srgb, var(--ac) 45%, #0b1c4a);
+}
+.svc-img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  scale: 1.12;
+  transition: scale 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+
+  .svc-card:hover & {
+    scale: 1.2;
+  }
+}
+/* تظليل بلون القطاع من تحت عشان الكلام يتقري */
+.svc-shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, transparent 40%, color-mix(in srgb, var(--if-deep) 85%, transparent) 92%),
+    linear-gradient(180deg, color-mix(in srgb, var(--ac) 30%, transparent), transparent 40%);
+  pointer-events: none;
+}
+.svc-icon {
+  position: absolute;
+  top: 16px;
+  inset-inline-start: 16px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 30%;
+  font-size: 1.2rem;
+  color: color-mix(in srgb, var(--ac) 80%, var(--if-deep));
+  background: linear-gradient(190deg, #fff, #d7eef2);
+  box-shadow:
+    inset 0 2px 0 #fff,
+    0 3px 0 color-mix(in srgb, var(--ac) 50%, #0b1c4a);
+}
+/* السهم: بيلف ناحية الركن مع الهوفر */
+.svc-arrow {
+  position: absolute;
+  top: 16px;
+  inset-inline-end: 16px;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  color: #fff;
+  background: linear-gradient(150deg, var(--ac), var(--if-royal));
+  box-shadow:
+    inset 0 1px 0 #ffffff40,
+    0 3px 0 var(--if-deep);
+  transition: scale 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+
+  svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    rotate: -90deg; /* عربي: بيشاور شمال */
+    transition: rotate 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  html[dir="ltr"] & svg {
+    rotate: 90deg;
+  }
+  .svc-card:hover & svg,
+  &:focus-visible svg {
+    rotate: -45deg; /* لفوق-شمال (ناحية الركن) */
+  }
+  html[dir="ltr"] .svc-card:hover & svg,
+  html[dir="ltr"] &:focus-visible svg {
+    rotate: 45deg;
+  }
+  &:hover {
+    scale: 1.06;
+  }
+  &:focus-visible {
+    outline: 3px solid var(--if-mint);
+    outline-offset: 3px;
+  }
+}
+/* الوصف بيطلع مع الهوفر */
+.svc-reveal {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+
+  > div {
+    overflow: hidden;
+    min-height: 0;
+  }
+  p {
+    margin: 0;
+    padding-bottom: 8px;
+    font-size: 0.92rem;
+    line-height: 1.8;
+    color: #ffffffdb;
+    opacity: 0;
+    translate: 0 8px;
+    transition:
+      opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      translate 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .svc-card:hover &,
+  .svc-card:focus-within & {
+    grid-template-rows: 1fr;
+  }
+  .svc-card:hover & p,
+  .svc-card:focus-within & p {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+.svc-name {
+  margin: 0;
+  font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+  line-height: 1.4;
+  color: #fff;
+}
+/* شريط التقدّم تحت */
+.svc-bar {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 28px;
+  z-index: 2;
+  pointer-events: none;
+
+  i {
+    display: block;
+    height: 3px;
+    border-radius: 3px;
+    background: color-mix(in srgb, var(--if-royal) 12%, transparent);
+    overflow: hidden;
+  }
+  b {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, var(--if-royal), var(--if-teal));
+    transform-origin: 0 50%;
+    transform: scaleX(0);
+  }
+  html[dir="rtl"] & b {
+    transform-origin: 100% 50%;
+  }
+}
+
+/* تابلت/موبايل + تقليل الحركة: من غير تثبيت، والوصف ظاهر على طول */
+@media (max-width: 1000px), (prefers-reduced-motion: reduce) {
+  .svc-track {
+    height: auto;
+    padding-block: clamp(56px, 7vw, 90px) clamp(40px, 5vw, 64px);
+  }
+  .svc-sticky {
+    position: static;
+    height: auto;
+    overflow: visible;
+  }
+  .svc-big,
+  .svc-bar {
+    display: none;
+  }
+  .svc-slot {
+    transform: none !important;
+  }
+  .svc-reveal {
+    grid-template-rows: 1fr;
+
+    p {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+}
+@media (max-width: 1000px) {
+  .svc-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .svc-card {
+    height: 340px;
+  }
+}
+@media (max-width: 560px) {
+  .svc-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+  .svc-card {
+    height: 300px;
+  }
+}

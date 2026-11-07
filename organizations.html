@@ -99,20 +99,64 @@
         </div>
       </section>
 
-      <!-- من نخدم -->
-      <section class="org-sectors">
-        <div class="container">
-          <div class="org-head reveal">
-            <span class="kicker" ar="من نخدم" en="Who we serve"></span>
-            <h2 ar="حلول تدريب واستشارات لكل جهة" en="Training and advisory for every organization"></h2>
-            <p class="lead" ar="نصمّم البرنامج حسب طبيعة جهتك وأهدافها، لا العكس." en="We shape the program around your organization and its goals — not the other way round."></p>
+      <!-- من نخدم: الكروت بتبدأ متراصة في النص وبتتفرد مع السكرول (القسم بيثبت) — الحركة في site.js -->
+      <section class="org-sectors svc-track">
+        <div class="svc-sticky">
+          <span class="svc-big" aria-hidden="true" ar="خدماتنا" en="Services"></span>
+          <div class="container svc-wrap">
+            <div class="org-head">
+              <span class="kicker" ar="من نخدم" en="Who we serve"></span>
+              <h2 ar="حلول تدريب واستشارات لكل جهة" en="Training and advisory for every organization"></h2>
+              <p class="lead" ar="نصمّم البرنامج حسب طبيعة جهتك وأهدافها، لا العكس." en="We shape the program around your organization and its goals — not the other way round."></p>
+            </div>
+            <div class="svc-grid">
+            <div class="svc-slot">
+              <article class="svc-card" style="--ac: var(--p1)">
+                <img class="svc-img" src="assets/images/02_medical_consultations.jpg" alt="" loading="lazy" />
+                <span class="svc-shade" aria-hidden="true"></span>
+                <span class="svc-icon" aria-hidden="true"><svg class="icon"><use href="#building"/></svg></span>
+                <!-- السهم: بيودي على نموذج العرض ونوع الجهة متحدد تلقائيًا -->
+                <a class="svc-arrow" href="#proposal" data-org-type="Hospitals" ar-aria-label="اطلب عرضًا: المستشفيات" en-aria-label="Request a proposal: Hospitals" aria-label="اطلب عرضًا: المستشفيات"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19.5V4.5M5.5 11l6.5-6.5 6.5 6.5"/></svg></a>
+                <div class="svc-reveal"><div><p ar="رفع جاهزية الكوادر السريرية وتوحيد الممارسات داخل الأقسام." en="Raising clinical staff readiness and aligning practice across departments."></p></div></div>
+                <h3 class="svc-name" ar="المستشفيات" en="Hospitals"></h3>
+              </article>
+            </div>
+            <div class="svc-slot">
+              <article class="svc-card" style="--ac: var(--p3)">
+                <img class="svc-img" src="assets/images/01_training.jpg" alt="" loading="lazy" />
+                <span class="svc-shade" aria-hidden="true"></span>
+                <span class="svc-icon" aria-hidden="true"><svg class="icon"><use href="#steth"/></svg></span>
+                <!-- السهم: بيودي على نموذج العرض ونوع الجهة متحدد تلقائيًا -->
+                <a class="svc-arrow" href="#proposal" data-org-type="Health centers" ar-aria-label="اطلب عرضًا: المراكز الصحية" en-aria-label="Request a proposal: Health centers" aria-label="اطلب عرضًا: المراكز الصحية"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19.5V4.5M5.5 11l6.5-6.5 6.5 6.5"/></svg></a>
+                <div class="svc-reveal"><div><p ar="برامج مرنة تناسب فرق الرعاية الأولية وطبيعة عملها اليومي." en="Flexible programs that fit primary-care teams and their daily work."></p></div></div>
+                <h3 class="svc-name" ar="المراكز الصحية" en="Health centers"></h3>
+              </article>
+            </div>
+            <div class="svc-slot">
+              <article class="svc-card" style="--ac: var(--p5)">
+                <img class="svc-img" src="assets/images/03_scientific_research.jpg" alt="" loading="lazy" />
+                <span class="svc-shade" aria-hidden="true"></span>
+                <span class="svc-icon" aria-hidden="true"><svg class="icon"><use href="#cap"/></svg></span>
+                <!-- السهم: بيودي على نموذج العرض ونوع الجهة متحدد تلقائيًا -->
+                <a class="svc-arrow" href="#proposal" data-org-type="Academic institutions" ar-aria-label="اطلب عرضًا: الجهات الأكاديمية" en-aria-label="Request a proposal: Academic institutions" aria-label="اطلب عرضًا: الجهات الأكاديمية"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19.5V4.5M5.5 11l6.5-6.5 6.5 6.5"/></svg></a>
+                <div class="svc-reveal"><div><p ar="دعم الطلاب والخريجين وأعضاء هيئة التدريس بالتدريب التطبيقي والبحثي." en="Supporting students, graduates, and faculty with applied and research training."></p></div></div>
+                <h3 class="svc-name" ar="الجهات الأكاديمية" en="Academic institutions"></h3>
+              </article>
+            </div>
+            <div class="svc-slot">
+              <article class="svc-card" style="--ac: var(--p4)">
+                <img class="svc-img" src="assets/images/04_global_partnerships.jpg" alt="" loading="lazy" />
+                <span class="svc-shade" aria-hidden="true"></span>
+                <span class="svc-icon" aria-hidden="true"><svg class="icon"><use href="#chart"/></svg></span>
+                <!-- السهم: بيودي على نموذج العرض ونوع الجهة متحدد تلقائيًا -->
+                <a class="svc-arrow" href="#proposal" data-org-type="Financial & administrative bodies" ar-aria-label="اطلب عرضًا: الجهات المالية والإدارية" en-aria-label="Request a proposal: Financial & administrative bodies" aria-label="اطلب عرضًا: الجهات المالية والإدارية"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19.5V4.5M5.5 11l6.5-6.5 6.5 6.5"/></svg></a>
+                <div class="svc-reveal"><div><p ar="تطوير المهارات الإدارية والمالية بشهادات مصغّرة مركّزة." en="Building management and finance skills through focused microcredentials."></p></div></div>
+                <h3 class="svc-name" ar="الجهات المالية والإدارية" en="Financial & administrative bodies"></h3>
+              </article>
+            </div>
+            </div>
           </div>
-          <div class="org-sector-grid">
-            <article class="org-sector" style="--ac: var(--p1)"><span class="org-sector-icon"><svg class="icon" aria-hidden="true"><use href="#building"/></svg></span><h3 ar="المستشفيات" en="Hospitals"></h3><p ar="رفع جاهزية الكوادر السريرية وتوحيد الممارسات داخل الأقسام." en="Raising clinical staff readiness and aligning practice across departments."></p></article>
-            <article class="org-sector" style="--ac: var(--p3)"><span class="org-sector-icon"><svg class="icon" aria-hidden="true"><use href="#steth"/></svg></span><h3 ar="المراكز الصحية" en="Health centers"></h3><p ar="برامج مرنة تناسب فرق الرعاية الأولية وطبيعة عملها اليومي." en="Flexible programs that fit primary-care teams and their daily work."></p></article>
-            <article class="org-sector" style="--ac: var(--p5)"><span class="org-sector-icon"><svg class="icon" aria-hidden="true"><use href="#cap"/></svg></span><h3 ar="الجهات الأكاديمية" en="Academic institutions"></h3><p ar="دعم الطلاب والخريجين وأعضاء هيئة التدريس بالتدريب التطبيقي والبحثي." en="Supporting students, graduates, and faculty with applied and research training."></p></article>
-            <article class="org-sector" style="--ac: var(--p4)"><span class="org-sector-icon"><svg class="icon" aria-hidden="true"><use href="#chart"/></svg></span><h3 ar="الجهات المالية والإدارية" en="Financial & administrative bodies"></h3><p ar="تطوير المهارات الإدارية والمالية بشهادات مصغّرة مركّزة." en="Building management and finance skills through focused microcredentials."></p></article>
-          </div>
+          <div class="svc-bar" aria-hidden="true"><div class="container"><i><b></b></i></div></div>
         </div>
       </section>
 
