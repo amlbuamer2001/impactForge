@@ -4580,17 +4580,21 @@ html[dir="rtl"] .pgx-row::after {
       white-space: nowrap;
     }
     /* سهم صغير بين العناصر، اتجاهه بيمشي مع اتجاه الصفحة */
+    /* الفاصل: سهمين متتاليين (الأول باهت والتاني واضح) بتدرّج الهوية = إحساس بالتقدّم في المسار */
     li + li::before {
       content: "";
-      width: 6px;
-      height: 6px;
-      margin-inline: 6px 8px;
-      border-top: 1.6px solid #ffffff73;
-      border-inline-end: 1.6px solid #ffffff73;
-      rotate: 45deg;
+      flex: none;
+      width: 16px;
+      height: 16px;
+      margin-inline: 2px 4px;
+      background: linear-gradient(90deg, #ffffff, var(--if-mint));
+      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 6.5l5 5.5-5 5.5' stroke-opacity='.4'/%3E%3Cpath d='M12.5 6.5l5 5.5-5 5.5'/%3E%3C/svg%3E") center / contain no-repeat;
+      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 6.5l5 5.5-5 5.5' stroke-opacity='.4'/%3E%3Cpath d='M12.5 6.5l5 5.5-5 5.5'/%3E%3C/svg%3E") center / contain no-repeat;
+      opacity: 0.85;
     }
+    /* في العربي المسار ماشي من اليمين لليسار */
     html[dir="rtl"] & li + li::before {
-      rotate: -45deg;
+      scale: -1 1;
     }
     a {
       display: inline-flex;
@@ -9051,4 +9055,310 @@ html[dir="ltr"] .blog-card:hover a.blog-card-action .icon,
 html[dir="ltr"] a.blog-card-action:focus-visible .icon {
   rotate: 180deg;
   translate: 3px 0;
+}
+
+/* =====================================================
+   صفحة التسجيل (بتعيد استخدام تخطيط صفحة التواصل: contact-grid / contact-card / contact-info)
+   ===================================================== */
+/* أجزاء النموذج المرقّمة */
+.reg-step {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: grid;
+  gap: 16px;
+
+  legend {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--if-deep);
+
+    i {
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      font-style: normal;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #fff;
+      background: linear-gradient(150deg, var(--if-teal), var(--if-royal));
+      box-shadow: 0 3px 0 var(--if-deep);
+    }
+  }
+  & + & {
+    margin-top: 8px;
+    padding-top: 22px;
+    border-top: 1px dashed color-mix(in srgb, var(--if-royal) 14%, var(--line));
+  }
+}
+
+/* كروت اختيار البرنامج */
+.reg-programs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr));
+  gap: 10px;
+}
+.reg-program {
+  position: relative;
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+.reg-program-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  height: 100%;
+  padding: 14px;
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--if-surface) 60%, #fff);
+  border: 1.5px solid color-mix(in srgb, var(--ac) 14%, var(--line));
+  transition:
+    border-color 0.25s,
+    background-color 0.25s,
+    box-shadow 0.25s,
+    translate 0.25s;
+
+  .reg-program:hover & {
+    border-color: color-mix(in srgb, var(--ac) 45%, transparent);
+    translate: 0 -2px;
+  }
+  .reg-program input:checked + & {
+    background: linear-gradient(180deg, #fff, color-mix(in srgb, var(--ac) 8%, #fff));
+    border-color: color-mix(in srgb, var(--ac) 70%, transparent);
+    box-shadow:
+      0 4px 0 color-mix(in srgb, var(--ac) 40%, #dfe7f3),
+      0 16px 26px -18px color-mix(in srgb, var(--ac) 70%, transparent);
+    translate: 0 -2px;
+  }
+  .reg-program input:focus-visible + & {
+    outline: 3px solid var(--if-teal);
+    outline-offset: 2px;
+  }
+}
+.reg-program-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 30%;
+  font-size: 1.2rem;
+  color: color-mix(in srgb, var(--ac) 80%, var(--if-deep));
+  background: color-mix(in srgb, var(--ac) 12%, #fff);
+  transition:
+    background 0.25s,
+    color 0.25s,
+    box-shadow 0.25s;
+
+  .reg-program input:checked + .reg-program-card & {
+    color: #fff;
+    background: linear-gradient(150deg, var(--ac), var(--if-royal));
+    box-shadow:
+      inset 0 2px 0 #ffffff4d,
+      0 3px 0 var(--if-deep);
+  }
+}
+.reg-program-name {
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--if-deep);
+}
+/* علامة صح في الركن للمختار */
+.reg-program-check {
+  position: absolute;
+  top: 12px;
+  inset-inline-end: 12px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid color-mix(in srgb, var(--ac) 30%, var(--line));
+  background: #fff;
+  transition:
+    background 0.25s,
+    border-color 0.25s,
+    scale 0.3s cubic-bezier(0.3, 1.6, 0.5, 1);
+
+  .reg-program input:checked + .reg-program-card & {
+    border-color: transparent;
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 13px no-repeat,
+      linear-gradient(150deg, var(--ac), var(--if-royal));
+    scale: 1.1;
+  }
+}
+
+/* أرقام الجوال والبريد بتتكتب LTR بس الأيقونة تفضل في مكانها */
+.register-page .cf-input input[dir="ltr"] {
+  text-align: start;
+}
+html[dir="rtl"] .register-page .cf-input input[dir="ltr"] {
+  text-align: right;
+}
+
+/* الموافقة */
+.reg-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--if-deep);
+  background: color-mix(in srgb, var(--if-surface) 60%, #fff);
+  border: 1px solid color-mix(in srgb, var(--if-royal) 10%, var(--line));
+  cursor: pointer;
+
+  input {
+    flex: none;
+    appearance: none;
+    -webkit-appearance: none;
+    width: 22px !important;
+    height: 22px;
+    margin: 1px 0 0 !important;
+    padding: 0 !important;
+    border-radius: 7px !important;
+    border: 1.5px solid color-mix(in srgb, var(--if-royal) 30%, var(--line)) !important;
+    background: #fff !important;
+    cursor: pointer;
+    transition:
+      background 0.2s,
+      border-color 0.2s;
+
+    &:checked {
+      border-color: transparent !important;
+      background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 14px no-repeat,
+        linear-gradient(150deg, var(--if-teal), var(--if-royal)) !important;
+    }
+    &:focus-visible {
+      outline: 3px solid var(--if-teal);
+      outline-offset: 2px;
+    }
+  }
+  a {
+    color: var(--if-royal);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+.register-page .cf-actions .btn {
+  width: 100%;
+  justify-content: center;
+}
+
+/* لوحة "ماذا يحدث بعد التسجيل" */
+.reg-timeline {
+  position: relative;
+  margin: 0 0 22px;
+  padding: 0;
+  list-style: none;
+  counter-reset: next;
+  display: grid;
+  gap: 18px;
+
+  /* خط بيوصل الخطوات */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 18px;
+    bottom: 18px;
+    inset-inline-start: 17px;
+    width: 2px;
+    border-radius: 2px;
+    background: linear-gradient(180deg, var(--if-mint), #ffffff22);
+  }
+  li {
+    position: relative;
+    counter-increment: next;
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr);
+    column-gap: 14px;
+  }
+  li::before {
+    content: counter(next);
+    grid-row: span 2;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-weight: 800;
+    color: var(--if-deep);
+    background: linear-gradient(190deg, #fff, #d7eef2);
+    box-shadow: 0 3px 0 color-mix(in srgb, var(--if-teal) 50%, #0b1c4a);
+  }
+  b {
+    font-size: 1rem;
+    color: #fff;
+  }
+  span {
+    margin-top: 2px;
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: #cfe0f3;
+  }
+}
+
+/* حقول بأيقونة (التواصل + التسجيل): مساحة الأيقونة لازم تغلب حشوة الحقول العامة */
+.contact-page .contact-form .cf-input input {
+  padding-inline-start: 46px;
+}
+/* الجوال والبريد مكتوبين LTR: الأيقونة على يمين الحقل في العربي، فالمساحة تبقى يمين */
+html[dir="rtl"] .contact-page .contact-form .cf-input input[dir="ltr"] {
+  padding-left: 16px;
+  padding-right: 46px;
+}
+
+/* كروت البرامج: الخمسة في صف واحد على الديسكتوب */
+@media (min-width: 700px) {
+  .reg-programs {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+/* موبايل: كروت أفقية مدمجة (أيقونة + اسم) في عمودين */
+@media (max-width: 699px) {
+  .reg-programs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .reg-program:last-child {
+    grid-column: 1 / -1;
+  }
+  .reg-program-card {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    padding-inline-end: 38px;
+  }
+  .reg-program-icon {
+    flex: none;
+    width: 36px;
+    height: 36px;
+    font-size: 1.05rem;
+  }
+  .reg-program-name {
+    font-size: 0.86rem;
+  }
+  .reg-program-check {
+    top: 50%;
+    translate: 0 -50%;
+    width: 20px;
+    height: 20px;
+  }
 }

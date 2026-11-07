@@ -36,7 +36,11 @@
 
   /* البرنامج المختار من الرابط (contact.html?program=nursing) */
   var wanted = new URLSearchParams(location.search).get("program") || new URLSearchParams(location.search).get("area");
-  if (wanted) $$("select[data-programs]").forEach(function (s) { s.value = wanted; });
+  if (wanted) {
+    $$("select[data-programs]").forEach(function (s) { s.value = wanted; });
+    /* صفحة التسجيل: كروت البرامج (radio) */
+    $$('input[type="radio"][name="program"]').forEach(function (r) { r.checked = r.value == wanted; });
+  }
 
   /* =====================================================
      PLATFORM + "قريبًا" BUTTONS

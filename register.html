@@ -91,19 +91,65 @@
             <nav class="breadcrumbs" ar-aria-label="مسار التنقل" en-aria-label="Breadcrumb" aria-label="مسار التنقل"><ol><li><a class="bc-home" href="index.html"><svg class="bc-home-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9v11h13V9"/><path d="M10 20v-6h4v6"/></svg><span ar="الرئيسية" en="Home"></span></a></li><li><span class="bc-current" aria-current="page" ar="التسجيل" en="Register"></span></li></ol></nav>
             
             <h1 ar="سجّل اهتمامك وسنتواصل معك" en="Register your interest and we’ll be in touch"></h1>
+            <p class="page-hero-sub" ar="اختر البرنامج المناسب لتخصصك، وسنرسل لك تفاصيل المواعيد والتسجيل." en="Choose the program that fits your specialty, and we’ll send you schedules and registration details."></p>
             
             
           </div>
         </div>
       </section>
 
-      <section class="form-section" id="form">
-        <div class="container reveal" style="max-width: 820px">
-          <form class="contact-form" data-to="" data-subject="Registration">
-            <label><span ar="الاسم الكامل *" en="Full name *"></span><input name="name" type="text" required autocomplete="name" /></label><div class="form-row"><label><span ar="الجوال *" en="Mobile (+966) *"></span><input name="phone" type="tel" required autocomplete="tel" placeholder="+966" /></label><label><span ar="البريد *" en="Email *"></span><input name="email" type="email" required autocomplete="email" /></label></div><label><span ar="التخصص / المرحلة المهنية *" en="Specialty / career stage *"></span><input name="stage" type="text" required /></label><label><span ar="البرنامج *" en="Program *"></span><select name="program" required data-programs ><option value="" ar="اختر" en="Select"></option><option value="nursing" ar="برنامج إمباكت لتعزيز كفاءات التمريض" en="Impact Nurse Enhancement Program"></option><option value="medical" ar="برنامج إمباكت للتعزيز الطبي" en="Impact Medical Enhancement Program"></option><option value="emergency-medicine" ar="برنامج إمباكت لتعزيز كفاءات طب الطوارئ" en="Impact Emergency Medicine Enhancement Program"></option><option value="management" ar="برنامج إمباكت لتعزيز المهارات الإدارية" en="Impact Business &amp; Management Enhancement Program"></option><option value="research" ar="برنامج إمباكت لتعزيز البحث العلمي" en="Impact Research Enhancement Program"></option></select></label><label class="check"><input type="checkbox" name="consent" required /><span><span ar="أوافق على" en="I agree to the"></span> <a href="privacy.html" ar="سياسة الخصوصية" en="Privacy Policy"></a> *</span></label>
-            <button class="btn" type="submit"><span class="btn-text" ar="سجّل اهتمامك" en="Register Your Interest"></span><svg class="icon" aria-hidden="true"><use href="#send"/></svg></button>
-            <p class="form-success" role="status"><svg class="icon" aria-hidden="true"><use href="#check"/></svg><span ar="شكرًا لاهتمامك. سيتواصل معك فريقنا بتفاصيل المواعيد والتسجيل." en="Thank you for your interest. Our team will contact you with schedule and registration details."></span></p>
-          </form>
+      <section class="form-section contact-page register-page" id="form">
+        <div class="container contact-grid">
+          <!-- النموذج -->
+          <div class="contact-card">
+            <div class="contact-card-head">
+              <span class="contact-card-icon"><svg class="icon" aria-hidden="true"><use href="#user"/></svg></span>
+              <div>
+                <h2 ar="سجّل اهتمامك في دقيقتين" en="Register in two minutes"></h2>
+                <p ar="اختر البرنامج وأدخل بياناتك، وسيتواصل معك فريقنا. الحقول المعلَّمة بـ * مطلوبة." en="Pick a program and enter your details — our team will be in touch. Fields marked * are required."></p>
+              </div>
+            </div>
+            <form class="contact-form" data-to="" data-subject="Registration">
+              <fieldset class="reg-step">
+                <legend><i aria-hidden="true">01</i><span ar="اختر البرنامج *" en="Choose a program *"></span></legend>
+                <div class="reg-programs">
+                  <label class="reg-program" style="--ac: var(--p1)"><input type="radio" name="program" value="nursing" required /><span class="reg-program-card" ar-title="برنامج إمباكت لتعزيز كفاءات التمريض" en-title="Impact Nurse Enhancement Program" title="برنامج إمباكت لتعزيز كفاءات التمريض"><span class="reg-program-icon"><svg class="icon" aria-hidden="true"><use href="#steth"/></svg></span><span class="reg-program-name" ar="التمريض" en="Nursing"></span><i class="reg-program-check" aria-hidden="true"></i></span></label>
+                  <label class="reg-program" style="--ac: var(--p2)"><input type="radio" name="program" value="medical" required /><span class="reg-program-card" ar-title="برنامج إمباكت للتعزيز الطبي" en-title="Impact Medical Enhancement Program" title="برنامج إمباكت للتعزيز الطبي"><span class="reg-program-icon"><svg class="icon" aria-hidden="true"><use href="#cross"/></svg></span><span class="reg-program-name" ar="الطب" en="Medical"></span><i class="reg-program-check" aria-hidden="true"></i></span></label>
+                  <label class="reg-program" style="--ac: var(--p3)"><input type="radio" name="program" value="emergency-medicine" required /><span class="reg-program-card" ar-title="برنامج إمباكت لتعزيز كفاءات طب الطوارئ" en-title="Impact Emergency Medicine Enhancement Program" title="برنامج إمباكت لتعزيز كفاءات طب الطوارئ"><span class="reg-program-icon"><svg class="icon" aria-hidden="true"><use href="#amb"/></svg></span><span class="reg-program-name" ar="طب الطوارئ" en="Emergency Medicine"></span><i class="reg-program-check" aria-hidden="true"></i></span></label>
+                  <label class="reg-program" style="--ac: var(--p4)"><input type="radio" name="program" value="management" required /><span class="reg-program-card" ar-title="برنامج إمباكت لتعزيز المهارات الإدارية" en-title="Impact Business &amp; Management Enhancement Program" title="برنامج إمباكت لتعزيز المهارات الإدارية"><span class="reg-program-icon"><svg class="icon" aria-hidden="true"><use href="#chart"/></svg></span><span class="reg-program-name" ar="الإدارة والأعمال" en="Business &amp; Management"></span><i class="reg-program-check" aria-hidden="true"></i></span></label>
+                  <label class="reg-program" style="--ac: var(--p5)"><input type="radio" name="program" value="research" required /><span class="reg-program-card" ar-title="برنامج إمباكت لتعزيز البحث العلمي" en-title="Impact Research Enhancement Program" title="برنامج إمباكت لتعزيز البحث العلمي"><span class="reg-program-icon"><svg class="icon" aria-hidden="true"><use href="#flask"/></svg></span><span class="reg-program-name" ar="البحث العلمي" en="Research"></span><i class="reg-program-check" aria-hidden="true"></i></span></label>
+                </div>
+              </fieldset>
+
+              <fieldset class="reg-step">
+                <legend><i aria-hidden="true">02</i><span ar="بياناتك" en="Your details"></span></legend>
+                <label class="cf-field"><span ar="الاسم الكامل *" en="Full name *"></span><span class="cf-input"><svg class="icon" aria-hidden="true"><use href="#user"/></svg><input name="name" type="text" required autocomplete="name" /></span></label>
+                <div class="form-row"><label class="cf-field"><span ar="الجوال *" en="Mobile *"></span><span class="cf-input"><svg class="icon" aria-hidden="true"><use href="#phone"/></svg><input name="phone" type="tel" required autocomplete="tel" inputmode="tel" dir="ltr" placeholder="+966 5X XXX XXXX" /></span></label><label class="cf-field"><span ar="البريد الإلكتروني *" en="Email *"></span><span class="cf-input"><svg class="icon" aria-hidden="true"><use href="#mail"/></svg><input name="email" type="email" required autocomplete="email" dir="ltr" placeholder="name@example.com" /></span></label></div>
+                <label class="cf-field"><span ar="التخصص / المرحلة المهنية *" en="Specialty / career stage *"></span><span class="cf-input"><svg class="icon" aria-hidden="true"><use href="#cap"/></svg><input name="stage" type="text" required ar-placeholder="مثال: تمريض — حديث التخرج" en-placeholder="e.g. Nursing — new graduate" placeholder="مثال: تمريض — حديث التخرج" /></span></label>
+              </fieldset>
+
+              <label class="check reg-consent"><input type="checkbox" name="consent" required /><span><span ar="أوافق على" en="I agree to the"></span> <a href="privacy.html" ar="سياسة الخصوصية" en="Privacy Policy"></a> *</span></label>
+              <div class="cf-actions">
+                <button class="btn" type="submit"><span class="btn-text" ar="سجّل اهتمامك" en="Register Your Interest"></span><svg class="icon btn-arrow" aria-hidden="true"><use href="#send"/></svg></button>
+              </div>
+              <p class="form-success" role="status"><svg class="icon" aria-hidden="true"><use href="#check"/></svg><span ar="شكرًا لاهتمامك. سيتواصل معك فريقنا بتفاصيل المواعيد والتسجيل." en="Thank you for your interest. Our team will contact you with schedule and registration details."></span></p>
+            </form>
+          </div>
+
+          <!-- ماذا يحدث بعد التسجيل -->
+          <aside class="contact-info reg-next">
+            <span class="kicker" ar="بعد التسجيل" en="After you register"></span>
+            <h2 ar="ماذا يحدث بعد ذلك؟" en="What happens next?"></h2>
+            <ol class="reg-timeline">
+              <li><b ar="نستلم طلبك" en="We receive your request"></b><span ar="يصل اهتمامك ببياناتك والبرنامج الذي اخترته إلى فريقنا." en="Your interest, details, and chosen program reach our team."></span></li>
+              <li><b ar="يتواصل معك فريقنا" en="Our team contacts you"></b><span ar="نرسل لك تفاصيل المواعيد والتسجيل ونجيب عن أسئلتك." en="We share schedules and registration details and answer your questions."></span></li>
+              <li><b ar="تبدأ رحلتك" en="Your journey begins"></b><span ar="تنضم إلى البرنامج وتبدأ التدريب التطبيقي مع مستشارينا." en="You join the program and start hands-on training with our advisors."></span></li>
+            </ol>
+            <ul class="ci-list">
+              <li><a class="ci-item" href="programs.html"><span class="ci-icon"><svg class="icon" aria-hidden="true"><use href="#layers"/></svg></span><span class="ci-text"><small ar="غير متأكد؟" en="Not sure?"></small><b ar="قارن بين البرامج الخمسة" en="Compare the five programs"></b></span><span class="ci-go"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
+              <li><a class="ci-item" href="contact.html"><span class="ci-icon"><svg class="icon" aria-hidden="true"><use href="#mail"/></svg></span><span class="ci-text"><small ar="عندك سؤال؟" en="Have a question?"></small><b ar="تواصل مع فريقنا" en="Talk to our team"></b></span><span class="ci-go"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a></li>
+            </ul>
+          </aside>
         </div>
       </section>
 
