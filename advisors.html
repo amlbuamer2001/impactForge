@@ -93,23 +93,128 @@
             <nav class="breadcrumbs" ar-aria-label="مسار التنقل" en-aria-label="Breadcrumb" aria-label="مسار التنقل"><ol><li><a class="bc-home" href="index.html"><svg class="bc-home-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9v11h13V9"/><path d="M10 20v-6h4v6"/></svg><span ar="الرئيسية" en="Home"></span></a></li><li><span class="bc-current" aria-current="page" ar="المستشارون" en="Advisors"></span></li></ol></nav>
             
             <h1 ar="المستشارون الأكاديميون" en="Academic Advisors"></h1>
-            
-            
+            <p class="page-hero-sub" ar="نخبة من الأكاديميين والممارسين يصمّمون برامجنا ويقدّمونها ويرافقون المتدربين خطوة بخطوة." en="Academics and practitioners who design and deliver our programs and guide trainees every step of the way."></p>
           </div>
         </div>
       </section>
 
-      <section>
+      <section class="advisors-page">
         <div class="container">
-          <div class="reveal"><span class="kicker" ar="المستشارون الأكاديميون" en="Academic Advisors"></span><p class="lead" ar="خلف كل برنامج مستشارون أكاديميون وممارسون يجمعون بين عمق المعرفة العلمية وواقع الممارسة اليومية. يشاركون في تصميم المحتوى وتقديمه وإرشاد المتدربين، ليبقى التعلّم مرتبطًا بما يحدث فعلًا في المستشفى والمختبر وبيئة العمل." en="Behind every program are academic advisors and practitioners who combine scientific depth with daily practice. They help design and deliver content and mentor trainees, so learning stays tied to what actually happens in the hospital, the lab, and the workplace."></p></div>
-          <div class="tabs" id="advisors-filter"><button class="tab is-active" type="button" data-v="all"><span ar="الكل" en="All"></span></button><button class="tab" type="button" data-v="nursing"><span ar="التمريض" en="Nursing"></span></button><button class="tab" type="button" data-v="medical"><span ar="الطب" en="Medical"></span></button><button class="tab" type="button" data-v="emergency-medicine"><span ar="طب الطوارئ" en="Emergency Medicine"></span></button><button class="tab" type="button" data-v="management"><span ar="الإدارة والأعمال" en="Business &amp; Management"></span></button><button class="tab" type="button" data-v="research"><span ar="البحث العلمي" en="Research"></span></button></div>
-          <!-- كارت لكل مستشار (يُنشر فقط بعد موافقة النشر):
-          <div class="advisor-card" data-p="nursing" style="--c: var(--p1)">
-            <div class="advisor-avatar"><img src="assets/images/advisors/NAME.jpg" ar-alt="الاسم" en-alt="Name" alt="" width="96" height="96" /></div>
-            <b ar="الاسم واللقب" en="Name"></b><small ar="المسمى والجهة" en="Position & institution"></small>
-            <span class="advisor-tag" ar="التمريض" en="Nursing"></span>
-          </div> -->
-          <div class="advisors-grid reveal" id="advisors-grid"></div>
+          <!-- المستشارة التنفيذية: بطاقة مميّزة (بيانات حقيقية موجودة في صفحة من نحن) -->
+          <div class="advisor-feature">
+            <article class="advisor-badge advisor-badge--lead" style="--c: var(--if-teal)">
+              <span class="badge-lanyard" aria-hidden="true"><i></i></span><span class="badge-clip" aria-hidden="true"></span>
+              <div class="badge-body">
+                <span class="badge-org"><img src="assets/images/logo-white.png" alt="Impact Forge" width="150" height="24" loading="lazy" /></span>
+                <div class="badge-photo"><img src="assets/images/princess.jpg" ar-alt="صاحبة السمو الملكي الأميرة نجود بنت هذلول بن عبدالعزيز" en-alt="HRH Princess Nujoud bint Hathloul bin Abdulaziz" alt="صاحبة السمو الملكي الأميرة نجود بنت هذلول بن عبدالعزيز" /></div>
+                <b ar="صاحبة السمو الملكي الأميرة نجود بنت هذلول بن عبدالعزيز" en="HRH Princess Nujoud bint Hathloul bin Abdulaziz"></b>
+                <small ar="المستشارة التنفيذية" en="Executive Advisor"></small>
+                <span class="badge-tag"><span ar="القيادة التنفيذية" en="Executive leadership"></span></span>
+              </div>
+            </article>
+            <div class="advisor-feature-copy">
+              <span class="kicker" ar="المستشارة التنفيذية" en="Executive Advisor"></span>
+              <blockquote class="advisor-feature-quote"><p ar="هدفنا واضح: سدّ الفجوة بين الإمكانات والكفاءة بمستويات عالمية." en="Our objective is clear: to bridge the gap between potential and world-class competence."></p></blockquote>
+              <p class="advisor-feature-text" ar="نعمل على تمكين الكفاءات السعودية لقيادة مستقبل القطاع الصحي والطبي، انطلاقًا من «رؤية المملكة 2030» التي جعلت الإنسان محورها." en="We empower Saudi talent to lead the future of the health and medical sectors, guided by Saudi Vision 2030 — a vision centered on people."></p>
+              <a class="link-more" href="about.html#advisor-message"><span ar="اقرأ الكلمة كاملة" en="Read the full message"></span> <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+            </div>
+          </div>
+
+          <!-- ماذا يقدّم المستشارون -->
+          <!-- دور المستشارين: نفس طريقة عرض كروت خدماتنا الاستشارية (متراصة ← بتتفرد مع السكرول) -->
+          <div class="advisor-roles fan-track">
+            <div class="fan-sticky">
+            <div class="advisor-roles-head">
+              <span class="kicker" ar="دور المستشارين" en="What advisors do"></span>
+              <p class="lead" ar="خلف كل برنامج مستشارون أكاديميون وممارسون يجمعون بين عمق المعرفة العلمية وواقع الممارسة اليومية. يشاركون في تصميم المحتوى وتقديمه وإرشاد المتدربين، ليبقى التعلّم مرتبطًا بما يحدث فعلًا في المستشفى والمختبر وبيئة العمل." en="Behind every program are academic advisors and practitioners who combine scientific depth with daily practice. They help design and deliver content and mentor trainees, so learning stays tied to what actually happens in the hospital, the lab, and the workplace."></p>
+            </div>
+            <ol class="advisor-roles-list fan-grid">
+              <li><span class="role-icon"><svg class="icon" aria-hidden="true"><use href="#layers"/></svg></span><b ar="تصميم المحتوى" en="Designing content"></b><span ar="يبنون محتوى البرامج على أساس علمي ومن واقع الممارسة اليومية." en="They build program content on scientific grounds and real daily practice."></span></li>
+              <li><span class="role-icon"><svg class="icon" aria-hidden="true"><use href="#monitor"/></svg></span><b ar="التدريب والتقديم" en="Training &amp; delivery"></b><span ar="يقدّمون الجلسات التطبيقية ودراسات الحالة والمحاكاة." en="They deliver hands-on sessions, case studies, and simulation."></span></li>
+              <li><span class="role-icon"><svg class="icon" aria-hidden="true"><use href="#users"/></svg></span><b ar="إرشاد المتدربين" en="Mentoring trainees"></b><span ar="يرافقون المتدربين ويقدّمون التغذية الراجعة حتى يصلوا للجاهزية." en="They guide trainees and give feedback until they’re practice-ready."></span></li>
+            </ol>
+            </div>
+          </div>
+
+          <!-- لوحة المستشارين -->
+          <div class="advisor-board">
+            <div class="advisor-board-head">
+              <h2 ar="لوحة المستشارين" en="Advisor board"></h2>
+              <div class="tabs" id="advisors-filter"><button class="tab is-active" type="button" data-v="all"><span ar="الكل" en="All"></span></button><button class="tab" type="button" data-v="nursing"><span ar="التمريض" en="Nursing"></span></button><button class="tab" type="button" data-v="medical"><span ar="الطب" en="Medical"></span></button><button class="tab" type="button" data-v="emergency-medicine"><span ar="طب الطوارئ" en="Emergency Medicine"></span></button><button class="tab" type="button" data-v="management"><span ar="الإدارة والأعمال" en="Business &amp; Management"></span></button><button class="tab" type="button" data-v="research"><span ar="البحث العلمي" en="Research"></span></button></div>
+            </div>
+            <!-- كارت لكل مستشار (يُنشر فقط بعد موافقة النشر) — انسخي ده وشيلي البطاقات اللي عليها is-placeholder:
+            <article class="advisor-card advisor-badge" data-p="nursing" style="--c: var(--p1)">
+              <span class="badge-lanyard" aria-hidden="true"><i></i></span><span class="badge-clip" aria-hidden="true"></span>
+              <div class="badge-body">
+                <span class="badge-org"><img src="assets/images/logo-white.png" alt="Impact Forge" width="150" height="24" loading="lazy" /></span>
+                <div class="badge-photo"><img src="assets/images/advisors/NAME.jpg" ar-alt="الاسم" en-alt="Name" alt="" /></div>
+                <b ar="الاسم واللقب" en="Name"></b><small ar="المسمى والجهة" en="Position &amp; institution"></small>
+                <span class="badge-tag"><span ar="التمريض" en="Nursing"></span></span>
+              </div>
+            </article> -->
+            <div class="advisors-grid advisor-badges" id="advisors-grid">
+            <article class="advisor-card advisor-badge is-placeholder" data-p="nursing" style="--c: var(--p1); --sway-delay: -0.0s">
+              <span class="badge-lanyard" aria-hidden="true"><i></i></span><span class="badge-clip" aria-hidden="true"></span>
+              <div class="badge-body">
+                <span class="badge-org"><img src="assets/images/logo-white.png" alt="Impact Forge" width="150" height="24" loading="lazy" /></span>
+                <div class="badge-photo"><!-- صورة للعرض فقط: بدّليها بصورة المستشار --><img src="assets/images/princess.jpg" alt="" loading="lazy" /></div>
+                <b ar="مستشارو التمريض" en="Nursing advisors"></b>
+                <small ar="نُعلن عنهم قريبًا" en="Announcing soon"></small>
+                <span class="badge-tag"><span ar="التمريض" en="Nursing"></span></span>
+              </div>
+            </article>
+            <article class="advisor-card advisor-badge is-placeholder" data-p="medical" style="--c: var(--p2); --sway-delay: -0.7s">
+              <span class="badge-lanyard" aria-hidden="true"><i></i></span><span class="badge-clip" aria-hidden="true"></span>
+              <div class="badge-body">
+                <span class="badge-org"><img src="assets/images/logo-white.png" alt="Impact Forge" width="150" height="24" loading="lazy" /></span>
+                <div class="badge-photo"><!-- صورة للعرض فقط: بدّليها بصورة المستشار --><img src="assets/images/princess.jpg" alt="" loading="lazy" /></div>
+                <b ar="مستشارو الطب" en="Medical advisors"></b>
+                <small ar="نُعلن عنهم قريبًا" en="Announcing soon"></small>
+                <span class="badge-tag"><span ar="الطب" en="Medical"></span></span>
+              </div>
+            </article>
+            <article class="advisor-card advisor-badge is-placeholder" data-p="emergency-medicine" style="--c: var(--p3); --sway-delay: -1.4s">
+              <span class="badge-lanyard" aria-hidden="true"><i></i></span><span class="badge-clip" aria-hidden="true"></span>
+              <div class="badge-body">
+                <span class="badge-org"><img src="assets/images/logo-white.png" alt="Impact Forge" width="150" height="24" loading="lazy" /></span>
+                <div class="badge-photo"><!-- صورة للعرض فقط: بدّليها بصورة المستشار --><img src="assets/images/princess.jpg" alt="" loading="lazy" /></div>
+                <b ar="مستشارو طب الطوارئ" en="Emergency Medicine advisors"></b>
+                <small ar="نُعلن عنهم قريبًا" en="Announcing soon"></small>
+                <span class="badge-tag"><span ar="طب الطوارئ" en="Emergency Medicine"></span></span>
+              </div>
+            </article>
+            <article class="advisor-card advisor-badge is-placeholder" data-p="management" style="--c: var(--p4); --sway-delay: -2.1s">
+              <span class="badge-lanyard" aria-hidden="true"><i></i></span><span class="badge-clip" aria-hidden="true"></span>
+              <div class="badge-body">
+                <span class="badge-org"><img src="assets/images/logo-white.png" alt="Impact Forge" width="150" height="24" loading="lazy" /></span>
+                <div class="badge-photo"><!-- صورة للعرض فقط: بدّليها بصورة المستشار --><img src="assets/images/princess.jpg" alt="" loading="lazy" /></div>
+                <b ar="مستشارو الإدارة والأعمال" en="Business &amp; Management advisors"></b>
+                <small ar="نُعلن عنهم قريبًا" en="Announcing soon"></small>
+                <span class="badge-tag"><span ar="الإدارة والأعمال" en="Business &amp; Management"></span></span>
+              </div>
+            </article>
+            <article class="advisor-card advisor-badge is-placeholder" data-p="research" style="--c: var(--p5); --sway-delay: -2.8s">
+              <span class="badge-lanyard" aria-hidden="true"><i></i></span><span class="badge-clip" aria-hidden="true"></span>
+              <div class="badge-body">
+                <span class="badge-org"><img src="assets/images/logo-white.png" alt="Impact Forge" width="150" height="24" loading="lazy" /></span>
+                <div class="badge-photo"><!-- صورة للعرض فقط: بدّليها بصورة المستشار --><img src="assets/images/princess.jpg" alt="" loading="lazy" /></div>
+                <b ar="مستشارو البحث العلمي" en="Research advisors"></b>
+                <small ar="نُعلن عنهم قريبًا" en="Announcing soon"></small>
+                <span class="badge-tag"><span ar="البحث العلمي" en="Research"></span></span>
+              </div>
+            </article>
+            </div>
+          </div>
+
+          <!-- انضم كمستشار -->
+          <div class="advisor-join">
+            <span class="advisor-join-icon"><svg class="icon" aria-hidden="true"><use href="#handshake"/></svg></span>
+            <div>
+              <h2 ar="هل أنت خبير في مجالك؟" en="Are you an expert in your field?"></h2>
+              <p ar="نرحّب بالأكاديميين والممارسين الراغبين في مشاركة خبرتهم وإعداد الجيل القادم من الكفاءات." en="We welcome academics and practitioners who want to share their expertise and prepare the next generation of talent."></p>
+            </div>
+            <a class="btn" href="contact.html"><span class="btn-text" ar="انضم إلى مستشارينا" en="Join Our Advisors"></span><svg class="icon btn-arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
+          </div>
         </div>
       </section>
       <section class="cta" id="cta">
@@ -117,7 +222,7 @@
           <!-- CTA: لوحة 3D عائمة بهوية الموقع + اختصار مباشر لكل برنامج -->
           <div class="cta-panel">
             <svg class="cta-pixels" viewBox="0 0 377 324" aria-hidden="true"><rect x="0" y="0" width="215.43" height="107.71" fill="url(#pxg)" /><rect x="161.57" y="107.72" width="107.71" height="107.71" fill="url(#pxg)" /><rect x="269.29" y="0" width="107.71" height="107.71" fill="url(#pxg)" /><rect x="269.29" y="215.43" width="107.71" height="107.71" fill="url(#pxg)" /></svg>
-            <span class="cta-mark" aria-hidden="true">IF</span>
+            <img class="cta-mark" src="assets/images/favicon.png" alt="" aria-hidden="true" />
             <div class="cta-copy">
               <span class="kicker" ar="خطوتك التالية" en="Your next step"></span>
               <h2 ar="ابدأ الخطوة التالية في مسيرتك المهنية" en="Take the next step in your career"></h2>

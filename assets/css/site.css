@@ -962,7 +962,7 @@ h2 {
 }
 
 /* =====================================================
-   3) GLOBAL UI (progress / back-to-top / spotlight / cursor)
+   3) GLOBAL UI (progress / back-to-top / cursor)
    ===================================================== */
 .scroll-progress {
   position: fixed;
@@ -1002,33 +1002,6 @@ h2 {
   &.is-visible {
     opacity: 1;
     pointer-events: auto;
-  }
-}
-
-/* إضاءة بتتبع الماوس (بتتضاف بالـ JS) */
-.spotlight {
-  isolation: isolate;
-
-  .spotlight-glow {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    border-radius: inherit;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.35s;
-    background: radial-gradient(
-      340px circle at var(--x, 50%) var(--y, 50%),
-      var(--spc, #c8eaef30),
-      transparent 65%
-    );
-  }
-  &:hover .spotlight-glow {
-    opacity: 1;
-  }
-  &.card .spotlight-glow,
-  &.advisor-card .spotlight-glow {
-    --spc: color-mix(in srgb, var(--if-teal) 14%, transparent);
   }
 }
 
@@ -4098,18 +4071,16 @@ html[dir="rtl"] .pgx-row::after {
     transform: scaleX(-1);
   }
 }
-/* حرفين IF مفرّغين كعلامة مائية */
+/* شعار الموقع (favicon) كعلامة مائية */
 .cta-mark {
   position: absolute;
   z-index: -1;
-  inset-inline-start: -0.06em;
-  bottom: -0.28em;
-  font-size: clamp(9rem, 20vw, 17rem);
-  font-weight: 800;
-  line-height: 1;
-  color: transparent;
-  -webkit-text-stroke: 1.5px #ffffff17;
-  direction: ltr;
+  inset-inline-start: -1.5%;
+  bottom: -12%;
+  width: clamp(9rem, 20vw, 17rem);
+  height: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.09;
   pointer-events: none;
   user-select: none;
 }
@@ -9690,22 +9661,6 @@ html[dir="rtl"] .contact-page .contact-form .cf-input input[dir="ltr"] {
   align-items: center;
   overflow: hidden;
 }
-/* كلمة ضخمة مفرّغة بتتحرك ورا الكروت */
-.svc-big {
-  position: absolute;
-  inset-inline-start: 0;
-  top: 52%;
-  white-space: nowrap;
-  font-size: clamp(7rem, 22vw, 20rem);
-  font-weight: 800;
-  line-height: 1;
-  color: transparent;
-  -webkit-text-stroke: 1.5px color-mix(in srgb, var(--if-royal) 16%, transparent);
-  translate: 0 -50%;
-  opacity: 0;
-  pointer-events: none;
-  user-select: none;
-}
 .svc-wrap {
   position: relative;
   z-index: 1;
@@ -9871,32 +9826,6 @@ html[dir="rtl"] .contact-page .contact-form .cf-input input[dir="ltr"] {
   line-height: 1.4;
   color: #fff;
 }
-/* شريط التقدّم تحت */
-.svc-bar {
-  position: absolute;
-  inset-inline: 0;
-  bottom: 28px;
-  z-index: 2;
-  pointer-events: none;
-
-  i {
-    display: block;
-    height: 3px;
-    border-radius: 3px;
-    background: color-mix(in srgb, var(--if-royal) 12%, transparent);
-    overflow: hidden;
-  }
-  b {
-    display: block;
-    height: 100%;
-    background: linear-gradient(90deg, var(--if-royal), var(--if-teal));
-    transform-origin: 0 50%;
-    transform: scaleX(0);
-  }
-  html[dir="rtl"] & b {
-    transform-origin: 100% 50%;
-  }
-}
 
 /* تابلت/موبايل + تقليل الحركة: من غير تثبيت، والوصف ظاهر على طول */
 @media (max-width: 1000px), (prefers-reduced-motion: reduce) {
@@ -9908,10 +9837,6 @@ html[dir="rtl"] .contact-page .contact-form .cf-input input[dir="ltr"] {
     position: static;
     height: auto;
     overflow: visible;
-  }
-  .svc-big,
-  .svc-bar {
-    display: none;
   }
   .svc-slot {
     transform: none !important;
@@ -9940,5 +9865,497 @@ html[dir="rtl"] .contact-page .contact-form .cf-input input[dir="ltr"] {
   }
   .svc-card {
     height: 300px;
+  }
+}
+
+/* =====================================================
+   المستشارون: لوحة "بطاقات تعريف" متعلّقة بشريط (lanyard) وبتتمرجح بهدوء
+   ===================================================== */
+.advisors-page {
+  padding-block: clamp(48px, 6vw, 90px);
+}
+
+/* ---------- بطاقة التعريف (مشتركة) ---------- */
+.advisor-badge {
+  --c: var(--if-teal);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 64px; /* مكان الشريط */
+  transform-origin: 50% 0;
+  animation: badge-sway 6s ease-in-out infinite;
+  animation-delay: var(--sway-delay, 0s);
+
+  &:hover,
+  &:focus-within {
+    animation-play-state: paused;
+  }
+}
+@keyframes badge-sway {
+  0%,
+  100% {
+    rotate: -1.6deg;
+  }
+  50% {
+    rotate: 1.6deg;
+  }
+}
+/* الشريط: نازل من فوق بلون البرنامج */
+.badge-lanyard {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 22px;
+  height: 70px;
+  margin-left: -11px;
+  border-radius: 0 0 4px 4px;
+  background:
+    repeating-linear-gradient(180deg, #ffffff26 0 2px, transparent 2px 7px),
+    linear-gradient(90deg, color-mix(in srgb, var(--c) 70%, var(--if-deep)), var(--c) 50%, color-mix(in srgb, var(--c) 70%, var(--if-deep)));
+  box-shadow: 0 2px 6px #0b1c4a33;
+
+  /* نص الشريط (اسم الهوية) */
+  i {
+    position: absolute;
+    inset: 6px 0;
+    background: linear-gradient(180deg, transparent, #ffffff40 50%, transparent);
+    opacity: 0.5;
+  }
+}
+/* المشبك المعدني */
+.badge-clip {
+  position: absolute;
+  top: 58px;
+  left: 50%;
+  z-index: 2;
+  width: 34px;
+  height: 16px;
+  margin-left: -17px;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #f4f7fb, #b8c4d3);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 3px 5px #0b1c4a40;
+}
+.badge-body {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 18px 22px;
+  border-radius: 24px;
+  text-align: center;
+  background: #fff;
+  border: 1px solid color-mix(in srgb, var(--c) 18%, var(--line));
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 5px 0 color-mix(in srgb, var(--c) 28%, #dfe7f3),
+    0 30px 46px -30px color-mix(in srgb, var(--if-deep) 60%, transparent);
+  transition:
+    translate 0.4s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.4s;
+
+  /* شريط الهوية فوق الكارت + فتحة الشريط */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 74px;
+    background:
+      radial-gradient(120% 140% at 100% 0%, color-mix(in srgb, var(--c) 55%, transparent), transparent 70%),
+      linear-gradient(150deg, var(--if-deep), var(--if-royal));
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    width: 44px;
+    height: 8px;
+    margin-left: -22px;
+    border-radius: 8px;
+    background: #ffffff38;
+    box-shadow: inset 0 1px 2px #0b1c4a66;
+  }
+  .advisor-badge:hover & {
+    translate: 0 -4px;
+    box-shadow:
+      inset 0 1px 0 #fff,
+      0 9px 0 color-mix(in srgb, var(--c) 38%, #dfe7f3),
+      0 36px 50px -30px color-mix(in srgb, var(--if-deep) 65%, transparent);
+  }
+  b {
+    position: relative;
+    display: block;
+    margin-top: 14px;
+    font-size: 1.02rem;
+    line-height: 1.5;
+    color: var(--if-deep);
+  }
+  small {
+    position: relative;
+    display: block;
+    margin-top: 4px;
+    font-size: 0.85rem;
+    color: var(--mut);
+  }
+}
+.badge-org {
+  position: relative;
+  z-index: 1;
+  margin-top: 30px;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+  color: #ffffffb3;
+  direction: ltr;
+}
+.badge-photo {
+  position: relative;
+  z-index: 1;
+  width: 104px;
+  height: 104px;
+  margin-top: 10px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--c) 14%, #fff);
+  box-shadow:
+    0 0 0 5px #fff,
+    0 0 0 7px color-mix(in srgb, var(--c) 55%, transparent),
+    0 14px 24px -12px #0b1c4a80;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 20%;
+  }
+}
+/* مكان فاضي لمستشار قادم */
+.badge-photo--empty {
+  display: grid;
+  place-items: center;
+  font-size: 2.2rem;
+  color: color-mix(in srgb, var(--c) 75%, var(--if-deep));
+  background:
+    repeating-conic-gradient(color-mix(in srgb, var(--c) 10%, #fff) 0 25%, #fff 0 50%) 0 0 / 18px 18px;
+}
+.badge-tag {
+  position: relative;
+  margin-top: 14px;
+  padding: 5px 14px;
+  border-radius: 99px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--c) 75%, #0b1c4a);
+  background: color-mix(in srgb, var(--c) 14%, #fff);
+}
+.advisor-badge.is-placeholder {
+  b {
+    color: color-mix(in srgb, var(--if-deep) 75%, #fff);
+  }
+  small {
+    font-weight: 700;
+    color: var(--if-steel);
+  }
+}
+
+/* ---------- المستشارة التنفيذية ---------- */
+.advisor-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: center;
+}
+.advisor-badge--lead {
+  .badge-photo {
+    width: 132px;
+    height: 132px;
+  }
+  .badge-body {
+    padding-bottom: 26px;
+  }
+}
+.advisor-feature-copy {
+  min-width: 0;
+}
+.advisor-feature-quote {
+  position: relative;
+  margin: 18px 0 14px;
+  padding-inline-start: 22px;
+  border-inline-start: 4px solid var(--if-teal);
+
+  p {
+    margin: 0;
+    font-size: clamp(1.4rem, 2.8vw, 2.1rem);
+    font-weight: 800;
+    line-height: 1.5;
+    color: var(--if-deep);
+    text-wrap: balance;
+  }
+}
+.advisor-feature-text {
+  max-width: 56ch;
+  margin: 0 0 18px;
+  font-size: 1rem;
+  line-height: 1.95;
+  color: #4a5872;
+}
+
+/* ---------- دور المستشارين ---------- */
+.advisor-roles {
+  margin-top: clamp(64px, 8vw, 110px);
+}
+.advisor-roles-head {
+  max-width: 760px;
+  margin-bottom: 26px;
+
+  .lead {
+    margin: 14px 0 0;
+  }
+}
+.advisor-roles-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: role;
+
+  li {
+    position: relative;
+    counter-increment: role;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 24px 22px;
+    border-radius: 24px;
+    background: linear-gradient(180deg, #fff, color-mix(in srgb, var(--if-teal) 5%, #fff));
+    border: 1px solid color-mix(in srgb, var(--if-royal) 10%, var(--line));
+    box-shadow: 0 4px 0 color-mix(in srgb, var(--if-teal) 20%, #e3eaf4);
+
+    /* رقم مفرّغ في الركن */
+    &::after {
+      content: counter(role, decimal-leading-zero);
+      position: absolute;
+      top: 18px;
+      inset-inline-end: 20px;
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1.2px color-mix(in srgb, var(--if-royal) 25%, transparent);
+    }
+  }
+  b {
+    margin-top: 8px;
+    font-size: 1.1rem;
+    color: var(--if-deep);
+  }
+  span:not(.role-icon) {
+    font-size: 0.93rem;
+    line-height: 1.85;
+    color: #51607a;
+  }
+}
+.role-icon {
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 30%;
+  font-size: 1.35rem;
+  color: #fff;
+  background: linear-gradient(150deg, var(--if-teal), var(--if-royal));
+  box-shadow:
+    inset 0 2px 0 #ffffff4d,
+    0 4px 0 var(--if-deep);
+}
+
+/* ---------- لوحة المستشارين ---------- */
+.advisor-board {
+  margin-top: clamp(64px, 8vw, 110px);
+}
+.advisor-board-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  margin-bottom: 18px;
+
+  h2 {
+    margin: 0;
+    font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+    color: var(--if-deep);
+  }
+  .tabs {
+    margin: 0;
+  }
+}
+/* الشبكة: نلغي شكل الكارت القديم ونخليها لوحة بطاقات متعلّقة */
+.advisors-grid.advisor-badges {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+  gap: 8px 22px;
+  padding-top: 8px;
+
+  .advisor-card {
+    padding: 64px 0 0;
+    border: 0;
+    background: none;
+    border-radius: 0;
+    text-align: center;
+
+    &:hover {
+      translate: none;
+    }
+  }
+}
+
+/* ---------- انضم كمستشار ---------- */
+.advisor-join {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px 24px;
+  margin-top: clamp(56px, 7vw, 90px);
+  padding: clamp(22px, 3vw, 32px);
+  border-radius: 28px;
+  color: #fff;
+  background:
+    radial-gradient(60% 120% at 100% 0%, color-mix(in srgb, var(--if-teal) 45%, transparent), transparent 70%),
+    linear-gradient(150deg, var(--if-deep), var(--if-royal) 65%, #2a63a3);
+  box-shadow:
+    inset 0 1px 0 #ffffff33,
+    0 6px 0 #0b1c4a,
+    0 40px 60px -40px color-mix(in srgb, var(--if-deep) 80%, transparent);
+
+  > div {
+    flex: 1 1 300px;
+  }
+  h2 {
+    margin: 0 0 4px;
+    font-size: clamp(1.15rem, 2vw, 1.45rem);
+    color: #fff;
+  }
+  p {
+    margin: 0;
+    font-size: 0.93rem;
+    line-height: 1.8;
+    color: #cfe0f3;
+  }
+}
+.advisor-join-icon {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 30%;
+  font-size: 1.4rem;
+  color: var(--if-royal);
+  background: linear-gradient(190deg, #fff, #d7eef2);
+  box-shadow:
+    inset 0 2px 0 #fff,
+    0 4px 0 color-mix(in srgb, var(--if-teal) 50%, #0b1c4a);
+}
+
+@media (max-width: 860px) {
+  .advisor-feature {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+  }
+  .advisor-badge--lead {
+    width: min(100%, 300px);
+  }
+  .advisor-roles-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .advisor-board-head .tabs {
+    width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scrollbar-width: none;
+  }
+}
+@media (max-width: 560px) {
+  .advisors-grid.advisor-badges {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 12px;
+  }
+  .badge-body {
+    padding: 0 10px 16px;
+
+    b {
+      font-size: 0.9rem;
+    }
+  }
+  .badge-photo {
+    width: 78px;
+    height: 78px;
+  }
+  .advisor-join .btn {
+    width: 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .advisor-badge {
+    animation: none;
+  }
+}
+
+/* بطاقة المستشار: اللوجو الأبيض في شريط الهوية بدل النص */
+.badge-org {
+  display: block;
+  line-height: 0;
+
+  img {
+    display: block;
+    width: 108px;
+    height: auto;
+    opacity: 0.92;
+  }
+}
+@media (max-width: 560px) {
+  .badge-org img {
+    width: 84px;
+  }
+}
+
+/* =====================================================
+   عرض "المروحة" (نفس طريقة svc-grid): القسم بيثبت والكروت بتتفرد مع السكرول
+   مستخدم في: دور المستشارين
+   ===================================================== */
+.fan-track {
+  position: relative;
+  height: 200vh;
+}
+.fan-sticky {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: 90px 40px;
+}
+.fan-grid > * {
+  will-change: transform;
+}
+/* تابلت/موبايل + تقليل الحركة: عرض عادي */
+@media (max-width: 1000px), (prefers-reduced-motion: reduce) {
+  .fan-track {
+    height: auto;
+  }
+  .fan-sticky {
+    position: static;
+    min-height: 0;
+    padding-block: 0;
+  }
+  .fan-grid > * {
+    transform: none !important;
   }
 }
