@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title ar="من مقاعد الدراسة إلى بيئة العمل: كيف تسدّ الفجوة بين المعرفة والممارسة؟ — مدونة إمباكتفورج" en="From classroom to workplace: closing the gap between knowledge and practice — Impact Forge Blog">من مقاعد الدراسة إلى بيئة العمل: كيف تسدّ الفجوة بين المعرفة والممارسة؟ — مدونة إمباكتفورج</title>
+    <meta name="theme-color" content="#2E4FA0" />
+    <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+    <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png" />
+    <script>
+      /* اللغة المحفوظة + علامة الـ JS قبل أول رسم (يمنع وميض اللغة) */
+      (function (d) { d.classList.add("js"); try { if (localStorage.getItem("lang") == "en") { d.lang = "en"; d.dir = "ltr"; } } catch (e) {} })(document.documentElement);
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+      /* طبقة الحركة: تتفعّل بس لو GSAP اتحملت ومفيش reduced-motion */
+      if (window.gsap && window.ScrollTrigger && !matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("gsap-enabled");
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/site.css" />
+  </head>
+
+  <body data-page="faq">
+    <!-- ============ SVG SPRITE ============ -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <symbol id="steth" viewBox="0 0 24 24"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6 6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3M8 15v1a6 6 0 0 0 12 0v-4"/><circle cx="20" cy="10" r="2"/></symbol>
+        <symbol id="cross" viewBox="0 0 24 24"><path d="M10 2h4a1 1 0 0 1 1 1v6h6a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-6v6a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h6V3a1 1 0 0 1 1-1z"/></symbol>
+        <symbol id="flask" viewBox="0 0 24 24"><path d="M10 2v7.5L4.5 19a2 2 0 0 0 1.7 3h11.6a2 2 0 0 0 1.7-3L14 9.5V2M8.5 2h7M7 16h10"/></symbol>
+        <symbol id="cap" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5zM6 12v5c3 3 9 3 12 0v-5"/></symbol>
+        <symbol id="globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20"/></symbol>
+        <symbol id="amb" viewBox="0 0 24 24"><path d="M10 10H6M8 8v4M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2M15 18H9M19 18h2a1 1 0 0 0 1-1v-3.7a1 1 0 0 0-.2-.6l-3.5-4.4A1 1 0 0 0 17.5 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol>
+        <symbol id="chart" viewBox="0 0 24 24"><path d="M3 3v18h18M8 17v-5M13 17V8M18 17v-9"/></symbol>
+        <symbol id="target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+        <symbol id="rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.3-2 5-2 5s3.7-.5 5-2c.7-.8.7-2.1-.1-2.9a2.2 2.2 0 0 0-2.9-.1zM12 15l-3-3a22 22 0 0 1 2-4A13 13 0 0 1 22 2c0 2.7-.8 7.5-6 11a22 22 0 0 1-4 2zM9 12H4s.6-3 2-4c1.6-1.1 5 0 5 0M12 15v5s3-.6 4-2c1.1-1.6 0-5 0-5"/></symbol>
+        <symbol id="phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></symbol>
+        <symbol id="mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+        <symbol id="pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+        <symbol id="user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+        <symbol id="users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0M16 4a4 4 0 0 1 0 8M22 21a7 7 0 0 0-4-6.3"/></symbol>
+        <symbol id="layers" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol>
+        <symbol id="check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+        <symbol id="info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+        <symbol id="monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></symbol>
+        <symbol id="download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
+        <symbol id="building" viewBox="0 0 24 24"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 7h1M14 7h1M9 11h1M14 11h1M9 15h1M14 15h1"/></symbol>
+        <symbol id="search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
+        <symbol id="handshake" viewBox="0 0 24 24"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.9-3.9a3 3 0 0 0-4.2 0l-.9.9a1 1 0 1 1-3-3l2.8-2.8a5 5 0 0 1 6 .8L21 9"/><path d="M3 9l3.5-3.5 4 1M3 9l6 6"/></symbol>
+        <symbol id="arrow" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
+        <symbol id="up" viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"/></symbol>
+        <symbol id="send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4zM22 2 11 13"/></symbol>
+        <linearGradient id="pxg" gradientUnits="userSpaceOnUse" x1="219" y1="-10" x2="158" y2="334"><stop offset="0" stop-color="#ffffff" /><stop offset="1" stop-color="#c8eaef" /></linearGradient>
+      </defs>
+    </svg>
+
+    <a class="skip-link" href="#main"><span ar="تخطَّ إلى المحتوى" en="Skip to content"></span></a>
+    <div class="scroll-progress"></div>
+
+    <!-- ================= HEADER ================= -->
+    <header class="header">
+      <div class="header-wrapper">
+        <div class="header-scoop-left"></div>
+        <nav class="header-bar" aria-label="Main">
+          <a href="index.html" class="logo" aria-label="Impact Forge"><img src="assets/images/logo-header.png" ar-alt="إمباكتفورج القابضة | Impact Forge" en-alt="Impact Forge Holding" alt="Impact Forge" width="210" height="33" /></a>
+          <button class="menu-toggle" ar-aria-label="القائمة" en-aria-label="Menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+          <div class="nav-links" id="nav-links">
+            <a href="index.html"><span ar="الرئيسية" en="Home"></span></a>
+            <a href="advisors.html"><span ar="المستشارين" en="Advisors"></span></a>
+            <div class="nav-dropdown"><a href="programs.html" aria-haspopup="true"><span ar="البرامج" en="Programs"></span><i class="caret" aria-hidden="true">▾</i></a><div class="nav-dropdown-menu"><a href="program-nursing.html"><span ar="التمريض" en="Nursing"></span></a><a href="program-medical.html"><span ar="الطب" en="Medical"></span></a><a href="program-emergency.html"><span ar="طب الطوارئ" en="Emergency Medicine"></span></a><a href="program-business.html"><span ar="الإدارة والأعمال" en="Business &amp; Management"></span></a><a href="program-research.html"><span ar="البحث العلمي" en="Research"></span></a></div></div>
+            <a href="organizations.html"><span ar="خدماتنا الاستشارية" en="Advisory Services"></span></a>
+            <a href="blog.html" class="is-active"><span ar="المدونة" en="Blog"></span></a>
+            <a href="contact.html"><span ar="تواصل معنا" en="Contact"></span></a>
+            <a class="nav-register" href="register.html"><span ar="سجّل الآن" en="Register"></span></a>
+            <button class="lang-toggle" type="button"><span ar="EN" en="عربي"></span></button>
+          </div>
+        </nav>
+        <div class="header-scoop-right"></div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="page-hero">
+        <svg class="page-hero-pixels" viewBox="0 0 377 324" aria-hidden="true"><rect x="0" y="215.43" width="215.43" height="107.71" fill="url(#pxg)"/><rect x="161.57" y="107.72" width="107.71" height="107.71" fill="url(#pxg)"/><rect x="269.29" y="215.43" width="107.71" height="107.71" fill="url(#pxg)"/><rect x="269.29" y="0" width="107.71" height="107.71" fill="url(#pxg)"/></svg>
+        <span class="page-hero-ring page-hero-ring-a"></span><span class="page-hero-ring page-hero-ring-b"></span>
+        
+        <div class="container">
+          <div class="page-hero-content">
+            <nav class="breadcrumbs" ar-aria-label="مسار التنقل" en-aria-label="Breadcrumb" aria-label="مسار التنقل"><ol><li><a class="bc-home" href="index.html"><svg class="bc-home-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9v11h13V9"/><path d="M10 20v-6h4v6"/></svg><span ar="الرئيسية" en="Home"></span></a></li><li><a href="blog.html"><span ar="المدونة" en="Blog"></span></a></li><li><span class="bc-current" aria-current="page" ar="من مقاعد الدراسة إلى بيئة العمل" en="From classroom to workplace"></span></li></ol></nav>
+            
+            <div class="blog-post-meta">
+              <span class="blog-category" style="--ac: var(--if-teal)"><svg class="icon" aria-hidden="true"><use href="#target"/></svg><span ar="نصائح مهنية" en="Career tips"></span></span>
+              <span class="blog-post-meta-item"><svg class="icon" aria-hidden="true"><use href="#users"/></svg><span ar="فريق إمباكتفورج" en="Impact Forge team"></span></span>
+              <span class="blog-post-meta-item"><svg class="icon" aria-hidden="true"><use href="#info"/></svg><span class="blog-post-readtime" ar="6 دقائق قراءة" en="6 min read"></span></span>
+            </div>
+            <h1 class="blog-post-title" ar="من مقاعد الدراسة إلى بيئة العمل: كيف تسدّ الفجوة بين المعرفة والممارسة؟" en="From classroom to workplace: closing the gap between knowledge and practice"></h1>
+          </div>
+        </div>
+      </section>
+
+      <section class="blog-post">
+        <div class="container blog-post-layout">
+          <!-- محتوى المقال: نص إرشادي عام — راجعيه قبل النشر -->
+          <article class="blog-post-article">
+            <figure class="blog-post-cover">
+              <img src="assets/images/01_training.jpg" alt="" />
+            </figure>
+
+            <div class="blog-post-body">
+              <p class="blog-post-lead" ar="يتخرّج كثير من الممارسين الصحيين وهم يحملون معرفة نظرية قوية، ثم يكتشفون في أول أيام العمل أن بيئة المستشفى تطلب شيئًا مختلفًا: قرارات أسرع، وتواصلًا مستمرًا مع الفريق، ومسؤولية مباشرة عن المريض. هذه الفجوة طبيعية، والخبر الجيد أنها قابلة للسدّ بخطوات واضحة." en="Many health graduates leave with strong theoretical knowledge, then discover in their first days at work that the hospital demands something different: faster decisions, constant team communication, and direct responsibility for patients. The gap is normal — and it can be closed with clear steps."></p>
+
+              <section class="blog-post-section" id="why-gap">
+                <h2><span class="blog-post-num" aria-hidden="true">01</span><span ar="لماذا يشعر الخريج بالفجوة؟" en="Why graduates feel the gap"></span></h2>
+                <p ar="المناهج الأكاديمية تبني الأساس العلمي، لكن الممارسة اليومية تعتمد على مهارات لا تُكتسب إلا بالتطبيق المتكرر تحت إشراف." en="Academic curricula build the scientific foundation, but daily practice relies on skills that only come from repeated, supervised application."></p>
+                <ul class="blog-post-list"><li ar="التعامل مع حالات حقيقية متغيّرة لا تشبه أمثلة الكتب دائمًا." en="Handling real, changing cases that don’t always match textbook examples."></li><li ar="اتخاذ القرار تحت ضغط الوقت وتعدّد المهام." en="Making decisions under time pressure and competing tasks."></li><li ar="التواصل الواضح مع الزملاء والمرضى وذويهم." en="Communicating clearly with colleagues, patients, and families."></li></ul>
+              </section>
+
+              <section class="blog-post-section" id="steps">
+                <h2><span class="blog-post-num" aria-hidden="true">02</span><span ar="خمس خطوات عملية لسدّ الفجوة" en="Five practical steps to close it"></span></h2>
+                <ol class="blog-post-steps">
+                  <li><b ar="حدّد فجواتك بصدق" en="Name your gaps honestly"></b><span ar="اكتب المهارات التي تشعر أنها الأضعف لديك، وابدأ بها." en="List the skills you feel weakest in, and start there."></span></li>
+                  <li><b ar="تدرّب بالمحاكاة قبل الواقع" en="Practise in simulation first"></b><span ar="السيناريوهات المحاكية تمنحك مساحة آمنة للخطأ والتعلّم منه." en="Simulated scenarios give you a safe space to make mistakes and learn."></span></li>
+                  <li><b ar="اطلب التغذية الراجعة باستمرار" en="Ask for feedback constantly"></b><span ar="ملاحظات المشرفين والزملاء أسرع طريق لتصحيح المسار." en="Feedback from supervisors and peers is the fastest way to correct course."></span></li>
+                  <li><b ar="اربط كل معلومة بموقف عملي" en="Tie every concept to a real situation"></b><span ar="اسأل نفسك: متى سأحتاج هذا في المناوبة؟" en="Ask yourself: when will I need this on shift?"></span></li>
+                  <li><b ar="ابنِ عادة التعلّم المستمر" en="Build a habit of continuous learning"></b><span ar="خصّص وقتًا ثابتًا أسبوعيًا للمراجعة وتطوير المهارات." en="Set a fixed weekly time for review and skill building."></span></li>
+                </ol>
+                <blockquote class="blog-post-quote"><p ar="المعرفة تجعلك مؤهّلًا، والممارسة تجعلك جاهزًا." en="Knowledge makes you qualified; practice makes you ready."></p></blockquote>
+              </section>
+
+              <section class="blog-post-section" id="applied">
+                <h2><span class="blog-post-num" aria-hidden="true">03</span><span ar="دور التدريب التطبيقي" en="The role of applied training"></span></h2>
+                <p ar="التدريب التطبيقي يضعك أمام مواقف تشبه بيئة العمل الفعلية: دراسات حالة، ومحاكاة، وجولات سريرية بإشراف مختصين. الهدف ليس حفظ المزيد من المعلومات، بل بناء الثقة في استخدامها في اللحظة المناسبة." en="Applied training puts you in situations that mirror the real workplace: case studies, simulation, and supervised clinical rounds. The goal isn’t memorising more — it’s building confidence to use what you know at the right moment."></p>
+                <p ar="وكلما كان التدريب مصمَّمًا حسب احتياج تخصصك ومرحلتك المهنية، كان أثره أوضح وأسرع." en="And the more the training is tailored to your specialty and career stage, the clearer and faster its impact."></p>
+              </section>
+
+              <section class="blog-post-section" id="progress">
+                <h2><span class="blog-post-num" aria-hidden="true">04</span><span ar="كيف تقيس تقدّمك؟" en="How to measure your progress"></span></h2>
+                <p ar="التقدّم الحقيقي يُقاس بما تستطيع فعله، لا بعدد الساعات التي قضيتها. راقب مؤشرات بسيطة:" en="Real progress is measured by what you can do, not by hours spent. Watch a few simple signals:"></p>
+                <ul class="blog-post-list"><li ar="هل أصبحت قراراتك أسرع وأكثر ثقة؟" en="Are your decisions faster and more confident?"></li><li ar="هل تقلّ الأخطاء المتكررة مع الوقت؟" en="Are repeated mistakes decreasing over time?"></li><li ar="هل تشعر براحة أكبر في التواصل مع الفريق؟" en="Do you feel more at ease communicating with the team?"></li></ul>
+              </section>
+
+              <section class="blog-post-section blog-post-summary" id="summary">
+                <h2><span class="blog-post-num" aria-hidden="true">05</span><span ar="الخلاصة" en="Key takeaways"></span></h2>
+                <ul><li ar="الفجوة بين الدراسة والعمل طبيعية ويمكن سدّها." en="The gap between study and work is normal — and closable."></li><li ar="الممارسة المتكررة والتغذية الراجعة أهم أدواتك." en="Repeated practice and feedback are your most important tools."></li><li ar="التدريب التطبيقي المصمَّم لتخصصك يختصر الطريق." en="Applied training built for your specialty shortens the journey."></li></ul>
+              </section>
+            </div>
+
+            <div class="blog-post-end">
+              <a class="blog-post-back" href="blog.html"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg><span ar="العودة إلى المدونة" en="Back to the blog"></span></a>
+            </div>
+          </article>
+
+          <aside class="blog-post-aside">
+            <nav class="pd-toc blog-post-toc" ar-aria-label="في هذا المقال" en-aria-label="In this article" aria-label="في هذا المقال">
+              <span class="blog-post-aside-label" ar="في هذا المقال" en="In this article"></span>
+              <ol><li><a href="#why-gap"><i>01</i><span ar="لماذا يشعر الخريج بالفجوة؟" en="Why graduates feel the gap"></span></a></li><li><a href="#steps"><i>02</i><span ar="خمس خطوات عملية لسدّ الفجوة" en="Five practical steps to close it"></span></a></li><li><a href="#applied"><i>03</i><span ar="دور التدريب التطبيقي" en="The role of applied training"></span></a></li><li><a href="#progress"><i>04</i><span ar="كيف تقيس تقدّمك؟" en="How to measure your progress"></span></a></li><li><a href="#summary"><i>05</i><span ar="الخلاصة" en="Key takeaways"></span></a></li></ol>
+            </nav>
+            <div class="blog-post-share">
+              <span class="blog-post-aside-label" ar="شارك المقال" en="Share this article"></span>
+              <div class="blog-post-share-row">
+                <button class="blog-share" type="button" data-share="copy" ar-aria-label="نسخ الرابط" en-aria-label="Copy link" aria-label="نسخ الرابط"><svg class="icon" aria-hidden="true"><use href="#layers"/></svg></button>
+                <a class="blog-share" data-share="whatsapp" href="#" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3Z"/><path d="M8.8 8.6c.2-.5.5-.5.8-.5h.5c.2 0 .4 0 .5.4l.7 1.7c.1.2 0 .4-.1.6l-.5.6c-.1.1-.2.3 0 .5.6 1 1.4 1.8 2.5 2.4.2.1.4.1.5-.1l.6-.7c.2-.2.4-.2.6-.1l1.6.8c.2.1.4.2.4.4 0 .5-.2 1.2-.7 1.6-.5.4-1.3.6-2.1.4a8 8 0 0 1-5.6-5.4c-.2-.8 0-1.6.3-2.2Z"/></svg></a>
+                <a class="blog-share" data-share="x" href="#" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4l16 16M20 4 4 20"/></svg></a>
+                <a class="blog-share" data-share="linkedin" href="#" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9v10M6 5.5v.01M10 19v-6a3 3 0 0 1 6 0v6M10 9v10"/></svg></a>
+              </div>
+              <span class="blog-share-status" role="status" aria-live="polite"></span>
+            </div>
+            <div class="program-summary blog-post-cta">
+              <h3 ar="جاهز تطبّق ما قرأته؟" en="Ready to put this into practice?"></h3>
+              <p ar="اكتشف برامجنا التطبيقية المصمَّمة حسب تخصصك." en="Explore our applied programs, built for your specialty."></p>
+              <a class="btn" href="programs.html"><span class="btn-text" ar="استكشف البرامج" en="Explore Programs"></span><svg class="icon btn-arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="blog-related">
+        <div class="container">
+          <div class="blog-related-head">
+            <h2 ar="مقالات ذات صلة" en="Related articles"></h2>
+            <a class="link-more" href="blog.html"><span ar="كل المقالات" en="All articles"></span> <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+          </div>
+          <div class="blog-grid">
+            <article class="blog-card" data-cat="nursing" style="--ac: var(--p1)">
+                <div class="blog-card-media">
+                  <div class="blog-card-image"><img src="assets/images/01_training.jpg" alt="" loading="lazy" /></div>
+                  <span class="blog-category"><svg class="icon" aria-hidden="true"><use href="#steth"/></svg><span ar="التمريض" en="Nursing"></span></span>
+                  <div class="blog-card-notch"><a class="blog-card-action" href="blog-classroom-to-workplace.html" ar-aria-label="اقرأ المقال: مهارات يبحث عنها المقيِّمون في مقابلات التوظيف التمريضية" en-aria-label="Read article: Skills assessors look for in nursing job interviews" aria-label="اقرأ المقال: مهارات يبحث عنها المقيِّمون في مقابلات التوظيف التمريضية"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a></div>
+                </div>
+                <div class="blog-card-body">
+                  <h3 ar="مهارات يبحث عنها المقيِّمون في مقابلات التوظيف التمريضية" en="Skills assessors look for in nursing job interviews"></h3>
+                  <p ar="ما الذي يميّز المتقدّم الجاهز للممارسة، وكيف تُظهره بثقة في المقابلة وتقييمات القبول." en="What sets a practice-ready candidate apart, and how to show it in interviews and admission assessments."></p>
+                </div>
+              </article>
+            <article class="blog-card" data-cat="medical" style="--ac: var(--p2)">
+                <div class="blog-card-media">
+                  <div class="blog-card-image"><img src="assets/images/02_medical_consultations.jpg" alt="" loading="lazy" /></div>
+                  <span class="blog-category"><svg class="icon" aria-hidden="true"><use href="#cross"/></svg><span ar="الطب" en="Medical"></span></span>
+                  <div class="blog-card-notch"><a class="blog-card-action" href="blog-classroom-to-workplace.html" ar-aria-label="اقرأ المقال: كيف تخطّط لمذاكرة الاختبارات الطبية دون إرهاق؟" en-aria-label="Read article: How to plan for medical exams without burning out" aria-label="اقرأ المقال: كيف تخطّط لمذاكرة الاختبارات الطبية دون إرهاق؟"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a></div>
+                </div>
+                <div class="blog-card-body">
+                  <h3 ar="كيف تخطّط لمذاكرة الاختبارات الطبية دون إرهاق؟" en="How to plan for medical exams without burning out"></h3>
+                  <p ar="خطة مذاكرة واقعية توازن بين المراجعة وحل الأسئلة والراحة، مع أخطاء شائعة يجب تجنّبها." en="A realistic study plan that balances review, practice questions, and rest — plus common mistakes to avoid."></p>
+                </div>
+              </article>
+            <article class="blog-card" data-cat="emergency" style="--ac: var(--p3)">
+                <div class="blog-card-media">
+                  <div class="blog-card-image"><img src="assets/images/medical-team-heroo.png" alt="" loading="lazy" /></div>
+                  <span class="blog-category"><svg class="icon" aria-hidden="true"><use href="#amb"/></svg><span ar="طب الطوارئ" en="Emergency"></span></span>
+                  <div class="blog-card-notch"><a class="blog-card-action" href="blog-classroom-to-workplace.html" ar-aria-label="اقرأ المقال: التفكير تحت الضغط: لماذا تصنع المحاكاة الفرق في الطوارئ؟" en-aria-label="Read article: Thinking under pressure: why simulation matters in emergency care" aria-label="اقرأ المقال: التفكير تحت الضغط: لماذا تصنع المحاكاة الفرق في الطوارئ؟"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a></div>
+                </div>
+                <div class="blog-card-body">
+                  <h3 ar="التفكير تحت الضغط: لماذا تصنع المحاكاة الفرق في الطوارئ؟" en="Thinking under pressure: why simulation matters in emergency care"></h3>
+                  <p ar="كيف يبني التدريب بالمحاكاة سرعة القرار والتواصل داخل الفريق قبل مواجهة الحالات الحقيقية." en="How simulation training builds fast decisions and team communication before real cases."></p>
+                </div>
+              </article>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+
+      <div class="container footer-grid">
+        <div>
+          <a class="logo" href="index.html"><img class="logo-img" src="assets/images/logo-header.png" ar-alt="إمباكتفورج القابضة" en-alt="Impact Forge Holding" alt="إمباكتفورج القابضة" width="230" height="37" loading="lazy" /></a>
+          <p ar="إمباكتفورج القابضة — نُعدّ كفاءات وطنية مؤهلة للمستقبل في القطاعين الصحي والتجاري." en="Impact Forge Holding — building future-ready national talent across health and business."></p>
+        </div>
+        <div>
+          <h4 ar="البرامج" en="Programs"></h4>
+          <ul><li><a href="program-nursing.html"><span ar="التمريض" en="Nursing"></span></a></li><li><a href="program-medical.html"><span ar="الطب" en="Medical"></span></a></li><li><a href="program-emergency.html"><span ar="طب الطوارئ" en="Emergency Medicine"></span></a></li><li><a href="program-business.html"><span ar="الإدارة والأعمال" en="Business &amp; Management"></span></a></li><li><a href="program-research.html"><span ar="البحث العلمي" en="Research"></span></a></li></ul>
+        </div>
+        <div>
+          <ul><li><a href="about.html"><span ar="من نحن" en="About"></span></a></li><li><a href="advisors.html"><span ar="المستشارون" en="Advisors"></span></a></li><li><a href="organizations.html"><span ar="للمؤسسات" en="For Organizations"></span></a></li><li><a href="faq.html"><span ar="الأسئلة الشائعة" en="FAQ"></span></a></li><li><a href="blog.html"><span ar="المدونة" en="Blog"></span></a></li></ul>
+        </div>
+        <div>
+          <h4 ar="تواصل معنا" en="Contact"></h4>
+          <ul><li><a href="contact.html"><span ar="تواصل معنا" en="Contact"></span></a></li><li><a href="privacy.html"><span ar="الخصوصية" en="Privacy Policy"></span></a></li><li><a href="terms.html"><span ar="الشروط" en="Terms &amp; Conditions"></span></a></li><li><a href="refund.html"><span ar="الاسترداد" en="Refund &amp; Cancellation Policy"></span></a></li></ul>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span ar="© 2026 إمباكتفورج القابضة. جميع الحقوق محفوظة." en="© 2026 Impact Forge Holding. All rights reserved."></span>
+      </div>
+    </footer>
+    <button class="back-to-top" ar-aria-label="العودة للأعلى" en-aria-label="Back to top"><svg class="icon" aria-hidden="true"><use href="#up"/></svg></button>
+    <script src="assets/js/site.js"></script>
+  </body>
+</html>

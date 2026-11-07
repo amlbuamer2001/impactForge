@@ -1060,3 +1060,156 @@
     if (sec) io.observe(sec);
   });
 })();
+
+/* =========================================================
+   المدونة: تابات الفلتر بشكل cube-nav (لزجة + توهّج بيتبع الماوس) + الفلترة
+   ========================================================= */
+(function () {
+  var nav = document.querySelector(".blog-filter-tabs");
+  if (!nav) return;
+  var root = document.documentElement,
+    tabs = [].slice.call(nav.querySelectorAll("button")),
+    goo = document.querySelector(".blog-filter-goo"),
+    wrap = document.querySelector(".blog-filter-wrap"),
+    paths = [].slice.call(goo.querySelectorAll("path")),
+    glow = document.getElementById("blog-filter-glow"),
+    cards = [].slice.call(document.querySelectorAll(".blog-card")),
+    featured = document.querySelector(".blog-featured"),
+    empty = document.querySelector(".blog-empty"),
+    R = 12, BRIDGE = 21.3, OVERLAP = 1.91,
+    now = { x: 0, y: 0 }, to = { x: 0, y: 0 }, raf = null, hovering = false;
+
+  function active() { return tabs.filter(function (t) { return t.getAttribute("aria-pressed") == "true"; })[0] || tabs[0]; }
+
+  /* نفس شكل cube-nav: مستطيل مدوّر لكل زرار + جسر منحني بين كل جارين */
+  function rr(x, y, w, h, r) {
+    return "M" + x + " " + (y + r) + " A" + r + " " + r + " 0 0 1 " + (x + r) + " " + y +
+      " L" + (x + w - r) + " " + y + " A" + r + " " + r + " 0 0 1 " + (x + w) + " " + (y + r) +
+      " L" + (x + w) + " " + (y + h - r) + " A" + r + " " + r + " 0 0 1 " + (x + w - r) + " " + (y + h) +
+      " L" + (x + r) + " " + (y + h) + " A" + r + " " + r + " 0 0 1 " + x + " " + (y + h - r) + " Z ";
+  }
+  function build() {
+    var bs = tabs.slice().sort(function (a, b) { return a.offsetLeft - b.offsetLeft; }),
+      H = bs[0].offsetHeight, dx = R - OVERLAP, inset = R - Math.sqrt(R * R - dx * dx), d = "";
+    bs.forEach(function (b) { d += rr(b.offsetLeft, 0, b.offsetWidth, H, R); });
+    for (var i = 0; i < bs.length - 1; i++) {
+      var x1 = bs[i].offsetLeft + bs[i].offsetWidth - OVERLAP, x2 = bs[i + 1].offsetLeft + OVERLAP;
+      d += "M" + x1 + " " + inset + " A" + BRIDGE + " " + BRIDGE + " 0 0 0 " + x2 + " " + inset +
+        " L" + x2 + " " + (H - inset) + " A" + BRIDGE + " " + BRIDGE + " 0 0 0 " + x1 + " " + (H - inset) + " Z ";
+    }
+    paths.forEach(function (p) { p.setAttribute("d", d); });
+    fit();
+    hot(active(), true);
+  }
+  /* لو أعرض من المساحة: تصغير خفيف، ولو محتاج تصغير كبير → سكرول أفقي (عشان الكلام يفضل مقروء) */
+  function fit() {
+    goo.style.transform = "";
+    var s = Math.min(1, wrap.clientWidth / goo.offsetWidth);
+    var scroll = s < 0.8;
+    wrap.classList.toggle("is-scroll", scroll);
+    goo.style.transform = !scroll && s < 1 ? "scale(" + s + ")" : "";
+  }
+  function setGlow(x, y) { glow.setAttribute("cx", x); glow.setAttribute("cy", y); }
+  function tick() {
+    now.x += (to.x - now.x) * 0.18; now.y += (to.y - now.y) * 0.18;
+    setGlow(now.x, now.y);
+    raf = Math.abs(to.x - now.x) > 0.1 || Math.abs(to.y - now.y) > 0.1 ? requestAnimationFrame(tick) : null;
+  }
+  function moveGlow(x, y, snap) {
+    to.x = x; to.y = y;
+    if (snap) { now.x = x; now.y = y; setGlow(x, y); return; }
+    if (!raf) raf = requestAnimationFrame(tick);
+  }
+  function hot(b, snap) {
+    tabs.forEach(function (t) { t.classList.toggle("is-hot", t === b); });
+    moveGlow(b.offsetLeft + b.offsetWidth / 2, b.offsetHeight / 2, snap);
+  }
+
+  goo.addEventListener("pointermove", function (e) {
+    hovering = true;
+    var r = goo.getBoundingClientRect(), s = r.width / goo.offsetWidth;
+    moveGlow((e.clientX - r.left) / s, (e.clientY - r.top) / s, false);
+  });
+  goo.addEventListener("pointerleave", function () { hovering = false; hot(active(), false); });
+
+  /* الفلترة */
+  function filter(tab) {
+    var cat = tab.dataset.cat, shown = 0;
+    tabs.forEach(function (t) { t.setAttribute("aria-pressed", t === tab); });
+    cards.forEach(function (card) {
+      var on = cat == "all" || card.dataset.cat == cat;
+      card.classList.toggle("is-out", !on);
+      card.classList.remove("is-in");
+      if (on) { void card.offsetWidth; card.classList.add("is-in"); shown++; }
+    });
+    /* المقال المميّز ثابت فوق (مش جزء من الفلترة) */
+    if (empty) empty.hidden = shown > 0;
+    if (count) count.textContent = shown;
+    hot(tab, false);
+    if (wrap.classList.contains("is-scroll")) tab.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+    /* لو نازلين تحت والشريط ثابت: نرجع لأول النتايج عشان التغيير يبان */
+    if (bar && bar.classList.contains("is-stuck")) {
+      var y = grid.getBoundingClientRect().top + scrollY - bar.offsetHeight - parseFloat(getComputedStyle(bar).top) - 16;
+      scrollTo({ top: y, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    }
+    if (window.ScrollTrigger) ScrollTrigger.refresh();
+  }
+
+  /* الشريط بياخد خلفية لما يثبت تحت الهيدر */
+  var bar = document.querySelector(".blog-toolbar"),
+    grid = document.querySelector(".blog-grid"),
+    count = document.querySelector(".blog-results-count b");
+  function stuck() {
+    if (!bar) return;
+    var top = parseFloat(getComputedStyle(bar).top) || 0;
+    bar.classList.toggle("is-stuck", bar.getBoundingClientRect().top <= top + 0.5 && grid.getBoundingClientRect().bottom > top + bar.offsetHeight);
+  }
+  addEventListener("scroll", stuck, { passive: true });
+  stuck();
+  tabs.forEach(function (t, i) {
+    t.addEventListener("click", function () { filter(t); });
+    t.addEventListener("pointerenter", function () { tabs.forEach(function (x) { x.classList.toggle("is-hot", x === t); }); });
+    t.addEventListener("focus", function () { hot(t, false); });
+    /* الأسهم بتتنقل بين التابات */
+    t.addEventListener("keydown", function (e) {
+      var rtl = root.dir == "rtl", n = null;
+      if (e.key == (rtl ? "ArrowLeft" : "ArrowRight")) n = Math.min(tabs.length - 1, i + 1);
+      else if (e.key == (rtl ? "ArrowRight" : "ArrowLeft")) n = Math.max(0, i - 1);
+      if (n === null) return;
+      e.preventDefault(); tabs[n].focus(); filter(tabs[n]);
+    });
+  });
+
+  build();
+  addEventListener("resize", build);
+  if (document.fonts) document.fonts.ready.then(build);
+  new MutationObserver(function () { requestAnimationFrame(build); }).observe(root, { attributes: true, attributeFilter: ["lang", "dir"] });
+})();
+
+
+/* =========================================================
+   تفاصيل المقال: أزرار المشاركة (نسخ الرابط + واتساب + X + لينكدإن)
+   ========================================================= */
+(function () {
+  var box = document.querySelector(".blog-post-share");
+  if (!box) return;
+  var url = location.href.split("#")[0],
+    title = (document.querySelector(".blog-post-title") || document.querySelector("h1")).textContent.trim(),
+    status = box.querySelector(".blog-share-status"),
+    rtl = function () { return document.documentElement.dir == "rtl"; };
+  var links = {
+    whatsapp: "https://wa.me/?text=" + encodeURIComponent(title + " " + url),
+    x: "https://twitter.com/intent/tweet?text=" + encodeURIComponent(title) + "&url=" + encodeURIComponent(url),
+    linkedin: "https://www.linkedin.com/sharing/share-offsite/?url=" + encodeURIComponent(url),
+  };
+  [].forEach.call(box.querySelectorAll("a[data-share]"), function (a) { a.href = links[a.dataset.share]; });
+  var copy = box.querySelector('[data-share="copy"]');
+  if (copy) copy.addEventListener("click", function () {
+    function done(ok) {
+      status.textContent = ok ? (rtl() ? "تم نسخ الرابط ✓" : "Link copied ✓") : (rtl() ? "تعذّر النسخ" : "Couldn’t copy");
+      clearTimeout(done.t); done.t = setTimeout(function () { status.textContent = ""; }, 2500);
+    }
+    if (navigator.clipboard) navigator.clipboard.writeText(url).then(function () { done(true); }, function () { done(false); });
+    else done(false);
+  });
+})();
