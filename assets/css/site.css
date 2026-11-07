@@ -10359,3 +10359,218 @@ html[dir="rtl"] .contact-page .contact-form .cf-input input[dir="ltr"] {
     transform: none !important;
   }
 }
+
+/* =====================================================
+   البريلودر ("الصَّهر"): مربعات الهوية بتتشكّل + لوجو + عدّاد
+   والخروج: 5 شرايح بألوان الهوية بتطلع لفوق بالتتابع وتكشف الصفحة
+   ===================================================== */
+html.is-loading {
+  overflow: hidden;
+}
+html.no-preload .preloader {
+  display: none;
+}
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  pointer-events: all;
+}
+/* الشرايح: هي الخلفية، وهي اللي بتفتح في الآخر */
+.pl-stripes {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+
+  i {
+    display: block;
+    height: 100%;
+    margin-inline-end: -1px; /* يمنع خطوط رفيعة بين الشرايح */
+    /* حافة سفلية بلون مختلف لكل شريحة (ملكي → تيل) تبان وهي طالعة */
+    background:
+      linear-gradient(0deg, var(--edge) 0 4px, transparent 4px),
+      radial-gradient(120% 60% at 50% 40%, color-mix(in srgb, var(--if-teal) 18%, transparent), transparent 70%),
+      linear-gradient(180deg, var(--if-deep), #13265a);
+    transition: translate 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+  }
+  i:nth-child(1) {
+    --edge: var(--if-royal);
+  }
+  i:nth-child(2) {
+    --edge: color-mix(in srgb, var(--if-royal) 70%, var(--if-steel));
+  }
+  i:nth-child(3) {
+    --edge: var(--if-steel);
+  }
+  i:nth-child(4) {
+    --edge: color-mix(in srgb, var(--if-steel) 50%, var(--if-teal));
+  }
+  i:nth-child(5) {
+    --edge: var(--if-teal);
+  }
+}
+.preloader::before {
+  /* شبكة خفيفة فوق الخلفية */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(#ffffff08 1px, transparent 1px) 0 0 / 48px 48px,
+    linear-gradient(90deg, #ffffff08 1px, transparent 1px) 0 0 / 48px 48px;
+  mask-image: radial-gradient(60% 60% at 50% 50%, #000, transparent 80%);
+  transition: opacity 0.4s;
+}
+.pl-center {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  transition:
+    opacity 0.4s,
+    scale 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* شبكة 3×3: المربعات بتنوّر بالتتابع على مسار ثعباني */
+.pl-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 22px);
+  gap: 7px;
+  perspective: 400px;
+
+  i {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    background: linear-gradient(150deg, var(--if-royal), var(--if-steel));
+    box-shadow:
+      inset 0 1px 0 #ffffff40,
+      0 3px 0 #0b1c4a;
+    opacity: 0.35;
+    animation: pl-forge 1.35s cubic-bezier(0.3, 1.4, 0.5, 1) infinite;
+    animation-delay: calc(var(--d) * 0.1s);
+  }
+}
+@keyframes pl-forge {
+  0%,
+  100% {
+    opacity: 0.35;
+    scale: 0.82;
+    rotate: x 0deg;
+  }
+  30% {
+    opacity: 1;
+    scale: 1;
+    rotate: x 180deg;
+    background: linear-gradient(150deg, var(--if-mint), var(--if-teal));
+    box-shadow:
+      inset 0 1px 0 #ffffff80,
+      0 3px 0 color-mix(in srgb, var(--if-teal) 60%, #0b1c4a),
+      0 0 18px color-mix(in srgb, var(--if-mint) 55%, transparent);
+  }
+  60% {
+    opacity: 0.6;
+    scale: 0.92;
+    rotate: x 180deg;
+  }
+}
+.pl-logo {
+  display: block;
+  width: 200px;
+  height: auto;
+  opacity: 0.95;
+}
+.pl-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  direction: ltr;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+.pl-count {
+  min-width: 3ch;
+  text-align: end;
+  font-size: 2.6rem;
+  font-weight: 800;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.4px var(--if-mint);
+}
+.pl-unit {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--if-mint);
+}
+.pl-bar {
+  width: 200px;
+  height: 3px;
+  border-radius: 3px;
+  overflow: hidden;
+  background: #ffffff1f;
+
+  b {
+    display: block;
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--if-teal), var(--if-mint));
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+  }
+  html[dir="rtl"] & b {
+    transform-origin: 100% 50%;
+  }
+}
+
+/* الخروج: المحتوى بيختفي، والشرايح بتطلع لفوق واحدة ورا التانية */
+.preloader.is-done {
+  pointer-events: none;
+
+  &::before {
+    opacity: 0;
+  }
+  .pl-center {
+    opacity: 0;
+    scale: 0.9;
+  }
+  .pl-stripes i {
+    translate: 0 -101%;
+  }
+  .pl-stripes i:nth-child(1) {
+    transition-delay: 0.25s;
+  }
+  .pl-stripes i:nth-child(2) {
+    transition-delay: 0.32s;
+  }
+  .pl-stripes i:nth-child(3) {
+    transition-delay: 0.39s;
+  }
+  .pl-stripes i:nth-child(4) {
+    transition-delay: 0.46s;
+  }
+  .pl-stripes i:nth-child(5) {
+    transition-delay: 0.53s;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pl-grid i {
+    animation: none;
+    opacity: 0.8;
+  }
+  .pl-stripes i {
+    transition: none;
+  }
+  .preloader.is-done {
+    opacity: 0;
+    transition: opacity 0.3s;
+
+    .pl-stripes i {
+      translate: none;
+    }
+  }
+}

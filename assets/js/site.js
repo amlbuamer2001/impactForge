@@ -2,6 +2,70 @@
    Impact Forge — shared site script
    المحتوى كله مكتوب في الـ HTML؛ الملف ده للتفاعل والحركة بس
    ========================================================= */
+/* =========================================================
+   البريلودر ("الصَّهر") — أول حاجة في الملف عشان يوقف حركات GSAP قبل ما تبدأ
+   - بيظهر في أول صفحة من الزيارة بس (sessionStorage)، الصفحات اللي بعدها بتفتح على طول
+   - العدّاد بيمشي مع تحميل الصور الفعلي، وبيكمّل لـ 100 مع window.load
+   - حد أدنى ~1 ثانية (عشان ما يبقاش وميض) وحد أقصى 6 ثواني (لو حاجة اتأخرت)
+   - حركة الدخول بتاعة الصفحة (GSAP) متوقفة لحد ما الستارة تفتح
+   ========================================================= */
+(function () {
+  var root = document.documentElement,
+    el = document.getElementById("preloader");
+  if (!el) { root.classList.remove("is-loading"); return; } /* صفحة من غير بريلودر: ما نقفلش السكرول */
+  if (root.classList.contains("no-preload")) { el.remove(); return; }
+
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches,
+    count = el.querySelector(".pl-count"),
+    bar = el.querySelector(".pl-bar b"),
+    start = performance.now(),
+    MIN = reduce ? 400 : 1100, MAX = 6000,
+    shown = 0, loaded = false, finished = false;
+
+  root.classList.add("is-loading"); /* (بيتضاف كمان من الـ head عشان السكرول يتقفل من أول لحظة) */
+  /* حركات الصفحة تستنى لحد ما الستارة تفتح */
+  if (window.gsap) gsap.globalTimeline.pause();
+
+  /* النسبة الحقيقية: الصور اللي خلصت تحميل */
+  function target() {
+    if (loaded) return 100;
+    var imgs = document.images, n = imgs.length, done = 0;
+    for (var i = 0; i < n; i++) if (imgs[i].complete) done++;
+    var t = n ? (done / n) * 90 : 60;
+    /* شوية تقدّم مع الوقت عشان ما يقفش لو صورة بطيئة */
+    return Math.min(95, Math.max(t, ((performance.now() - start) / MAX) * 95));
+  }
+  function tick() {
+    if (finished) return;
+    var t = target();
+    shown += (t - shown) * 0.12;
+    if (t == 100 && 100 - shown < 0.6) shown = 100;
+    var v = Math.round(shown);
+    count.textContent = v;
+    bar.style.transform = "scaleX(" + (shown / 100).toFixed(3) + ")";
+    if (shown >= 100 && performance.now() - start >= MIN) return finish();
+    requestAnimationFrame(tick);
+  }
+  function finish() {
+    if (finished) return;
+    finished = true;
+    count.textContent = 100;
+    bar.style.transform = "scaleX(1)";
+    el.classList.add("is-done");
+    try { sessionStorage.setItem("if-preloaded", "1"); } catch (e) {}
+    /* بعد ما الستارة تخلص: نشيل البريلودر ونشغّل حركات الصفحة */
+    setTimeout(function () {
+      root.classList.remove("is-loading");
+      if (window.gsap) { gsap.globalTimeline.resume(); if (window.ScrollTrigger) ScrollTrigger.refresh(); }
+      el.remove();
+    }, reduce ? 350 : 1250);
+  }
+
+  addEventListener("load", function () { loaded = true; });
+  setTimeout(function () { loaded = true; }, MAX); /* أقصى مدة */
+  requestAnimationFrame(tick);
+})();
+
 (function () {
   /* رابط منصة التعلّم: سيبيه فاضي لحد الإطلاق (أزرار [data-platform] هتظهر "قريبًا")، وبعدها حطي الرابط هنا بس */
   var PLATFORM_URL = "";
