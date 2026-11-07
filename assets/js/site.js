@@ -40,6 +40,8 @@
     $$("select[data-programs]").forEach(function (s) { s.value = wanted; });
     /* صفحة التسجيل: كروت البرامج (radio) */
     $$('input[type="radio"][name="program"]').forEach(function (r) { r.checked = r.value == wanted; });
+    /* خدماتنا الاستشارية: شرايح المجالات (checkbox) — ?area=management */
+    $$('input[type="checkbox"][name="area"]').forEach(function (c) { if (c.value == wanted) c.checked = true; });
   }
 
   /* =====================================================
@@ -166,18 +168,29 @@
   $$("form.contact-form").forEach(function (f) {
     f.onsubmit = function (e) {
       e.preventDefault();
+      /* مجموعة شرايح مطلوبة (data-required-group): لازم اختيار واحد على الأقل */
+      var groups = $$(".cf-chips[data-required-group]", f), missing = null;
+      groups.forEach(function (g) {
+        var ok = $$("input:checked", g).length > 0, err = g.parentNode.querySelector(".org-area-error");
+        if (err) err.hidden = ok;
+        if (!ok && !missing) missing = g;
+      });
+      if (missing) { $("input", missing).focus(); return; }
       var lines = $$("input, select, textarea", f).filter(function (el) {
-        return el.type != "radio" || el.checked; /* الشرايح (radio): المختار بس */
+        /* الشرايح (radio/checkbox جوه .cf-chip): المختار بس */
+        return !(el.closest(".cf-chip") || el.closest(".reg-program")) || el.checked;
       }).map(function (el) {
         var v = el.tagName == "SELECT" && el.selectedIndex > 0 ? el.options[el.selectedIndex].text : el.value;
         var lb = el.closest("label"), name = el.getAttribute("aria-label") || (lb && lb.firstElementChild && lb.firstElementChild.textContent) || el.name;
         if (el.type == "checkbox") v = el.checked ? "✓" : "✗";
-        if (el.type == "radio") {
-          var fs = el.closest("fieldset"), lg = fs && fs.querySelector("legend");
-          name = lg ? lg.textContent : el.name;
+        if (el.closest(".cf-chip") || el.closest(".reg-program")) {
+          /* اسم المجموعة: عنوان الشرايح لو موجود، وإلا عنوان الجزء */
+          var grp = el.closest(".cf-topics"), gl = grp && grp.querySelector(".cf-topics-label, legend"),
+            fs = el.closest("fieldset"), lg = fs && fs.querySelector("legend");
+          name = (gl || lg) ? (gl || lg).textContent.replace(/\s*\*.*$/, "") : el.name;
           v = el.nextElementSibling ? el.nextElementSibling.textContent : el.value;
         }
-        return name + ": " + v;
+        return name.trim() + ": " + v.trim();
       });
       /* المستلم ونص رسالة التأكيد مكتوبين في الـ HTML: data-to على الفورم و .form-success */
       location.href = "mailto:" + (f.dataset.to || "") + "?subject=" + encodeURIComponent(f.dataset.subject || "Website inquiry") + "&body=" + encodeURIComponent(lines.join("\n"));

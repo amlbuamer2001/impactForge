@@ -9362,3 +9362,314 @@ html[dir="rtl"] .contact-page .contact-form .cf-input input[dir="ltr"] {
     height: 20px;
   }
 }
+
+/* =====================================================
+   الفوتر: زرار في عمود الهوية + بيانات تواصل بأيقونات + روابط قانونية في الشريط السفلي
+   ===================================================== */
+.footer {
+  .footer-brand p {
+    max-width: 38ch;
+    line-height: 1.85;
+  }
+  .footer-cta {
+    padding: 14px 24px;
+    font-size: 0.92rem;
+  }
+  .footer-contact {
+    gap: 12px;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: none;
+    }
+    .icon {
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      padding: 7px;
+      border-radius: 10px;
+      color: var(--if-royal);
+      background: color-mix(in srgb, var(--if-teal) 10%, #fff);
+      border: 1px solid color-mix(in srgb, var(--if-teal) 22%, transparent);
+      transition:
+        background 0.25s,
+        color 0.25s;
+    }
+    a:hover .icon,
+    a:focus-visible .icon {
+      color: #fff;
+      background: linear-gradient(150deg, var(--if-royal), var(--if-teal));
+    }
+  }
+  .footer-bottom {
+    align-items: center;
+  }
+  .footer-legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+  }
+  @media (max-width: 520px) {
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+}
+
+/* =====================================================
+   خدماتنا الاستشارية (organizations.html)
+   ===================================================== */
+.org-head {
+  max-width: 680px;
+  margin: 0 auto clamp(32px, 4vw, 48px);
+  text-align: center;
+
+  h2 {
+    margin: 14px 0 0;
+    color: var(--if-deep);
+  }
+  .lead {
+    margin: 12px auto 0;
+  }
+}
+
+/* من نخدم */
+.org-sectors {
+  padding-block: clamp(56px, 7vw, 100px) clamp(40px, 5vw, 64px);
+}
+.org-sector-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  gap: 18px;
+}
+.org-sector {
+  position: relative;
+  overflow: hidden;
+  padding: 24px 22px;
+  border-radius: 26px;
+  background: linear-gradient(180deg, #fff, color-mix(in srgb, var(--ac) 5%, #fff));
+  border: 1px solid color-mix(in srgb, var(--ac) 14%, var(--line));
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 4px 0 color-mix(in srgb, var(--ac) 22%, #dfe7f3),
+    0 22px 36px -30px color-mix(in srgb, var(--if-deep) 55%, transparent);
+  transition:
+    translate 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.35s;
+
+  &:hover {
+    translate: 0 -5px;
+    box-shadow:
+      inset 0 1px 0 #fff,
+      0 8px 0 color-mix(in srgb, var(--ac) 32%, #dfe7f3),
+      0 28px 40px -28px color-mix(in srgb, var(--if-deep) 60%, transparent);
+  }
+  h3 {
+    margin: 16px 0 8px;
+    font-size: 1.12rem;
+    color: var(--if-deep);
+  }
+  p {
+    margin: 0;
+    font-size: 0.93rem;
+    line-height: 1.85;
+    color: #51607a;
+  }
+}
+.org-sector-icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 30%;
+  font-size: 1.4rem;
+  color: #fff;
+  background: linear-gradient(150deg, var(--ac), var(--if-royal));
+  box-shadow:
+    inset 0 2px 0 #ffffff4d,
+    inset 0 -3px 0 #0b1c4a33,
+    0 4px 0 var(--if-deep);
+  transition: rotate 0.45s cubic-bezier(0.3, 1.5, 0.5, 1);
+
+  .org-sector:hover & {
+    rotate: -8deg;
+  }
+}
+
+/* منهجية العمل: 4 خطوات متوصّلة بخط */
+.org-method {
+  padding-block: clamp(40px, 5vw, 64px) clamp(56px, 7vw, 100px);
+  background: linear-gradient(180deg, #fff, var(--if-surface));
+}
+.org-steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  /* الخط اللي بيوصل الأرقام */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 27px;
+    inset-inline: 12%;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--if-royal), var(--if-teal));
+    opacity: 0.35;
+  }
+}
+.org-step {
+  position: relative;
+  text-align: center;
+
+  h3 {
+    margin: 16px 0 8px;
+    font-size: 1.05rem;
+    color: var(--if-deep);
+  }
+  p {
+    margin: 0 auto;
+    max-width: 26ch;
+    font-size: 0.92rem;
+    line-height: 1.85;
+    color: #51607a;
+  }
+}
+.org-step-num {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto;
+  border-radius: 50%;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(150deg, var(--if-teal), var(--if-royal));
+  box-shadow:
+    0 0 0 7px var(--if-surface),
+    inset 0 2px 0 #ffffff4d,
+    0 4px 0 7px color-mix(in srgb, var(--if-royal) 12%, var(--if-surface));
+}
+
+/* مجالات البرامج */
+.org-areas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px 18px;
+  margin-top: clamp(36px, 5vw, 56px);
+  padding: 18px 22px;
+  border-radius: 24px;
+  background: #fff;
+  border: 1px solid color-mix(in srgb, var(--if-royal) 10%, var(--line));
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--if-royal) 10%, #e3eaf4);
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+.org-areas-label {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--if-deep);
+}
+.org-area {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px 6px 8px;
+  border-radius: 99px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--if-deep);
+  text-decoration: none;
+  background: color-mix(in srgb, var(--ac) 8%, #fff);
+  border: 1px solid color-mix(in srgb, var(--ac) 20%, transparent);
+  transition:
+    background 0.25s,
+    color 0.25s,
+    translate 0.25s;
+
+  html[dir="rtl"] & {
+    padding: 6px 8px 6px 14px;
+  }
+  &:hover,
+  &:focus-visible {
+    color: #fff;
+    background: linear-gradient(150deg, var(--ac), var(--if-royal));
+    translate: 0 -2px;
+  }
+}
+.org-area-icon {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 0.9rem;
+  color: color-mix(in srgb, var(--ac) 80%, var(--if-deep));
+  background: #fff;
+}
+
+/* نموذج العرض: عنوان مجموعة الشرايح + أيقونات جوه الشرايح */
+.cf-topics-label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--if-deep);
+}
+.org-area-chips .cf-chip span {
+  gap: 7px;
+
+  .icon {
+    font-size: 1rem;
+  }
+}
+.org-area-error {
+  margin: 8px 0 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #c0392b;
+}
+
+@media (max-width: 900px) {
+  .org-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 30px;
+
+    &::before {
+      display: none;
+    }
+  }
+}
+@media (max-width: 520px) {
+  .org-steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .org-areas {
+    flex-direction: column;
+  }
+}
+/* شرايح المجالات: النص الداخلي مش شريحة تانية */
+.org-area-chips .cf-chip span span {
+  all: unset;
+}
